@@ -7,4 +7,5 @@ export const HomePageContainer = styled.div`
 
 export const TitleContainer = styled.h1`
   font-size: 60px;
+  text-align: center;
 `;

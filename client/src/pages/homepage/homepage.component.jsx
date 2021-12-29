@@ -22,7 +22,7 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <TitleContainer style={{ textAlign: 'center' }}>배달어때?</TitleContainer>
+      <TitleContainer>배달어때?</TitleContainer>
       <HomePageContainer>
         {/* <ul style={{ display: 'flex', flexDirection: 'column' }}>
           {data.map((item) => (

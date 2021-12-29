@@ -1,10 +1,11 @@
 import Header from '../../components/UI/header/Header.component';
+import { TitleContainer } from './PreferencePage.styles';
 
 const PreferenceHome = () => {
   return (
     <div>
       <Header />
-      <h1>성향별 테스트 페이지입니다.</h1>
+      <TitleContainer>성향별 테스트 페이지입니다.</TitleContainer>
     </div>
   );
 };
