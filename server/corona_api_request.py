@@ -19,7 +19,8 @@ for dic in json_data:
     for key, value in dic.items():
         fields.append(key)
     break
-with open("./static/corona_daily_data.csv", "w") as f:
+
+with open("./project-template/server/static/corona_daily_data.csv", "w") as f:
     w = csv.DictWriter(f, fieldnames=fields)
     w.writeheader()
     for dic in json_data:
