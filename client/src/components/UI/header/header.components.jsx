@@ -12,8 +12,8 @@ const Header = () => {
     <HeaderContainer>
       <LogoContainer to='/'>
         <Logo />
-        배달어때?
       </LogoContainer>
+      배달어때?
       <RegionalLink to='/regional'>지역별</RegionalLink>
       <PreferenceLink to='/preference'>성향별</PreferenceLink>
       <TeamLink to='/team'>팀소개</TeamLink>
