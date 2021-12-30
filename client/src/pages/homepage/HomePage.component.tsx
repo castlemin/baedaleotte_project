@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
 import Header from '../../components/UI/header/Header.component';
 import { HomePageContainer, TitleContainer } from './HomePage.styles';
-import { useInView } from 'react-intersection-observer';
 
 const HomePage = () => {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [ref, inView] = useInView();
 
   // useEffect(() => {

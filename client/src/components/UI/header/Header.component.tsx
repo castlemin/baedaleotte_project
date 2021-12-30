@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   HeaderContainer,
   RegionalLink,
@@ -8,7 +9,7 @@ import {
 } from './Header.styles';
 import { ReactComponent as Logo } from '../../../assets/delivery.svg';
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <div>

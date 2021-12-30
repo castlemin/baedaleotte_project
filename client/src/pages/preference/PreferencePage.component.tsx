@@ -1,7 +1,8 @@
+import React from 'react';
 import Header from '../../components/UI/header/Header.component';
 import { TitleContainer } from './PreferencePage.styles';
 
-const PreferenceHome = () => {
+const PreferenceHome: React.FC = () => {
   return (
     <div>
       <Header />

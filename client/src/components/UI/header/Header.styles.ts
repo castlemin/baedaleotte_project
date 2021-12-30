@@ -37,6 +37,7 @@ export const HeaderContainer = styled.nav`
   height: 60px;
 `;
 
+/* 해당 링크 페이지에 따라 밑줄 위치가 이동하는 식으로 구현한다. */
 export const LinkContainer = styled.div``;
 
 export const RegionalLink = styled(Link)`
