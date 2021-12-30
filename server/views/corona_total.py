@@ -2,7 +2,7 @@ import json
 
 from flask import Blueprint, Flask, flash, redirect, render_template, request, session, url_for
 from flask.json import jsonify
-from models.test_table import Corona_Daily
+from models.corona_daily import Corona_Daily
 
 # from models.test_table import
 

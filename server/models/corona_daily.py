@@ -1,5 +1,3 @@
-# import pymysql
-# from sqlalchemy.ext.declarative import declarative_base
 from db_connect import db
 from sqlalchemy import Column, Date, Integer
 
