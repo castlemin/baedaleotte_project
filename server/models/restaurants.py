@@ -1,6 +1,50 @@
 from db_connect import db
-from sqlalchemy import Column, Date, Integer
+from sqlalchemy import Boolean, Column, Date, DateTime, Float, Integer, PickleType, String
+
 
 class Restaurants_Info(db.Model):
-    __tablename__ = 'Restaurants_Info'
-    
+    __tablename__ = "Restaurants_Info"
+    id = db.Column(db.Integer, nullable=False, auto_increment=True, primary_key=True)
+    restaurant_id = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(20), nullable=False)
+    except_cash = db.Column(db.Boolean)
+    is_available_delivery = db.Column(db.Boolean)
+    is_available_pickup = db.Column(db.Boolean)
+    categories = db.Column(db.PickleType)
+    tags = db.Column(db.PickleType)
+    payment_methods = db.Column(db.PickleType)
+    discount_percent = db.Column(db.Integer)
+    restaurant_type = db.Column(db.String(50))
+    additional_discount = db.Column(db.Integer)
+    review_avg = db.Column(db.Float)
+    review_count = db.Column(db.Integer)
+    franchise_id = db.Column(db.Integer)
+    begin = db.Column(db.DateTime)
+    end = db.Column(db.DateTime)
+    lat = db.Column(db.String(20))
+    lng = db.Column(db.String(20))
+    new_rating = db.Column(db.Float)
+    distance = db.Column(db.Float)
+    min_order_amount = db.Columns(db.Float)
+    free_delivery_threshold = db.Column(db.Float)
+    is_deliverable = db.Column(db.Boolean)
+    reason = db.Column(db.String(50))
+    owner_reply_count = db.Column(db.Integer)
+    estimated_delivery_time = db.Column(db.String(20))
+    representative_menus = db.Column(db.PickleType)
+    adjusted_delivery_fee = db.Column(db.Integer)
+    delivery_method = db.Column(db.String(20))
+    section = db.Column(db.String)
+    section_pos = db.Column(db.Integer)
+    list_pos = db.Column(db.Integer)
+    phone = db.Column(db.String(30))
+    address = db.Column(db.String(50))
+    logo_url = db.Column(db.String(200))
+    thumbnail_url = db.Column(db.String(200))
+    reachable = db.Column(db.Boolean)
+    minimum_pickup_minutes = db.Column(db.String(20))
+    franchise_name = db.Column(db.String(20))
+    discount_from = db.Column(db.String(20))
+    discount_until = db.Column(db.String(20))
+    thumbnail_message = db.Column(db.String(200))
+    delivery_fee_to_display = db.Column(db.PickleType)
