@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/venv,flask,python,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=venv,flask,python,macos
 
+### jupyter note book ###
+*.ipynb
+
 ### static data ###
 static/
 

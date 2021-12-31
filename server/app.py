@@ -8,9 +8,7 @@ import config
 
 # from models.test_table import Daily_Corona
 from personalKey import db_setting, secretKey
-from views import corona_total
-
-# from db_connect import db
+from views import corona_total, restaurants
 
 
 db = SQLAlchemy()
@@ -23,7 +21,10 @@ def create_app():
     app.config["SESSION_TYPE"] = "filesystem"
     db.init_app(app)
     Migrate().init_app(app, db)
+
     app.register_blueprint(corona_total.bp)
+    app.register_blueprint(restaurants.bp)
+
     return app
 
 

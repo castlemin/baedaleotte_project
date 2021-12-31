@@ -4,22 +4,21 @@ import Header from '../../components/UI/header/Header.component';
 import { TitleContainer } from './RegionalPage.styles';
 
 const RegionalHome: React.FC = () => {
-  const [covidData, setCovidData] = useState({});
+  const [covidData, setCovidData] = useState([]);
 
   useEffect(() => {
     const fetchCovidData = async () => {
-      const res = await axios.get('/corona_total');
+      const res = await axios.get('/corona_total/');
       const data = await res.data;
       setCovidData(data);
     };
     fetchCovidData();
   }, []);
-
+  console.log(covidData)
   return (
     <div>
       <Header />
       <TitleContainer>지역별 추천 서비스 페이지입니다.</TitleContainer>
-      <div></div>
     </div>
   );
 };
