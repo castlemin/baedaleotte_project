@@ -1,7 +1,7 @@
 import Header from '../../components/UI/header/Header.component';
 import { TitleContainer } from './TeamPage.styles';
 
-const TeamHome = () => {
+const TeamPage = () => {
   return (
     <div>
       <Header />
@@ -10,4 +10,4 @@ const TeamHome = () => {
   );
 };
 
-export default TeamHome;
+export default TeamPage;

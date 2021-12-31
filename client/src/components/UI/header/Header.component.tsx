@@ -10,6 +10,9 @@ import {
 import { ReactComponent as Logo } from '../../../assets/delivery.svg';
 
 const Header: React.FC = () => {
+  // const handleScroll = (position: number) => {
+  //   window.scrollTo({ top: position, behavior: 'smooth' });
+  // };
   return (
     <HeaderContainer>
       <div>
@@ -19,9 +22,27 @@ const Header: React.FC = () => {
         </LogoContainer>
       </div>
       <LinkContainer>
-        <RegionalLink to='/regional'>지역별</RegionalLink>
-        <PreferenceLink to='/preference'>성향별</PreferenceLink>
-        <TeamLink to='/team'>팀 소개</TeamLink>
+        <RegionalLink
+          onClick={() => {
+            window.scrollTo({ top: 789, behavior: 'smooth' });
+          }}
+        >
+          지역별
+        </RegionalLink>
+        <PreferenceLink
+          onClick={() => {
+            window.scrollTo({ top: 789 * 2, behavior: 'smooth' });
+          }}
+        >
+          성향별
+        </PreferenceLink>
+        <TeamLink
+          onClick={() => {
+            window.scrollTo({ top: 789 * 3, behavior: 'smooth' });
+          }}
+        >
+          팀 소개
+        </TeamLink>
       </LinkContainer>
     </HeaderContainer>
   );

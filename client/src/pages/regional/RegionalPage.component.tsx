@@ -14,11 +14,18 @@ const RegionalHome: React.FC = () => {
     };
     fetchCovidData();
   }, []);
-  console.log(covidData)
+
+  console.log(covidData);
+
   return (
     <div>
       <Header />
-      <TitleContainer>지역별 추천 서비스 페이지입니다.</TitleContainer>
+      <TitleContainer></TitleContainer>
+      <div>
+        {covidData.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </div>
     </div>
   );
 };
