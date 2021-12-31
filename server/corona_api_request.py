@@ -4,7 +4,7 @@ import json
 import requests
 import xmltodict
 
-from personalKey import SEOUL_OPEN_DATA_PERSONAL_KEY
+from personalKey import SEOUL_OPEN_DATA_PERSONAL_KEY, db_setting
 
 key = SEOUL_OPEN_DATA_PERSONAL_KEY
 url = f"http://openAPI.seoul.go.kr:8088/{key}/xml/TbCorona19CountStatusJCG/1/5/"
@@ -19,8 +19,8 @@ for dic in json_data:
     for key, value in dic.items():
         fields.append(key)
     break
-
-with open("./project-template/server/static/corona_daily_data.csv", "w") as f:
+# print(json_data)
+with open("./static/corona_daily_data1.csv", "w") as f:
     w = csv.DictWriter(f, fieldnames=fields)
     w.writeheader()
     for dic in json_data:

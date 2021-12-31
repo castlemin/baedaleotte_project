@@ -2,8 +2,8 @@ from db_connect import db
 from sqlalchemy import BIGINT, TEXT, Column, Date, Float
 
 
-class Restaurant_Info(db.Model):
-    __tablename__ = "Restaurant_Info"
+class RestaurantInfo(db.Model):
+    __tablename__ = "RestaurantInfo"
     # id = db.Column(db.BIGINT, nullable=False, auto_increment=True, primary_key=True)
     restaurant_id = db.Column(db.BIGINT, nullable=False, primary_key=True)
     name = db.Column(db.TEXT(20), nullable=False)

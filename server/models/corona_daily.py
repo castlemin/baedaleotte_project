@@ -2,8 +2,8 @@ from db_connect import db
 from sqlalchemy import Column, Date, Integer
 
 
-class Corona_Daily(db.Model):
-    __tablename__ = "Corona_Daily"
+class CoronaDaily(db.Model):
+    __tablename__ = "CoronaDaily"
     JCG_DT = db.Column(db.Date, nullable=False, primary_key=True)
     JONGNO = db.Column(db.Integer, nullable=False)
     JONGNOADD = db.Column(db.Integer, nullable=False)
@@ -57,9 +57,3 @@ class Corona_Daily(db.Model):
     GANGDONGADD = db.Column(db.Integer, nullable=False)
     ETC = db.Column(db.Integer, nullable=False)
     ETCADD = db.Column(db.Integer, nullable=False)
-
-
-class test_table(db.Model):
-    __tablename__ = "test_table"
-    id = db.Column(db.Integer, nullable=False, primary_key=True)
-    name = db.Column(db.String(10), nullable=False)
