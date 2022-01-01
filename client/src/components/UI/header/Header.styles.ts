@@ -11,6 +11,7 @@ const linkCSS = css`
   margin: 0 12px 0 0;
   box-shadow: 1px 2px 1px 1px crimson;
   border: none;
+  cursor: pointer;
 `;
 
 export const LogoContainer = styled(Link)`
@@ -25,7 +26,7 @@ export const LogoContainer = styled(Link)`
   > div {
     color: white;
     margin-left: 5px;
-    font-size: 20px;
+    font-size: 23px;
     font-weight: bold;
   }
 `;
@@ -38,6 +39,7 @@ export const HeaderContainer = styled.nav`
   height: 65px;
   width: 100vw;
   position: fixed;
+  z-index: 100;
 `;
 
 /* 해당 링크 페이지에 따라 밑줄 위치가 이동하는 식으로 구현한다. */

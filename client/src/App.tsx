@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/homepage/HomePage.component';
-import PreferenceHome from './pages/preference/PreferencePage.component';
-import RegionalHome from './pages/regional/RegionalPage.component';
-import ServiceStartPage from './pages/service-start/ServiceStartPage.component';
+import HomePage from './pages/home-page/HomePage.component';
+import PreferenceHome from './pages/service/preference-page/PreferenceHome.component';
+import RegionalHome from './pages/service/regional-page/RegionalHome.component';
+import ServiceStartPage from './pages/service/ServiceStartPage.component';
 import TeamHome from './pages/team-page/TeamPage.component';
 
 const App: React.FC = () => {

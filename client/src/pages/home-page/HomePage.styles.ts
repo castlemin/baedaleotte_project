@@ -1,41 +1,36 @@
 import styled, { css } from 'styled-components';
+import {
+  pageDefault,
+  customAnimation,
+} from '../../components/UI/global/css.styles';
 
-export const pageDefault = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-`;
-
-type Props = {
+interface Props {
   position: number;
-};
+  toLeft?: boolean;
+  toRight?: boolean;
+  fadeIn?: boolean;
+  aniLevitate?: boolean;
+}
 
 export const HomePageContainer = styled.div`
   ${pageDefault}
-
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  ${customAnimation}
 `;
 
 export const TitleContainer = styled.h1`
   font-size: 60px;
-  text-align: center;
+  text-align: right;
+  margin: 40px 40px;
   animation: fadein 2s;
 `;
 
-export const SubtitleContainer = styled.h2`
+export const SubtitleContainer = styled.h2<Props>`
   font-size: 40px;
   font-weight: bold;
   margin: 0 40px 10px 0;
   text-align: right;
+  animation: ${({ aniLevitate }: Props) =>
+    aniLevitate ? `fadein 2s` : 'none'};
 `;
 
 export const DescContainer = styled.span<Props>`
@@ -43,29 +38,48 @@ export const DescContainer = styled.span<Props>`
   font-weight: bold;
   margin: 0 40px 10px 0;
   text-align: right;
+  transform: ${({ position, toLeft, toRight }: Props) =>
+    toLeft
+      ? `translateX(${-position})`
+      : toRight
+      ? `translateX(${position})`
+      : null};
+  animation: ${({ aniLevitate }: Props) =>
+    aniLevitate ? `pop-up 1s ease-in-out` : 'none'};
+  
+  opacity: ${({ position, fadeIn }: Props) =>
+    fadeIn ? position - 50 / 70 : 1}}
 `;
 
 export const StartButton = styled.button`
   width: 120px;
   height: 60px;
+  font-size: 15px;
   border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 1px 2px 1px 1px darkgrey;
+  align-self: center;
+  z-index: 50;
+  :hover {
+    transition: ease-in 185ms;
+    background-color: darkgrey;
+    box-shadow: 1px 2px 1px 1px grey;
+    border-color: whear;
+    color: white;
+  }
 `;
 
 export const RegIntroContainer = styled.div`
   ${pageDefault}
-  background-image: url('../../assets/img1.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
 `;
 
 export const PrefIntroContainer = styled.div`
   ${pageDefault}
-  background-color: yellow;
 `;
 
 export const TeamIntroContainer = styled.div`
   ${pageDefault}
-  background-color: green;
 `;
 
 export const ScrollToTopBtn = styled.button`

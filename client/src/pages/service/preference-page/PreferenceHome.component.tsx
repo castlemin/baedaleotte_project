@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../components/UI/header/Header.component';
-import { TitleContainer } from './PreferencePage.styles';
+import Header from '../../../components/UI/header/Header.component';
+import { TitleContainer } from './PreferenceHome.styles';
 
 const PreferenceHome: React.FC = () => {
   return (
