@@ -20,7 +20,7 @@ for dic in json_data:
         fields.append(key)
     break
 # print(json_data)
-with open("./static/corona_daily_data1.csv", "w") as f:
+with open("./static/corona_daily_data2.csv", "w") as f:
     w = csv.DictWriter(f, fieldnames=fields)
     w.writeheader()
     for dic in json_data:
