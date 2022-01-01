@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/UI/header/Header.component';
 import { ReactComponent as MAIN_IMG } from '../../assets/images/on_the_way.svg';
+import { ReactComponent as INTRO_IMG } from '../../assets/images/takeout_boxes.svg';
+import IntroLottie from '../../components/UI/IntroLottie/IntroLottie';
 import {
   HomePageContainer,
   TitleContainer,
@@ -52,7 +54,7 @@ const HomePage: React.FC = () => {
         <DescContainer aniLevitate position={position}>
           배달어때?
         </DescContainer>
-        <MAIN_IMG style={{ position: 'absolute', width: '40%' }} />
+        <IntroLottie />
         <StartButton
           onClick={() => {
             navigate('/service');
@@ -66,31 +68,44 @@ const HomePage: React.FC = () => {
           backgroundPositionY: position / 2,
         }}
       >
+        <TitleContainer>집콕 배달 추천</TitleContainer>
         <SubtitleContainer position={position}>
           오늘이 나가먹을 상인가?!
         </SubtitleContainer>
-        <DescContainer toLeft position={position}>
+        <DescContainer position={position}>
           지역의 안전도를 확인하세요.
         </DescContainer>
-        <DescContainer toLeft position={position}>
+        <DescContainer position={position}>
           그리고, 오늘이 외식날인지 파악하세요.
         </DescContainer>
-        <DescContainer toLeft position={position}>
+        <DescContainer position={position}>
           배달날인지 파악하세요.
         </DescContainer>
+        <MAIN_IMG
+          style={{ position: 'absolute', marginLeft: '40px', width: '40%' }}
+        />
       </RegIntroContainer>
       <PrefIntroContainer
         style={{
           backgroundPositionY: position / -2,
         }}
       >
-        slide3
+        <TitleContainer>배달 음식 취향 테스트</TitleContainer>
+        <SubtitleContainer position={position}>
+          나는 내 뱃고래를 더 알고 싶다
+        </SubtitleContainer>
+        <DescContainer position={position}>
+          지금 먹고 싶은 배달음식을 찾아보세요.
+        </DescContainer>
+        <DescContainer position={position}>
+          그리고, 성향에 따라 배달음식 추천을 받아보세요.
+        </DescContainer>
+        <DescContainer position={position}>한끼의 만족을 위해.</DescContainer>
+        <INTRO_IMG
+          style={{ position: 'absolute', marginLeft: '40px', width: '40%' }}
+        />
       </PrefIntroContainer>
-      <TeamIntroContainer
-        style={{
-          backgroundPositionY: position / -2,
-        }}
-      >
+      <TeamIntroContainer>
         <ScrollToTopBtn onClick={onScrollToTop}>위로</ScrollToTopBtn>
       </TeamIntroContainer>
     </>

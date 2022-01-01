@@ -5,6 +5,7 @@ import PreferenceHome from './pages/service/preference-page/PreferenceHome.compo
 import RegionalHome from './pages/service/regional-page/RegionalHome.component';
 import ServiceStartPage from './pages/service/ServiceStartPage.component';
 import TeamHome from './pages/team-page/TeamPage.component';
+import RegionStores from './pages/service/regional-page/regionalstores/ReginalStores.component';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Route path='/service/regional' element={<RegionalHome />} />
         <Route path='/service/preference' element={<PreferenceHome />} />
         <Route path='/team' element={<TeamHome />} />
+        <Route path='/service/reginal/store_list' element={<RegionStores />} />
       </Routes>
     </>
   );

@@ -15,6 +15,7 @@ interface Props {
 export const HomePageContainer = styled.div`
   ${pageDefault}
   ${customAnimation}
+  background-image: linear-gradient(rgba(244, 255, 252, 0), rgb(238, 253, 250), rgb(235, 252, 248));
 `;
 
 export const TitleContainer = styled.h1`
@@ -34,15 +35,16 @@ export const SubtitleContainer = styled.h2<Props>`
 `;
 
 export const DescContainer = styled.span<Props>`
+  position: relative;
   font-size: 30px;
   font-weight: bold;
   margin: 0 40px 10px 0;
   text-align: right;
   transform: ${({ position, toLeft, toRight }: Props) =>
     toLeft
-      ? `translateX(${-position})`
+      ? `translateX(${-position}px)`
       : toRight
-      ? `translateX(${position})`
+      ? `translateX(${position}px)`
       : null};
   animation: ${({ aniLevitate }: Props) =>
     aniLevitate ? `pop-up 1s ease-in-out` : 'none'};
@@ -61,6 +63,7 @@ export const StartButton = styled.button`
   box-shadow: 1px 2px 1px 1px darkgrey;
   align-self: center;
   z-index: 50;
+  margin-top: 120px;
   :hover {
     transition: ease-in 185ms;
     background-color: darkgrey;
@@ -72,6 +75,7 @@ export const StartButton = styled.button`
 
 export const RegIntroContainer = styled.div`
   ${pageDefault}
+  background-color: #fffcf5;
 `;
 
 export const PrefIntroContainer = styled.div`
@@ -90,6 +94,7 @@ export const ScrollToTopBtn = styled.button`
   font-size: 18px;
   line-height: 48px;
   width: 48px;
+  margin: auto;
 
   /* place it at the bottom right corner */
   position: fixed;
