@@ -1,9 +1,6 @@
 import styled, { css } from 'styled-components';
 
 export const pageDefault = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 100vw;
   height: 100vh;
 `;

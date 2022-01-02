@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Header from '../../../components/UI/header/Header.component';
-import { TitleContainer } from './RegionalHome.styles';
+import Header from '../../../../components/UI/header/Header.component';
 
 const RegionalHome: React.FC = () => {
   const [covidData, setCovidData] = useState([]);
@@ -20,7 +19,6 @@ const RegionalHome: React.FC = () => {
   return (
     <div>
       <Header />
-      <TitleContainer></TitleContainer>
       <div>
         {/* {covidData.map((item) => (
           <li key={item.id}>{item.name}</li>

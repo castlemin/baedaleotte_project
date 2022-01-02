@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   pageDefault,
   customAnimation,
@@ -18,28 +18,34 @@ export const HomePageContainer = styled.div`
   background-image: linear-gradient(rgba(244, 255, 252, 0), rgb(238, 253, 250), rgb(235, 252, 248));
 `;
 
+export const ContentsContainer = styled.article`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 160px;
+  margin: 0 10px 0 100px;
+`;
+
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const TitleContainer = styled.h1`
-  font-size: 60px;
-  text-align: right;
-  margin: 40px 40px;
+  font-size: 3rem;
   animation: fadein 2s;
 `;
 
 export const SubtitleContainer = styled.h2<Props>`
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: bold;
-  margin: 0 40px 10px 0;
-  text-align: right;
   animation: ${({ aniLevitate }: Props) =>
     aniLevitate ? `fadein 2s` : 'none'};
 `;
 
 export const DescContainer = styled.span<Props>`
   position: relative;
-  font-size: 30px;
+  font-size: 2rem;
   font-weight: bold;
-  margin: 0 40px 10px 0;
-  text-align: right;
   transform: ${({ position, toLeft, toRight }: Props) =>
     toLeft
       ? `translateX(${-position}px)`
@@ -54,21 +60,22 @@ export const DescContainer = styled.span<Props>`
 `;
 
 export const StartButton = styled.button`
-  width: 120px;
-  height: 60px;
-  font-size: 15px;
+  background-color: white;
+  margin-top: 54px;
+  width: 248px;
+  height: 64px;
+  font-size: 18px;
+  font-weight: bold;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   box-shadow: 1px 2px 1px 1px darkgrey;
-  align-self: center;
-  z-index: 50;
-  margin-top: 120px;
+  postition: absolute;
   :hover {
-    transition: ease-in 185ms;
     background-color: darkgrey;
+    transition: ease-in 185ms;
     box-shadow: 1px 2px 1px 1px grey;
-    border-color: whear;
+    border-color: wheat;
     color: white;
   }
 `;

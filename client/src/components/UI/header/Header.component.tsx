@@ -9,12 +9,16 @@ import {
 } from './Header.styles';
 import { ReactComponent as Logo } from '../../../assets/delivery.svg';
 
-const Header: React.FC = () => {
+interface Props {
+  serviceStatic?: boolean;
+}
+
+const Header: React.FC<Props> = ({ serviceStatic }) => {
   // const handleScroll = (position: number) => {
   //   window.scrollTo({ top: position, behavior: 'smooth' });
   // };
   return (
-    <HeaderContainer>
+    <HeaderContainer serviceStatic={serviceStatic}>
       <div>
         <LogoContainer to='/'>
           <Logo />
