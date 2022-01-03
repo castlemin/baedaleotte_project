@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/UI/header/Header.component';
 import { ReactComponent as MAIN_IMG } from '../../assets/images/on_the_way.svg';
 import { ReactComponent as INTRO_IMG } from '../../assets/images/takeout_boxes.svg';
-import IntroLottie from '../../components/UI/IntroLottie/IntroLottie';
+import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
 import {
   HomePageContainer,
   ContentsContainer,
@@ -17,7 +17,6 @@ import {
   TeamIntroContainer,
   ScrollToTopBtn,
 } from './HomePage.styles';
-import Loading from '../../components/UI/loading/Loading.component';
 
 const HomePage: React.FC = () => {
   const [position, setPosition] = useState(0);

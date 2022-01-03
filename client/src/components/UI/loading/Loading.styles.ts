@@ -5,4 +5,6 @@ export const AnimContainer = styled.div`
   height: 100%;
   margin: 0 auto;
   position: absolute;
+  background-color: black;
+  opacity: 0.7;
 `;

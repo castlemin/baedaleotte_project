@@ -71,8 +71,10 @@ export const StartButton = styled.button`
   cursor: pointer;
   box-shadow: 1px 2px 1px 1px darkgrey;
   postition: absolute;
+  box-sizing: border-box;
+  padding: 0;
   :hover {
-    background-color: darkgrey;
+    background-color: #88aed0;
     transition: ease-in 185ms;
     box-shadow: 1px 2px 1px 1px grey;
     border-color: wheat;
