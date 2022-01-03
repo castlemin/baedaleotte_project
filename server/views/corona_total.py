@@ -28,10 +28,10 @@ def getCoronaTotal():
         for eng_gu2 in jcg_dict.keys():
             if eng_gu == eng_gu2:
                 returning_dict[jcg_dict[eng_gu2]] = test[eng_gu]
-    # print(returning_dict)
+    print(returning_dict)
     # return Response(cor_res, mimetype="application/json")
 
-    return Response(json.dumps(returning_dict, indent=4), mimetype="application/json")
+    return Response(json.dumps(returning_dict, ensure_ascii=False), mimetype="application/json")
     # return jsonify(cor_res)
 
 
