@@ -2,11 +2,29 @@ import styled, { css } from 'styled-components';
 
 interface Props {
   url?: string;
+  isHovered?: boolean;
 }
 
 export const ShopListContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  place-items: center;
+  margin: 30px;
+`;
+export const ShopTitleContainer = styled.p`
+  height: fit-content;
+`;
+
+export const ShopDescContainer = styled.p`
+  height: fit-content;
+  margin: 10px;
+  display: none;
+  text-align: left;
+  font-size: 13px;
+
+  > li {
+    list-style: none;
+  }
 `;
 
 export const ShopImgContainer = styled.div<Props>`
@@ -21,12 +39,4 @@ export const ShopImgContainer = styled.div<Props>`
     css`
       background-image: url(https://www.yogiyo.co.kr/${url});
     `};
-`;
-
-export const ShopTitleContainer = styled.p`
-  height: fit-content;
-`;
-
-export const ShopDescContainer = styled.p`
-  height: fit-content;
 `;
