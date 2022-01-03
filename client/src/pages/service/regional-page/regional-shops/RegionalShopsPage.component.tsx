@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 /* import axios from 'axios'; */
 import stores from '../../../../assets/data/food_dummy.json';
@@ -11,25 +12,18 @@ import {
   ShopListContainer,
 } from './RegionalShopsPage.styles';
 
-const RegionalShopsPage = () => {
-  const [storeList, setStoreList] = useState([]);
-
-  const data = new Date();
-
-  const WEEK_DAY = {
-    Sun: '일요일',
-    Mon: '월요일',
-    Tue: '화요일',
-    Wed: '수요일',
-    Thu: '목요일',
-    Fri: '금요일',
-    Sat: '토요일',
-  };
-
-  const date = WEEK_DAY[data.toString().split(' ')[0]];
+const RegionalShopsPage: React.FC = () => {
+  const [storeList, setStoreList] = useState<any[]>([]);
 
   useEffect(() => {
-    setStoreList(stores);
+    const fetchRestaurants = async () => {
+      const res = await axios.get(
+        'https://a4f6d6aa-7694-4185-b2c9-534ac61ec028.mock.pstmn.io/restaurants/near'
+      );
+      const data = await res.data;
+      setStoreList(data);
+    };
+    fetchRestaurants();
   }, []);
 
   console.log(storeList);
@@ -41,16 +35,14 @@ const RegionalShopsPage = () => {
       ) : (
         <>
           <Header serviceStatic />
-          <h1>오늘은 {date}, 인기메뉴는 </h1>
           <ShopListContainer>
             {storeList.map((item) => (
               <Card key={item.id} shop>
                 <ShopDescContainer>
                   <b>카테고리</b>:{' '}
-                  {item.categories.map((cat) => (
-                    <li key={cat}>{cat}</li>
+                  {item.categories.map((cat: string[]) => (
+                    <li>{cat}</li>
                   ))}
-                  <br />
                   <b>영업시간</b>: {item.begin.slice(0, -3)}시 -{' '}
                   {item.end.slice(0, -3)}시
                   <br />

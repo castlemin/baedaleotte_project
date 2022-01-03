@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 interface Props {
-  serviceStart?: boolean;
+  service?: boolean;
+  report?: boolean;
 }
 
 export const TitleContainer = styled.h1`
@@ -17,11 +18,15 @@ export const SubtitleContainer = styled.h2<Props>`
   font-weight: bold;
   margin: 0 40px 10px 0;
   word-break: keep-all;
-  ${({ serviceStart }: Props) =>
-    serviceStart &&
+  ${({ service }: Props) =>
+    service &&
     css`
       font-size: 30px;
       margin: 60px 20px;
+    `}
+  ${({ report }: Props) =>
+    css`
+      margin: 20px 20px;
     `}
 `;
 
@@ -30,8 +35,8 @@ export const DescContainer = styled.span<Props>`
   font-size: 30px;
   font-weight: bold;
   word-break: keep-all;
-  ${({ serviceStart }: Props) =>
-    serviceStart &&
+  ${({ service }: Props) =>
+    service &&
     css`
       font-size: 20px;
       margin: 0 46px;
