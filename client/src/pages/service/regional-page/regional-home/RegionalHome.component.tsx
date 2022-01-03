@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Header from '../../components/UI/header/Header.component';
-import { TitleContainer } from './RegionalPage.styles';
+import Header from '../../../../components/UI/header/Header.component';
 
 const RegionalHome: React.FC = () => {
   const [covidData, setCovidData] = useState([]);
@@ -14,11 +13,17 @@ const RegionalHome: React.FC = () => {
     };
     fetchCovidData();
   }, []);
-  console.log(covidData)
+
+  console.log(covidData);
+
   return (
     <div>
       <Header />
-      <TitleContainer>지역별 추천 서비스 페이지입니다.</TitleContainer>
+      <div>
+        {/* {covidData.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))} */}
+      </div>
     </div>
   );
 };
