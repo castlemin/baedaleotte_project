@@ -12,6 +12,6 @@ bp = Blueprint("categories", __name__, url_prefix="/categories")
 @bp.route("")
 def getAllCategories():
     categories = Categories.query.all()
-    res = json.dumps([x.category for x in categories], cls=AlchemyEncoder, ensure_ascii=False)
+    res = json.dumps([x.category for x in categories], cls=AlchemyEncoder, ensure_ascii=False, indent=4)
     # return res
     return Response(res, mimetype="application/json")

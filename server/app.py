@@ -8,7 +8,7 @@ import config
 
 # from models.test_table import Daily_Corona
 from personalKey import db_setting, secretKey
-from views import categories, corona_total, restaurants
+from views import categories, corona_total, restaurants, review
 
 db = SQLAlchemy()
 
@@ -24,6 +24,7 @@ def create_app():
     app.register_blueprint(corona_total.bp)
     app.register_blueprint(restaurants.bp)
     app.register_blueprint(categories.bp)
+    app.register_blueprint(review.bp)
     return app
 
 
