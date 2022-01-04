@@ -13,14 +13,12 @@ bp = Blueprint("restaurants", __name__, url_prefix="/restaurants")
 
 @bp.route("")
 def getAllRestaurants():
-    res_id = 510525
-    restaurants = RestaurantInfo.query.filter(RestaurantInfo.restaurant_id == res_id).first()
-    # print(restaurants.categories)
+    restaurants = RestaurantInfo.query.all()
     res = json.dumps(restaurants, cls=AlchemyEncoder, ensure_ascii=False, indent=4)
     return Response(res, mimetype="application/json")
 
 
-def restaurant_search(instances, user_location):
+def restaurant_search(instances: RestaurantInfo, user_location):
     res = []
     for restaurant in instances:
         restaurant_location = (float(restaurant.lat), float(restaurant.lng))
@@ -30,23 +28,18 @@ def restaurant_search(instances, user_location):
     return res
 
 
-@bp.route("/near")
-def getNearRestaurants():
-    user_location = (37.484410, 127.087437)
-    # 37.484410, 127.087437
-    cat_1 = request.args.get("category1", type=str)
-    cat_2 = request.args.get("category2", type=str)
-
-    if cat_1 is not None and cat_2 is None:
-        restaurants = RestaurantInfo.query.filter(RestaurantInfo.categories.ilike(f"%{cat_1}%"))
-
-    elif cat_1 is not None and cat_2 is not None:
-        restaurants = RestaurantInfo.query.filter(
-            RestaurantInfo.categories.ilike(f"%{cat_1}%") | RestaurantInfo.categories.ilike(f"%{cat_2}%")
-        ).distinct()
+def get_restaurants_by_categories(cat1: str, cat2: str):
+    if cat1 is None:
+        return RestaurantInfo.query.all()
+    elif cat2 is None:
+        return RestaurantInfo.query.filter(RestaurantInfo.categories.ilike(f"%{cat1}"))
     else:
-        restaurants = RestaurantInfo.query.all()
+        return RestaurantInfo.query.filter(
+            RestaurantInfo.categories.ilike(f"%{cat1}") | RestaurantInfo.categories.ilike(f"%{cat2}")
+        ).distinct()
 
+
+def preprocess_restaurants_list(restaurants: RestaurantInfo):
     lis = []
     for restaurant in restaurants:
         line = re.split(" ", restaurant.categories)
@@ -63,14 +56,27 @@ def getNearRestaurants():
         restaurant.payment_methods = payment_method
         restaurant.categories = categories
         lis.append(restaurant)
+    return lis
+
+
+@bp.route("/near")
+def getNearRestaurants(lat: float, lng: float):
+    user_location = (lat, lng)
+    # 37.484410, 127.087437
+    cat_1 = request.args.get("category1", type=str)
+    cat_2 = request.args.get("category2", type=str)
+
+    restaurants = get_restaurants_by_categories(cat_1, cat_2)
+
+    lis = preprocess_restaurants_list(restaurants)
+
     res = restaurant_search(lis, user_location)
     res = json.dumps(res, cls=AlchemyEncoder, ensure_ascii=False, indent=4)
     return Response(res, mimetype="application/json")
 
 
 @bp.route("/<int:res_id>")
-def getRestaurantDetail(res_id):
-    res_id = 510525
+def getRestaurantDetail(res_id: int):
     restaurant = RestaurantInfo.query.filter(RestaurantInfo.restaurant_id == res_id).first()
     res = json.dumps(restaurant, cls=AlchemyEncoder, ensure_ascii=False, indent=4)
     return Response(res, mimetype="application/json")
