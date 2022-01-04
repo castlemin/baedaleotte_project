@@ -38,7 +38,7 @@ export const Card = styled.div<Props>`
     category &&
     css`
       height: 20rem;
-      width: 21rem;
+      width: 20rem;
 
       &:hover {
         transition: all 200ms ease;
@@ -52,7 +52,7 @@ export const Card = styled.div<Props>`
     shop &&
     css`
       height: 20rem;
-      width: 15rem;
+      width: 16rem;
       flex-direction: column-reverse;
 
       &:hover {
