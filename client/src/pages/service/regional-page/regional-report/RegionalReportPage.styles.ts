@@ -3,9 +3,15 @@ import styled from 'styled-components';
 export const NextButton = styled.button`
   background-color: white;
   margin: auto;
+<<<<<<< HEAD
   margin-top: 54px;
   width: 248px;
   height: 64px;
+=======
+  margin-bottom: 20px;
+  width: 120px;
+  height: 50px;
+>>>>>>> feature/Frontend#12
   font-size: 18px;
   font-weight: bold;
   border: none;

@@ -16,7 +16,12 @@ export const ApprovalContainer = styled.form`
 
 export const ApproveLabel = styled.label``;
 
-export const SubmitBtn = styled.button`
+export const ToServiceBtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const ToServiceBtn = styled.button`
   font: inherit;
   font-weight: bold;
   padding: 0.75rem 1.5rem;
@@ -26,7 +31,7 @@ export const SubmitBtn = styled.button`
   border-radius: 7px;
   justify-content: space-between;
   width: fit-content;
-  margin: 30px auto;
+  margin: 15px 5px;
 
   &:hover {
     transition: ease-in 200ms;
