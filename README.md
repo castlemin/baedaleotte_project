@@ -1,22 +1,88 @@
-# (서비스 명)
-- 최종 서비스 명을 위 괄호 부분에 작성하세요.
-- 최종 서비스의 한 줄 소개를 작성하세요.
-
+# 배달어때
+- 서울시에서 사용자가 위치한 구의 코로나 확진자 데이터와 위험도(자체계산)을 알려주고, 이에따른 음식점을 추천해 주는 서비스 입니다!
 
 ## 프로젝트 구성 안내
-
-* `bullet point 에 적힌 내용을 수정해 주시면 됩니다.`
-
-* `초기 기획은 언제든 수정될 수 있으니 웹서비스 결과를 내는데 초점을 두시기 바랍니다.`
 
 ## 1. 프로젝트 소개
 
 **어떠한 인공지능 모델과 알고리즘을 사용했는지에 대한 설명과 엔드유저에게 보이는 웹서비스에 대한 소개**
 
   - 사용하려는 인공지능 모델과 알고리즘을 명시
+    - 서울시 자치구별 코로나 위험도 계산 모델
+      * 알고리즘
+
   - 인공지능에 사용하려는 데이터를 명시, 이에 대한 설명
-  - 기술 스택 (python, d3, pandas, jupyter, javascript, MySQL 등)
-  - 사용된 라이브러리 (numpy, matplotlib, wordcloud 등)
+    #### 1. 코로나 위험도 지도
+
+    - 서울시 코로나 데이터 - 매일 업데이트
+        
+        [](http://data.seoul.go.kr/dataList/OA-20470/S/1/datasetView.do)
+        
+        - `업데이트` : 매2회
+        - `사용 기간` : 30일 전 ~ 현재 (ex. 2021.12.02 ~ 2022.01.01)
+    - 서울 생활 인구 데이터
+        
+        [](https://data.seoul.go.kr/dataList/OA-15379/S/1/datasetView.do)
+        
+        - `업데이트` : 정기(매일) - 약 일주일 정도 딜레이 존재
+        - `사용 기간` : 14일 전 ~ 현재 (ex. 2021.12.18 ~ 2022.01.01)
+        - `Open API` : O
+    - 구별 다중이용시설 목록
+        
+        [](https://data.seoul.go.kr/dataList/OA-15380/S/1/datasetView.do)
+        
+        - `업데이트` : X
+        - `사용 기간` : 2021년
+        - `Open API` : O
+    - 가구주의 연령 및 가구원수별 가구(일반가구) - 시군구
+        
+        [KOSIS](https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1JC1511&conn_path=I3)
+        
+        [가구주의_연령_및_가구원수별_가구_일반가구___시군구_20220101200148.csv](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ccfa2c7e-6861-4837-9d45-6b90e7e86532/가구주의_연령_및_가구원수별_가구_일반가구___시군구_20220101200148.csv)
+        
+        [가구주의_연령_및_가구원수별_가구_일반가구___시군구_합계.csv](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/948df3b1-b0e4-4ada-aaf3-6a465a68a6a1/가구주의_연령_및_가구원수별_가구_일반가구___시군구_합계.csv)
+        
+        - `업데이트` : X
+        - `사용 기간` : 2020년
+        - `Open API` : X
+    - 공휴일 데이터
+        
+        [국가공휴일.xlsx](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b41413bd-9c8e-4359-ba58-d6ac26857f80/국가공휴일.xlsx)
+    
+
+    #### 2. 코로나 레포트
+
+      - 코로나 확진자 데이터
+          - [지도와 동일](https://www.notion.so/DATA-4da2c18df58b42ddbdd311b3d9810771)
+      - 백신 데이터
+          
+          [](https://data.seoul.go.kr/dataList/OA-20914/S/1/datasetView.do)
+          
+          - `업데이트` : 매2회
+          - `사용 기간` : 10일 전 ~ 현재  (ex. 2021.12.22 ~ 2022.01.01)
+          - `Open API` : O
+
+    #### 3. 카테고리 추천 (요일, 시간대별)
+
+      - 지역-요일별 **배달 품목정보**
+          
+          [](https://bdp.kt.co.kr/invoke/SOKBP2603/?goodsCode=KGUAREADOITEM)
+          
+          - 3개 파일 - merge해서 사용
+          - **2019.07.31 ~ 2020.07.31**
+          - `업데이트` :  X
+          - `사용 기간` : **2019.07.31 ~ 2020.07.31 (all)**
+          - `Open API` : X
+  - 기술 스택
+    - FE
+      * React, TypeScript, StyledComponents, ReactRouterDom
+    - BE
+      * Flask, SQLAlchemy, MariaDB, Sentry
+  - 사용된 라이브러리
+    - FE
+      * axios, lottie-web, plotly.js
+    - BE
+      * APScheduler, haversine, GoogleMapsAPI, 서울시공공데이터 코로나 자치구별 일일 확진자 API, xmltodict, pandas, csv
   - 웹서비스에 대한 자세한 개요
 
 ## 2. 프로젝트 목표
@@ -76,3 +142,6 @@
 
 ## 7. FAQ
   - 자주 받는 질문 정리
+
+
+
