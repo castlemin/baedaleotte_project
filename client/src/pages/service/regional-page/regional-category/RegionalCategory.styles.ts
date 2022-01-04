@@ -13,8 +13,8 @@ export const CategoryTitle = styled.h2`
 export const NextButton = styled.button`
   background-color: white;
   margin-top: 54px;
-  width: 248px;
-  height: 64px;
+  width: 120px;
+  height: 50px;
   font-size: 18px;
   font-weight: bold;
   border: none;

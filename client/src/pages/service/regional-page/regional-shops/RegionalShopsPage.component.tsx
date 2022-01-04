@@ -77,8 +77,8 @@ const RegionalShopsPage: React.FC = () => {
             </FilterBtn>
           </FilterBtnContainer>
           <ShopListContainer>
-            {!isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
-            {!isDetailOpen && (
+            {isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
+            {isDetailOpen && (
               <RegionalShopDetail
                 shopData={shopList}
                 selected={selectShop}

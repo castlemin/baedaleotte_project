@@ -7,7 +7,6 @@ import TeamHome from './pages/team-page/TeamPage.component';
 import RegionalHome from './pages/service/regional-page/regional-home/RegionalHome.component';
 import RegionalShopsPage from './pages/service/regional-page/regional-shops/RegionalShopsPage.component';
 import RegionalReportPage from './pages/service/regional-page/regional-report/RegionalReportPage.components';
-import GraphContainer from './components/UI/Graphs/Graph';
 import RegionalCategoryPage from './pages/service/regional-page/regional-category/RegionalCategoryPage.component';
 
 const App: React.FC = () => {
@@ -31,7 +30,6 @@ const App: React.FC = () => {
         />
         <Route path='/service/preference' element={<PreferenceHome />} />
         <Route path='/team' element={<TeamHome />} />
-        <Route path='/team/1' element={<GraphContainer />} />
       </Routes>
     </>
   );

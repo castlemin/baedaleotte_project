@@ -7,7 +7,8 @@ import {
   SubtitleContainer,
 } from '../../components/UI/Text/Text.styles';
 import {
-  SubmitBtn,
+  ToServiceBtn,
+  ToServiceBtnContainer,
   BackgroundContainer,
   ApprovalContainer,
   ApproveLabel,
@@ -82,22 +83,22 @@ const ServiceStartPage: React.FC = () => {
             위치 정보 제공을 동의합니다.
           </ApproveLabel>
         </ApprovalContainer>
-        <div>
-          <SubmitBtn
+        <ToServiceBtnContainer>
+          <ToServiceBtn
             name='toRegional'
             onClick={handleClick}
             disabled={checked === false}
           >
             나의 지역 안전확인
-          </SubmitBtn>
-          <SubmitBtn
+          </ToServiceBtn>
+          <ToServiceBtn
             name='toPreference'
             onClick={handleClick}
             disabled={checked === false}
           >
             배달음식 성향확인
-          </SubmitBtn>
-        </div>
+          </ToServiceBtn>
+        </ToServiceBtnContainer>
       </Card>
     </BackgroundContainer>
   );

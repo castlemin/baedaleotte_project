@@ -5,10 +5,11 @@ import {
   SubtitleContainer,
   TitleContainer,
 } from '../../../../components/UI/Text/Text.styles';
-import GraphContainer from '../../../../components/UI/Graphs/Graph';
+import { GuMap } from '../../../../components/UI/Graphs/GuMap';
 import { useNavigate } from 'react-router-dom';
-import { NextButton } from '../regional-category/RegionalCategory.styles';
-const RegionalReportPage = () => {
+import { NextButton } from '../regional-report/RegionalReportPage.styles';
+
+const RegionalReportPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleToCategory = () => {
@@ -21,7 +22,7 @@ const RegionalReportPage = () => {
       <TitleContainer>현재 지역 코로나 리포트</TitleContainer>
       <Card regionalReport>
         <SubtitleContainer report>현재 코로나 확진세</SubtitleContainer>
-        <GraphContainer />
+        <GuMap />
         <NextButton onClick={handleToCategory}>카테고리 선택</NextButton>
       </Card>
     </>
