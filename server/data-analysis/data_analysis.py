@@ -38,7 +38,7 @@ def processing(data):
     #전처리 후 데이터 리턴
     return data
 
-corona_data = pd.read_csv('./data/서울특별시 코로나19 자치구별 확진자 발생동향.csv', encoding='euc-kr')
+corona_data = pd.read_csv('./server/data-analysis/data/서울특별시 코로나19 자치구별 확진자 발생동향.csv', encoding='euc-kr')
 ori_data = processing(corona_data)
 
 
@@ -47,7 +47,7 @@ ori_data = processing(corona_data)
 # 1. 시작화 자료 생성
 
 # geojson lead
-with open('./data/seoul_map.geojson', encoding='UTF-8') as f:
+with open('./server/data-analysis/data/seoul_map.geojson', encoding='UTF-8') as f:
     seoul_geojson = json.load(f)
 
 # 서울시 코로나 위험도 지도
@@ -163,5 +163,5 @@ def 백신현황(data):
 #     return fig.to_json()
     return fig.to_json()
     
-vac_data = pd.read_csv('./data/서울특별시 코로나19 백신 예방접종 현황.csv', encoding='euc-kr')
+vac_data = pd.read_csv('./server/data-analysis/data/서울특별시 코로나19 백신 예방접종 현황.csv', encoding='euc-kr')
 #백신현황(vac_data)
