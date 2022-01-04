@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from flask import Blueprint, Flask, Response, flash, redirect, render_template, request, session, url_for
 from flask.json import jsonify
@@ -26,10 +27,26 @@ def find_korean_match(jcg: EngKorJCG, cor_res: json):
     return returning_dict
 
 
+def translateSystemClock(userTime: datetime):
+    year = str(userTime.year)
+    if userTime.month < 10:
+        month = "0" + str(userTime.month)
+    else:
+        month = str(userTime.month)
+    if userTime.day < 10:
+        day = "0" + str(userTime.day)
+    else:
+        day = str(userTime.day)
+    return year + "." + month + "." + day
+
+
 # 코로나 전체 데이터 뿌려주기
 @bp.route("")
 def getCoronaTotal():
-    daily_corona = CoronaDaily.query.filter(CoronaDaily.JCG_DT == "2021.12.28.00").first()
+    session["userTime"] = datetime.today()
+    userTime = session.get("userTime")
+    userDate = translateSystemClock(userTime)
+    daily_corona = CoronaDaily.query.filter(CoronaDaily.JCG_DT == "2022.01.04.00").first()
     cor_res = json.dumps(daily_corona, cls=AlchemyEncoder, ensure_ascii=False)
     jcg = EngKorJCG.query.all()
     # jcg_res = json.dumps(jcg, cls=AlchemyEncoder, ensure_ascii=False)

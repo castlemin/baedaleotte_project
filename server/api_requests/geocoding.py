@@ -1,13 +1,17 @@
+import importlib.util
 import json
 
 import requests
-from typing_extensions import ParamSpec
 
-from personalKey import geocodingKey
+spec = importlib.util.spec_from_file_location("personalKey", "static/projectKeys/personalKey.py")
+personalKey = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(personalKey)
+geocodingKey = personalKey.geocodingKey
 
 
-def getKoreanJCG(lat, lng):
+def getKoreanJCG(lat: float, lng: float):
     latlng = str(lat) + "," + str(lng)
+    # latlng = "37.486106,127.089377"
     BASE_URL = "https://maps.googleapis.com/maps/api/geocode/json"
     PARRAMS = {
         "latlng": latlng,
@@ -26,4 +30,5 @@ def getKoreanJCG(lat, lng):
                 break
         if flag:
             break
+    # print(ans)
     return ans
