@@ -3,13 +3,18 @@ import styled from 'styled-components';
 export const CategoryListContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  place-items: center;
+`;
+
+export const CategoryTitle = styled.h2`
+  font-size: 2rem;
 `;
 
 export const NextButton = styled.button`
   background-color: white;
   margin-top: 54px;
-  width: 248px;
-  height: 64px;
+  width: 120px;
+  height: 50px;
   font-size: 18px;
   font-weight: bold;
   border: none;
