@@ -15,13 +15,9 @@ const RegionalShopDetail = ({ onCancel, shopData, selected }: Props) => {
   };
   return (
     <DetailCardContainer>
-<<<<<<< HEAD
-      {shopData.filter((info) => info.id === selected)}
-=======
       {shopData.map((item) => (
         <li>{item.name}</li>
       ))}
->>>>>>> feature/Frontend#12
       <button onClick={handleCloseModal}>닫기</button>
     </DetailCardContainer>
   );

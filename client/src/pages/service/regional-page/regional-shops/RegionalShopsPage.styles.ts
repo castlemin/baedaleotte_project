@@ -13,6 +13,7 @@ export const ShopListContainer = styled.div`
 `;
 export const ShopTitleContainer = styled.p`
   height: fit-content;
+  font-weight: bold;
 `;
 
 export const ShopDescContainer = styled.p`
@@ -35,7 +36,7 @@ export const FilterBtnContainer = styled.div`
 export const FilterBtn = styled.button`
   background-color: beige;
   width: 80px;
-  height: 25px;
+  height: 40px;
   font-size: 13px;
   font-weight: bold;
   border: none;
@@ -44,7 +45,8 @@ export const FilterBtn = styled.button`
   box-shadow: 1px 2px 1px 1px darkgrey;
   box-sizing: border-box;
   padding: 0;
-  margin: 10px 5px 0 0;
+  display: absolute;
+  margin: 10px 8px 0 0;
   + button {
     margin: 10px 120px 0 0;
   }

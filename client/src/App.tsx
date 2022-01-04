@@ -7,11 +7,8 @@ import TeamHome from './pages/team-page/TeamPage.component';
 import RegionalHome from './pages/service/regional-page/regional-home/RegionalHome.component';
 import RegionalShopsPage from './pages/service/regional-page/regional-shops/RegionalShopsPage.component';
 import RegionalReportPage from './pages/service/regional-page/regional-report/RegionalReportPage.components';
-<<<<<<< HEAD
-import GraphContainer from './components/UI/Graphs/Graph';
-=======
->>>>>>> feature/Frontend#12
 import RegionalCategoryPage from './pages/service/regional-page/regional-category/RegionalCategoryPage.component';
+import Error404 from './components/UI/Error/404.error';
 
 const App: React.FC = () => {
   return (
@@ -34,10 +31,7 @@ const App: React.FC = () => {
         />
         <Route path='/service/preference' element={<PreferenceHome />} />
         <Route path='/team' element={<TeamHome />} />
-<<<<<<< HEAD
-        <Route path='/team/1' element={<GraphContainer />} />
-=======
->>>>>>> feature/Frontend#12
+        <Route path='/*' element={<Error404 />} />
       </Routes>
     </>
   );

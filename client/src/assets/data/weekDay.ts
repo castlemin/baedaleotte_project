@@ -2,17 +2,18 @@ interface DayObj {
   [index: string]: string;
 }
 
+/* mapped typing 필요 */
 const data = new Date();
 
 const DAYS: DayObj = {
-  Sun: '일요일',
-  Mon: '월요일',
-  Tue: '화요일',
-  Wed: '수요일',
-  Thu: '목요일',
-  Fri: '금요일',
-  Sat: '토요일',
+  0: '일요일',
+  1: '월요일',
+  2: '화요일',
+  3: '수요일',
+  4: '목요일',
+  5: '금요일',
+  6: '토요일',
 };
 
-export const weekDay = DAYS[data.toString().split(' ')[0]];
+export const weekDay: string = DAYS[data.getDay()];
 export const hour: number = data.getHours();

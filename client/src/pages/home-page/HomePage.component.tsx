@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, LegacyRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/UI/header/Header.component';
+import { GuMap } from '../../assets/data/Graphs/GuMap';
 import { ReactComponent as MAIN_IMG } from '../../assets/images/on_the_way.svg';
 import { ReactComponent as INTRO_IMG } from '../../assets/images/takeout_boxes.svg';
 import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
@@ -77,13 +78,7 @@ const HomePage: React.FC = () => {
         }}
       >
         <ContentsContainer>
-          <MAIN_IMG
-            style={{
-              margin: '40px 0 auto',
-              marginLeft: '40px',
-              width: '100%',
-            }}
-          />
+          <GuMap />
           <TextWrapper>
             <TitleContainer>집콕 배달 추천</TitleContainer>
             <SubtitleContainer position={position}>

@@ -8,6 +8,7 @@ export const CategoryListContainer = styled.div`
 
 export const CategoryTitle = styled.h2`
   font-size: 2rem;
+  text-align: center;
 `;
 
 export const NextButton = styled.button`
