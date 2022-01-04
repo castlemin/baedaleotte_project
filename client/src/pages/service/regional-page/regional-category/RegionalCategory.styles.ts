@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const CategoryListContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  place-items: center;
+`;
+
+export const CategoryTitle = styled.h2`
+  font-size: 2rem;
 `;
 
 export const NextButton = styled.button`
