@@ -5,9 +5,10 @@ import PreferenceHome from './pages/service/preference-page/PreferenceHome.compo
 import ServiceStartPage from './pages/service/ServiceStartPage.component';
 import TeamHome from './pages/team-page/TeamPage.component';
 import RegionalHome from './pages/service/regional-page/regional-home/RegionalHome.component';
-import RegionalShopsPage from './pages/service/regional-page/regionalshops/RegionalShopsPage.component';
+import RegionalShopsPage from './pages/service/regional-page/regional-shops/RegionalShopsPage.component';
 import RegionalReportPage from './pages/service/regional-page/regional-report/RegionalReportPage.components';
 import GraphContainer from './components/UI/Graphs/Graph';
+import RegionalCategoryPage from './pages/service/regional-page/regional-category/RegionalCategoryPage.component';
 
 const App: React.FC = () => {
   return (
@@ -20,13 +21,17 @@ const App: React.FC = () => {
           path='/service/regional/report'
           element={<RegionalReportPage />}
         />
+        <Route
+          path='/service/regional/categories'
+          element={<RegionalCategoryPage />}
+        />
+        <Route
+          path='/service/regional/shop_list'
+          element={<RegionalShopsPage />}
+        />
         <Route path='/service/preference' element={<PreferenceHome />} />
         <Route path='/team' element={<TeamHome />} />
         <Route path='/team/1' element={<GraphContainer />} />
-        <Route
-          path='/service/reginal/shop_list'
-          element={<RegionalShopsPage />}
-        />
       </Routes>
     </>
   );

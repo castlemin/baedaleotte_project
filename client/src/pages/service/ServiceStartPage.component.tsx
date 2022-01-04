@@ -10,6 +10,7 @@ import {
   SubmitBtn,
   BackgroundContainer,
   ApprovalContainer,
+  ApproveLabel,
 } from './ServiceStartPage.styles';
 
 const ServiceStartPage: React.FC = () => {
@@ -64,22 +65,22 @@ const ServiceStartPage: React.FC = () => {
     <BackgroundContainer>
       <Header serviceStatic />
       <Card serviceStart>
-        <SubtitleContainer serviceStart>
+        <SubtitleContainer service>
           해당 서비스는 사용자님의 위치정보를 필요로 해요.
         </SubtitleContainer>
-        <DescContainer serviceStart>
-          사용자님의 위치 정보를 통해, 위치하신 지역의 코로나 위험도와 근방
-          배달음식점을 파악해야 하기 때문이죠.
+        <DescContainer service>
+          사용자님의 현재 위치 정보를 통해, 위치하신 지역의 코로나 위험도를
+          분석하고 근방 배달음식점을 파악해야 하기 때문이죠.
         </DescContainer>
-        <br></br>
-        <DescContainer serviceStart>
+        <br />
+        <DescContainer service>
           회원님의 GPS 정보 사용에 동의하시겠습니까?
         </DescContainer>
         <ApprovalContainer onChange={handleCheck}>
-          <label htmlFor='approve'>
+          <ApproveLabel htmlFor='approve'>
             <input type='checkbox' name='approve' defaultChecked={checked} />
             위치 정보 제공을 동의합니다.
-          </label>
+          </ApproveLabel>
         </ApprovalContainer>
         <div>
           <SubmitBtn

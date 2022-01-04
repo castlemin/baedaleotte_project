@@ -1,12 +1,8 @@
 import styled from 'styled-components';
 
-export const CategoryListContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-`;
-
 export const NextButton = styled.button`
   background-color: white;
+  margin: auto;
   margin-top: 54px;
   width: 248px;
   height: 64px;

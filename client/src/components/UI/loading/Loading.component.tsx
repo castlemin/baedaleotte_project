@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Lottie from 'lottie-web';
-import loadingAnim from '../../../assets/lotties/pizza_phone.json';
+import loadingAnim from '../../../assets/lotties/empty-plate.json';
 import { AnimContainer } from './Loading.styles';
 
 const Loading: React.FC = () => {
@@ -9,8 +9,8 @@ const Loading: React.FC = () => {
     Lottie.loadAnimation({
       container: ref.current,
       renderer: 'svg',
-      loop: false,
-      autoplay: false,
+      loop: true,
+      autoplay: true,
       animationData: loadingAnim,
     });
   }, []);
