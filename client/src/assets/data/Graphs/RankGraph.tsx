@@ -1,7 +1,7 @@
-import { useFetchJson } from '../../../hooks/useFetchJson';
+import { useFetchGraph } from '../../../hooks/useFetchJson';
 import Plot from 'react-plotly.js';
 
 export const RankGraph = () => {
-  const rankJson = useFetchJson('get_seoul_risk_map_all');
+  const rankJson = useFetchGraph('get_risk_rank');
   return <Plot data={rankJson.data} layout={rankJson.layout} />;
 };
