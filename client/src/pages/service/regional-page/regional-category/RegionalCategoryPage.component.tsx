@@ -5,10 +5,7 @@ import {
 } from './RegionalCategory.styles';
 
 import { weekDay, hour } from '../../../../assets/data/weekDay';
-import {
-  TitleContainer,
-  DescContainer,
-} from '../../../../components/UI/Text/Text.styles';
+import { DescContainer } from '../../../../components/UI/Text/Text.styles';
 import Header from '../../../../components/UI/header/Header.component';
 import { categories } from '../../../../assets/data/categories';
 import { Card } from '../../../../components/UI/Card/Card.styles';
