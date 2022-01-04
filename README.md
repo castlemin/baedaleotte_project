@@ -73,12 +73,14 @@
           - `업데이트` :  X
           - `사용 기간` : **2019.07.31 ~ 2020.07.31 (all)**
           - `Open API` : X
-  - 기술 스택
+
+  - **기술 스택**
     - FE
       * React, TypeScript, StyledComponents, ReactRouterDom
     - BE
       * Flask, SQLAlchemy, MariaDB, Sentry
-  - 사용된 라이브러리
+      
+  - **사용된 라이브러리**
     - FE
       * axios, lottie-web, plotly.js
     - BE
