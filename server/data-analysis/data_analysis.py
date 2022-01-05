@@ -52,6 +52,7 @@ with open('./server/data-analysis/data/seoul_map.geojson', encoding='UTF-8') as 
 
 # 서울시 코로나 위험도 지도
 def 서울코로나위험도지도(data, region='서울'):
+
     # add_trace를 통해 marker를 2번 그리는 방식으로 외곽선 표시
     fig = go.Figure()
 
@@ -62,7 +63,8 @@ def 서울코로나위험도지도(data, region='서울'):
                                         colorscale=[[0, 'rgba(0, 128, 0, 1)'], [0.5, 'rgba(255, 255, 0, 1)'], [1.0, 'rgba(255, 0, 0, 1)']], # marker의 scale
                                         zmin=0, zmax=100,
                                         featureidkey = 'properties.SIG_KOR_NM', # locations와 geojson을 매칭할 key
-                                        marker_opacity=0.6, marker_line_width=1
+                                        marker_opacity=0.6, marker_line_width=1, 
+                                        name='', 
                                         ))
     if region != '서울':
         fig.add_trace(go.Choroplethmapbox(geojson=seoul_geojson, 
@@ -71,17 +73,27 @@ def 서울코로나위험도지도(data, region='서울'):
                                             colorscale=[[0, 'rgba(0, 128, 0, 0)'], [0.5, 'rgba(255, 255, 0, 0)'], [1.0, 'rgba(255, 0, 0, 0)']], # raba의 a값을 0으로 주어 투명으로 덧칠
                                             zmin=0, zmax=100,
                                             featureidkey = 'properties.SIG_KOR_NM',
-                                            marker_opacity=0.6, marker_line_width=3, # marker_line을 굵게 덧칠
-                                            marker_line_color='blue'
+                                            marker_opacity=0.6, marker_line_width=5, # marker_line을 굵게 덧칠
+                                            marker_line_color=px.colors.qualitative.G10[0],
                                             # marker 옵션은 아래처럼 표현도 가능
                                             # marker=dict(opacity=1, line=dict(color='black', width=10)),
+                                            name='', 
                                             ))
     # fig의 layout 설정
-    fig.update_layout(mapbox_style="open-street-map",
-                    mapbox_zoom=9.8, 
-                    mapbox_center = {'lat': 37.5645679, 'lon': 126.9688672},
-                    margin={"r":0,"t":0,"l":0,"b":0}
-                    )
+    fig.update_layout(mapbox_style="carto-positron", # 맵의 테마 설정 (open-street-map, white-bg, carto-positron, stamen-terrain 등)
+                        mapbox_zoom=9.8, 
+                        margin={"r":0,"t":0,"l":0,"b":0},
+                        mapbox_center = {'lat': 37.5645679, 'lon': 126.9688672},
+                        )
+
+    if region != '서울':
+        gcs = pd.read_csv("./data/서울시 행정구역 좌표계.csv")
+        gcs = gcs[['시군구명_한글', '위도', '경도']]
+        lat = gcs[gcs['시군구명_한글'] == region]['위도'].iloc[0]
+        lon = gcs[gcs['시군구명_한글'] == region]['경도'].iloc[0]
+        fig.update_layout(mapbox_center = {'lat': lat, 'lon': lon },
+                            mapbox_zoom=11.5
+                            )
                     
     return fig.to_json()
     
