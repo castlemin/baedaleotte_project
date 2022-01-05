@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, LegacyRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/UI/header/Header.component';
+import { GuMap } from '../../assets/data/Graphs/GuMap';
 import { ReactComponent as MAIN_IMG } from '../../assets/images/on_the_way.svg';
 import { ReactComponent as INTRO_IMG } from '../../assets/images/takeout_boxes.svg';
-import IntroLottie from '../../components/UI/IntroLottie/IntroLottie';
+import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
 import {
   HomePageContainer,
   ContentsContainer,
@@ -17,11 +18,13 @@ import {
   TeamIntroContainer,
   ScrollToTopBtn,
 } from './HomePage.styles';
-import Loading from '../../components/UI/loading/Loading.component';
 
 const HomePage: React.FC = () => {
   const [position, setPosition] = useState(0);
   const navigate = useNavigate();
+
+  const homePageRef = useRef<HTMLDivElement | null>(null);
+  console.log(homePageRef.current);
 
   const onScroll = () => {
     console.log(window.scrollY);
@@ -38,8 +41,9 @@ const HomePage: React.FC = () => {
       window.removeEventListener('scroll', onScroll);
     };
   }, []);
+
   return (
-    <>
+    <div ref={homePageRef}>
       <Header />
       <HomePageContainer>
         <ContentsContainer>
@@ -74,13 +78,7 @@ const HomePage: React.FC = () => {
         }}
       >
         <ContentsContainer>
-          <MAIN_IMG
-            style={{
-              margin: '40px 0 auto',
-              marginLeft: '40px',
-              width: '100%',
-            }}
-          />
+          <GuMap />
           <TextWrapper>
             <TitleContainer>집콕 배달 추천</TitleContainer>
             <SubtitleContainer position={position}>
@@ -127,7 +125,7 @@ const HomePage: React.FC = () => {
       <TeamIntroContainer>
         <ScrollToTopBtn onClick={onScrollToTop}>위로</ScrollToTopBtn>
       </TeamIntroContainer>
-    </>
+    </div>
   );
 };
 

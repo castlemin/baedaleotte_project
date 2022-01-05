@@ -1,13 +1,17 @@
+from datetime import datetime
+
+import sentry_sdk
 import sqlalchemy
-from flask import Flask, jsonify
+from flask import Flask, jsonify, session
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from sentry_sdk.integrations.flask import FlaskIntegration
 from sqlalchemy.sql.expression import text
 
 import config
 
 # from models.test_table import Daily_Corona
-from personalKey import db_setting, secretKey
+from static.projectKeys.personalKey import db_setting, secretKey, sentry_dsn
 from views import categories, corona_total, restaurants, review
 
 db = SQLAlchemy()
@@ -15,6 +19,10 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
+    sentry_sdk.init(
+        dsn=sentry_dsn,
+        integrations=[FlaskIntegration()],
+    )
     app.config.from_object(config)
     app.secret_key = secretKey
     app.config["SESSION_TYPE"] = "filesystem"
@@ -25,6 +33,7 @@ def create_app():
     app.register_blueprint(restaurants.bp)
     app.register_blueprint(categories.bp)
     app.register_blueprint(review.bp)
+
     return app
 
 
