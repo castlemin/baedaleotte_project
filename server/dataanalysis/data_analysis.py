@@ -48,6 +48,7 @@ seoul_corona_score = pd.DataFrame(
 seoul_corona_score.loc["점수"] = list(np.random.randint(0, 100, (25)))
 seoul_corona_score = seoul_corona_score.astype(float)
 
+
 # 코로나 위험도 점수 반환 함수
 def 위험도점수(data, region):
     return str(data[region][0])
@@ -79,6 +80,7 @@ ori_data = processing(corona_data)
 # geojson lead
 with open("./dataanalysis/data/seoul_map.geojson", encoding="UTF-8") as f:
     seoul_geojson = json.load(f)
+
 
 # 서울시 코로나 위험도 지도
 def 서울코로나위험도지도(data, region="서울"):

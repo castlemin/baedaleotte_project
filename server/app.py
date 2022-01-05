@@ -1,12 +1,10 @@
 from datetime import datetime
 
 import sentry_sdk
-import sqlalchemy
-from flask import Flask, jsonify, session
+from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sentry_sdk.integrations.flask import FlaskIntegration
-from sqlalchemy.sql.expression import text
 
 import config
 from static.projectKeys.personalKey import db_setting, secretKey, sentry_dsn
@@ -32,6 +30,8 @@ def create_app():
     app.register_blueprint(categories.bp)
     app.register_blueprint(review.bp)
     app.register_blueprint(graph.bp)
+
+    # @app.errorhandler(404)
 
     return app
 
