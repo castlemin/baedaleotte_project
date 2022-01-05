@@ -60,8 +60,6 @@ const ServiceStartPage: React.FC = () => {
       : navigate('preference');
   };
 
-  console.log(GPS);
-
   return (
     <BackgroundContainer>
       <Card serviceStart>

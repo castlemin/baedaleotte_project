@@ -47,6 +47,11 @@ export const PageTitle = styled.h2`
   text-align: center;
 `;
 
+export const SelectedOptionsTitle = styled.h3`
+  font-size: 1.5rem;
+  margin-bottom: 0;
+`;
+
 export const SelectedContainer = styled.div`
   display: flex;
   justify-content: space-between;

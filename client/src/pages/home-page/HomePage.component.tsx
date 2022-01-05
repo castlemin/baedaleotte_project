@@ -5,6 +5,7 @@ import { GuMap } from '../../assets/data/Graphs/GuMap';
 import { ReactComponent as MAIN_IMG } from '../../assets/images/on_the_way.svg';
 import { ReactComponent as INTRO_IMG } from '../../assets/images/takeout_boxes.svg';
 import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
+import { HOME_IMG_CONFIG } from '../../assets/data/homeImgConfig';
 import {
   HomePageContainer,
   ContentsContainer,
@@ -74,11 +75,7 @@ const HomePage: React.FC = () => {
           </TextWrapper>
         </ContentsContainer>
       </HomePageContainer>
-      <RegIntroContainer
-        style={{
-          backgroundColor: '#F7F4F5',
-        }}
-      >
+      <RegIntroContainer>
         <ContentsContainer>
           <GuMap />
           <TextWrapper>
@@ -98,19 +95,13 @@ const HomePage: React.FC = () => {
           </TextWrapper>
         </ContentsContainer>
       </RegIntroContainer>
-      <PrefIntroContainer
-        style={{
-          backgroundColor: 'yellow',
-        }}
-      >
+      <PrefIntroContainer>
         <ContentsContainer>
-          <INTRO_IMG
-            style={{ margin: '40px 0 auto', marginLeft: '40px', width: '100%' }}
-          />
+          <INTRO_IMG style={HOME_IMG_CONFIG} />
           <TextWrapper>
             <TitleContainer>배달 음식 취향 테스트</TitleContainer>
             <SubtitleContainer position={position}>
-              나는 내 뱃고래를 더 알고 싶다
+              "나는 내 뱃고래를 더 알고 싶다."
             </SubtitleContainer>
             <DescContainer position={position}>
               지금 먹고 싶은 배달음식을 찾아보세요.

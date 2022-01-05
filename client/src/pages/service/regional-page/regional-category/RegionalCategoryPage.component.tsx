@@ -7,6 +7,7 @@ import {
   SelectedContainer,
   SelectedCategory,
   SelectedTitle,
+  SelectedOptionsTitle,
   PlaceHolder,
 } from './RegionalCategory.styles';
 
@@ -59,7 +60,7 @@ const RegionalCategoryPage = () => {
       {!isModalClosed && <BackDrop onCancel={handleCloseModal} />}
       <PageTitle>
         오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는
-        <p style={{ marginBottom: 0 }}>선택 메뉴</p>
+        <SelectedOptionsTitle>선택 메뉴</SelectedOptionsTitle>
       </PageTitle>
       <SelectedContainer>
         <PlaceHolder selected={categorySelected.length}>
@@ -71,6 +72,7 @@ const RegionalCategoryPage = () => {
           </SelectedCategory>
         ))}
       </SelectedContainer>
+      <NextButton onClick={handleToShopList}>임시 버튼</NextButton>
       <CategoryListContainer>
         {categories.map((cat) => (
           <CategoryContainer
@@ -81,7 +83,6 @@ const RegionalCategoryPage = () => {
           </CategoryContainer>
         ))}
       </CategoryListContainer>
-      <NextButton onClick={handleToShopList}>임시 버튼</NextButton>
     </>
   );
 };
