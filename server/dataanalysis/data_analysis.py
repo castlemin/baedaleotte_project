@@ -48,7 +48,6 @@ seoul_corona_score = pd.DataFrame(
 seoul_corona_score.loc["점수"] = list(np.random.randint(0, 100, (25)))
 seoul_corona_score = seoul_corona_score.astype(float)
 
-
 # 코로나 위험도 점수 반환 함수
 def 위험도점수(data, region):
     return str(data[region][0])
@@ -76,11 +75,14 @@ ori_data = processing(corona_data)
 # -----------------------------------------------------------
 
 # 1. 시작화 자료 생성
+# width, height
+graph_width=630
+graph_height=405
+
 
 # geojson lead
 with open("./dataanalysis/data/seoul_map.geojson", encoding="UTF-8") as f:
     seoul_geojson = json.load(f)
-
 
 # 서울시 코로나 위험도 지도
 def 서울코로나위험도지도(data, region="서울"):
@@ -135,6 +137,8 @@ def 서울코로나위험도지도(data, region="서울"):
         mapbox_zoom=9.8,
         margin={"r": 0, "t": 0, "l": 0, "b": 0},
         mapbox_center={"lat": 37.5645679, "lon": 126.9688672},
+        width=graph_width, 
+        height=graph_height,
     )
 
     if region != "서울":
@@ -152,26 +156,27 @@ def 위험도순위(data, region):
     data = data.loc["점수"].sort_values(ascending=False)
     index = list(data.index).index(region)
     colors = ["lightslategray"] * len(data)
-    colors[index] = "blue"
+    colors[index] = px.colors.qualitative.G10[0]
 
     bar_data = go.Bar(x=data.index, y=data.values, marker_color=colors)
-    layout = go.Layout(title=f"{region}의 위험도 순위는 {index+1}위 입니다.", template="gridon")
+    layout = go.Layout(template='gridon', width = graph_width, height=graph_height,)
 
     fig = go.Figure(data=bar_data, layout=layout)
+
+    fig.update_layout(hovermode='x unified')
+    fig.update_xaxes(tickangle=45)
+    fig.update_yaxes(title_text='코로나 위험도 점수(점)')
 
     return fig.to_json()
 
 
 # 지역 확진자 그래프
 def 내지역확진자all(data, region):
-    import plotly.express as px
-    import plotly.graph_objects as go
-    from plotly.subplots import make_subplots
-
     # 전처리 함수 실행
     data = processing(data)[-7:]
+    data['자치구 기준일'] = data['자치구 기준일'].apply(lambda x:x.strftime('%Y.%m.%d'))
 
-    reg = data[data.columns[data.columns.str.contains(region)]]
+    reg = data[data.columns[data.columns.str.contains(region)].tolist() + ['자치구 기준일']]
 
     # Create figure with secondary y-axis
     fig = make_subplots(specs=[[{"secondary_y": True}]])
@@ -208,9 +213,9 @@ def 내지역확진자all(data, region):
 
     # Add figure title
     fig.update_layout(
-        title_text=f"{region} 전체/추가 확진자({reg.index[0].strftime('%Y-%m-%d')} ~ {reg.index[-1].strftime('%Y-%m-%d')})",
         template="gridon",
         bargap=0.5,
+        width=graph_width, height=graph_height,
     )
     # Set x-axis title
     # fig.update_xaxes(title_text="date")
@@ -225,50 +230,50 @@ def 내지역확진자all(data, region):
 
 
 def 백신현황(data):
-    vac = data[:10]
-    vac = vac.sort_values("접종일")
-    fig = make_subplots(rows=3, cols=1, shared_xaxes=True)
+    vac = data.dropna()[:7]
+    vac = vac.sort_values('접종일')
+    fig = make_subplots(rows=3, cols=1,shared_xaxes=True)
     # 1차접종 그래프
     fig.add_trace(
         go.Scatter(
-            x=vac["접종일"],
-            y=vac["1차접종률(%)"],
-            mode="lines+markers+text",
-            name="1차접종률(%)",
-            text=vac["1차접종률(%)"],
-            textposition="bottom center",
-        ),
-        1,
-        1,
-    )
+            x=vac['접종일'], 
+            y=vac['1차접종률(%)'],
+            mode='lines+markers+text',
+            name='1차접종률(%)',
+            text=vac['1차접종률(%)'],
+            textposition="bottom center", 
+            hovertemplate = "%{y}"),
+            1,
+            1
+        )
     # 2차접종 그래프
     fig.add_trace(
         go.Scatter(
-            x=vac["접종일"],
-            y=vac["2차접종률(%)"],
-            mode="lines+markers+text",
-            name="2차접종률(%)",
-            text=vac["2차접종률(%)"],
-            textposition="bottom center",
-        ),
-        2,
-        1,
-    )
+            x=vac['접종일'], 
+            y=vac['2차접종률(%)'],
+            mode='lines+markers+text',
+            name='2차접종률(%)',text=vac['2차접종률(%)'],
+            textposition="bottom center", 
+            hovertemplate = "%{y}"),
+            2,
+            1
+        )
     # 추가접종 그래프
     fig.add_trace(
         go.Scatter(
-            x=vac["접종일"],
-            y=vac["추가접종률(%)"],
-            mode="lines+markers+text",
-            name="추가접종률(%)",
-            text=vac["추가접종률(%)"],
+            x=vac['접종일'], 
+            y=vac['추가접종률(%)'],
+            mode='lines+markers+text',
+            name='추가접종률(%)',
+            text=vac['추가접종률(%)'],
             textposition="bottom center",
-        ),
-        3,
-        1,
-    )
+            hovertemplate = "%{y}"),
+            3,
+            1
+        )
     fig.update_layout(
-        title_text=f"1차 / 2차 / 추가 백신 접종률 ({vac['접종일'].iloc[0]} ~ {vac['접종일'].iloc[-1]})", template="gridon"
+        template="gridon",
+        width=graph_width, height=graph_height,
     )
     #     return fig.to_json()
     return fig.to_json()
