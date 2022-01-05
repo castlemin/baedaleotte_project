@@ -25,7 +25,7 @@ export const Card = styled.div<Props>`
   ${({ serviceStart }: Props) =>
     serviceStart &&
     css`
-      margin: 100px auto;
+      margin: 50px auto 0;
     `}
 
   ${({ regionalReport }: Props) =>

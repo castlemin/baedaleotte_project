@@ -7,6 +7,7 @@ import {
   SelectedContainer,
   SelectedCategory,
   SelectedTitle,
+  PlaceHolder,
 } from './RegionalCategory.styles';
 
 import { weekDay, hour } from '../../../../assets/data/weekDay';
@@ -37,7 +38,7 @@ const RegionalCategoryPage = () => {
       categorySelected.length >= 2 &&
       !categorySelected.includes(event.target.textContent)
     ) {
-      setMessage('카테고리 선택은 2개 까지만 가능합니다!');
+      setMessage('카테고리 선택은 2개까지만 가능합니다!');
       setIsModalClosed((prev) => !prev);
     }
     if (categorySelected.includes(event.target.textContent)) {
@@ -61,6 +62,9 @@ const RegionalCategoryPage = () => {
         <p style={{ marginBottom: 0 }}>선택 메뉴</p>
       </PageTitle>
       <SelectedContainer>
+        <PlaceHolder selected={categorySelected.length}>
+          카테고리를 선택해주세요.
+        </PlaceHolder>
         {categorySelected.map((item) => (
           <SelectedCategory imgUrl={IMAGES[item]}>
             <SelectedTitle>{item}</SelectedTitle>

@@ -1,7 +1,10 @@
 import styled from 'styled-components';
+import { customAnimation } from '../../../../components/UI/global/css.styles';
 
 export const ReportContainer = styled.section`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
 `;
 
@@ -27,13 +30,13 @@ export const ReportTitle = styled.h1`
 export const ReportSubtitle = styled.h2`
   font-size: 24px;
   text-align: center;
+  word-break: all;
 `;
 
 export const DescriptionSection = styled.section`
   margin-top: 8%;
   margin-left: 30px;
   display: flex;
-  flex-direction: column;
   align-items: center;
 `;
 

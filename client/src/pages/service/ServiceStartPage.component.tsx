@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SeoulMap } from '../../assets/data/Graphs/SeoulMap';
 import { Card } from '../../components/UI/Card/Card.styles';
-import Header from '../../components/UI/header/Header.component';
 import {
   DescContainer,
   SubtitleContainer,
