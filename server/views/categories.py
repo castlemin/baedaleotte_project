@@ -9,7 +9,7 @@ from utility.todict import AlchemyEncoder
 bp = Blueprint("categories", __name__, url_prefix="/categories")
 
 
-@bp.route("")
+@bp.route("/")
 def getAllCategories():
     categories = Categories.query.all()
     res = json.dumps([x.category for x in categories], cls=AlchemyEncoder, ensure_ascii=False, indent=4)
