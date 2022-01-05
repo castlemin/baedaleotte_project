@@ -31,23 +31,27 @@ const HomePage: React.FC = () => {
     setHeight(homePageRef.current.scrollHeight);
   }, []);
 
-  const onScroll = () => {
+  const handleScroll = () => {
     setPosition(window.scrollY);
   };
 
-  const onScrollToTop = () => {
+  const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleToService = () => {
+    navigate('/service');
+  };
+
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <div>
+    <>
       <Header viewHeight={height} />
       <HomePageContainer ref={homePageRef}>
         <ContentsContainer>
@@ -66,20 +70,13 @@ const HomePage: React.FC = () => {
             <DescContainer aniLevitate position={position}>
               배달어때?
             </DescContainer>
-            <StartButton
-              onClick={() => {
-                navigate('/service');
-              }}
-            >
-              바로 시작하기!
-            </StartButton>
+            <StartButton onClick={handleToService}>바로 시작하기!</StartButton>
           </TextWrapper>
         </ContentsContainer>
       </HomePageContainer>
       <RegIntroContainer
         style={{
           backgroundColor: '#F7F4F5',
-          backgroundPositionY: position / 2,
         }}
       >
         <ContentsContainer>
@@ -103,7 +100,6 @@ const HomePage: React.FC = () => {
       </RegIntroContainer>
       <PrefIntroContainer
         style={{
-          backgroundPositionY: position / -2,
           backgroundColor: 'yellow',
         }}
       >
@@ -129,9 +125,9 @@ const HomePage: React.FC = () => {
         </ContentsContainer>
       </PrefIntroContainer>
       <TeamIntroContainer>
-        <ScrollToTopBtn onClick={onScrollToTop}>위로</ScrollToTopBtn>
+        <ScrollToTopBtn onClick={handleScrollToTop}>위로</ScrollToTopBtn>
       </TeamIntroContainer>
-    </div>
+    </>
   );
 };
 
