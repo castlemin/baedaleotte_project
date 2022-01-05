@@ -1,32 +1,80 @@
 import React from 'react';
-import { Card } from '../../../../components/UI/Card/Card.styles';
 import Header from '../../../../components/UI/header/Header.component';
-import {
-  DescContainer,
-  SubtitleContainer,
-  TitleContainer,
-} from '../../../../components/UI/Text/Text.styles';
-import { GuMap } from '../../../../assets/data/Graphs/GuMap';
-import { SeoulMap } from '../../../../assets/data/Graphs/SeoulMap';
 import { useNavigate } from 'react-router-dom';
-import { NextButton } from '../regional-report/RegionalReportPage.styles';
-import { riskScore } from '../../../../assets/data/RiskScore';
+
+import {
+  NextButton,
+  ReportSubtitle,
+  ReportTitle,
+  ReportContainer,
+  GraphConatiner,
+  DescriptionSection,
+} from '../regional-report/RegionalReportPage.styles';
+
+/* 리포트에서 사용하는 그래프입니다. */
+import { GuMap } from '../../../../assets/data/Graphs/GuMap';
+import { RiskScore } from '../../../../assets/data/RiskScore';
+import { RankGraph } from '../../../../assets/data/Graphs/RankGraph';
+import { VaccinGraph } from '../../../../assets/data/Graphs/VaccineGraph';
+import { ConfirmedGraph } from '../../../../assets/data/Graphs/ConfirmedGraph';
+import { ConfirmedByGuGraph } from '../../../../assets/data/Graphs/ConfirmedByGuGraph';
 
 const RegionalReportPage: React.FC = () => {
   const navigate = useNavigate();
 
+  /* 카테고리 페이지 이동 함수 */
   const handleToCategory = () => {
     navigate('/service/regional/categories/');
   };
 
+  {
+    /* <div
+      style={{
+        display: 'inline-block',
+        height: '300px',
+        width: '400px',
+        backgroundImage: `url(${MockMap})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    ></div>
+    <div
+      style={{
+        display: 'inline-block',
+        height: '300px',
+        width: '400px',
+        backgroundImage: `url(${MockMap})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    ></div> */
+  }
+
   return (
     <>
-      <Header serviceStatic />
-      <TitleContainer>현재 지역 코로나 리포트</TitleContainer>
-      <SubtitleContainer report>내 행정구 위험도</SubtitleContainer>
-      <GuMap />
-      <SeoulMap />
-      <NextButton onClick={handleToCategory}>카테고리 선택</NextButton>
+      <ReportTitle>내 지역 코로나 리포트</ReportTitle>
+      <ReportContainer>
+        <GraphConatiner>
+          <ReportSubtitle>내 행정구 위험도 지도</ReportSubtitle>
+          <GuMap />
+          <button>위험도를 산출한 방식이 궁금하다면</button>
+          <ReportSubtitle>내 행정구 위험도 순위</ReportSubtitle>
+          <RankGraph />
+          <ReportSubtitle>백신 접종률</ReportSubtitle>
+          <VaccinGraph />
+          <ReportSubtitle>서울시 전체 확진자 현황</ReportSubtitle>
+          <ConfirmedGraph />
+          <ReportSubtitle>행정구별 확진자 현황</ReportSubtitle>
+          <ConfirmedByGuGraph />
+        </GraphConatiner>
+        <DescriptionSection>
+          <ReportSubtitle>
+            현재 당신의 지역 위험도는 <RiskScore />
+            점, '이불밖은 위험해'입니다.
+          </ReportSubtitle>
+        </DescriptionSection>
+        <NextButton onClick={handleToCategory}>카테고리 선택</NextButton>
+      </ReportContainer>
     </>
   );
 };

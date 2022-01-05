@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import {
+  CategoryContainer,
   CategoryListContainer,
   CategoryTitle,
+  PageTitle,
+  SelectedContainer,
+  SelectedCategory,
+  SelectedTitle,
 } from './RegionalCategory.styles';
 
 import { weekDay, hour } from '../../../../assets/data/weekDay';
-import { DescContainer } from '../../../../components/UI/Text/Text.styles';
 import Header from '../../../../components/UI/header/Header.component';
 import { categories } from '../../../../assets/data/categories';
-import { Card } from '../../../../components/UI/Card/Card.styles';
 import Modal from '../../../../components/UI/modal/Modal.component';
 import BackDrop from '../../../../components/UI/BackDrop/BackDrop.component';
 import { NextButton } from './RegionalCategory.styles';
@@ -29,7 +32,7 @@ const RegionalCategoryPage = () => {
     setIsModalClosed((prev) => !prev);
   };
 
-  const handleSelectCategory = (event: any) => {
+  const handleToggleCategory = (event: any) => {
     if (
       categorySelected.length >= 2 &&
       !categorySelected.includes(event.target.textContent)
@@ -53,30 +56,25 @@ const RegionalCategoryPage = () => {
         <Modal message={message} onCancel={handleCloseModal} />
       )}
       {!isModalClosed && <BackDrop onCancel={handleCloseModal} />}
-      <CategoryTitle>
+      <PageTitle>
         오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는
-        <p>
-          선택 메뉴:{' '}
-          {categorySelected.map((item) => (
-            <span>[{item}]</span>
-          ))}
-        </p>
-      </CategoryTitle>
+        <p style={{ marginBottom: 0 }}>선택 메뉴</p>
+      </PageTitle>
+      <SelectedContainer>
+        {categorySelected.map((item) => (
+          <SelectedCategory imgUrl={IMAGES[item]}>
+            <SelectedTitle>{item}</SelectedTitle>
+          </SelectedCategory>
+        ))}
+      </SelectedContainer>
       <CategoryListContainer>
         {categories.map((cat) => (
-          <Card
-            category
-            onClick={handleSelectCategory}
-            style={{
-              backgroundImage: `url(${IMAGES[cat]})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
+          <CategoryContainer
+            onClick={handleToggleCategory}
+            imgUrl={IMAGES[cat]}
           >
-            <DescContainer style={{ backgroundColor: 'black', color: 'white' }}>
-              {cat}
-            </DescContainer>
-          </Card>
+            <CategoryTitle>{cat}</CategoryTitle>
+          </CategoryContainer>
         ))}
       </CategoryListContainer>
       <NextButton onClick={handleToShopList}>임시 버튼</NextButton>
