@@ -15,6 +15,7 @@ import {
   ShopListContainer,
   FilterBtn,
   FilterBtnContainer,
+  ShopContainer,
 } from './RegionalShopsPage.styles';
 
 const RegionalShopsPage: React.FC = () => {
@@ -85,12 +86,15 @@ const RegionalShopsPage: React.FC = () => {
               />
             )}
             {shopList.map((item, idx) => (
-              <Card
+              <ShopContainer
                 key={idx}
-                shop
                 onClick={handleToDetail}
                 id={item.restaurant_id}
               >
+                <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
+                <ShopTitleContainer id={item.restaurant_id}>
+                  {item.name}
+                </ShopTitleContainer>
                 <ShopDescContainer id={item.restaurant_id}>
                   <b>카테고리</b>:{' '}
                   {item.categories.map((cat: string[]) => (
@@ -104,11 +108,7 @@ const RegionalShopsPage: React.FC = () => {
                   <br />
                   <b>배달 소요시간</b>: {item.estimated_delivery_time}
                 </ShopDescContainer>
-                <ShopTitleContainer id={item.restaurant_id}>
-                  {item.name}
-                </ShopTitleContainer>
-                <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
-              </Card>
+              </ShopContainer>
             ))}
           </ShopListContainer>
         </>

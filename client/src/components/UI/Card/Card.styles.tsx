@@ -47,30 +47,6 @@ export const Card = styled.div<Props>`
         background-color: white;
       }
     `}
-
-  ${({ shop }: Props) =>
-    shop &&
-    css`
-      height: 20rem;
-      width: 16rem;
-      flex-direction: column-reverse;
-
-      &:hover {
-        transition: all 200ms ease;
-        cursor: pointer;
-        transform: scale(1.2);
-        background-color: white;
-      }
-
-      &:hover ${ShopDescContainer} {
-        display: block;
-      }
-
-      &: hover ${ShopTitleContainer} {
-        margin: 8px 0;
-        font-weight: bold;
-      }
-    `};
 `;
 
 /* height: -moz-fit-content;
