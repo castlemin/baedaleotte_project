@@ -21,13 +21,17 @@ import {
 
 const HomePage: React.FC = () => {
   const [position, setPosition] = useState(0);
+  const [height, setHeight] = useState(0);
+
   const navigate = useNavigate();
 
-  const homePageRef = useRef<HTMLDivElement | null>(null);
-  console.log(homePageRef.current);
+  const homePageRef = useRef<any>(null);
+
+  useEffect(() => {
+    setHeight(homePageRef.current.scrollHeight);
+  }, []);
 
   const onScroll = () => {
-    console.log(window.scrollY);
     setPosition(window.scrollY);
   };
 
@@ -43,9 +47,9 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div ref={homePageRef}>
-      <Header />
-      <HomePageContainer>
+    <div>
+      <Header viewHeight={height} />
+      <HomePageContainer ref={homePageRef}>
         <ContentsContainer>
           <IntroLottie />
           <TextWrapper>
@@ -74,6 +78,7 @@ const HomePage: React.FC = () => {
       </HomePageContainer>
       <RegIntroContainer
         style={{
+          backgroundColor: '#F7F4F5',
           backgroundPositionY: position / 2,
         }}
       >
@@ -99,6 +104,7 @@ const HomePage: React.FC = () => {
       <PrefIntroContainer
         style={{
           backgroundPositionY: position / -2,
+          backgroundColor: 'yellow',
         }}
       >
         <ContentsContainer>

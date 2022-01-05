@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 interface Props {
-  imgUrl: string;
+  selected?: number;
+  imgUrl?: string;
 }
 
 export const CategoryListContainer = styled.div`
@@ -24,13 +25,18 @@ export const CategoryContainer = styled.div`
   width: 200px;
   margin: 10px;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+    transition: 200ms ease;
+    transform: scale(1.03);
+  }
 `;
 
 export const CategoryTitle = styled.h3`
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   margin-top: 0;
   text-align: center;
   border-radius: 6px 6px 0 0;
@@ -46,10 +52,20 @@ export const SelectedContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 120px;
-  width: 230px;
+  width: 240px;
   margin: 20px auto;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+`;
+
+export const PlaceHolder = styled.p`
+  display: block;
+  margin: auto;
+  ${({ selected }: Props) =>
+    selected &&
+    css`
+      display: none;
+    `}
 `;
 
 export const SelectedCategory = styled.div`
@@ -67,8 +83,8 @@ export const SelectedCategory = styled.div`
 `;
 
 export const SelectedTitle = styled.h3`
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   font-size: 2px;
   margin: 0;
   border-radius: 3px 3px 0 0;

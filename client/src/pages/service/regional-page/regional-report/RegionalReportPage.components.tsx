@@ -54,20 +54,52 @@ const RegionalReportPage: React.FC = () => {
     <>
       <ReportTitle>내 지역 코로나 리포트</ReportTitle>
       <ReportContainer>
-        <GraphConatiner>
-          <ReportSubtitle>내 행정구 위험도 지도</ReportSubtitle>
-          <GuMap />
-          <button>위험도를 산출한 방식이 궁금하다면</button>
-          <ReportSubtitle>내 행정구 위험도 순위</ReportSubtitle>
-          <RankGraph />
-          <ReportSubtitle>백신 접종률</ReportSubtitle>
-          <VaccinGraph />
-          <ReportSubtitle>서울시 전체 확진자 현황</ReportSubtitle>
-          <ConfirmedGraph />
-          <ReportSubtitle>행정구별 확진자 현황</ReportSubtitle>
-          <ConfirmedByGuGraph />
-        </GraphConatiner>
         <DescriptionSection>
+          <GraphConatiner>
+            <ReportSubtitle>내 행정구 위험도 지도</ReportSubtitle>
+            <GuMap />
+            <button>위험도를 산출한 방식이 궁금하다면</button>
+          </GraphConatiner>
+          <ReportSubtitle>
+            현재 당신의 지역 위험도는 <RiskScore />
+            점, '이불밖은 위험해'입니다.
+          </ReportSubtitle>
+        </DescriptionSection>
+        <DescriptionSection>
+          <ReportSubtitle>
+            현재 당신의 지역 위험도는 <RiskScore />
+            점, '이불밖은 위험해'입니다.
+          </ReportSubtitle>
+          <GraphConatiner>
+            <ReportSubtitle>내 행정구 위험도 순위</ReportSubtitle>
+            <RankGraph />
+          </GraphConatiner>
+        </DescriptionSection>
+        <DescriptionSection>
+          <GraphConatiner>
+            <ReportSubtitle>백신 접종률</ReportSubtitle>
+            <VaccinGraph />
+          </GraphConatiner>
+          <ReportSubtitle>
+            현재 당신의 지역 위험도는 <RiskScore />
+            점, '이불밖은 위험해'입니다.
+          </ReportSubtitle>
+        </DescriptionSection>
+        <DescriptionSection>
+          <ReportSubtitle>
+            현재 당신의 지역 위험도는 <RiskScore />
+            점, '이불밖은 위험해'입니다.
+          </ReportSubtitle>
+          <GraphConatiner>
+            <ReportSubtitle>서울시 전체 확진자 현황</ReportSubtitle>
+            <ConfirmedGraph />
+          </GraphConatiner>
+        </DescriptionSection>
+        <DescriptionSection>
+          <GraphConatiner>
+            <ReportSubtitle>행정구별 확진자 현황</ReportSubtitle>
+            <ConfirmedByGuGraph />
+          </GraphConatiner>
           <ReportSubtitle>
             현재 당신의 지역 위험도는 <RiskScore />
             점, '이불밖은 위험해'입니다.
