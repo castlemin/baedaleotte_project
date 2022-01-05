@@ -1,4 +1,4 @@
-import Header from '../../components/UI/header/Header.component';
+import Header from '../../../components/UI/header/Header.component';
 import { TitleContainer } from './TeamPage.styles';
 
 const TeamPage = () => {

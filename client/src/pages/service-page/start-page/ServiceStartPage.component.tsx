@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SeoulMap } from '../../assets/data/Graphs/SeoulMap';
-import { Card } from '../../components/UI/Card/Card.styles';
+import { SeoulMap } from '../../../assets/data/Graphs/SeoulMap';
+import { Card } from '../../../components/UI/Card/Card.styles';
 import {
   DescContainer,
   SubtitleContainer,
-} from '../../components/UI/Text/Text.styles';
+} from '../../../components/UI/Text/Text.styles';
 import {
   ToServiceBtn,
   ToServiceBtnContainer,

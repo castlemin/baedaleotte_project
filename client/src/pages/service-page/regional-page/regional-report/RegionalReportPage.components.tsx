@@ -6,7 +6,7 @@ import {
   NextButton,
   ReportTitle,
   ReportContainer,
-} from '../regional-report/RegionalReportPage.styles';
+} from './RegionalReportPage.styles';
 
 /* 리포트에서 사용하는 그래프입니다. */
 import { ReportTreatMap } from './report-sections/treat-map/ReportTreatMap.component';
