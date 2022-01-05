@@ -7,8 +7,6 @@ import pandas as pd
 import requests
 import sqlalchemy
 import xmltodict
-from apscheduler.jobstores.base import JobLookupError
-from apscheduler.schedulers.background import BackgroundScheduler
 
 spec = importlib.util.spec_from_file_location("personalKey", "static/projectKeys/personalKey.py")
 personalKey = importlib.util.module_from_spec(spec)
@@ -41,7 +39,7 @@ def addLatestSeoulCoronaPatients():
     engine = sqlalchemy.create_engine(DB_URI, echo=False)
     df = pd.read_csv("./static/corona_daily_data.csv", encoding="utf-8")
     df = df.head(1)
-    # df.to_sql(name="CoronaDaily", con=engine, if_exists="append", index=False)
+    df.to_sql(name="CoronaDaily", con=engine, if_exists="append", index=False)
     print(df)
 
 

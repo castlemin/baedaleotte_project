@@ -11,11 +11,11 @@ from utility.todict import AlchemyEncoder
 bp = Blueprint("restaurants", __name__, url_prefix="/restaurants")
 
 
-@bp.route("")
+@bp.route("/")
 def getAllRestaurants():
     restaurants = RestaurantInfo.query.all()
     res = json.dumps(restaurants, cls=AlchemyEncoder, ensure_ascii=False, indent=4)
-    return Response(res, mimetype="application/json")
+    return Response(res, mimetype="application/json", status=200)
 
 
 def restaurant_search(instances: RestaurantInfo, user_location):
@@ -59,8 +59,10 @@ def preprocess_restaurants_list(restaurants: RestaurantInfo):
     return lis
 
 
-@bp.route("/near")
-def getNearRestaurants(lat: float, lng: float):
+@bp.route("/near", methods=["POST"])
+def getNearRestaurants():
+    lat = float(request.form["lat"])
+    lng = float(request.form["lng"])
     user_location = (lat, lng)
     # 37.484410, 127.087437
     cat_1 = request.args.get("category1", type=str)
@@ -72,14 +74,26 @@ def getNearRestaurants(lat: float, lng: float):
 
     res = restaurant_search(lis, user_location)
     res = json.dumps(res, cls=AlchemyEncoder, ensure_ascii=False, indent=4)
-    return Response(res, mimetype="application/json")
+    return Response(res, mimetype="application/json", status=200)
 
 
 @bp.route("/<int:res_id>")
 def getRestaurantDetail(res_id: int):
-    restaurant = RestaurantInfo.query.filter(RestaurantInfo.restaurant_id == res_id).first()
+    # flag = False
+    # try:
+    #     if res_id is None:
+    #         flag = True
+    #         raise ValueError("입력값이 없습니다.")
+    #     if type(res_id) is not int:
+    #         flag = True
+    #         raise ValueError("정확한 식당번호를 입력해 주시기 바랍니다.")
+    #     res_ids = RestaurantInfo.query.with_entities(RestaurantInfo.restaurant_id).all()# noqa: E501
+    #     if (res_id,) not in res_ids:
+    #         flag = True
+    #         raise ValueError("식당 번호를 찾을수 없습니다.")
+    #     if flag == False:
+    restaurant = RestaurantInfo.query.filter(RestaurantInfo.restaurant_id == res_id).first()  # noqa: E501
     res = json.dumps(restaurant, cls=AlchemyEncoder, ensure_ascii=False, indent=4)
-    return Response(res, mimetype="application/json")
-
-
-# @bp.route("/<int:res_id>/review")
+    return Response(res, mimetype="application/json", status=200)
+    # except ValueError as e:
+    #     return Response(jsonify({"result": e, "status": 400}))

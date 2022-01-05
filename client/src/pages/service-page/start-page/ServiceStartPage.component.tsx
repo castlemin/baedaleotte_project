@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card } from '../../components/UI/Card/Card.styles';
-import Header from '../../components/UI/header/Header.component';
+import { SeoulMap } from '../../../assets/data/Graphs/SeoulMap';
+import { Card } from '../../../components/UI/Card/Card.styles';
 import {
   DescContainer,
   SubtitleContainer,
-} from '../../components/UI/Text/Text.styles';
+} from '../../../components/UI/Text/Text.styles';
 import {
   ToServiceBtn,
   ToServiceBtnContainer,
@@ -60,18 +60,16 @@ const ServiceStartPage: React.FC = () => {
       : navigate('preference');
   };
 
-  console.log(GPS);
-
   return (
     <BackgroundContainer>
-      <Header serviceStatic />
       <Card serviceStart>
         <SubtitleContainer service>
           해당 서비스는 사용자님의 위치정보를 필요로 해요.
         </SubtitleContainer>
+        <SeoulMap />
         <DescContainer service>
-          사용자님의 현재 위치 정보를 통해, 위치하신 지역의 코로나 위험도를
-          분석하고 근방 배달음식점을 파악해야 하기 때문이죠.
+          보시는 것 처럼 사용자님의 현재 위치 정보를 통해, 위치하신 지역의
+          코로나 위험도를 분석하고 근방 배달음식점을 파악해야 하기 때문이죠.
         </DescContainer>
         <br />
         <DescContainer service>

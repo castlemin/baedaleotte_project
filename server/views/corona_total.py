@@ -41,11 +41,12 @@ def translateSystemClock(userTime: datetime):
 
 
 # 코로나 전체 데이터 뿌려주기
-@bp.route("")
+@bp.route("/")
 def getCoronaTotal():
     session["userTime"] = datetime.today()
     userTime = session.get("userTime")
     userDate = translateSystemClock(userTime)
+    # print(userDate)
     daily_corona = CoronaDaily.query.filter(CoronaDaily.JCG_DT == "2022.01.04.00").first()
     cor_res = json.dumps(daily_corona, cls=AlchemyEncoder, ensure_ascii=False)
     jcg = EngKorJCG.query.all()

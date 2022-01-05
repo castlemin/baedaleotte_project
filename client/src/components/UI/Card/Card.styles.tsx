@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import {
   ShopDescContainer,
   ShopTitleContainer,
-} from '../../../pages/service/regional-page/regional-shops/RegionalShopsPage.styles';
+} from '../../../pages/service-page/regional-page/regional-shops/RegionalShopsPage.styles';
 
 interface Props {
   serviceStart?: boolean;
@@ -25,7 +25,7 @@ export const Card = styled.div<Props>`
   ${({ serviceStart }: Props) =>
     serviceStart &&
     css`
-      margin: 100px auto;
+      margin: 50px auto 0;
     `}
 
   ${({ regionalReport }: Props) =>
@@ -47,30 +47,6 @@ export const Card = styled.div<Props>`
         background-color: white;
       }
     `}
-
-  ${({ shop }: Props) =>
-    shop &&
-    css`
-      height: 20rem;
-      width: 16rem;
-      flex-direction: column-reverse;
-
-      &:hover {
-        transition: all 200ms ease;
-        cursor: pointer;
-        transform: scale(1.2);
-        background-color: white;
-      }
-
-      &:hover ${ShopDescContainer} {
-        display: block;
-      }
-
-      &: hover ${ShopTitleContainer} {
-        margin: 8px 0;
-        font-weight: bold;
-      }
-    `};
 `;
 
 /* height: -moz-fit-content;

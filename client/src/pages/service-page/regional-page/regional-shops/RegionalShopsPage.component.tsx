@@ -2,8 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import BackDrop from '../../../../components/UI/BackDrop/BackDrop.component';
 /* import axios from 'axios'; */
-import { Card } from '../../../../components/UI/Card/Card.styles';
-import Header from '../../../../components/UI/header/Header.component';
 import Loading from '../../../../components/UI/loading/Loading.component';
 import RegionalShopDetail from '../regional-shops-detail/RegionalShopDetail.component';
 // import useLoadShops from '../../../../hooks/useLoadShops.component';
@@ -15,6 +13,7 @@ import {
   ShopListContainer,
   FilterBtn,
   FilterBtnContainer,
+  ShopContainer,
 } from './RegionalShopsPage.styles';
 
 const RegionalShopsPage: React.FC = () => {
@@ -33,8 +32,6 @@ const RegionalShopsPage: React.FC = () => {
     };
     fetchRestaurants();
   }, []);
-
-  console.log(shopList);
 
   const handleToDetail = (e: any) => {
     setSelectShop(e.target.id);
@@ -85,12 +82,15 @@ const RegionalShopsPage: React.FC = () => {
               />
             )}
             {shopList.map((item, idx) => (
-              <Card
+              <ShopContainer
                 key={idx}
-                shop
                 onClick={handleToDetail}
                 id={item.restaurant_id}
               >
+                <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
+                <ShopTitleContainer id={item.restaurant_id}>
+                  {item.name}
+                </ShopTitleContainer>
                 <ShopDescContainer id={item.restaurant_id}>
                   <b>카테고리</b>:{' '}
                   {item.categories.map((cat: string[]) => (
@@ -100,15 +100,11 @@ const RegionalShopsPage: React.FC = () => {
                   {item.end.slice(0, -3)}시
                   <br />
                   <b>평점</b>:{' '}
-                  {item.review_avg === 0 ? '평점 없음' : item.review_avg}
+                  {item.review_avg === 0 ? '평점 없음' : `${item.review_avg}점`}
                   <br />
                   <b>배달 소요시간</b>: {item.estimated_delivery_time}
                 </ShopDescContainer>
-                <ShopTitleContainer id={item.restaurant_id}>
-                  {item.name}
-                </ShopTitleContainer>
-                <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
-              </Card>
+              </ShopContainer>
             ))}
           </ShopListContainer>
         </>

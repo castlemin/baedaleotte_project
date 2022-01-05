@@ -9,10 +9,10 @@
     "python.linting.flake8Args": [
       // black의 기본 max line length 값은 88 이므로 맞춰준다.
       // https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#line-length
-      "--max-line-length=88",
+      "--max-line-length=250",
       // 무시 할 에러코드
       // 에러 코드 확인 -> https://flake8.pycqa.org/en/latest/user/error-codes.html
-      "--ignore=F401,E402"
+      "--ignore=F401,E402,E501"
     ],
   
     // black formatter 사용

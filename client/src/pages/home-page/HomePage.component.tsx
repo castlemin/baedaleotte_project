@@ -5,6 +5,7 @@ import { GuMap } from '../../assets/data/Graphs/GuMap';
 import { ReactComponent as MAIN_IMG } from '../../assets/images/on_the_way.svg';
 import { ReactComponent as INTRO_IMG } from '../../assets/images/takeout_boxes.svg';
 import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
+import { HOME_IMG_CONFIG } from '../../assets/data/homeImgConfig';
 import {
   HomePageContainer,
   ContentsContainer,
@@ -21,31 +22,39 @@ import {
 
 const HomePage: React.FC = () => {
   const [position, setPosition] = useState(0);
+  const [height, setHeight] = useState(0);
+
   const navigate = useNavigate();
 
-  const homePageRef = useRef<HTMLDivElement | null>(null);
-  console.log(homePageRef.current);
+  const homePageRef = useRef<any>(null);
 
-  const onScroll = () => {
-    console.log(window.scrollY);
+  useEffect(() => {
+    setHeight(homePageRef.current.scrollHeight);
+  }, []);
+
+  const handleScroll = () => {
     setPosition(window.scrollY);
   };
 
-  const onScrollToTop = () => {
+  const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleToService = () => {
+    navigate('/service');
+  };
+
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <div ref={homePageRef}>
-      <Header />
-      <HomePageContainer>
+    <>
+      <Header viewHeight={height} />
+      <HomePageContainer ref={homePageRef}>
         <ContentsContainer>
           <IntroLottie />
           <TextWrapper>
@@ -62,21 +71,11 @@ const HomePage: React.FC = () => {
             <DescContainer aniLevitate position={position}>
               배달어때?
             </DescContainer>
-            <StartButton
-              onClick={() => {
-                navigate('/service');
-              }}
-            >
-              바로 시작하기!
-            </StartButton>
+            <StartButton onClick={handleToService}>바로 시작하기!</StartButton>
           </TextWrapper>
         </ContentsContainer>
       </HomePageContainer>
-      <RegIntroContainer
-        style={{
-          backgroundPositionY: position / 2,
-        }}
-      >
+      <RegIntroContainer>
         <ContentsContainer>
           <GuMap />
           <TextWrapper>
@@ -96,19 +95,13 @@ const HomePage: React.FC = () => {
           </TextWrapper>
         </ContentsContainer>
       </RegIntroContainer>
-      <PrefIntroContainer
-        style={{
-          backgroundPositionY: position / -2,
-        }}
-      >
+      <PrefIntroContainer>
         <ContentsContainer>
-          <INTRO_IMG
-            style={{ margin: '40px 0 auto', marginLeft: '40px', width: '100%' }}
-          />
+          <INTRO_IMG style={HOME_IMG_CONFIG} />
           <TextWrapper>
             <TitleContainer>배달 음식 취향 테스트</TitleContainer>
             <SubtitleContainer position={position}>
-              나는 내 뱃고래를 더 알고 싶다
+              "나는 내 뱃고래를 더 알고 싶다."
             </SubtitleContainer>
             <DescContainer position={position}>
               지금 먹고 싶은 배달음식을 찾아보세요.
@@ -123,9 +116,9 @@ const HomePage: React.FC = () => {
         </ContentsContainer>
       </PrefIntroContainer>
       <TeamIntroContainer>
-        <ScrollToTopBtn onClick={onScrollToTop}>위로</ScrollToTopBtn>
+        <ScrollToTopBtn onClick={handleScrollToTop}>위로</ScrollToTopBtn>
       </TeamIntroContainer>
-    </div>
+    </>
   );
 };
 
