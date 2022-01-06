@@ -39,11 +39,11 @@ def addLatestSeoulCoronaPatients():
     engine = sqlalchemy.create_engine(DB_URI, echo=False)
     df = pd.read_csv("./static/corona_daily_data.csv", encoding="utf-8")
     df = df.head(1)
-    df.to_sql(name="CoronaDaily", con=engine, if_exists="append", index=False)
+    # df.to_sql(name="CoronaDaily", con=engine, if_exists="append", index=False)
     print(df)
 
 
-# # addLatestSeoulCoronaPatients()
+addLatestSeoulCoronaPatients()
 # sched = BackgroundScheduler()
 # sched.start()
 
