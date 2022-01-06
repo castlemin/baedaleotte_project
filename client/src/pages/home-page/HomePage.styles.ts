@@ -88,7 +88,8 @@ export const RegIntroContainer = styled.div`
 `;
 
 export const PrefIntroContainer = styled.div`
-  ${pageDefault}
+  backgroundcolor: yellow;
+  ${pageDefault};
 `;
 
 export const TeamIntroContainer = styled.div`

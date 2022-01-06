@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import {
   ShopDescContainer,
   ShopTitleContainer,
-} from '../../../pages/service/regional-page/regional-shops/RegionalShopsPage.styles';
+} from '../../../pages/service-page/regional-page/regional-shops/RegionalShopsPage.styles';
 
 interface Props {
   serviceStart?: boolean;

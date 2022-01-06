@@ -6,6 +6,11 @@ export const ReportContainer = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  background-image: linear-gradient(
+    rgba(244, 255, 252, 0),
+    rgb(238, 253, 250),
+    rgb(235, 252, 248)
+  );
 `;
 
 export const GraphConatiner = styled.div`
@@ -42,10 +47,10 @@ export const DescriptionSection = styled.section`
 
 export const NextButton = styled.button`
   background-color: white;
-  margin: auto;
-  margin-bottom: 20px;
-  width: 120px;
-  height: 50px;
+  margin: 40px auto;
+  padding: 5px 20px;
+  width: 200px;
+  height: 60px;
   font-size: 18px;
   font-weight: bold;
   border: none;
@@ -54,7 +59,6 @@ export const NextButton = styled.button`
   box-shadow: 1px 2px 1px 1px darkgrey;
   postition: absolute;
   box-sizing: border-box;
-  padding: 0;
   :hover {
     background-color: #88aed0;
     transition: ease-in 185ms;

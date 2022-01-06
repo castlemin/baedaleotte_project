@@ -23,13 +23,13 @@
 
   - **기술 스택**
     - FE
-      * React, TypeScript, StyledComponents, ReactRouterDom
+      * React(프레임워크), TypeScript(언어), Styled-components(스타일), React Router Dom(라우팅), React Recoil(상태관리)
     - BE
       * Flask, SQLAlchemy, MariaDB, Sentry
 
   - **사용된 라이브러리**
     - FE
-      * axios, lottie-web, plotly.js
+      * axios(API 통신), lottie-web(로딩 및 애니메이션), plotly.js(데이터 시각화)
     - BE
       * APScheduler, haversine, GoogleMapsAPI, 서울시공공데이터 코로나 자치구별 일일 확진자 API, xmltodict, pandas, csv
   - 웹서비스에 대한 자세한 개요
