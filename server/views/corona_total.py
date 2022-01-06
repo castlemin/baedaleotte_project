@@ -37,7 +37,11 @@ def translateSystemClock(userTime: datetime):
         day = "0" + str(userTime.day)
     else:
         day = str(userTime.day)
-    return year + "." + month + "." + day
+    if userTime.hour < 20:
+        day = int(day) - 1
+        if day < 10:
+            day = "0" + str(day)
+    return year + "." + month + "." + day + ".00"
 
 
 # 코로나 전체 데이터 뿌려주기
@@ -46,8 +50,8 @@ def getCoronaTotal():
     session["userTime"] = datetime.today()
     userTime = session.get("userTime")
     userDate = translateSystemClock(userTime)
-    # print(userDate)
-    daily_corona = CoronaDaily.query.filter(CoronaDaily.JCG_DT == "2022.01.04.00").first()
+    print(userDate)
+    daily_corona = CoronaDaily.query.filter(CoronaDaily.JCG_DT == userDate).first()
     cor_res = json.dumps(daily_corona, cls=AlchemyEncoder, ensure_ascii=False)
     jcg = EngKorJCG.query.all()
     # jcg_res = json.dumps(jcg, cls=AlchemyEncoder, ensure_ascii=False)
