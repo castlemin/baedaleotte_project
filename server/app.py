@@ -8,7 +8,9 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 
 import config
 from static.projectKeys.personalKey import db_setting, secretKey, sentry_dsn
-from views import categories, corona_total, graph, restaurants, review
+
+from views import categories, corona_total, restaurants, review, goout, graph
+
 
 db = SQLAlchemy()
 
@@ -30,6 +32,7 @@ def create_app():
     app.register_blueprint(categories.bp)
     app.register_blueprint(review.bp)
     app.register_blueprint(graph.bp)
+    app.register_blueprint(goout.bp)
 
     # @app.errorhandler(404)
 
