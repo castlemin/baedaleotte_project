@@ -1,13 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { categories } from '../../../../assets/data/categories';
+import { eatoutCategories } from '../../../../../../assets/data/eatoutCategories';
 
-import BackDrop from '../../../../components/UI/BackDrop/BackDrop.component';
+import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
 /* import axios from 'axios'; */
-import Loading from '../../../../components/UI/loading/Loading.component';
-import { selectedCategory } from '../../../../store/store';
-import RegionalShopDetail from '../regional-shops-detail/RegionalShopDetail.component';
+import Loading from '../../../../../../components/UI/loading/Loading.component';
+import { selectedDeliveryCategory } from '../../../../../../store/store';
+import RegionalDeliveryShopDetail from '../delivery-shops-detail/RegionalDeliveryShopDetail.component';
 // import useLoadShops from '../../../../hooks/useLoadShops.component';
 
 import {
@@ -18,14 +18,14 @@ import {
   FilterBtn,
   FilterBtnContainer,
   ShopContainer,
-} from './RegionalShopsPage.styles';
+} from './RegionalDeliveryShopsPage.styles';
 
-const RegionalShopsPage: React.FC = () => {
-  const [shopList, setShopList] = useState<any[]>([]);
+const RegionalDeliveryShopsPage: React.FC = () => {
+  const [deliveryShopList, setDeliveryShopList] = useState<any[]>([]);
   const [pageNum, setPageNum] = useState(1);
-  const [selectShop, setSelectShop] = useState('');
+  const [selectShop, setSelectDeliveryShop] = useState('');
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const chosenCategories = useRecoilValue(selectedCategory);
+  const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -34,15 +34,19 @@ const RegionalShopsPage: React.FC = () => {
       );
       const data = await res.data;
       const filteredData = await data.filter((item: any) =>
-        item.categories.includes(chosenCategories[0] || chosenCategories[1])
+        item.categories.includes(
+          chosenDeliveryCategories[0] || chosenDeliveryCategories[1]
+        )
       );
-      setShopList(filteredData);
+      setDeliveryShopList(filteredData);
     };
     fetchRestaurants();
   }, []);
 
-  const handleToDetail = (event: any) => {
-    setSelectShop(event.target.id);
+  console.log(deliveryShopList);
+
+  const handleToDeliveryDetail = (event: any) => {
+    setSelectDeliveryShop(event.target.id);
     handleToggleDetail();
     console.log(selectShop);
   };
@@ -52,12 +56,12 @@ const RegionalShopsPage: React.FC = () => {
   };
 
   const handleClickSort = (event: any) => {
-    if (event.target.id === 'review') {
-      setShopList((prev) => [
+    if (event.target.className === 'review') {
+      setDeliveryShopList((prev) => [
         ...prev.sort((a, b) => b.review_avg - a.review_avg),
       ]);
     } else if (event.target.id === 'time') {
-      setShopList((prev) => [
+      setDeliveryShopList((prev) => [
         ...prev.sort(
           (a, b) =>
             parseInt(a.estimated_delivery_time.slice(3, -1)) -
@@ -69,7 +73,7 @@ const RegionalShopsPage: React.FC = () => {
 
   return (
     <>
-      {!shopList ? (
+      {!deliveryShopList ? (
         <Loading />
       ) : (
         <>
@@ -81,29 +85,32 @@ const RegionalShopsPage: React.FC = () => {
               높은평점순
             </FilterBtn>
           </FilterBtnContainer>
-          <ShopListContainer>
+          <ShopListContainer layout={deliveryShopList.length}>
             {isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
             {isDetailOpen && (
-              <RegionalShopDetail
-                shopData={shopList}
+              <RegionalDeliveryShopDetail
+                shopData={deliveryShopList}
                 selected={selectShop}
                 onCancel={handleToggleDetail}
               />
             )}
-            {shopList.map((item, idx) => (
+            {deliveryShopList.map((item, idx) => (
               <ShopContainer
                 key={idx}
-                onClick={handleToDetail}
+                onClick={handleToDeliveryDetail}
                 id={item.restaurant_id}
               >
-                <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
-                <ShopTitleContainer id={item.restaurant_id}>
+                <ShopImgContainer
+                  className={item.restaurant_id}
+                  url={item.logo_url}
+                />
+                <ShopTitleContainer className={item.restaurant_id}>
                   {item.name}
                 </ShopTitleContainer>
-                <ShopDescContainer id={item.restaurant_id}>
+                <ShopDescContainer className={item.restaurant_id}>
                   <b>카테고리</b>:{' '}
                   {item.categories.map((cat: string[]) => (
-                    <li id={item.restaurant_id}>{cat}</li>
+                    <li className={item.restaurant_id}>{cat}</li>
                   ))}
                   <b>영업시간</b>: {item.begin.slice(0, -3)}시 -{' '}
                   {item.end.slice(0, -3)}시
@@ -122,4 +129,4 @@ const RegionalShopsPage: React.FC = () => {
   );
 };
 
-export default RegionalShopsPage;
+export default RegionalDeliveryShopsPage;

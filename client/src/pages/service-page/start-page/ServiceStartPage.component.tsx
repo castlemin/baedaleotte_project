@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SeoulMap } from '../../../assets/data/Graphs/SeoulMap';
-import { DescContainer } from '../../../components/UI/Text/Text.styles';
+import { useRecoilState } from 'recoil';
 import {
   ToServiceBtn,
   ToServiceBtnContainer,
@@ -14,17 +14,18 @@ import {
   RequestDescContainer,
   ExampleTitle,
 } from './ServiceStartPage.styles';
+import { userLocation } from '../../../store/store';
 
 const ServiceStartPage: React.FC = () => {
   const navigate = useNavigate();
-  const [GPS, setGPS] = useState({});
+  const [userCoords, setUserCoords] = useRecoilState(userLocation);
   const [checked, setChecked] = useState(false);
 
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setGPS({
+          setUserCoords({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           });

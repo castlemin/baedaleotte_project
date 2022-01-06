@@ -23,7 +23,7 @@ export const GraphContainer = styled.div`
 
 export const AddOn = styled.div<Props>`
   display: none;
-  height: 300px;
+  height: fit-content;
   ${({ addOnOpen }: Props) =>
     addOnOpen &&
     css`

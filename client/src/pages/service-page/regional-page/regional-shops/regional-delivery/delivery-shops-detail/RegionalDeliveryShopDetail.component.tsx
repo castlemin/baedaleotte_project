@@ -1,5 +1,5 @@
 import React from 'react';
-import ShopDetailReview from './detail-review/ShopDetailReview.component';
+import DeliveryShopDetailReview from '../delivery-review/DeliveryShopDetailReview.component';
 import {
   DetailCardContainer,
   DetailDescContainer,
@@ -9,13 +9,13 @@ import {
   CloseBtn,
   DetailShopTitle,
   DetailItemsWrapper,
-} from './RegionalShopDetail.styles';
+} from './RegionalDeliveryShopDetail.styles';
 import {
   formatPhoneNumber,
   formatPrice,
   formatRating,
   formatTime,
-} from '../../../../functions/formatter';
+} from '../../../../../../functions/formatter';
 
 interface Props {
   onCancel: () => void;
@@ -59,7 +59,7 @@ const RegionalShopDetail: React.FC<Props> = ({
           </DetailItemsWrapper>
         </DetailDescContainer>
       ))}
-      <ShopDetailReview shopId={selected} />
+      <DeliveryShopDetailReview shopId={selected} />
     </DetailCardContainer>
   );
 };

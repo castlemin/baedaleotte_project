@@ -1,14 +1,32 @@
 import styled, { css } from 'styled-components';
 
 interface Props {
-  url: string;
+  url?: string;
+  layout?: number;
 }
 
-export const ShopListContainer = styled.div`
+export const ShopListContainer = styled.div<Props>`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  place-items: center;
   margin: 30px 80px;
+  ${({ layout }: Props) =>
+    layout === 1
+      ? css`
+          display: block;
+          margin: 120px auto;
+          width: fit-content;
+        `
+      : layout === 2
+      ? css`
+          grid-template-columns: 1fr 1fr;
+        `
+      : Number(layout) % 2 !== 0 && Number(layout) % 3 === 0
+      ? css`
+          grid-template-columns: 1fr 1fr 1fr;
+        `
+      : css`
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+        `}
+  place-items: center;
   border-radius: 3px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
 `;

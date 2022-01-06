@@ -1,5 +1,13 @@
 import Header from '../../../components/UI/header/Header.component';
-import { TitleContainer } from './TeamPage.styles';
+import {
+  TitleContainer,
+  MemberName,
+  MemberContainer,
+  FirstParagraph,
+  SecondParagraph,
+  ProfileImage,
+  MemberDescription,
+} from './TeamPage.styles';
 import HWANIK_FACE_IMG from '../../../assets/images/team/hwanIk_face.png';
 import HWANIK_FULL_IMG from '../../../assets/images/team/hwanIk_full.png';
 import SANG_FACE_IMG from '../../../assets/images/team/Sang_face.png';
@@ -12,44 +20,27 @@ import SUHYEN_FULL_IMG from '../../../assets/images/team/suHyen_full.png';
 const TeamPage = () => {
   return (
     <div>
-      <TitleContainer>팀 소개 페이지입니다.</TitleContainer>
-      <div>
-        <h2>윤상</h2>
-        <div style={{ display: 'flex' }}>
-          <img
-            style={{
-              width: '300px',
-              border: '1px solid red',
-              borderRadius: '50%',
-            }}
-            src={SANG_FACE_IMG}
-            alt='frontend developer'
-          />
-          <p>
+      <MemberContainer>
+        <MemberName>윤상</MemberName>
+        <FirstParagraph>
+          <ProfileImage src={SANG_FACE_IMG} alt='Team Leader' />
+          <MemberDescription>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde dolor
             magni beatae sunt magnam a excepturi aut officia suscipit! Non enim
             hic ab exercitationem voluptas necessitatibus nam molestias sed
             maxime.
-          </p>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-          <img
-            style={{
-              width: '300px',
-              border: '1px solid red',
-              borderRadius: '50%',
-            }}
-            src={SANG_FULL_IMG}
-            alt='frontend developer'
-          />
-          <p>
+          </MemberDescription>
+        </FirstParagraph>
+        <SecondParagraph>
+          <ProfileImage src={SANG_FULL_IMG} alt='Team Leader' />
+          <MemberDescription>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id
             asperiores placeat necessitatibus mollitia pariatur ipsa
             praesentium? Dolorum obcaecati, quasi iusto tempora et nulla
             eligendi facilis doloribus molestias cum ducimus culpa.
-          </p>
-        </div>
-      </div>
+          </MemberDescription>
+        </SecondParagraph>
+      </MemberContainer>
       <div>
         <h2>유환익</h2>
         <div style={{ display: 'flex' }}>

@@ -12,25 +12,28 @@ import {
   SelectedTitle,
   SelectedOptionsTitle,
   PlaceHolder,
-} from './RegionalCategory.styles';
+} from './RegionalDeliveryCategory.styles';
 
-import { weekDay, hour } from '../../../../assets/data/weekDay';
-import Header from '../../../../components/UI/header/Header.component';
-import { categories } from '../../../../assets/data/categories';
-import Modal from '../../../../components/UI/modal/Modal.component';
-import BackDrop from '../../../../components/UI/BackDrop/BackDrop.component';
-import { NextButton } from './RegionalCategory.styles';
-import { IMAGES } from '../../../../assets/data/imgMapper';
-import { selectedCategory } from '../../../../store/store';
+import { weekDay, hour } from '../../../../../../assets/data/weekDay';
+import Header from '../../../../../../components/UI/header/Header.component';
+import { deliveryCategories } from '../../../../../../assets/data/deliveryCategories';
+import Modal from '../../../../../../components/UI/modal/Modal.component';
+import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
+import { NextButton } from './RegionalDeliveryCategory.styles';
+import { DELIVERY_IMAGES } from '../../../../../../assets/data/imgMapper';
+import { selectedDeliveryCategory } from '../../../../../../store/store';
+import { CategoryTop5 } from '../../../../../../assets/data/CategoryTop5';
 
-const RegionalCategoryPage = () => {
+const RegionalDeliveryCategoryPage = () => {
   const navigate = useNavigate();
-  const [categoryStored, setCategoryStored] = useRecoilState(selectedCategory);
+  const [categoryStored, setCategoryStored] = useRecoilState(
+    selectedDeliveryCategory
+  );
   const [isModalClosed, setIsModalClosed] = useState(true);
   const [message, setMessage] = useState('');
 
   const handleToShopList = () => {
-    navigate('/service/regional/shop_list');
+    navigate('/service/regional/delivery_shop_list');
   };
 
   const handleCloseModal = () => {
@@ -63,7 +66,7 @@ const RegionalCategoryPage = () => {
       {!isModalClosed && <BackDrop onCancel={handleCloseModal} />}
       <CategoryTemplate style={{ display: 'flex', flexDirection: 'column' }}>
         <PageTitle>
-          오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는
+          오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는: <CategoryTop5 />
           <SelectedOptionsTitle>선택 메뉴</SelectedOptionsTitle>
         </PageTitle>
         <SelectedContainer>
@@ -71,7 +74,7 @@ const RegionalCategoryPage = () => {
             카테고리를 선택해주세요.
           </PlaceHolder>
           {categoryStored.map((item) => (
-            <SelectedCategory imgUrl={IMAGES[item]}>
+            <SelectedCategory imgUrl={DELIVERY_IMAGES[item]}>
               <SelectedTitle>{item}</SelectedTitle>
             </SelectedCategory>
           ))}
@@ -83,10 +86,10 @@ const RegionalCategoryPage = () => {
           추천 가게
         </NextButton>
         <CategoryListContainer>
-          {categories.map((cat) => (
+          {deliveryCategories.map((cat) => (
             <CategoryContainer
               onClick={handleToggleCategory}
-              imgUrl={IMAGES[cat]}
+              imgUrl={DELIVERY_IMAGES[cat]}
             >
               <CategoryTitle>{cat}</CategoryTitle>
             </CategoryContainer>
@@ -97,4 +100,4 @@ const RegionalCategoryPage = () => {
   );
 };
 
-export default RegionalCategoryPage;
+export default RegionalDeliveryCategoryPage;

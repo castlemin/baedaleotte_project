@@ -12,12 +12,14 @@ import asian_url from '../images/asian.png';
 import burger_url from '../images/burger.jpeg';
 import chinese_url from '../images/chinese.jpeg';
 import korean_url from '../images/korean.jpeg';
+import western_url from '../images/western.jpeg';
+import alcohol_url from '../images/alcohol.jpeg';
 
 interface imageUrl {
   [index: string]: string;
 }
 
-export const IMAGES: imageUrl = {
+export const DELIVERY_IMAGES: imageUrl = {
   족발보쌈: pork_url,
   야식: night_food_url,
   찜탕: stew_url,
@@ -32,4 +34,14 @@ export const IMAGES: imageUrl = {
   도시락죽: porridge_url,
   아시안: asian_url,
   버거: burger_url,
+};
+
+export const EATOUT_IMAGES: imageUrl = {
+  한식: korean_url,
+  일식: sushi_url,
+  중식: chinese_url,
+  양식: western_url,
+  세계음식: asian_url,
+  카페: dessert_url,
+  주점: alcohol_url,
 };

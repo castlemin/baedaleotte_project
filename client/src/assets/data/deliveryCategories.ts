@@ -1,4 +1,4 @@
-export const categories: string[] = [
+export const deliveryCategories: string[] = [
   '족발보쌈',
   '야식',
   '찜탕',

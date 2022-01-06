@@ -24,6 +24,11 @@ export const ReportSubtitle = styled.h2`
   word-break: all;
 `;
 
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const NextButton = styled.button`
   background-color: white;
   margin: 40px auto;
@@ -38,6 +43,11 @@ export const NextButton = styled.button`
   box-shadow: 1px 2px 1px 1px darkgrey;
   postition: absolute;
   box-sizing: border-box;
+
+  + button {
+    margin-left: 20px;
+  }
+
   :hover {
     background-color: #88aed0;
     transition: ease-in 185ms;

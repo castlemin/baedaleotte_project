@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { formatRating } from '../../../../../functions/formatter';
-import { itemsPerPage } from '../../../../../store/store';
+import { formatRating } from '../../../../../../functions/formatter';
+import { itemsPerPage } from '../../../../../../store/store';
 import {
   Title,
   Comment,
@@ -12,13 +12,13 @@ import {
   PrevButton,
   NextButton,
   ButtonWrapper,
-} from './ShopDetailReview.styles';
+} from './DeliveryShopDetailReview.styles';
 
 interface Props {
   shopId: string;
 }
 
-const ShopDetailReview = ({ shopId }: Props) => {
+const DeliveryShopDetailReview = ({ shopId }: Props) => {
   const [review, setReview] = useState([]);
   const [curPage, setCurPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -77,4 +77,4 @@ const ShopDetailReview = ({ shopId }: Props) => {
   );
 };
 
-export default ShopDetailReview;
+export default DeliveryShopDetailReview;

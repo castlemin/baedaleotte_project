@@ -15,3 +15,15 @@ export const formatTime = (open: string, close: string) => {
 
 export const formatPhoneNumber = (phoneNum: number) =>
   String(phoneNum).replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+
+export const formatEatOutWeekdayHour = (hour: string) => {
+  return hour.slice(0, 18);
+};
+
+export const formatEatOutWeekendHour = (hour: string) => {
+  if (hour.slice(19, 38) === '') {
+    return '';
+  } else {
+    return hour.slice(19, 38);
+  }
+};

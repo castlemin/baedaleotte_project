@@ -1,11 +1,26 @@
 import { atom } from 'recoil';
 
-export const selectedCategory = atom({
-  key: 'selectedCategory',
+export const selectedDeliveryCategory = atom({
+  key: 'selectedDeliveryCategory',
+  default: [],
+});
+
+export const selectedEatOutCategory = atom({
+  key: 'selectedEatOutCategory',
   default: [],
 });
 
 export const itemsPerPage = atom({
   key: 'itemsPerPage',
   default: 5,
+});
+
+export const userLocation = atom({
+  key: 'userLocation',
+  default: {},
+});
+
+export const RegionName = atom({
+  key: 'regionName',
+  default: '',
 });
