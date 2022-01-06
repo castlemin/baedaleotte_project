@@ -6,7 +6,8 @@ class GoOut(db.Model):
     __tablename__ = "goout"
     id = db.Column(db.BIGINT, nullable=False, primary_key=True)
     name = db.Column(db.TEXT(20), nullable=False)
-    categories = db.Column(db.TEXT)
+    food_type = db.Column(db.TEXT)
+    category = db.Column(db.TEXT)
     region = db.Column(db.TEXT)
     rating = db.Column(db.Float)
     address = db.Column(db.TEXT)
@@ -23,7 +24,7 @@ class GoOut(db.Model):
 class GoOutReviews(db.Model):
     __tablename__ = "goout_reviews"
     id = db.Column(db.BIGINT, nullable=False, primary_key=True)
-    goout_id = db.Column(db.BIGINT, db.ForeignKey("GoOut.id", ondelete="CASCADE"))
+    store_name = db.Column(db.BIGINT, db.ForeignKey("GoOut.name", ondelete="CASCADE"))
     review_1 = db.Column(db.TEXT)
     review_2 = db.Column(db.TEXT)
     review_3 = db.Column(db.TEXT)
