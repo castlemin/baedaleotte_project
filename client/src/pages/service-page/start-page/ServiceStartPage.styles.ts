@@ -19,6 +19,7 @@ export const GPSRequestContainer = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const RequestTitleContainer = styled.h2`

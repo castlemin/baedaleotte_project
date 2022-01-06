@@ -22,7 +22,7 @@ export const DetailCardContainer = styled.div`
   z-index: 10;
   position: absolute;
   top: 5vh;
-  left: calc(50% - 25rem);
+  left: calc(50% - 20rem);
 `;
 
 export const DetailDescContainer = styled.div``;

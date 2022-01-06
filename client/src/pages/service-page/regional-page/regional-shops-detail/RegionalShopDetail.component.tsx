@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ShopDetailReview from './detail-review/ShopDetailReview.component';
 import {
   DetailCardContainer,
@@ -10,10 +10,12 @@ import {
   DetailShopTitle,
   DetailItemsWrapper,
 } from './RegionalShopDetail.styles';
-import { formatRating } from '../../../../functions/formatRating';
-import { formatPhoneNumber } from '../../../../functions/formatPhoneNumber';
-import { formatPrice } from '../../../../functions/formatPrice';
-import { formatTime } from '../../../../functions/formatTime';
+import {
+  formatPhoneNumber,
+  formatPrice,
+  formatRating,
+  formatTime,
+} from '../../../../functions/formatter';
 
 interface Props {
   onCancel: () => void;
