@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SeoulMap } from '../../../assets/data/Graphs/SeoulMap';
-import { Card } from '../../../components/UI/Card/Card.styles';
-import {
-  DescContainer,
-  SubtitleContainer,
-} from '../../../components/UI/Text/Text.styles';
+import { DescContainer } from '../../../components/UI/Text/Text.styles';
 import {
   ToServiceBtn,
   ToServiceBtnContainer,
   BackgroundContainer,
   ApprovalContainer,
   ApproveLabel,
+  ApprovalCheck,
+  GPSRequestContainer,
+  RequestTitleContainer,
+  RequestDescContainer,
+  ExampleTitle,
 } from './ServiceStartPage.styles';
 
 const ServiceStartPage: React.FC = () => {
@@ -62,22 +63,27 @@ const ServiceStartPage: React.FC = () => {
 
   return (
     <BackgroundContainer>
-      <Card serviceStart>
-        <SubtitleContainer service>
+      <GPSRequestContainer>
+        <RequestTitleContainer>
           해당 서비스는 사용자님의 위치정보를 필요로 해요.
-        </SubtitleContainer>
+        </RequestTitleContainer>
+        <ExampleTitle>서울시 전체 코로나 위험도</ExampleTitle>
         <SeoulMap />
-        <DescContainer service>
+        <RequestDescContainer>
           보시는 것 처럼 사용자님의 현재 위치 정보를 통해, 위치하신 지역의
           코로나 위험도를 분석하고 근방 배달음식점을 파악해야 하기 때문이죠.
-        </DescContainer>
+        </RequestDescContainer>
         <br />
-        <DescContainer service>
+        <RequestDescContainer>
           회원님의 GPS 정보 사용에 동의하시겠습니까?
-        </DescContainer>
+        </RequestDescContainer>
         <ApprovalContainer onChange={handleCheck}>
-          <ApproveLabel htmlFor='approve'>
-            <input type='checkbox' name='approve' defaultChecked={checked} />
+          <ApproveLabel htmlFor='approval'>
+            <ApprovalCheck
+              type='checkbox'
+              name='approval'
+              defaultChecked={checked}
+            />
             위치 정보 제공을 동의합니다.
           </ApproveLabel>
         </ApprovalContainer>
@@ -89,15 +95,8 @@ const ServiceStartPage: React.FC = () => {
           >
             나의 지역 안전확인
           </ToServiceBtn>
-          <ToServiceBtn
-            name='toPreference'
-            onClick={handleClick}
-            disabled={checked === false}
-          >
-            배달음식 성향확인
-          </ToServiceBtn>
         </ToServiceBtnContainer>
-      </Card>
+      </GPSRequestContainer>
     </BackgroundContainer>
   );
 };

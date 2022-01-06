@@ -1,8 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { categories } from '../../../../assets/data/categories';
+
 import BackDrop from '../../../../components/UI/BackDrop/BackDrop.component';
 /* import axios from 'axios'; */
 import Loading from '../../../../components/UI/loading/Loading.component';
+import { selectedCategory } from '../../../../store/store';
 import RegionalShopDetail from '../regional-shops-detail/RegionalShopDetail.component';
 // import useLoadShops from '../../../../hooks/useLoadShops.component';
 
@@ -21,6 +25,7 @@ const RegionalShopsPage: React.FC = () => {
   const [pageNum, setPageNum] = useState(1);
   const [selectShop, setSelectShop] = useState('');
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const chosenCategories = useRecoilValue(selectedCategory);
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -28,26 +33,30 @@ const RegionalShopsPage: React.FC = () => {
         'https://a4f6d6aa-7694-4185-b2c9-534ac61ec028.mock.pstmn.io/restaurants/near'
       );
       const data = await res.data;
-      setShopList(data);
+      const filteredData = await data.filter((item: any) =>
+        item.categories.includes(chosenCategories[0] || chosenCategories[1])
+      );
+      setShopList(filteredData);
     };
     fetchRestaurants();
   }, []);
 
-  const handleToDetail = (e: any) => {
-    setSelectShop(e.target.id);
+  const handleToDetail = (event: any) => {
+    setSelectShop(event.target.id);
     handleToggleDetail();
+    console.log(selectShop);
   };
 
   const handleToggleDetail = () => {
     setIsDetailOpen((prev) => !prev);
   };
 
-  const handleClickFilter = (e: any) => {
-    if (e.target.id === 'review') {
+  const handleClickSort = (event: any) => {
+    if (event.target.id === 'review') {
       setShopList((prev) => [
         ...prev.sort((a, b) => b.review_avg - a.review_avg),
       ]);
-    } else if (e.target.id === 'time') {
+    } else if (event.target.id === 'time') {
       setShopList((prev) => [
         ...prev.sort(
           (a, b) =>
@@ -65,10 +74,10 @@ const RegionalShopsPage: React.FC = () => {
       ) : (
         <>
           <FilterBtnContainer>
-            <FilterBtn id='time' onClick={handleClickFilter}>
+            <FilterBtn id='time' onClick={handleClickSort}>
               빠른시간순
             </FilterBtn>
-            <FilterBtn id='review' onClick={handleClickFilter}>
+            <FilterBtn id='review' onClick={handleClickSort}>
               높은평점순
             </FilterBtn>
           </FilterBtnContainer>
@@ -99,7 +108,7 @@ const RegionalShopsPage: React.FC = () => {
                   <b>영업시간</b>: {item.begin.slice(0, -3)}시 -{' '}
                   {item.end.slice(0, -3)}시
                   <br />
-                  <b>평점</b>:{' '}
+                  <b>평균평점</b>:{' '}
                   {item.review_avg === 0 ? '평점 없음' : `${item.review_avg}점`}
                   <br />
                   <b>배달 소요시간</b>: {item.estimated_delivery_time}

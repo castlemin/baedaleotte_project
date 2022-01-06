@@ -1,8 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface Props {
+  addOnOpen: boolean;
+}
 
 export const DescriptionSection = styled.section`
-  margin-top: 8%;
-  margin-left: 30px;
   display: flex;
   align-items: center;
 `;
@@ -13,12 +15,20 @@ export const GraphContainer = styled.div`
   box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
   height: -moz-fit-content;
   width: 45rem;
-  margin-top: 8%;
-  margin-left: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const AddOn = styled.div<Props>`
+  display: none;
+  height: 300px;
+  ${({ addOnOpen }: Props) =>
+    addOnOpen &&
+    css`
+      display: block;
+    `}
 `;
 
 export const ReportTitle = styled.h1`

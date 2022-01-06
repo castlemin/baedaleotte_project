@@ -6,6 +6,7 @@ import { ReactComponent as MAIN_IMG } from '../../assets/images/on_the_way.svg';
 import { ReactComponent as INTRO_IMG } from '../../assets/images/takeout_boxes.svg';
 import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
 import { HOME_IMG_CONFIG } from '../../assets/data/homeImgConfig';
+
 import {
   HomePageContainer,
   ContentsContainer,
@@ -87,7 +88,7 @@ const HomePage: React.FC = () => {
               지역의 안전도를 확인하세요.
             </DescContainer>
             <DescContainer position={position}>
-              그리고, 오늘이 외식날인지 파악하세요.
+              그리고, 오늘이 외식날인지
             </DescContainer>
             <DescContainer position={position}>
               배달날인지 파악하세요.

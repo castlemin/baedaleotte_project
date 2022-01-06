@@ -1,5 +1,21 @@
-import React, { useState } from 'react';
-import { DetailCardContainer } from './RegionalShopDetail.styles';
+import React from 'react';
+import ShopDetailReview from './detail-review/ShopDetailReview.component';
+import {
+  DetailCardContainer,
+  DetailDescContainer,
+  DetailImage,
+  DetailCategoryList,
+  DetailDescListItem,
+  CloseBtn,
+  DetailShopTitle,
+  DetailItemsWrapper,
+} from './RegionalShopDetail.styles';
+import {
+  formatPhoneNumber,
+  formatPrice,
+  formatRating,
+  formatTime,
+} from '../../../../functions/formatter';
 
 interface Props {
   onCancel: () => void;
@@ -7,18 +23,43 @@ interface Props {
   selected: string;
 }
 
-const RegionalShopDetail = ({ onCancel, shopData, selected }: Props) => {
-  const [detailInfo, setDetailInfo] = useState([]);
+const RegionalShopDetail: React.FC<Props> = ({
+  onCancel,
+  shopData,
+  selected,
+}: Props) => {
+  const selectedShop = shopData.filter(
+    (item) => item.restaurant_id === Number(selected)
+  );
 
   const handleCloseModal = () => {
     onCancel();
   };
+
   return (
     <DetailCardContainer>
-      {shopData.map((item) => (
-        <li>{item.name}</li>
+      <CloseBtn onClick={handleCloseModal}>x</CloseBtn>
+      {selectedShop.map((item) => (
+        <DetailDescContainer key={item.restaurant_id}>
+          <DetailShopTitle>{item.name}</DetailShopTitle>
+          <DetailItemsWrapper>
+            <DetailImage imgUrl={item.logo_url}></DetailImage>
+            <div>
+              <DetailCategoryList>
+                카테고리:{' '}
+                {item.categories.map((cat: any) => (
+                  <DetailDescListItem>{cat}</DetailDescListItem>
+                ))}
+              </DetailCategoryList>
+              <p>평균평점: {formatRating(item.review_avg)}</p>
+              <p>전화번호: {formatPhoneNumber(item.phone)}</p>
+              <p>영업시간: {formatTime(item.begin, item.end)}</p>
+              <p>최소주문금액: {formatPrice(item.min_order_amount)}원</p>
+            </div>
+          </DetailItemsWrapper>
+        </DetailDescContainer>
       ))}
-      <button onClick={handleCloseModal}>닫기</button>
+      <ShopDetailReview shopId={selected} />
     </DetailCardContainer>
   );
 };

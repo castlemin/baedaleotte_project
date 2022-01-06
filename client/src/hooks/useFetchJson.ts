@@ -11,6 +11,5 @@ export const useFetchGraph = (endPoint: string) => {
     }
     fetchGraph();
   }, []);
-  console.log(state);
   return state;
 };

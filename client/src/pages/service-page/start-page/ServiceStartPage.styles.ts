@@ -10,16 +10,47 @@ export const BackgroundContainer = styled.div`
   height: 100vh;
 `;
 
+export const GPSRequestContainer = styled.div`
+  text-align: center;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+  height: -moz-fit-content;
+  width: 45rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const RequestTitleContainer = styled.h2`
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 60px;
+  word-break: keep-all;
+`;
+
+export const RequestDescContainer = styled.p`
+  position: relative;
+  font-size: 20px;
+  font-weight: bold;
+  word-break: keep-all;
+  margin: 0 46px;
+`;
+
 export const ApprovalContainer = styled.form`
   margin: 10px auto;
 `;
 
 export const ApproveLabel = styled.label``;
 
+export const ApprovalCheck = styled.input``;
+
 export const ToServiceBtnContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const ExampleTitle = styled.h2``;
 
 export const ToServiceBtn = styled.button`
   font: inherit;
