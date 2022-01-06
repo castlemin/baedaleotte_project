@@ -18,11 +18,6 @@ export const SubtitleContainer = styled.h2<Props>`
   font-weight: bold;
   line-height: 40px;
   word-break: keep-all;
-  ${({ service }: Props) =>
-    service &&
-    css`
-      line-height: 60px;
-    `}
   ${({ report }: Props) =>
     report &&
     css`
@@ -35,10 +30,4 @@ export const DescContainer = styled.span<Props>`
   font-size: 20px;
   font-weight: bold;
   word-break: keep-all;
-  ${({ service }: Props) =>
-    service &&
-    css`
-      font-size: 20px;
-      margin: 0 46px;
-    `}
 `;

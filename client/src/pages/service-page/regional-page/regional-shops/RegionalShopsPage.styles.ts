@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface Props {
-  url?: string;
+  url: string;
 }
 
 export const ShopListContainer = styled.div`

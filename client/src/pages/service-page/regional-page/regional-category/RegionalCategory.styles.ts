@@ -5,6 +5,11 @@ interface Props {
   imgUrl?: string;
 }
 
+export const CategoryTemplate = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const CategoryListContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -66,6 +71,7 @@ export const SelectedContainer = styled.div`
 export const PlaceHolder = styled.p`
   display: block;
   margin: auto;
+  font-weight: bold;
   ${({ selected }: Props) =>
     selected &&
     css`
@@ -97,7 +103,7 @@ export const SelectedTitle = styled.h3`
 
 export const NextButton = styled.button`
   background-color: white;
-  margin-top: 54px;
+  margin: 0 auto 20px;
   width: 120px;
   height: 50px;
   font-size: 18px;
@@ -106,7 +112,6 @@ export const NextButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   box-shadow: 1px 2px 1px 1px darkgrey;
-  postition: absolute;
   box-sizing: border-box;
   padding: 0;
   :hover {

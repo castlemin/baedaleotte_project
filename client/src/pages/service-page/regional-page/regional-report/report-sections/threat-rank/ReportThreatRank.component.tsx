@@ -4,10 +4,10 @@ import {
   DescriptionSection,
   ReportSubtitle,
   GraphContainer,
-} from './ReportTreatRank.styles';
+} from './ReportThreatRank.styles';
 import { RankGraph } from '../../../../../../assets/data/Graphs/RankGraph';
 
-export const ReportTreatRank: React.FC = () => {
+export const ReportThreatRank: React.FC = () => {
   return (
     <DescriptionSection>
       <ReportSubtitle>
