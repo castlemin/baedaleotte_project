@@ -21,23 +21,27 @@ export const HomePageContainer = styled.div`
 export const ContentsContainer = styled.article`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding-top: 160px;
+  padding-top: 170px;
   margin: 0 10px 0 100px;
 `;
 
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 20px;
 `;
 
 export const TitleContainer = styled.h1`
   font-size: 3rem;
+  font-weight: unset;
+  margin: 0;
   animation: fadein 2s;
 `;
 
 export const SubtitleContainer = styled.h2<Props>`
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: unset;
+  margin: 14px 0;
   animation: ${({ aniLevitate }: Props) =>
     aniLevitate ? `fadein 2s` : 'none'};
 `;
@@ -45,7 +49,7 @@ export const SubtitleContainer = styled.h2<Props>`
 export const DescContainer = styled.span<Props>`
   position: relative;
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: unset;
   transform: ${({ position, toLeft, toRight }: Props) =>
     toLeft
       ? `translateX(${-position}px)`
@@ -93,33 +97,13 @@ export const PrefIntroContainer = styled.div`
 `;
 
 export const TeamIntroContainer = styled.div`
+  display: flex;
+  align-items: center;
   ${pageDefault}
 `;
 
-export const ScrollToTopBtn = styled.button`
-  background-color: black;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 48px;
-  width: 48px;
-  margin: auto;
-
-  /* place it at the bottom right corner */
-  position: fixed;
-  bottom: 120px;
-  right: 20px;
-
-  /* keep it at the top of everything else */
-  z-index: 100;
-
-  /* hide with opacity */
-  opacity: 1;
-
-  /* also add a translate effect */
-  transform: translateY(100px);
-  transition: all 0.5s ease;
+export const TeamImage = styled.img`
+  width: 100%;
 `;
 
 /* .showBtn {

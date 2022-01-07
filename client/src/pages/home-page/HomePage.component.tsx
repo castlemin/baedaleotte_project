@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, LegacyRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/UI/header/Header.component';
 import { GuMap } from '../../assets/data/Graphs/GuMap';
-import { ReactComponent as MAIN_IMG } from '../../assets/images/on_the_way.svg';
+import teamImg from '../../assets/images/team/team.png';
 import { ReactComponent as INTRO_IMG } from '../../assets/images/takeout_boxes.svg';
 import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
 import { HOME_IMG_CONFIG } from '../../assets/data/homeImgConfig';
@@ -16,9 +16,8 @@ import {
   DescContainer,
   StartButton,
   RegIntroContainer,
-  PrefIntroContainer,
   TeamIntroContainer,
-  ScrollToTopBtn,
+  TeamImage,
 } from './HomePage.styles';
 
 const HomePage: React.FC = () => {
@@ -37,12 +36,13 @@ const HomePage: React.FC = () => {
     setPosition(window.scrollY);
   };
 
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const handleToService = () => {
     navigate('/service');
+  };
+
+  const handleToTeamPage = () => {
+    navigate('/team');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -96,28 +96,27 @@ const HomePage: React.FC = () => {
           </TextWrapper>
         </ContentsContainer>
       </RegIntroContainer>
-      <PrefIntroContainer>
+      <TeamIntroContainer>
         <ContentsContainer>
-          <INTRO_IMG style={HOME_IMG_CONFIG} />
+          <TeamImage src={teamImg} alt='team' />
           <TextWrapper>
-            <TitleContainer>배달 음식 취향 테스트</TitleContainer>
+            <TitleContainer>팀 소개</TitleContainer>
             <SubtitleContainer position={position}>
-              "나는 내 뱃고래를 더 알고 싶다."
+              멋진 사람들, "언더톢의 반란"을
+              <br /> 소개합니다.
             </SubtitleContainer>
             <DescContainer position={position}>
-              지금 먹고 싶은 배달음식을 찾아보세요.
+              개발에 대한 열정으로 똘똘 뭉친
             </DescContainer>
             <DescContainer position={position}>
-              그리고, 성향에 따라 배달음식 추천을 받아보세요.
+              멋진 반란을 꾀하는 그들,
             </DescContainer>
             <DescContainer position={position}>
-              한끼의 만족을 위해.
+              우리 개발팀을 만나보세요.
             </DescContainer>
+            <StartButton onClick={handleToTeamPage}>팀 소개로 이동</StartButton>
           </TextWrapper>
         </ContentsContainer>
-      </PrefIntroContainer>
-      <TeamIntroContainer>
-        <ScrollToTopBtn onClick={handleScrollToTop}>위로</ScrollToTopBtn>
       </TeamIntroContainer>
     </>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   AddOn,
+  AddOnButton,
   DescriptionSection,
   GraphContainer,
   ReportSubtitle,
@@ -22,7 +23,9 @@ export const ReportThreatMap: React.FC = () => {
       <GraphContainer>
         <ReportSubtitle>내 행정구 위험도 지도</ReportSubtitle>
         <GuMap />
-        <button onClick={handleOpen}>위험도를 산출한 방식이 궁금하다면</button>
+        <AddOnButton onClick={handleOpen}>
+          위험도를 산출한 방식이 궁금하다면
+        </AddOnButton>
         <AddOn addOnOpen={open}>
           <h2>코로나 위험도 산출 공식</h2>
           <p style={{ wordBreak: 'keep-all' }}>

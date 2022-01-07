@@ -89,15 +89,15 @@ export const ShopContainer = styled.div`
   }
 `;
 
-export const FilterBtnContainer = styled.div`
+export const SortButtonContainer = styled.div`
   display: flex;
   justify-content: end;
 `;
 
-export const FilterBtn = styled.button`
+export const SortButton = styled.button`
   background-color: beige;
   width: 80px;
-  height: 40px;
+  height: 50px;
   font-size: 13px;
   font-weight: bold;
   border: none;

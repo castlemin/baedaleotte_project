@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import { pageDefault } from '../../../components/UI/global/css.styles';
+
+export const TeamPageContainer = styled.div`
+  ${pageDefault}
+`;
 
 export const TitleContainer = styled.h1`
   text-align: center;
@@ -6,6 +11,11 @@ export const TitleContainer = styled.h1`
 
 export const MemberName = styled.h2`
   font-size: 3rem;
+`;
+
+export const Wrapper = styled.div`
+  padding-top: 25px;
+  margin: 13px 25px;
 `;
 
 export const MemberContainer = styled.div``;
@@ -21,7 +31,6 @@ export const SecondParagraph = styled.div`
 
 export const ProfileImage = styled.img`
   width: 300px;
-  border: 1px solid red;
   border-radius: 50%;
 `;
 

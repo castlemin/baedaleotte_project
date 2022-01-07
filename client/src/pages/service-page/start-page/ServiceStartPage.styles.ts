@@ -25,7 +25,7 @@ export const GPSRequestContainer = styled.div`
 export const RequestTitleContainer = styled.h2`
   font-size: 30px;
   font-weight: bold;
-  line-height: 60px;
+  line-height: 20px;
   word-break: keep-all;
 `;
 
@@ -50,7 +50,9 @@ export const ToServiceBtnContainer = styled.div`
   justify-content: center;
 `;
 
-export const ExampleTitle = styled.h2``;
+export const ExampleTitle = styled.h2`
+  margin: 0;
+`;
 
 export const ToServiceBtn = styled.button`
   font: inherit;

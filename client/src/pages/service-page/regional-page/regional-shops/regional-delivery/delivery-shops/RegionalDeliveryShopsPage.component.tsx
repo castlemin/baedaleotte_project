@@ -15,9 +15,9 @@ import {
   ShopImgContainer,
   ShopDescContainer,
   ShopListContainer,
-  FilterBtn,
-  FilterBtnContainer,
+  SortButtonContainer,
   ShopContainer,
+  SortButton,
 } from './RegionalDeliveryShopsPage.styles';
 
 const RegionalDeliveryShopsPage: React.FC = () => {
@@ -77,14 +77,29 @@ const RegionalDeliveryShopsPage: React.FC = () => {
         <Loading />
       ) : (
         <>
-          <FilterBtnContainer>
-            <FilterBtn id='time' onClick={handleClickSort}>
-              빠른시간순
-            </FilterBtn>
-            <FilterBtn id='review' onClick={handleClickSort}>
-              높은평점순
-            </FilterBtn>
-          </FilterBtnContainer>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-evenly',
+              alignItems: 'center',
+            }}
+          >
+            <h2>
+              선택하신{' '}
+              {chosenDeliveryCategories.map((item) => (
+                <span>[{item}]</span>
+              ))}
+              에 대한 추천 결과입니다.
+            </h2>
+            <SortButtonContainer>
+              <SortButton id='time' onClick={handleClickSort}>
+                빠른시간순
+              </SortButton>
+              <SortButton id='review' onClick={handleClickSort}>
+                높은평점순
+              </SortButton>
+            </SortButtonContainer>
+          </div>
           <ShopListContainer layout={deliveryShopList.length}>
             {isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
             {isDetailOpen && (
@@ -100,17 +115,14 @@ const RegionalDeliveryShopsPage: React.FC = () => {
                 onClick={handleToDeliveryDetail}
                 id={item.restaurant_id}
               >
-                <ShopImgContainer
-                  className={item.restaurant_id}
-                  url={item.logo_url}
-                />
-                <ShopTitleContainer className={item.restaurant_id}>
+                <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
+                <ShopTitleContainer id={item.restaurant_id}>
                   {item.name}
                 </ShopTitleContainer>
-                <ShopDescContainer className={item.restaurant_id}>
+                <ShopDescContainer id={item.restaurant_id}>
                   <b>카테고리</b>:{' '}
                   {item.categories.map((cat: string[]) => (
-                    <li className={item.restaurant_id}>{cat}</li>
+                    <li id={item.restaurant_id}>{cat}</li>
                   ))}
                   <b>영업시간</b>: {item.begin.slice(0, -3)}시 -{' '}
                   {item.end.slice(0, -3)}시

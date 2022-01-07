@@ -9,6 +9,28 @@ export const DescriptionSection = styled.section`
   align-items: center;
 `;
 
+export const AddOnButton = styled.button`
+  background-color: white;
+  width: 248px;
+  height: 64px;
+  font-size: 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 1px 2px 1px 1px darkgrey;
+  postition: absolute;
+  box-sizing: border-box;
+  padding: 0;
+  margin-bottom: 30px;
+  :hover {
+    background-color: #88aed0;
+    transition: ease-in 185ms;
+    box-shadow: 1px 2px 1px 1px grey;
+    border-color: wheat;
+    color: white;
+  }
+`;
+
 export const GraphContainer = styled.div`
   text-align: center;
   border-radius: 6px;

@@ -9,7 +9,6 @@ import {
   DetailDescContainer,
   DetailImage,
   DetailCategoryList,
-  DetailDescListItem,
   CloseBtn,
   DetailShopTitle,
   DetailItemsWrapper,

@@ -86,14 +86,29 @@ const RegionalEatOutShopsPage: React.FC = () => {
         <Loading />
       ) : (
         <>
-          <FilterBtnContainer>
-            <FilterBtn id='time' onClick={handleClickSort}>
-              빠른시간순
-            </FilterBtn>
-            <FilterBtn id='review' onClick={handleClickSort}>
-              높은평점순
-            </FilterBtn>
-          </FilterBtnContainer>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-evenly',
+              alignItems: 'center',
+            }}
+          >
+            <h2>
+              선택하신{' '}
+              {chosenEatOutCategories.map((item) => (
+                <span>[{item}]</span>
+              ))}
+              에 대한 추천 결과입니다.
+            </h2>
+            <FilterBtnContainer>
+              <FilterBtn id='time' onClick={handleClickSort}>
+                빠른시간순
+              </FilterBtn>
+              <FilterBtn id='review' onClick={handleClickSort}>
+                높은평점순
+              </FilterBtn>
+            </FilterBtnContainer>
+          </div>
           <ShopListContainer>
             {isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
             {isDetailOpen && (

@@ -6,7 +6,7 @@ import {
   TeamLink,
   LogoContainer,
   LinkContainer,
-} from './Header.styles';
+} from './TeamHeader.styles';
 import { ReactComponent as Logo } from '../../../assets/delivery.svg';
 
 interface Props {
@@ -14,12 +14,12 @@ interface Props {
   viewHeight?: any;
 }
 
-const Header: React.FC<Props> = ({ serviceStatic, viewHeight }) => {
+const TeamHeader: React.FC<Props> = ({ serviceStatic, viewHeight }) => {
   // const handleScroll = (position: number) => {
   //   window.scrollTo({ top: position, behavior: 'smooth' });
   // };
   return (
-    <HeaderContainer serviceStatic={serviceStatic}>
+    <HeaderContainer>
       <div>
         <LogoContainer to='/'>
           <Logo />
@@ -32,25 +32,32 @@ const Header: React.FC<Props> = ({ serviceStatic, viewHeight }) => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
-          메인
+          팀 리더
         </RegionalLink>
         <PreferenceLink
           onClick={() => {
             window.scrollTo({ top: viewHeight, behavior: 'smooth' });
           }}
         >
-          서비스 소개
+          프론트엔드 개발자
         </PreferenceLink>
         <TeamLink
           onClick={() => {
             window.scrollTo({ top: viewHeight * 2, behavior: 'smooth' });
           }}
         >
-          팀 소개
+          백엔드 개발자
+        </TeamLink>
+        <TeamLink
+          onClick={() => {
+            window.scrollTo({ top: viewHeight * 3, behavior: 'smooth' });
+          }}
+        >
+          데이터 분석가
         </TeamLink>
       </LinkContainer>
     </HeaderContainer>
   );
 };
 
-export default Header;
+export default TeamHeader;
