@@ -10,7 +10,8 @@ import config
 from static.projectKeys.personalKey import db_setting, secretKey, sentry_dsn
 
 from views import categories, corona_total, restaurants, review, goout, graph
-
+# top5 는 시간/요일별 인기 카테고리 top5를 위한 bp입니다.
+#from views import categories, corona_total, restaurants, review, goout, graph, top5
 
 db = SQLAlchemy()
 
@@ -32,6 +33,7 @@ def create_app():
     app.register_blueprint(categories.bp)
     app.register_blueprint(review.bp)
     app.register_blueprint(graph.bp)
+    #app.register_blueprint(top5.bp)
     app.register_blueprint(goout.bp)
 
     # @app.errorhandler(404)

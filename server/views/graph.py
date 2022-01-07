@@ -1,9 +1,11 @@
 # 데이터분석에서 작성한 py 파일 import
 import imp
 import importlib.util
-from flask import Blueprint, session, request, Response, jsonify
+# send_file은 flask에서 파일을 전송하기 위한 모듈입니다
+from flask import Blueprint, session, request, Response, jsonify, send_file
 from apscheduler.schedulers.background import BackgroundScheduler
 from api_requests.geocoding import getKoreanJCG
+import pandas as pd
 
 spec = importlib.util.spec_from_file_location("da", "dataanalysis/data_analysis.py")
 da = importlib.util.module_from_spec(spec)
@@ -21,6 +23,20 @@ def import_schedule():
 sched = BackgroundScheduler(timezone="Asia/Seoul")
 sched.start()
 sched.add_job(import_schedule, trigger='cron', hour=0, minute=10)
+
+# 코로나 위험도 합계 점수 및 상세 점수들을 저장해 놓은 csv 파일을 불러옴
+점수df = pd.read_csv('./data/risk_data.csv', index_col='Unnamed: 0')
+
+# 코로나 상세 점수를 json 형식으로 반환하기 전 dict로 변환하는 함수
+def df_dic(df, region):
+    dic = {'stack' : df.loc[region]['rate'] + df.loc[region]['코로나신규'],
+            'fac' : df.loc[region]['다중이용시설'],
+            'population' : df.loc[region]['생활인구'],
+            'family' : df.loc[region]['평균가구'],
+            'rate' : round((df.loc[region]['rate'] / 0.3), 1),
+    }
+    return dic
+
 
 
 bp = Blueprint("graph", __name__, url_prefix="/data")
@@ -40,42 +56,62 @@ def get_user_location():
     return jsonify(res)
 
 
-@bp.route("/vac")
-def get_vac():
+@bp.route('/vac')
+def vac():
     return da.백신현황(da.vac_data)
 
+@bp.route('/seoul_risk_map_all')
+def seoul_risk_map_all():
+    return da.서울코로나위험도지도(점수df)
 
-@bp.route("/seoul_risk_map_all")
-def get_seoul_risk_map_all():
-    return da.서울코로나위험도지도(da.seoul_corona_score)
-
-
-# gps 부분에 gps정보가 들어와야 함
-@bp.route("/seoul_risk_map")
-def get_seoul_risk_map():
+@bp.route('/seoul_risk_map')
+def seoul_risk_map():
     region = request.args['region']
-    return da.서울코로나위험도지도(da.seoul_corona_score, region)
+    return da.서울코로나위험도지도(점수df, region)
 
-
-@bp.route("/risk_rank")
-def get_risk_rank():
+@bp.route('/risk_rank')
+def risk_rank():
     region = request.args['region']
-    return da.위험도순위(da.seoul_corona_score, region)
+    return da.위험도순위(점수df, region)
 
+@bp.route('/coronic_all')
+def coronic_all():
+    return da.내지역확진자all(da.coronic_seoul,'서울')
 
-@bp.route("/coronic_all")
-def get_coronic_all():
-    return da.내지역확진자all(da.corona_data, "서울")
-
-
-@bp.route("/coronic_gu")
-def get_coronic_gu():
+@bp.route('/coronic_gu')
+def coronic_gu():
     region = request.args['region']
-    return da.내지역확진자all(da.corona_data, region)
+    return da.내지역확진자all(da.coronic_seoul, region)
 
-
-@bp.route("/risk_score")
-def get_risk_score():
+@bp.route('/risk_score')
+def risk_score():
     region = request.args['region']
-    return da.위험도점수(da.seoul_corona_score, region)
+    score = str(점수df.loc[region]['합계'])
+    return score
+
+@bp.route('/risk_score_detail')
+def risk_score_detail():
+    region = request.args['region']
+    dic = df_dic(점수df, region)
+    return jsonify(dic)
+
+# Prophet을 사용해 예측한 내용을 보여주는 그래프
+# 기존 그래프와 달라 이미지로 저장후 png 파일을 보내줌
+@bp.route('/predict1')
+def predict1():
+    region = request.args['region']
+    file_name = f"./dataanalysis/img/{region}_prophet.png"
+    return send_file(file_name,
+                     mimetype='image/png',
+                     attachment_filename='predict1.png',# 다운받아지는 파일 이름. 
+                     as_attachment=True)
+
+@bp.route('/predict2')
+def predict2():
+    region = request.args['region']
+    file_name = f"./dataanalysis/img/{region}_prophet2.png"
+    return send_file(file_name,
+                     mimetype='image/png',
+                     attachment_filename='predict2.png',# 다운받아지는 파일 이름. 
+                     as_attachment=True)
 
