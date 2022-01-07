@@ -40,7 +40,6 @@ const RegionalReportPage: React.FC = () => {
   useEffect(() => {
     const sendUserLocation = async () => {
       const response = await axios.post(USER_LOCATION_URL, params);
-      console.log(response);
     };
     sendUserLocation();
   }, []);

@@ -15,6 +15,7 @@ export const ReportContainer = styled.section`
 
 export const ReportTitle = styled.h1`
   font-size: 40px;
+  line-height: 60px 50px;
   text-align: center;
 `;
 

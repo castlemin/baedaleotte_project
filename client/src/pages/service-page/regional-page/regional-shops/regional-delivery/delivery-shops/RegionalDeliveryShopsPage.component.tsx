@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { eatoutCategories } from '../../../../../../assets/data/eatoutCategories';
+import { FOOD_DELIVERY_LIST_URL } from '../../../../../../assets/data/requestUrls';
 
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
 /* import axios from 'axios'; */
@@ -29,9 +30,7 @@ const RegionalDeliveryShopsPage: React.FC = () => {
 
   useEffect(() => {
     const fetchRestaurants = async () => {
-      const res = await axios.get(
-        'https://a4f6d6aa-7694-4185-b2c9-534ac61ec028.mock.pstmn.io/restaurants/near'
-      );
+      const res = await axios.get(FOOD_DELIVERY_LIST_URL);
       const data = await res.data;
       const filteredData = await data.filter((item: any) =>
         item.categories.includes(

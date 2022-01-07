@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { EAT_OUT_REVIEW_URL } from '../../../../../../assets/data/requestUrls';
 import { formatRating } from '../../../../../../functions/formatter';
 import {
   Title,
@@ -7,9 +8,6 @@ import {
   CommentWrapper,
   Content,
   CommentRating,
-  PrevButton,
-  NextButton,
-  ButtonWrapper,
 } from './EatOutShopDetailReview.styles';
 
 interface Props {
@@ -21,9 +19,7 @@ const EatOutShopDetailReview = ({ shopId }: Props) => {
 
   useEffect(() => {
     const fetchReview = async () => {
-      const res = await axios.get(
-        `https://a4f6d6aa-7694-4185-b2c9-534ac61ec028.mock.pstmn.io/goout/reviews/${shopId}`
-      );
+      const res = await axios.get(`${EAT_OUT_REVIEW_URL}${shopId}`);
       const data = await res.data;
       setReview(data);
     };

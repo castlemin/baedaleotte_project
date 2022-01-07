@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { RISK_SCORE_URL } from './requestUrls';
 
 export const RiskScore = () => {
   const [score, setScore] = useState(0);
   useEffect(() => {
     const fetchScore = async () => {
-      const url =
-        'https://a4f6d6aa-7694-4185-b2c9-534ac61ec028.mock.pstmn.io/data/risk_score?region=용산구';
-      const response = await axios.get(url);
+      const response = await axios.get(RISK_SCORE_URL);
       setScore(response.data);
     };
     fetchScore();

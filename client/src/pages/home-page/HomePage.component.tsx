@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/UI/header/Header.component';
 import { GuMap } from '../../assets/data/Graphs/GuMap';
 import teamImg from '../../assets/images/team/team.png';
-import { ReactComponent as INTRO_IMG } from '../../assets/images/takeout_boxes.svg';
 import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
 import { HOME_IMG_CONFIG } from '../../assets/data/homeImgConfig';
 
@@ -98,7 +97,7 @@ const HomePage: React.FC = () => {
       </RegIntroContainer>
       <TeamIntroContainer>
         <ContentsContainer>
-          <TeamImage src={teamImg} alt='team' />
+          <TeamImage src={teamImg} style={HOME_IMG_CONFIG} alt='team' />
           <TextWrapper>
             <TitleContainer>팀 소개</TitleContainer>
             <SubtitleContainer position={position}>

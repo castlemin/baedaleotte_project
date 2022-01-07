@@ -26,6 +26,7 @@ import {
   FilterBtnContainer,
   ShopContainer,
 } from './RegionalEatOutShopsPage.styles';
+import { EAT_OUT_LIST_URL } from '../../../../../../assets/data/requestUrls';
 
 const RegionalEatOutShopsPage: React.FC = () => {
   const [eatOutShopList, setEatOutShopList] = useState<any[]>([]);
@@ -36,12 +37,10 @@ const RegionalEatOutShopsPage: React.FC = () => {
   const userCoords = useRecoilValue(userLocation);
 
   const params = userCoords;
-  const EATOUT_URL =
-    'https://a4f6d6aa-7694-4185-b2c9-534ac61ec028.mock.pstmn.io/goout';
 
   useEffect(() => {
     const fetchRestaurants = async () => {
-      const res = await axios.post(EATOUT_URL, params);
+      const res = await axios.post(EAT_OUT_LIST_URL, params);
       const data = res.data;
       const filteredData = await data.filter(
         (item: any) =>

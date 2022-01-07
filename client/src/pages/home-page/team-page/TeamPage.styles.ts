@@ -14,8 +14,8 @@ export const MemberName = styled.h2`
 `;
 
 export const Wrapper = styled.div`
-  padding-top: 25px;
-  margin: 13px 25px;
+  padding-top: 26px;
+  margin: 13px 23px;
 `;
 
 export const MemberContainer = styled.div``;

@@ -54,14 +54,20 @@ export const LogoContainer = styled(Link)`
 /* 해당 링크 페이지에 따라 밑줄 위치가 이동하는 식으로 구현한다. */
 export const LinkContainer = styled.div``;
 
-export const RegionalLink = styled.button`
+export const LeaderLink = styled.button`
   ${linkCSS}
 `;
 
-export const PreferenceLink = styled.button`
+export const FrontendLink = styled.button`
   ${linkCSS}
 `;
 
-export const TeamLink = styled.button`
+export const BackendLink = styled.button`
+  ${linkCSS}
+`;
+export const DA1Link = styled.button`
+  ${linkCSS}
+`;
+export const DA2Link = styled.button`
   ${linkCSS}
 `;

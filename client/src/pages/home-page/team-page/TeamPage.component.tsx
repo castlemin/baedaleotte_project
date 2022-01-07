@@ -18,6 +18,9 @@ import SUNGMIN_FACE_IMG from '../../../assets/images/team/sungMin_face.png';
 import SUNGMIN_FULL_IMG from '../../../assets/images/team/sungMin_full.png';
 import SUHYEN_FACE_IMG from '../../../assets/images/team/suHyen_face.png';
 import SUHYEN_FULL_IMG from '../../../assets/images/team/suHyen_full.png';
+import HYEONHEE_FACE_IMG from '../../../assets/images/team/hyeonHee_face.png';
+import HYEONHEE_FULL_IMG from '../../../assets/images/team/hyeonHee_full.png';
+
 import TeamHeader from './TeamHeader.component';
 
 const TeamPage = () => {
@@ -133,7 +136,7 @@ const TeamPage = () => {
         <Wrapper>
           <MemberName>강현희</MemberName>
           <FirstParagraph>
-            <ProfileImage alt='data analylist' />
+            <ProfileImage src={HYEONHEE_FACE_IMG} alt='data analylist' />
             <MemberDescription>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut,
               minima saepe eveniet maxime odit doloribus expedita natus
@@ -142,7 +145,7 @@ const TeamPage = () => {
             </MemberDescription>
           </FirstParagraph>
           <SecondParagraph>
-            <ProfileImage alt='data analylist' />
+            <ProfileImage src={HYEONHEE_FULL_IMG} alt='data analylist' />
             <MemberDescription>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Voluptatem a deleniti qui sed quaerat in perspiciatis asperiores

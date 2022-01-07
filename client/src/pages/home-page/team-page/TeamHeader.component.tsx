@@ -1,9 +1,11 @@
 import React from 'react';
 import {
   HeaderContainer,
-  RegionalLink,
-  PreferenceLink,
-  TeamLink,
+  LeaderLink,
+  FrontendLink,
+  BackendLink,
+  DA1Link,
+  DA2Link,
   LogoContainer,
   LinkContainer,
 } from './TeamHeader.styles';
@@ -27,34 +29,41 @@ const TeamHeader: React.FC<Props> = ({ serviceStatic, viewHeight }) => {
         </LogoContainer>
       </div>
       <LinkContainer>
-        <RegionalLink
+        <LeaderLink
           onClick={() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
           팀 리더
-        </RegionalLink>
-        <PreferenceLink
+        </LeaderLink>
+        <FrontendLink
           onClick={() => {
             window.scrollTo({ top: viewHeight, behavior: 'smooth' });
           }}
         >
           프론트엔드 개발자
-        </PreferenceLink>
-        <TeamLink
+        </FrontendLink>
+        <BackendLink
           onClick={() => {
             window.scrollTo({ top: viewHeight * 2, behavior: 'smooth' });
           }}
         >
           백엔드 개발자
-        </TeamLink>
-        <TeamLink
+        </BackendLink>
+        <DA1Link
           onClick={() => {
             window.scrollTo({ top: viewHeight * 3, behavior: 'smooth' });
           }}
         >
           데이터 분석가
-        </TeamLink>
+        </DA1Link>
+        <DA2Link
+          onClick={() => {
+            window.scrollTo({ top: 10000, behavior: 'smooth' });
+          }}
+        >
+          데이터 분석가
+        </DA2Link>
       </LinkContainer>
     </HeaderContainer>
   );
