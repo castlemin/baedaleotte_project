@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 interface Props {
-  imgUrl: string;
+  imgUrl?: string;
+  cardHeight?: number;
 }
 
 export const CloseBtn = styled.span`
@@ -21,7 +22,9 @@ export const DetailCardContainer = styled.div`
   width: 40rem;
   z-index: 10;
   position: absolute;
-  top: 5vh;
+  ${({ cardHeight }: Props) => css`
+    top: ${cardHeight};
+  `}
   left: calc(50% - 20rem);
 `;
 

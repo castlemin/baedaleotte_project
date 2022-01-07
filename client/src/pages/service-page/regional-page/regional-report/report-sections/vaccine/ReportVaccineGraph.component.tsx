@@ -9,6 +9,8 @@ import { VaccineGraph } from '../../../../../../assets/data/Graphs/VaccineGraph'
 import { RiskScore } from '../../../../../../assets/data/RiskScore';
 
 export const ReportVaccineGraph: React.FC = () => {
+  const score = RiskScore();
+
   return (
     <DescriptionSection>
       <GraphContainer>
@@ -16,7 +18,7 @@ export const ReportVaccineGraph: React.FC = () => {
         <VaccineGraph />
       </GraphContainer>
       <ReportSubtitle>
-        현재 당신의 지역 위험도는 <RiskScore />
+        현재 당신의 지역 위험도는 {score}
         점, '이불밖은 위험해'입니다.
       </ReportSubtitle>
     </DescriptionSection>

@@ -6,7 +6,6 @@ export const Title = styled.h2`
 
 export const Comment = styled.li`
   word-break: keep-all;
-  font-weight: bold;
 `;
 
 export const CommentWrapper = styled.ul`

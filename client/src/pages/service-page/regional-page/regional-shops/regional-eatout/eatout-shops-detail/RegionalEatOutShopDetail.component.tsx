@@ -20,16 +20,16 @@ interface Props {
   onCancel: () => void;
   shopData: any[];
   selected: string;
+  viewHeight: number;
 }
 
 const RegionalEatOutShopDetail: React.FC<Props> = ({
   onCancel,
   shopData,
   selected,
+  viewHeight,
 }: Props) => {
   const selectedShop = shopData.filter((item) => item.id === Number(selected));
-
-  console.log(selectedShop);
 
   const handleCloseModal = () => {
     onCancel();
@@ -43,7 +43,7 @@ const RegionalEatOutShopDetail: React.FC<Props> = ({
   );
 
   return (
-    <DetailCardContainer>
+    <DetailCardContainer cardHeight={viewHeight}>
       <CloseBtn onClick={handleCloseModal}>x</CloseBtn>
       {selectedShop.map((item) => (
         <DetailDescContainer key={item.id}>
@@ -51,9 +51,15 @@ const RegionalEatOutShopDetail: React.FC<Props> = ({
           <DetailItemsWrapper>
             <DetailImage imgUrl={item.img_url_2}></DetailImage>
             <CategoryListWrapper>
-              <DetailCategoryList>카테고리: {item.category}</DetailCategoryList>
-              <DetailDescContent>평균평점: {item.rating}</DetailDescContent>
-              <DetailDescContent>전화번호: {item.phone}</DetailDescContent>
+              <DetailCategoryList>
+                <b>카테고리</b>: {item.category}
+              </DetailCategoryList>
+              <DetailDescContent>
+                <b>평균평점</b>: {item.rating}
+              </DetailDescContent>
+              <DetailDescContent>
+                <b>전화번호</b>: {item.phone}
+              </DetailDescContent>
               <DetailDescContent>
                 <b>영업시간(주중)</b>: {formatEatOutWeekdayHour(item.hour)}
               </DetailDescContent>
@@ -66,7 +72,9 @@ const RegionalEatOutShopDetail: React.FC<Props> = ({
                   </DetailDescContent>
                 )}
               </DetailDescContent>
-              <DetailDescContent>평균가격: {item.price}</DetailDescContent>
+              <DetailDescContent>
+                <b>평균가격</b>: {item.price}
+              </DetailDescContent>
             </CategoryListWrapper>
           </DetailItemsWrapper>
         </DetailDescContainer>

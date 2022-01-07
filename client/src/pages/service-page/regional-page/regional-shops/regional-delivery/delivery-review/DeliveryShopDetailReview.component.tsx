@@ -51,7 +51,7 @@ const DeliveryShopDetailReview = ({ shopId }: Props) => {
         {limitCurItems(review).map((item: any) => (
           <Content>
             <Comment>
-              {item.row_num}. {item.comment}
+              <b>{item.row_num}.</b> {item.comment}
             </Comment>
             <CommentRating>{formatRating(item.rating)}</CommentRating>
           </Content>

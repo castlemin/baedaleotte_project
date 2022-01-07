@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
@@ -34,11 +34,16 @@ const RegionalEatOutShopsPage: React.FC = () => {
   const [eatOutShopList, setEatOutShopList] = useState<any[]>([]);
   const [selectShop, setSelectShop] = useState('');
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [detailViewHeight, setDetailViewHeight] = useState(0);
   const chosenEatOutCategories = useRecoilValue(selectedEatOutCategory);
   const userCoords = useRecoilValue(userLocation);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(8);
+  const [target, setTarget] = useState<HTMLDivElement | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const cardHeightRef = useRef<any>();
 
   const RegionalEatOutShopDetail = React.lazy(
     () => import('../eatout-shops-detail/RegionalEatOutShopDetail.component')
@@ -60,9 +65,6 @@ const RegionalEatOutShopsPage: React.FC = () => {
     fetchRestaurants();
   }, []);
 
-  const [target, setTarget] = useState<HTMLDivElement | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-
   const lastIdx = currentPage * postPerPage;
 
   const limitNumOfItems = (items: any[]) => {
@@ -75,13 +77,13 @@ const RegionalEatOutShopsPage: React.FC = () => {
     setIsLoaded(true);
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setCurrentPage((prev) => prev + 1);
-
-    setIsLoaded(false);
   };
+
   const onIntersect = async ([entry]: any, observer: any): Promise<any> => {
     if (entry.isIntersecting && !isLoaded) {
       observer.unobserve(entry.target);
       await getMoreItem();
+      setIsLoaded(false);
       observer.observe(entry.target);
     }
   };
@@ -100,8 +102,9 @@ const RegionalEatOutShopsPage: React.FC = () => {
 
   const handleToEatOutDetail = (event: any) => {
     setSelectShop(event.target.id);
+    setDetailViewHeight(cardHeightRef.current.scrollHeight);
     handleToggleDetail();
-    console.log(selectShop);
+    console.log();
   };
 
   const handleToggleDetail = () => {
@@ -159,6 +162,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
                   shopData={eatOutShopList}
                   selected={selectShop}
                   onCancel={handleToggleDetail}
+                  viewHeight={detailViewHeight}
                 />
               </Suspense>
             )}
@@ -167,6 +171,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
                 key={idx}
                 onClick={handleToEatOutDetail}
                 id={item.id}
+                ref={cardHeightRef}
               >
                 <ShopImgContainer id={item.id} url={item.img_url_3} />
                 <ShopTitleContainer id={item.id}>

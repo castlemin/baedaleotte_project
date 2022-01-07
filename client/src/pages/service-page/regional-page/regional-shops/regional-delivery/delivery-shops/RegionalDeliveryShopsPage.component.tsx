@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
@@ -26,11 +26,16 @@ const RegionalDeliveryShopsPage = () => {
   const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
 
   const [selectShop, setSelectDeliveryShop] = useState('');
-  const [isDetailOpen, setIsDetailOpen] = useState(false);
-
   const [deliveryShopList, setDeliveryShopList] = useState<any>([]);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [detailViewHeight, setDetailViewHeight] = useState(0);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(8);
+  const [target, setTarget] = useState<HTMLDivElement | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const cardHeightRef = useRef<any>();
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -48,9 +53,6 @@ const RegionalDeliveryShopsPage = () => {
     fetchRestaurants();
   }, []);
 
-  const [target, setTarget] = useState<HTMLDivElement | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-
   const lastIdx = currentPage * postPerPage;
 
   const limitNumOfItems = (items: any[]) => {
@@ -63,13 +65,13 @@ const RegionalDeliveryShopsPage = () => {
     setIsLoaded(true);
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setCurrentPage((prev) => prev + 1);
-
-    setIsLoaded(false);
   };
+
   const onIntersect = async ([entry]: any, observer: any): Promise<any> => {
     if (entry.isIntersecting && !isLoaded) {
       observer.unobserve(entry.target);
       await getMoreItem();
+      setIsLoaded(false);
       observer.observe(entry.target);
     }
   };
@@ -87,6 +89,7 @@ const RegionalDeliveryShopsPage = () => {
   console.log(deliveryShopList);
 
   const handleToDeliveryDetail = (event: any) => {
+    setDetailViewHeight(cardHeightRef.current.clientHeight);
     setSelectDeliveryShop(event.target.id);
     handleToggleDetail();
     console.log(selectShop);
@@ -128,7 +131,7 @@ const RegionalDeliveryShopsPage = () => {
             </CategoryIndicator>
             <SortButtonContainer>
               <SortButton id='time' onClick={handleClickSort}>
-                빠른시간순
+                빠른배달순
               </SortButton>
               <SortButton id='review' onClick={handleClickSort}>
                 높은평점순
@@ -142,6 +145,7 @@ const RegionalDeliveryShopsPage = () => {
                 shopData={deliveryShopList}
                 selected={selectShop}
                 onCancel={handleToggleDetail}
+                viewHeight={detailViewHeight}
               />
             )}
             {limitNumOfItems(deliveryShopList).map((item, idx) => (
@@ -149,6 +153,7 @@ const RegionalDeliveryShopsPage = () => {
                 key={idx}
                 onClick={handleToDeliveryDetail}
                 id={item.restaurant_id}
+                ref={cardHeightRef}
               >
                 <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
                 <ShopTitleContainer id={item.restaurant_id}>

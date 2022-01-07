@@ -23,12 +23,14 @@ interface Props {
   onCancel: () => void;
   shopData: any[];
   selected: string;
+  viewHeight: number;
 }
 
 const RegionalShopDetail: React.FC<Props> = ({
   onCancel,
   shopData,
   selected,
+  viewHeight,
 }: Props) => {
   const selectedShop = shopData.filter(
     (item) => item.restaurant_id === Number(selected)
@@ -43,7 +45,7 @@ const RegionalShopDetail: React.FC<Props> = ({
   };
 
   return (
-    <DetailCardContainer>
+    <DetailCardContainer height={viewHeight}>
       <CloseBtn onClick={handleCloseModal}>x</CloseBtn>
       {selectedShop.map((item) => (
         <DetailDescContainer key={item.restaurant_id}>
@@ -52,22 +54,22 @@ const RegionalShopDetail: React.FC<Props> = ({
             <DetailImage imgUrl={item.logo_url}></DetailImage>
             <CategoryListWrapper>
               <DetailCategoryList>
-                카테고리:{' '}
+                <b>카테고리</b>:{' '}
                 {item.categories.map((cat: any) => (
                   <DetailCategoryItem>{cat}</DetailCategoryItem>
                 ))}
               </DetailCategoryList>
               <DetailDescContent>
-                평균평점: {formatRating(item.review_avg)}
+                <b>평균평점</b>: {formatRating(item.review_avg)}
               </DetailDescContent>
               <DetailDescContent>
-                전화번호: {formatPhoneNumber(item.phone)}
+                <b>전화번호</b>: {formatPhoneNumber(item.phone)}
               </DetailDescContent>
               <DetailDescContent>
-                영업시간: {formatTime(item.begin, item.end)}
+                <b>영업시간</b>: {formatTime(item.begin, item.end)}
               </DetailDescContent>
               <DetailDescContent>
-                최소주문금액: {formatPrice(item.min_order_amount)}원
+                <b>최소주문금액</b>: {formatPrice(item.min_order_amount)}원
               </DetailDescContent>
             </CategoryListWrapper>
           </DetailItemsWrapper>

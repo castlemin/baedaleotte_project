@@ -10,9 +10,11 @@ import {
 import { GuMap } from '../../../../../../assets/data/Graphs/GuMap';
 import { RiskScore } from '../../../../../../assets/data/RiskScore';
 import { Card } from '../../../../../../components/UI/Card/Card.styles';
+import { riskScoreParser } from '../../../../../../assets/data/riskScoreParser';
 
 export const ReportThreatMap: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const score = RiskScore();
 
   const handleOpen = () => {
     setOpen((prev) => !prev);
@@ -24,7 +26,7 @@ export const ReportThreatMap: React.FC = () => {
         <ReportSubtitle>내 행정구 위험도 지도</ReportSubtitle>
         <GuMap />
         <AddOnButton onClick={handleOpen}>
-          위험도를 산출한 방식이 궁금하다면
+          위험도 산출 방식이 궁금하다면
         </AddOnButton>
         <AddOn addOnOpen={open}>
           <h2>코로나 위험도 산출 공식</h2>
@@ -38,7 +40,18 @@ export const ReportThreatMap: React.FC = () => {
             <b>내 지역</b>: 강남구
           </p>
           <p>
-            <b>위험도 점수</b>: <RiskScore />
+            <b>위험도 점수</b>: {score}
+          </p>
+          <p>
+            <p>
+              <b>등급표</b>
+            </p>
+            (현재 등급 = {riskScoreParser(score)})
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              <li>30점 미만 = {riskScoreParser(29)}</li>
+              <li>60점 미만 = {riskScoreParser(59)}</li>
+              <li>60점 이상 = {riskScoreParser(60)}</li>
+            </ul>
           </p>
           <hr />
           <p style={{ textAlign: 'left' }}>
@@ -51,8 +64,8 @@ export const ReportThreatMap: React.FC = () => {
         </AddOn>
       </GraphContainer>
       <ReportSubtitle>
-        현재 당신의 지역 위험도는 <RiskScore />
-        점, '이불밖은 위험해'입니다.
+        현재 당신의 지역 위험도는 {score}점, 등급은 {riskScoreParser(score)}
+        입니다.
       </ReportSubtitle>
     </DescriptionSection>
   );

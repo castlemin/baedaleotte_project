@@ -11,5 +11,5 @@ export const RiskScore = () => {
     };
     fetchScore();
   }, []);
-  return <span>{score}</span>;
+  return score;
 };

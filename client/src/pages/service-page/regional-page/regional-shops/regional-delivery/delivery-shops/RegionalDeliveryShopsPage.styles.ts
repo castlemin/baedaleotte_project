@@ -105,10 +105,10 @@ export const SortButtonContainer = styled.div`
 `;
 
 export const SortButton = styled.button`
-  background-color: beige;
+  background-color: white;
   width: 80px;
   height: 50px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
   border: none;
   border-radius: 4px;

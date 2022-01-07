@@ -7,8 +7,11 @@ import {
 
 import { ConfirmedByGuGraph } from '../../../../../../assets/data/Graphs/ConfirmedByGuGraph';
 import { RiskScore } from '../../../../../../assets/data/RiskScore';
+import { riskScoreParser } from '../../../../../../assets/data/riskScoreParser';
 
 export const ReportConfirmedByGu: React.FC = () => {
+  const score = RiskScore();
+
   return (
     <DescriptionSection>
       <GraphContainer>
@@ -16,8 +19,7 @@ export const ReportConfirmedByGu: React.FC = () => {
         <ConfirmedByGuGraph />
       </GraphContainer>
       <ReportSubtitle>
-        현재 당신의 지역 위험도는 <RiskScore />
-        점, '이불밖은 위험해'입니다.
+        현재 당신의 지역 위험도는 점, '이불밖은 위험해' 입니다.
       </ReportSubtitle>
     </DescriptionSection>
   );
