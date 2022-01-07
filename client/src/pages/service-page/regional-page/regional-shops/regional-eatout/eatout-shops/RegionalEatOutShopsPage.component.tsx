@@ -24,19 +24,21 @@ import {
   ShopDescContainer,
   ShopDescContent,
   ShopListContainer,
-  FilterBtn,
-  FilterBtnContainer,
+  SortButton,
+  SortButtonContainer,
   ShopContainer,
 } from './RegionalEatOutShopsPage.styles';
 import { EAT_OUT_LIST_URL } from '../../../../../../assets/data/requestUrls';
 
 const RegionalEatOutShopsPage: React.FC = () => {
   const [eatOutShopList, setEatOutShopList] = useState<any[]>([]);
-  const [pageNum, setPageNum] = useState(1);
   const [selectShop, setSelectShop] = useState('');
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const chosenEatOutCategories = useRecoilValue(selectedEatOutCategory);
   const userCoords = useRecoilValue(userLocation);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(8);
 
   const RegionalEatOutShopDetail = React.lazy(
     () => import('../eatout-shops-detail/RegionalEatOutShopDetail.component')
@@ -58,6 +60,42 @@ const RegionalEatOutShopsPage: React.FC = () => {
     fetchRestaurants();
   }, []);
 
+  const [target, setTarget] = useState<HTMLDivElement | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const lastIdx = currentPage * postPerPage;
+
+  const limitNumOfItems = (items: any[]) => {
+    let currentItems;
+    currentItems = items.slice(0, lastIdx);
+    return currentItems;
+  };
+
+  const getMoreItem = async () => {
+    setIsLoaded(true);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setCurrentPage((prev) => prev + 1);
+
+    setIsLoaded(false);
+  };
+  const onIntersect = async ([entry]: any, observer: any): Promise<any> => {
+    if (entry.isIntersecting && !isLoaded) {
+      observer.unobserve(entry.target);
+      await getMoreItem();
+      observer.observe(entry.target);
+    }
+  };
+  useEffect(() => {
+    let observer: any;
+    if (target) {
+      observer = new IntersectionObserver(onIntersect, {
+        threshold: 0.4,
+      });
+      observer.observe(target);
+    }
+    return () => observer && observer.disconnect();
+  }, [target]);
+
   console.log(eatOutShopList);
 
   const handleToEatOutDetail = (event: any) => {
@@ -78,8 +116,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
     } else if (event.target.id === 'time') {
       setEatOutShopList((prev) => [
         ...prev.sort(
-          (a, b) =>
-            parseInt(a.hour.slice(9, 11)) - parseInt(b.hour.slice(9, 11))
+          (a, b) => parseInt(b.hour.slice(-5)) - parseInt(a.hour.slice(-5))
         ),
       ]);
     }
@@ -105,14 +142,14 @@ const RegionalEatOutShopsPage: React.FC = () => {
               ))}
               에 대한 추천 결과입니다.
             </CategoryIndicator>
-            <FilterBtnContainer>
-              <FilterBtn id='time' onClick={handleClickSort}>
-                빠른시간순
-              </FilterBtn>
-              <FilterBtn id='review' onClick={handleClickSort}>
+            <SortButtonContainer>
+              <SortButton id='time' onClick={handleClickSort}>
+                마감시간순
+              </SortButton>
+              <SortButton id='review' onClick={handleClickSort}>
                 높은평점순
-              </FilterBtn>
-            </FilterBtnContainer>
+              </SortButton>
+            </SortButtonContainer>
           </HeadingContainer>
           <ShopListContainer>
             {isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
@@ -125,7 +162,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
                 />
               </Suspense>
             )}
-            {eatOutShopList.map((item, idx) => (
+            {limitNumOfItems(eatOutShopList).map((item: any, idx: number) => (
               <ShopContainer
                 key={idx}
                 onClick={handleToEatOutDetail}
@@ -162,6 +199,11 @@ const RegionalEatOutShopsPage: React.FC = () => {
                 </ShopDescContainer>
               </ShopContainer>
             ))}
+            <div ref={setTarget}>
+              {isLoaded && eatOutShopList.length >= lastIdx ? (
+                <div>loading...</div>
+              ) : null}
+            </div>
           </ShopListContainer>
         </>
       )}

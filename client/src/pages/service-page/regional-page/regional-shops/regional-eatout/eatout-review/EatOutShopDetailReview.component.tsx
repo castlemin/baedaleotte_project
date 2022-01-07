@@ -33,11 +33,11 @@ const EatOutShopDetailReview = ({ shopId }: Props) => {
         {review.map((item: any) => (
           <Content>
             <Comment>1. {item.review_1.slice(0, -10)}</Comment>
-            <p>- {item.review_1.slice(-10)} -</p>
+            <p>-게시일: {item.review_1.slice(-10)} -</p>
             <Comment>2. {item.review_2.slice(0, -10)}</Comment>
-            <p>- {item.review_2.slice(-10)} -</p>
+            <p>-게시일: {item.review_2.slice(-10)} -</p>
             <Comment>3. {item.review_3.slice(0, -10)}</Comment>
-            <p>- {item.review_3.slice(-10)} -</p>
+            <p>-게시일: {item.review_3.slice(-10)} -</p>
             <CommentRating>{formatRating(item.rating)}</CommentRating>
           </Content>
         ))}

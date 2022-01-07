@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { Suspense, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { FOOD_DELIVERY_LIST_URL } from '../../../../../../assets/data/requestUrls';
 
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
 /* import axios from 'axios'; */
 import Loading from '../../../../../../components/UI/loading/Loading.component';
+import RegionalShopDetail from '../delivery-shops-detail/RegionalDeliveryShopDetail.component';
 import { selectedDeliveryCategory } from '../../../../../../store/store';
 // import useLoadShops from '../../../../hooks/useLoadShops.component';
 
@@ -22,30 +22,69 @@ import {
   SortButton,
 } from './RegionalDeliveryShopsPage.styles';
 
-const RegionalDeliveryShopsPage: React.FC = () => {
-  const [deliveryShopList, setDeliveryShopList] = useState<any[]>([]);
+const RegionalDeliveryShopsPage = () => {
+  const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
+
   const [selectShop, setSelectDeliveryShop] = useState('');
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
+
+  const [deliveryShopList, setDeliveryShopList] = useState<any>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(8);
 
   useEffect(() => {
     const fetchRestaurants = async () => {
-      const res = await axios.get(FOOD_DELIVERY_LIST_URL);
+      const res = await axios.get(
+        'https://bf13481e-d0b7-4fc0-a3d3-05a66db58f51.mock.pstmn.io/restaurants/near'
+      );
       const data = await res.data;
-      const filteredData = await data.filter((item: any) =>
-        item.categories.includes(
-          chosenDeliveryCategories[0] || chosenDeliveryCategories[1]
-        )
+      const filteredData = await data.filter(
+        (item: any) =>
+          item.categories.includes(chosenDeliveryCategories[0]) ||
+          item.categories.includes(chosenDeliveryCategories[1])
       );
       setDeliveryShopList(filteredData);
     };
     fetchRestaurants();
   }, []);
 
-  const RegionalDeliveryShopDetail = React.lazy(
-    () =>
-      import('../delivery-shops-detail/RegionalDeliveryShopDetail.component')
-  );
+  const [target, setTarget] = useState<HTMLDivElement | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const lastIdx = currentPage * postPerPage;
+
+  const limitNumOfItems = (items: any[]) => {
+    let currentItems;
+    currentItems = items.slice(0, lastIdx);
+    return currentItems;
+  };
+
+  const getMoreItem = async () => {
+    setIsLoaded(true);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setCurrentPage((prev) => prev + 1);
+
+    setIsLoaded(false);
+  };
+  const onIntersect = async ([entry]: any, observer: any): Promise<any> => {
+    if (entry.isIntersecting && !isLoaded) {
+      observer.unobserve(entry.target);
+      await getMoreItem();
+      observer.observe(entry.target);
+    }
+  };
+  useEffect(() => {
+    let observer: any;
+    if (target) {
+      observer = new IntersectionObserver(onIntersect, {
+        threshold: 0.4,
+      });
+      observer.observe(target);
+    }
+    return () => observer && observer.disconnect();
+  }, [target]);
+
+  console.log(deliveryShopList);
 
   const handleToDeliveryDetail = (event: any) => {
     setSelectDeliveryShop(event.target.id);
@@ -59,13 +98,13 @@ const RegionalDeliveryShopsPage: React.FC = () => {
 
   const handleClickSort = (event: any) => {
     if (event.target.id === 'review') {
-      setDeliveryShopList((prev) => [
-        ...prev.sort((a, b) => b.review_avg - a.review_avg),
+      setDeliveryShopList((prev: any) => [
+        ...prev.sort((a: any, b: any) => b.review_avg - a.review_avg),
       ]);
     } else if (event.target.id === 'time') {
-      setDeliveryShopList((prev) => [
+      setDeliveryShopList((prev: any) => [
         ...prev.sort(
-          (a, b) =>
+          (a: any, b: any) =>
             parseInt(a.estimated_delivery_time.slice(3, -1)) -
             parseInt(b.estimated_delivery_time.slice(3, -1))
         ),
@@ -99,15 +138,13 @@ const RegionalDeliveryShopsPage: React.FC = () => {
           <ShopListContainer layout={deliveryShopList.length}>
             {isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
             {isDetailOpen && (
-              <Suspense fallback={<Loading />}>
-                <RegionalDeliveryShopDetail
-                  shopData={deliveryShopList}
-                  selected={selectShop}
-                  onCancel={handleToggleDetail}
-                />
-              </Suspense>
+              <RegionalShopDetail
+                shopData={deliveryShopList}
+                selected={selectShop}
+                onCancel={handleToggleDetail}
+              />
             )}
-            {deliveryShopList.map((item, idx) => (
+            {limitNumOfItems(deliveryShopList).map((item, idx) => (
               <ShopContainer
                 key={idx}
                 onClick={handleToDeliveryDetail}
@@ -132,6 +169,11 @@ const RegionalDeliveryShopsPage: React.FC = () => {
                 </ShopDescContainer>
               </ShopContainer>
             ))}
+            <div ref={setTarget}>
+              {isLoaded && deliveryShopList.length >= lastIdx ? (
+                <div>loading...</div>
+              ) : null}
+            </div>
           </ShopListContainer>
         </>
       )}

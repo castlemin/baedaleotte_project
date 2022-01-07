@@ -51,8 +51,9 @@ export const DetailItemsWrapper = styled.div`
 export const DetailImage = styled.div`
   height: 300px;
   width: 300px;
+  border-radius: 4px;
   ${({ imgUrl }: Props) => css`
-    background-image: url(https://www.yogiyo.co.kr/${imgUrl});
+    background-image: url(${imgUrl});
   `}
   background-size: cover;
   background-repeat: no-repeat;

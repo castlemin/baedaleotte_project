@@ -36,7 +36,7 @@ const DeliveryShopDetailReview = ({ shopId }: Props) => {
   const lastIdx = curPage * itemsPerPage;
   const firstIdx = lastIdx - itemsPerPage;
 
-  const limitCurItems = (items: any) => {
+  const limitCurItems = (items: any[]) => {
     let curItems;
     curItems = items.slice(firstIdx, lastIdx);
     return curItems;

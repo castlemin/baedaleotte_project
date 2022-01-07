@@ -1,7 +1,7 @@
-import { useFetchGraph } from '../../../hooks/useFetchJson';
-import Plot from 'react-plotly.js';
+import Plot, { PlotParams } from 'react-plotly.js';
 
-export const SeoulMap = () => {
-  const seoulMapJson = useFetchGraph('seoul_risk_map_all');
-  return <Plot data={seoulMapJson.data} layout={seoulMapJson.layout} />;
+interface Props extends PlotParams {}
+
+export const SeoulMap = ({ data, layout }: Props) => {
+  return <Plot data={data} layout={layout} />;
 };

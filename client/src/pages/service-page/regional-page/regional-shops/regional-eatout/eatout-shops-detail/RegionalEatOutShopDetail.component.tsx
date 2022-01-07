@@ -49,7 +49,7 @@ const RegionalEatOutShopDetail: React.FC<Props> = ({
         <DetailDescContainer key={item.id}>
           <DetailShopTitle>{item.name}</DetailShopTitle>
           <DetailItemsWrapper>
-            <DetailImage imgUrl={item.img_url_1}></DetailImage>
+            <DetailImage imgUrl={item.img_url_2}></DetailImage>
             <CategoryListWrapper>
               <DetailCategoryList>카테고리: {item.category}</DetailCategoryList>
               <DetailDescContent>평균평점: {item.rating}</DetailDescContent>

@@ -24,7 +24,7 @@ import { selectedEatOutCategory } from '../../../../../../store/store';
 
 const RegionalDeliveryCategoryPage = () => {
   const navigate = useNavigate();
-  const [categoryStored, setCategoryStored] = useRecoilState(
+  const [categoryStored, setCategoryStored] = useRecoilState<any>(
     selectedEatOutCategory
   );
   const [isModalClosed, setIsModalClosed] = useState(true);
@@ -38,7 +38,7 @@ const RegionalDeliveryCategoryPage = () => {
     setIsModalClosed((prev) => !prev);
   };
 
-  const handleToggleCategory = (event) => {
+  const handleToggleCategory = (event: any) => {
     if (
       categoryStored.length >= 2 &&
       !categoryStored.includes(event.target.textContent)
@@ -47,11 +47,11 @@ const RegionalDeliveryCategoryPage = () => {
       setIsModalClosed((prev) => !prev);
     }
     if (categoryStored.includes(event.target.textContent)) {
-      setCategoryStored((prev) =>
-        prev.filter((cat) => cat !== event.target.textContent)
+      setCategoryStored((prev: any) =>
+        prev.filter((cat: any) => cat !== event.target.textContent)
       );
     } else if (categoryStored.length < 2) {
-      setCategoryStored((prev) => [...prev, event.target.textContent]);
+      setCategoryStored((prev: any) => [...prev, event.target.textContent]);
     }
   };
 
@@ -70,7 +70,7 @@ const RegionalDeliveryCategoryPage = () => {
           <PlaceHolder selected={categoryStored.length}>
             카테고리를 선택해주세요.
           </PlaceHolder>
-          {categoryStored.map((item) => (
+          {categoryStored.map((item: any) => (
             <SelectedCategory imgUrl={EATOUT_IMAGES[item]}>
               <SelectedTitle>{item}</SelectedTitle>
             </SelectedCategory>

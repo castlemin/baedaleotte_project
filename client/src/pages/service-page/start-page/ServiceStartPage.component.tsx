@@ -1,6 +1,7 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+import { useFetchGraph } from '../../../hooks/useFetchJson';
 import {
   ToServiceBtn,
   ToServiceBtnContainer,
@@ -16,16 +17,18 @@ import {
 import { userLocation } from '../../../store/store';
 import Loading from '../../../components/UI/loading/Loading.component';
 
+const SeoulMap = React.lazy(() =>
+  import('../../../assets/data/Graphs/SeoulMap').then(({ SeoulMap }) => ({
+    default: SeoulMap,
+  }))
+);
+
 const ServiceStartPage: React.FC = () => {
   const navigate = useNavigate();
   const [userCoords, setUserCoords] = useRecoilState(userLocation);
   const [checked, setChecked] = useState(false);
 
-  const SeoulMap = React.lazy(() =>
-    import('../../../assets/data/Graphs/SeoulMap').then(({ SeoulMap }) => ({
-      default: SeoulMap,
-    }))
-  );
+  const seoulMapJson = useFetchGraph('seoul_risk_map_all');
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -76,7 +79,7 @@ const ServiceStartPage: React.FC = () => {
         </RequestTitleContainer>
         <ExampleTitle>서울시 전체 코로나 위험도</ExampleTitle>
         <Suspense fallback={<Loading />}>
-          <SeoulMap />
+          <SeoulMap data={seoulMapJson.data} layout={seoulMapJson.layout} />
         </Suspense>
         <RequestDescContainer>
           보시는 것 처럼 사용자님의 현재 위치 정보를 통해, 위치하신 지역의

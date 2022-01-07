@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 import { customAnimation } from '../../../../components/UI/global/css.styles';
 
-export const HeadingContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
 export const ReportContainer = styled.section`
   display: flex;
   flex-direction: column;
