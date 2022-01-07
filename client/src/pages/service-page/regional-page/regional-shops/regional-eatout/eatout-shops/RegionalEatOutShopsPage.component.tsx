@@ -191,8 +191,9 @@ const RegionalEatOutShopsPage: React.FC = () => {
                   </ShopDescContent>
                   <ShopDescContent>
                     <b>평균평점</b>:{' '}
+                    {item.rating === 0 ? '평점 없음' : `${item.rating}점`}
                   </ShopDescContent>
-                  {item.rating === 0 ? '평점 없음' : `${item.rating}점`}
+
                   <ShopDescContent>
                     <b>주소</b>: {item.address}
                   </ShopDescContent>
