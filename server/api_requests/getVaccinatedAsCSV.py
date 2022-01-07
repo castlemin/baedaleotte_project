@@ -53,7 +53,7 @@ def saveVaccinated():
     # print(jsonString)
     json_data = json.loads(jsonString)["tvCorona19VaccinestatNew"]["row"]
     # print(json_data)
-    with open("./data/서울특별시 코로나19 백신 예방접종 현황.csv", "w", encoding="euc-kr") as f:
+    with open("./dataanalysis/data/서울특별시 코로나19 백신 예방접종 현황.csv", "w", encoding="euc-kr") as f:
         w = csv.writer(f)
         w.writerow(fields)
         for dic in json_data:

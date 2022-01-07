@@ -64,10 +64,10 @@ def saveSeoulPopDailyAsCSV():
         json_data = json.loads(jsonString)["SPOP_DAILYSUM_JACHI"]["row"]
         # print(json_data)
         if d == 6:
-            with open("./data/자치구단위 서울생활인구 일별 집계표.csv", "w", encoding="euc-kr") as f:
+            with open("./dataanalysis/data/자치구단위 서울생활인구 일별 집계표.csv", "w", encoding="euc-kr") as f:
                 w = csv.writer(f)
                 w.writerow(fields)
-        with open("./data/자치구단위 서울생활인구 일별 집계표.csv", "a", encoding="euc-kr") as f:
+        with open("./dataanalysis/data/자치구단위 서울생활인구 일별 집계표.csv", "a", encoding="euc-kr") as f:
             w = csv.writer(f)
             for dic in json_data:
                 row = []

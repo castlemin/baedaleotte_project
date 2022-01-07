@@ -145,8 +145,8 @@ def make_score(coronic_seoul):
     #reg_list는 변경 가능 (직접 리스트 지정하거나 risk_data index 활용하거나 등)
     reg_list = risk_data.index
     for reg in reg_list:
-        model_dic[reg].plot(forecast_dic[reg]).savefig(f'./img/{reg}_prophet.png')
-        model_dic[reg].plot_components(forecast_dic[reg]).savefig(f'./img/{reg}_prophet2.png')
+        model_dic[reg].plot(forecast_dic[reg]).savefig(f'./dataanalysis/img/{reg}_prophet.png')
+        model_dic[reg].plot_components(forecast_dic[reg]).savefig(f'./dataanalysis/img/{reg}_prophet2.png')
     path = './dataanalysis/data/'
     risk_data.to_csv(path + 'risk_data.csv')
 	#리턴값 없음
@@ -165,7 +165,7 @@ coronic_seoul = processing(coronic_seoul)
 # 실제 코드
 점수df = make_score(coronic_seoul)
 # 테스트용 코드 이거 없으면 새로 학습해서 오래 걸림
-#점수df = pd.read_csv('./dataanalysis/data/risk_data.csv', index_col='Unnamed: 0')
+# 점수df = pd.read_csv('./dataanalysis/data/risk_data.csv', index_col='Unnamed: 0')
 
 # --------------------------------------------------------------------
 

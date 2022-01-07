@@ -25,7 +25,7 @@ sched.start()
 sched.add_job(import_schedule, trigger='cron', hour=0, minute=10)
 
 # 코로나 위험도 합계 점수 및 상세 점수들을 저장해 놓은 csv 파일을 불러옴
-점수df = pd.read_csv('./data/risk_data.csv', index_col='Unnamed: 0')
+점수df = pd.read_csv('./dataanalysis/data/risk_data.csv', index_col='Unnamed: 0')
 
 # 코로나 상세 점수를 json 형식으로 반환하기 전 dict로 변환하는 함수
 def df_dic(df, region):
@@ -115,3 +115,4 @@ def predict2():
                      attachment_filename='predict2.png',# 다운받아지는 파일 이름. 
                      as_attachment=True)
 
+print("@@@@@@@@@@@@@@@graph.py is DONE@@@@")
