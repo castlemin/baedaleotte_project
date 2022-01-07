@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SeoulMap } from '../../../assets/data/Graphs/SeoulMap';
 import { useRecoilState } from 'recoil';
 import {
   ToServiceBtn,
@@ -15,11 +14,18 @@ import {
   ExampleTitle,
 } from './ServiceStartPage.styles';
 import { userLocation } from '../../../store/store';
+import Loading from '../../../components/UI/loading/Loading.component';
 
 const ServiceStartPage: React.FC = () => {
   const navigate = useNavigate();
   const [userCoords, setUserCoords] = useRecoilState(userLocation);
   const [checked, setChecked] = useState(false);
+
+  const SeoulMap = React.lazy(() =>
+    import('../../../assets/data/Graphs/SeoulMap').then(({ SeoulMap }) => ({
+      default: SeoulMap,
+    }))
+  );
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -69,7 +75,9 @@ const ServiceStartPage: React.FC = () => {
           해당 서비스는 사용자님의 위치정보를 필요로 해요.
         </RequestTitleContainer>
         <ExampleTitle>서울시 전체 코로나 위험도</ExampleTitle>
-        <SeoulMap />
+        <Suspense fallback={<Loading />}>
+          <SeoulMap />
+        </Suspense>
         <RequestDescContainer>
           보시는 것 처럼 사용자님의 현재 위치 정보를 통해, 위치하신 지역의
           코로나 위험도를 분석하고 근방 배달음식점을 파악해야 하기 때문이죠.

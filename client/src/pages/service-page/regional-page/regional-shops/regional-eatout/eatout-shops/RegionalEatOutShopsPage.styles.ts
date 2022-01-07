@@ -5,6 +5,16 @@ interface Props {
   layout?: number;
 }
 
+export const HeadingContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+export const CategoryIndicator = styled.h2``;
+
+export const CategoryNameContainer = styled.span``;
+
 export const ShopListContainer = styled.div<Props>`
   display: grid;
   ${({ layout }: Props) =>
@@ -46,6 +56,8 @@ export const ShopDescContainer = styled.p`
     list-style: none;
   }
 `;
+
+export const ShopDescContent = styled.p``;
 
 export const ShopImgContainer = styled.div<Props>`
   width: 100%;

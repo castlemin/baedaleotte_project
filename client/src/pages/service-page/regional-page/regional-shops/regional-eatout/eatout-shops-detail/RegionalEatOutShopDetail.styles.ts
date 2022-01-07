@@ -27,12 +27,16 @@ export const DetailCardContainer = styled.div`
 
 export const DetailDescContainer = styled.div``;
 
+export const CategoryListWrapper = styled.div``;
+
 export const DetailCategoryList = styled.ul`
   margin-top: 0;
   padding: 0;
 `;
 
-export const DetailDescListItem = styled.li`
+export const DetailDescContent = styled.p``;
+
+export const DetailCategoryItem = styled.li`
   list-style: none;
 `;
 
@@ -48,7 +52,7 @@ export const DetailImage = styled.div`
   height: 300px;
   width: 300px;
   ${({ imgUrl }: Props) => css`
-    background-image: url(${imgUrl});
+    background-image: url(https://www.yogiyo.co.kr/${imgUrl});
   `}
   background-size: cover;
   background-repeat: no-repeat;

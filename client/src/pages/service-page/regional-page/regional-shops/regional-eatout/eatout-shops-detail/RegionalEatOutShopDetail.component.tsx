@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import Loading from '../../../../../../components/UI/loading/Loading.component';
 import {
   formatEatOutWeekdayHour,
   formatEatOutWeekendHour,
 } from '../../../../../../functions/formatter';
-import EatOutShopDetailReview from '../../regional-eatout/eatout-review/EatOutShopDetailReview.component';
 import {
   DetailCardContainer,
   DetailDescContainer,
   DetailImage,
+  CategoryListWrapper,
+  DetailDescContent,
   DetailCategoryList,
   CloseBtn,
   DetailShopTitle,
@@ -33,6 +35,13 @@ const RegionalEatOutShopDetail: React.FC<Props> = ({
     onCancel();
   };
 
+  const EatOutShopDetailReview = React.lazy(
+    () =>
+      import(
+        '../../regional-eatout/eatout-review/EatOutShopDetailReview.component'
+      )
+  );
+
   return (
     <DetailCardContainer>
       <CloseBtn onClick={handleCloseModal}>x</CloseBtn>
@@ -41,28 +50,30 @@ const RegionalEatOutShopDetail: React.FC<Props> = ({
           <DetailShopTitle>{item.name}</DetailShopTitle>
           <DetailItemsWrapper>
             <DetailImage imgUrl={item.img_url_1}></DetailImage>
-            <div>
+            <CategoryListWrapper>
               <DetailCategoryList>카테고리: {item.category}</DetailCategoryList>
-              <p>평균평점: {item.rating}</p>
-              <p>전화번호: {item.phone}</p>
-              <p>
+              <DetailDescContent>평균평점: {item.rating}</DetailDescContent>
+              <DetailDescContent>전화번호: {item.phone}</DetailDescContent>
+              <DetailDescContent>
                 <b>영업시간(주중)</b>: {formatEatOutWeekdayHour(item.hour)}
-              </p>
-              <p>
+              </DetailDescContent>
+              <DetailDescContent>
                 {formatEatOutWeekendHour(item.hour) === '' ? (
                   ''
                 ) : (
-                  <p>
+                  <DetailDescContent>
                     <b>영업시간(주말)</b>: {formatEatOutWeekendHour(item.hour)}
-                  </p>
+                  </DetailDescContent>
                 )}
-              </p>
-              <p>평균가격: {item.price}</p>
-            </div>
+              </DetailDescContent>
+              <DetailDescContent>평균가격: {item.price}</DetailDescContent>
+            </CategoryListWrapper>
           </DetailItemsWrapper>
         </DetailDescContainer>
       ))}
-      <EatOutShopDetailReview shopId={selected} />
+      <Suspense fallback={<Loading />}>
+        <EatOutShopDetailReview shopId={selected} />
+      </Suspense>
     </DetailCardContainer>
   );
 };

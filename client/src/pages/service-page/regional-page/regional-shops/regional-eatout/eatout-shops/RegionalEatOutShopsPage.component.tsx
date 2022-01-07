@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
@@ -9,8 +9,6 @@ import {
   selectedEatOutCategory,
   userLocation,
 } from '../../../../../../store/store';
-import RegionalEatOutShopDetail from '../eatout-shops-detail/RegionalEatOutShopDetail.component';
-// import useLoadShops from '../../../../hooks/useLoadShops.component';
 
 import {
   formatEatOutWeekdayHour,
@@ -18,9 +16,13 @@ import {
 } from '../../../../../../functions/formatter';
 
 import {
+  HeadingContainer,
+  CategoryIndicator,
+  CategoryNameContainer,
   ShopTitleContainer,
   ShopImgContainer,
   ShopDescContainer,
+  ShopDescContent,
   ShopListContainer,
   FilterBtn,
   FilterBtnContainer,
@@ -35,6 +37,10 @@ const RegionalEatOutShopsPage: React.FC = () => {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const chosenEatOutCategories = useRecoilValue(selectedEatOutCategory);
   const userCoords = useRecoilValue(userLocation);
+
+  const RegionalEatOutShopDetail = React.lazy(
+    () => import('../eatout-shops-detail/RegionalEatOutShopDetail.component')
+  );
 
   const params = userCoords;
 
@@ -85,20 +91,20 @@ const RegionalEatOutShopsPage: React.FC = () => {
         <Loading />
       ) : (
         <>
-          <div
+          <HeadingContainer
             style={{
               display: 'flex',
               justifyContent: 'space-evenly',
               alignItems: 'center',
             }}
           >
-            <h2>
+            <CategoryIndicator>
               선택하신{' '}
               {chosenEatOutCategories.map((item) => (
-                <span>[{item}]</span>
+                <CategoryNameContainer>[{item}]</CategoryNameContainer>
               ))}
               에 대한 추천 결과입니다.
-            </h2>
+            </CategoryIndicator>
             <FilterBtnContainer>
               <FilterBtn id='time' onClick={handleClickSort}>
                 빠른시간순
@@ -107,15 +113,17 @@ const RegionalEatOutShopsPage: React.FC = () => {
                 높은평점순
               </FilterBtn>
             </FilterBtnContainer>
-          </div>
+          </HeadingContainer>
           <ShopListContainer>
             {isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
             {isDetailOpen && (
-              <RegionalEatOutShopDetail
-                shopData={eatOutShopList}
-                selected={selectShop}
-                onCancel={handleToggleDetail}
-              />
+              <Suspense fallback={<Loading />}>
+                <RegionalEatOutShopDetail
+                  shopData={eatOutShopList}
+                  selected={selectShop}
+                  onCancel={handleToggleDetail}
+                />
+              </Suspense>
             )}
             {eatOutShopList.map((item, idx) => (
               <ShopContainer
@@ -128,25 +136,29 @@ const RegionalEatOutShopsPage: React.FC = () => {
                   {item.name}
                 </ShopTitleContainer>
                 <ShopDescContainer id={item.id}>
-                  <b>카테고리</b>: {item.category}
-                  <br />
-                  <p>
+                  <ShopDescContent>
+                    <b>카테고리</b>: {item.category}
+                  </ShopDescContent>
+                  <ShopDescContent>
                     <b>영업시간(주중)</b>: {formatEatOutWeekdayHour(item.hour)}
-                  </p>
-                  <p>
+                  </ShopDescContent>
+                  <ShopDescContent>
                     {formatEatOutWeekendHour(item.hour) === '' ? (
                       ''
                     ) : (
-                      <p>
+                      <ShopDescContent>
                         <b>영업시간(주말)</b>:{' '}
                         {formatEatOutWeekendHour(item.hour)}
-                      </p>
+                      </ShopDescContent>
                     )}
-                  </p>
-                  <b>평균평점</b>:{' '}
+                  </ShopDescContent>
+                  <ShopDescContent>
+                    <b>평균평점</b>:{' '}
+                  </ShopDescContent>
                   {item.rating === 0 ? '평점 없음' : `${item.rating}점`}
-                  <br />
-                  <b>주소</b>: {item.address}
+                  <ShopDescContent>
+                    <b>주소</b>: {item.address}
+                  </ShopDescContent>
                 </ShopDescContainer>
               </ShopContainer>
             ))}

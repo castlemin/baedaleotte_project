@@ -1,11 +1,12 @@
-import React from 'react';
-import DeliveryShopDetailReview from '../delivery-review/DeliveryShopDetailReview.component';
+import React, { Suspense } from 'react';
 import {
   DetailCardContainer,
   DetailDescContainer,
   DetailImage,
+  CategoryListWrapper,
+  DetailDescContent,
   DetailCategoryList,
-  DetailDescListItem,
+  DetailCategoryItem,
   CloseBtn,
   DetailShopTitle,
   DetailItemsWrapper,
@@ -16,6 +17,7 @@ import {
   formatRating,
   formatTime,
 } from '../../../../../../functions/formatter';
+import Loading from '../../../../../../components/UI/loading/Loading.component';
 
 interface Props {
   onCancel: () => void;
@@ -32,6 +34,10 @@ const RegionalShopDetail: React.FC<Props> = ({
     (item) => item.restaurant_id === Number(selected)
   );
 
+  const DeliveryShopDetailReview = React.lazy(
+    () => import('../delivery-review/DeliveryShopDetailReview.component')
+  );
+
   const handleCloseModal = () => {
     onCancel();
   };
@@ -44,22 +50,32 @@ const RegionalShopDetail: React.FC<Props> = ({
           <DetailShopTitle>{item.name}</DetailShopTitle>
           <DetailItemsWrapper>
             <DetailImage imgUrl={item.logo_url}></DetailImage>
-            <div>
+            <CategoryListWrapper>
               <DetailCategoryList>
                 카테고리:{' '}
                 {item.categories.map((cat: any) => (
-                  <DetailDescListItem>{cat}</DetailDescListItem>
+                  <DetailCategoryItem>{cat}</DetailCategoryItem>
                 ))}
               </DetailCategoryList>
-              <p>평균평점: {formatRating(item.review_avg)}</p>
-              <p>전화번호: {formatPhoneNumber(item.phone)}</p>
-              <p>영업시간: {formatTime(item.begin, item.end)}</p>
-              <p>최소주문금액: {formatPrice(item.min_order_amount)}원</p>
-            </div>
+              <DetailDescContent>
+                평균평점: {formatRating(item.review_avg)}
+              </DetailDescContent>
+              <DetailDescContent>
+                전화번호: {formatPhoneNumber(item.phone)}
+              </DetailDescContent>
+              <DetailDescContent>
+                영업시간: {formatTime(item.begin, item.end)}
+              </DetailDescContent>
+              <DetailDescContent>
+                최소주문금액: {formatPrice(item.min_order_amount)}원
+              </DetailDescContent>
+            </CategoryListWrapper>
           </DetailItemsWrapper>
         </DetailDescContainer>
       ))}
-      <DeliveryShopDetailReview shopId={selected} />
+      <Suspense fallback={<Loading />}>
+        <DeliveryShopDetailReview shopId={selected} />
+      </Suspense>
     </DetailCardContainer>
   );
 };

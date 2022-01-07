@@ -15,7 +15,6 @@ import {
   NextButton,
 } from './RegionalEatOutCategory.styles';
 
-import { weekDay, hour } from '../../../../../../assets/data/weekDay';
 import Header from '../../../../../../components/UI/header/Header.component';
 import { eatoutCategories } from '../../../../../../assets/data/eatoutCategories';
 import Modal from '../../../../../../components/UI/modal/Modal.component';
@@ -65,7 +64,6 @@ const RegionalDeliveryCategoryPage = () => {
       {!isModalClosed && <BackDrop onCancel={handleCloseModal} />}
       <CategoryTemplate style={{ display: 'flex', flexDirection: 'column' }}>
         <PageTitle>
-          오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는
           <SelectedOptionsTitle>선택 메뉴</SelectedOptionsTitle>
         </PageTitle>
         <SelectedContainer>

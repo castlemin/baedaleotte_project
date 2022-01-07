@@ -21,7 +21,7 @@ export const AddOnButton = styled.button`
   postition: absolute;
   box-sizing: border-box;
   padding: 0;
-  margin-bottom: 30px;
+  margin: 20px 0;
   :hover {
     background-color: #88aed0;
     transition: ease-in 185ms;
@@ -55,11 +55,13 @@ export const AddOn = styled.div<Props>`
 
 export const ReportTitle = styled.h1`
   font-size: 40px;
+  margin-bottom: 20px;
   text-align: center;
 `;
 
 export const ReportSubtitle = styled.h2`
   font-size: 24px;
   text-align: center;
+  margin-left: 40px;
   word-break: all;
 `;

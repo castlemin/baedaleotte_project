@@ -25,6 +25,7 @@ export const ReportTitle = styled.h1`
 
 export const ReportSubtitle = styled.h2`
   font-size: 24px;
+  margin-left: 40px;
   text-align: center;
   word-break: all;
 `;

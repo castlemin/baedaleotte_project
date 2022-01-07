@@ -1,17 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { eatoutCategories } from '../../../../../../assets/data/eatoutCategories';
 import { FOOD_DELIVERY_LIST_URL } from '../../../../../../assets/data/requestUrls';
 
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
 /* import axios from 'axios'; */
 import Loading from '../../../../../../components/UI/loading/Loading.component';
 import { selectedDeliveryCategory } from '../../../../../../store/store';
-import RegionalDeliveryShopDetail from '../delivery-shops-detail/RegionalDeliveryShopDetail.component';
 // import useLoadShops from '../../../../hooks/useLoadShops.component';
 
 import {
+  HeadingContainer,
+  CategoryIndicator,
+  CategoryNameContainer,
   ShopTitleContainer,
   ShopImgContainer,
   ShopDescContainer,
@@ -23,7 +24,6 @@ import {
 
 const RegionalDeliveryShopsPage: React.FC = () => {
   const [deliveryShopList, setDeliveryShopList] = useState<any[]>([]);
-  const [pageNum, setPageNum] = useState(1);
   const [selectShop, setSelectDeliveryShop] = useState('');
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
@@ -42,7 +42,10 @@ const RegionalDeliveryShopsPage: React.FC = () => {
     fetchRestaurants();
   }, []);
 
-  console.log(deliveryShopList);
+  const RegionalDeliveryShopDetail = React.lazy(
+    () =>
+      import('../delivery-shops-detail/RegionalDeliveryShopDetail.component')
+  );
 
   const handleToDeliveryDetail = (event: any) => {
     setSelectDeliveryShop(event.target.id);
@@ -55,7 +58,7 @@ const RegionalDeliveryShopsPage: React.FC = () => {
   };
 
   const handleClickSort = (event: any) => {
-    if (event.target.className === 'review') {
+    if (event.target.id === 'review') {
       setDeliveryShopList((prev) => [
         ...prev.sort((a, b) => b.review_avg - a.review_avg),
       ]);
@@ -76,20 +79,14 @@ const RegionalDeliveryShopsPage: React.FC = () => {
         <Loading />
       ) : (
         <>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
-            }}
-          >
-            <h2>
+          <HeadingContainer>
+            <CategoryIndicator>
               선택하신{' '}
               {chosenDeliveryCategories.map((item) => (
-                <span>[{item}]</span>
+                <CategoryNameContainer>[{item}]</CategoryNameContainer>
               ))}
               에 대한 추천 결과입니다.
-            </h2>
+            </CategoryIndicator>
             <SortButtonContainer>
               <SortButton id='time' onClick={handleClickSort}>
                 빠른시간순
@@ -98,15 +95,17 @@ const RegionalDeliveryShopsPage: React.FC = () => {
                 높은평점순
               </SortButton>
             </SortButtonContainer>
-          </div>
+          </HeadingContainer>
           <ShopListContainer layout={deliveryShopList.length}>
             {isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
             {isDetailOpen && (
-              <RegionalDeliveryShopDetail
-                shopData={deliveryShopList}
-                selected={selectShop}
-                onCancel={handleToggleDetail}
-              />
+              <Suspense fallback={<Loading />}>
+                <RegionalDeliveryShopDetail
+                  shopData={deliveryShopList}
+                  selected={selectShop}
+                  onCancel={handleToggleDetail}
+                />
+              </Suspense>
             )}
             {deliveryShopList.map((item, idx) => (
               <ShopContainer
