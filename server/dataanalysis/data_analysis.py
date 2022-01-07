@@ -163,9 +163,9 @@ coronic_seoul = processing(coronic_seoul)
 
 #1-3 사용
 # 실제 코드
-#점수df = make_score(coronic_seoul)
+점수df = make_score(coronic_seoul)
 # 테스트용 코드 이거 없으면 새로 학습해서 오래 걸림
-점수df = pd.read_csv('./dataanalysis/data/risk_data.csv', index_col='Unnamed: 0')
+#점수df = pd.read_csv('./dataanalysis/data/risk_data.csv', index_col='Unnamed: 0')
 
 # --------------------------------------------------------------------
 
