@@ -36,7 +36,17 @@ def create_app():
     app.register_blueprint(top5.bp)
     app.register_blueprint(goout.bp)
 
-    # @app.errorhandler(404)
+    # Error Handling
+    @app.errorhandler(BadRequestKeyError)
+    @app.errorhandler(Forbidden)
+    @app.errorhandler(MethodNotAllowed)
+    @app.errorhandler(RequestTimeout)
+    @app.errorhandler(NotAcceptable)
+    @app.errorhandler(Conflict)
+    @app.errorhandler(InternalServerError)
+    @app.errorhandler(BadGateway)
+    def error_handling(error):
+        return 404
 
     return app
 
