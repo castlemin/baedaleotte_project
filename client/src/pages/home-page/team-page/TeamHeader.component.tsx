@@ -40,7 +40,7 @@ const TeamHeader: React.FC<Props> = ({ viewHeight }) => {
         <FrontendLink
           onClick={() => {
             window.scrollTo({
-              top: viewHeight + 51,
+              top: viewHeight,
               behavior: 'smooth',
             });
           }}
@@ -50,7 +50,7 @@ const TeamHeader: React.FC<Props> = ({ viewHeight }) => {
         <BackendLink
           onClick={() => {
             window.scrollTo({
-              top: (viewHeight + 48) * 2,
+              top: viewHeight * 2,
               behavior: 'smooth',
             });
           }}
@@ -60,7 +60,7 @@ const TeamHeader: React.FC<Props> = ({ viewHeight }) => {
         <DA1Link
           onClick={() => {
             window.scrollTo({
-              top: (viewHeight + 45) * 3,
+              top: viewHeight * 3,
               behavior: 'smooth',
             });
           }}
@@ -70,7 +70,7 @@ const TeamHeader: React.FC<Props> = ({ viewHeight }) => {
         <DA2Link
           onClick={() => {
             window.scrollTo({
-              top: (viewHeight + 42) * 4,
+              top: viewHeight * 4,
               behavior: 'smooth',
             });
           }}

@@ -3,6 +3,7 @@ import { pageDefault } from '../../../components/UI/global/css.styles';
 
 export const TeamPageContainer = styled.div`
   ${pageDefault}
+  padding: 20px;
 `;
 
 export const TitleContainer = styled.h1`
@@ -18,7 +19,9 @@ export const Wrapper = styled.div`
   margin: 13px 23px;
 `;
 
-export const MemberContainer = styled.div``;
+export const MemberContainer = styled.div`
+  padding: 50px;
+`;
 
 export const FirstParagraph = styled.div`
   display: flex;
@@ -32,6 +35,10 @@ export const SecondParagraph = styled.div`
 export const ProfileImage = styled.img`
   width: 300px;
   border-radius: 50%;
+`;
+
+export const Introduction = styled.p`
+  font-size: 100%;
 `;
 
 export const MemberDescription = styled.p`

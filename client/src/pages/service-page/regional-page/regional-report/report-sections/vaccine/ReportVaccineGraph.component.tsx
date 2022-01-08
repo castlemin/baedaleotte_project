@@ -18,8 +18,7 @@ export const ReportVaccineGraph: React.FC = () => {
         <VaccineGraph />
       </GraphContainer>
       <ReportSubtitle>
-        현재 당신의 지역 위험도는 {score}
-        점, '이불밖은 위험해'입니다.
+        <p>현재 서울시의 백신 접종률은 {score}%입니다.</p>
       </ReportSubtitle>
     </DescriptionSection>
   );
