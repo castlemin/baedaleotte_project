@@ -56,9 +56,10 @@ def 평균가구(data):
 
 # 다중이용시설비율 (고정, 5)
 def 다중이용시설비율(data):
-    data['count'] = change_max_to_100(data['count'] / data['count'].sum())
-    data.set_index('지역구', inplace=True)
-    return data['count']
+    temp = data.copy()
+    temp['count'] = change_max_to_100(temp['count'] / temp['count'].sum())
+    temp.set_index('지역구', inplace=True)
+    return temp['count']
 
 # 신규확진자 절대값 (유동, 40)
 def 코로나신규(data):

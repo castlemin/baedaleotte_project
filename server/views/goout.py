@@ -2,6 +2,7 @@ import json
 
 from flask import Blueprint, request
 from flask.wrappers import Response
+from flask_cors import cross_origin
 from sqlalchemy import or_
 
 from models.goout import GoOut, GoOutReviews
@@ -23,6 +24,7 @@ def get_goouts_by_filtering(region: str, cat1: str, cat2: str):
 
 
 @bp.route('', methods=['POST'])
+@cross_origin()
 def get_goout():
     lat = request.json['lat']
     lng = request.json['lng']
@@ -38,6 +40,7 @@ def get_goout():
 
 
 @bp.route("/<int:goout_id>", methods=['GET'])
+@cross_origin()
 def get_goout_detail(goout_id: int):
     res = GoOut.query.filter(GoOut.id == goout_id).first()
     res = json.dumps(res, cls=AlchemyEncoder, ensure_ascii=False, indent=4)
@@ -46,6 +49,7 @@ def get_goout_detail(goout_id: int):
 
 
 @bp.route("/reviews/<int:goout_id>", methods=['GET'])
+@cross_origin()
 def get_goout_review(goout_id: int):
     goout = GoOut.query.filter(GoOut.id == goout_id).first()
     res = GoOutReviews.query.filter(GoOutReviews.store_name == goout.name).all()

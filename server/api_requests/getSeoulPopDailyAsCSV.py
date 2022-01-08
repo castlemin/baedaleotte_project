@@ -66,7 +66,12 @@ def saveSeoulPopDailyAsCSV():
         if d == 6:
             with open("./dataanalysis/data/자치구단위 서울생활인구 일별 집계표.csv", "w", encoding="euc-kr") as f:
                 w = csv.writer(f)
-                w.writerow(fields)
+                for i in range(len(fields)):
+                    if i == len(fields)-1:
+                        f.write("\"" + fields[i] + "\"")
+                    else:
+                        f.write("\"" + fields[i] + "\",")
+                w.writerow("")
         with open("./dataanalysis/data/자치구단위 서울생활인구 일별 집계표.csv", "a", encoding="euc-kr") as f:
             w = csv.writer(f)
             for dic in json_data:

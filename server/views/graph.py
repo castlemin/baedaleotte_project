@@ -3,6 +3,7 @@ import imp
 import importlib.util
 # send_file은 flask에서 파일을 전송하기 위한 모듈입니다
 from flask import Blueprint, session, request, Response, jsonify, send_file
+from flask_cors import cross_origin
 from apscheduler.schedulers.background import BackgroundScheduler
 from api_requests.geocoding import getKoreanJCG
 import pandas as pd
@@ -26,7 +27,7 @@ sched.add_job(import_schedule, trigger='cron', hour=0, minute=10)
 
 # 코로나 위험도 합계 점수 및 상세 점수들을 저장해 놓은 csv 파일을 불러옴
 점수df = pd.read_csv('./dataanalysis/data/risk_data.csv', index_col='Unnamed: 0')
-
+print(점수df)
 # 코로나 상세 점수를 json 형식으로 반환하기 전 dict로 변환하는 함수
 def df_dic(df, region):
     dic = {'stack' : df.loc[region]['rate'] + df.loc[region]['코로나신규'],
@@ -43,6 +44,7 @@ bp = Blueprint("graph", __name__, url_prefix="/data")
 
 
 @bp.route("/user_location", methods=['POST'])
+@cross_origin()
 def get_user_location():
     lat = request.json['lat']
     lng = request.json['lng']
@@ -57,39 +59,47 @@ def get_user_location():
 
 
 @bp.route('/vac')
+@cross_origin()
 def vac():
     return da.백신현황(da.vac_data)
 
 @bp.route('/seoul_risk_map_all')
+@cross_origin()
 def seoul_risk_map_all():
     return da.서울코로나위험도지도(점수df)
 
 @bp.route('/seoul_risk_map')
+@cross_origin()
 def seoul_risk_map():
     region = request.args['region']
     return da.서울코로나위험도지도(점수df, region)
 
 @bp.route('/risk_rank')
+@cross_origin()
 def risk_rank():
     region = request.args['region']
     return da.위험도순위(점수df, region)
 
 @bp.route('/coronic_all')
+@cross_origin()
 def coronic_all():
     return da.내지역확진자all(da.coronic_seoul,'서울')
 
 @bp.route('/coronic_gu')
+@cross_origin()
 def coronic_gu():
     region = request.args['region']
     return da.내지역확진자all(da.coronic_seoul, region)
 
 @bp.route('/risk_score')
+@cross_origin()
 def risk_score():
     region = request.args['region']
     score = str(점수df.loc[region]['합계'])
     return score
 
 @bp.route('/risk_score_detail')
+@cross_origin()
 def risk_score_detail():
     region = request.args['region']
     dic = df_dic(점수df, region)

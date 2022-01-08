@@ -22,7 +22,7 @@ class RestaurantInfo(db.Model):
 
 
 class Reviews(db.Model):
-    __tablename__ = "Reviews"
+    __tablename__ = "reviews"
     row_num = db.Column(db.BIGINT, nullable=False, primary_key=True)
     store_id = db.Column(db.BIGINT, db.ForeignKey("RestaurantInfo.restaurant_id", ondelete="CASCADE"))
     comment = db.Column(db.TEXT, nullable=True)

@@ -5,6 +5,8 @@
 ### jupyter note book ###
 *.ipynb
 templates/
+dataanalysis/img/
+dataanalysis/data/
 ### static data ###
 static/
 *.json

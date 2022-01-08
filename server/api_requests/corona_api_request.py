@@ -44,8 +44,3 @@ def addLatestSeoulCoronaPatients():
 
 
 # addLatestSeoulCoronaPatients()
-# sched = BackgroundScheduler()
-# sched.start()
-
-# # sched.add_job(addLatestSeoulCoronaPatients, "interval", second=5, id="test")
-# sched.add_job(addLatestSeoulCoronaPatients, "cron", hour="00", minute="32", second="40", id="test_10")
