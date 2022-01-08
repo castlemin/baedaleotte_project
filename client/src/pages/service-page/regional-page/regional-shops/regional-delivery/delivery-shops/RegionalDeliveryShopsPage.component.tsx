@@ -21,6 +21,7 @@ import {
   ShopContainer,
   SortButton,
   DeliveryShopListTitle,
+  ToMainPageButton,
 } from './RegionalDeliveryShopsPage.styles';
 import { FOOD_DELIVERY_LIST_URL } from '../../../../../../assets/data/requestUrls';
 import { useNavigate } from 'react-router-dom';
@@ -119,6 +120,10 @@ const RegionalDeliveryShopsPage = () => {
     console.log(selectShop);
   };
 
+  const handleToMain = () => {
+    navigate('/');
+  };
+
   const handleToggleDetail = () => {
     setIsDetailOpen((prev) => !prev);
   };
@@ -149,6 +154,9 @@ const RegionalDeliveryShopsPage = () => {
             내 주변 외식 음식점 추천 리스트
           </DeliveryShopListTitle>
           <HeadingContainer>
+            <ToMainPageButton onClick={handleToMain}>
+              메인 화면
+            </ToMainPageButton>
             <CategoryIndicator>
               선택하신{' '}
               {chosenDeliveryCategories.map((item) => (

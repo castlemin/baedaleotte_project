@@ -16,6 +16,33 @@ export const HeadingContainer = styled.div`
   align-items: center;
 `;
 
+export const ToMainPageButton = styled.button`
+  background-color: white;
+  width: 80px;
+  height: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 1px 2px 1px 1px darkgrey;
+  box-sizing: border-box;
+  padding: 0;
+  display: absolute;
+  margin: 10px 8px 0 0;
+  + button {
+    margin: 10px 120px 0 0;
+  }
+
+  :hover {
+    background-color: #88aed0;
+    transition: ease-in 185ms;
+    box-shadow: 1px 2px 1px 1px grey;
+    border-color: wheat;
+    color: white;
+  }
+`;
+
 export const CategoryIndicator = styled.h2``;
 
 export const CategoryNameContainer = styled.span``;
