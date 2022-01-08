@@ -5,6 +5,8 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sentry_sdk.integrations.flask import FlaskIntegration
+from werkzeug.exceptions import BadRequestKeyError, Forbidden, MethodNotAllowed, RequestTimeout, NotAcceptable, \
+    Conflict, InternalServerError, BadGateway
 
 import config
 from static.projectKeys.personalKey import db_setting, secretKey, sentry_dsn
