@@ -27,6 +27,7 @@ import {
   SortButton,
   SortButtonContainer,
   ShopContainer,
+  EatoutShopListTitle,
 } from './RegionalEatOutShopsPage.styles';
 import { EAT_OUT_LIST_URL } from '../../../../../../assets/data/requestUrls';
 
@@ -128,6 +129,9 @@ const RegionalEatOutShopsPage: React.FC = () => {
         <Loading />
       ) : (
         <>
+          <EatoutShopListTitle>
+            내 주변 외식 음식점 추천 리스트
+          </EatoutShopListTitle>
           <HeadingContainer
             style={{
               display: 'flex',

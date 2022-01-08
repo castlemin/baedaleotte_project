@@ -5,6 +5,11 @@ interface Props {
   layout?: number;
 }
 
+export const DeliveryShopListTitle = styled.h1`
+  text-align: center;
+  margin: 10px 0 20px 0px;
+`;
+
 export const HeadingContainer = styled.div`
   display: flex;
   justify-content: space-evenly;

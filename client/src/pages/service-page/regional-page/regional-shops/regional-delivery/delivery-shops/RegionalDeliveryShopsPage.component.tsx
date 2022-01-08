@@ -23,6 +23,7 @@ import {
   SortButtonContainer,
   ShopContainer,
   SortButton,
+  DeliveryShopListTitle,
 } from './RegionalDeliveryShopsPage.styles';
 import { FOOD_DELIVERY_LIST_URL } from '../../../../../../assets/data/requestUrls';
 import { useNavigate } from 'react-router-dom';
@@ -132,6 +133,9 @@ const RegionalDeliveryShopsPage = () => {
 
   return (
     <>
+      <DeliveryShopListTitle>
+        내 주변 외식 음식점 추천 리스트
+      </DeliveryShopListTitle>
       <HeadingContainer>
         <CategoryIndicator>
           선택하신{' '}

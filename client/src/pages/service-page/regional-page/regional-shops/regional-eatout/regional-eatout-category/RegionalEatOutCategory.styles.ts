@@ -55,6 +55,7 @@ export const PageTitle = styled.h2`
 export const SelectedOptionsTitle = styled.h3`
   font-size: 1.5rem;
   margin-bottom: 0;
+  text-align: center;
 `;
 
 export const SelectedContainer = styled.div`
