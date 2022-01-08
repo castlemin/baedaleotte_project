@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   HeaderContainer,
-  RegionalLink,
-  PreferenceLink,
-  TeamLink,
+  ToMainIntro,
+  ToServiceIntro,
+  ToTeamIntro,
   LogoContainer,
   LinkContainer,
 } from './Header.styles';
@@ -27,27 +27,27 @@ const Header: React.FC<Props> = ({ serviceStatic, viewHeight }) => {
         </LogoContainer>
       </div>
       <LinkContainer>
-        <RegionalLink
+        <ToMainIntro
           onClick={() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
           메인
-        </RegionalLink>
-        <PreferenceLink
+        </ToMainIntro>
+        <ToServiceIntro
           onClick={() => {
             window.scrollTo({ top: viewHeight, behavior: 'smooth' });
           }}
         >
           서비스 소개
-        </PreferenceLink>
-        <TeamLink
+        </ToServiceIntro>
+        <ToTeamIntro
           onClick={() => {
             window.scrollTo({ top: viewHeight * 2, behavior: 'smooth' });
           }}
         >
           팀 소개
-        </TeamLink>
+        </ToTeamIntro>
       </LinkContainer>
     </HeaderContainer>
   );
