@@ -76,6 +76,7 @@ def preprocess_restaurants_list(restaurants):
 
 
 @bp.route("/near", methods=["POST"])
+@cross_origin()
 def getNearRestaurants():
     with session.no_autoflush:
         lat = request.json["lat"]

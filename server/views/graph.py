@@ -44,19 +44,19 @@ def df_dic(df, region):
 bp = Blueprint("graph", __name__, url_prefix="/data")
 
 
-# @bp.route("/user_location", methods=['POST'])
-# @cross_origin()
-# def get_user_location():
-#     lat = request.json['lat']
-#     lng = request.json['lng']
+@bp.route("/user_location", methods=['POST'])
+@cross_origin()
+def get_user_location():
+    lat = request.json['lat']
+    lng = request.json['lng']
 
-#     region = getKoreanJCG(lat, lng)
+    region = getKoreanJCG(lat, lng)
 
-#     res = {
-#         "region": region
-#     }
+    res = {
+        "region": region
+    }
 
-#     return jsonify(res)
+    return jsonify(res)
 
 
 @bp.route('/vac')
