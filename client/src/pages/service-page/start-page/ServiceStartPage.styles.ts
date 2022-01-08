@@ -39,11 +39,37 @@ export const RequestDescContainer = styled.p`
 
 export const ApprovalContainer = styled.form`
   margin: 10px auto;
+  border-radius: 5px;
+  background-color: lightgrey;
+  width: 215px;
+  height: 30px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+
+  &:active {
+    background-color: grey;
+  }
 `;
 
-export const ApproveLabel = styled.label``;
+export const ApproveLabel = styled.label`
+  padding-top: 4px;
+  height: 100%;
+  text-align: center;
+  padding; 5px;
+  cursor: pointer;
+  line-height: 20px;
+`;
 
-export const ApprovalCheck = styled.input``;
+export const ApprovalCheck = styled.input`
+  display: none;
+  background-color: grey;
+
+  &:checked {
+    display: inline;
+    background-color: lightgrey;
+  }
+`;
 
 export const ToServiceBtnContainer = styled.div`
   display: flex;

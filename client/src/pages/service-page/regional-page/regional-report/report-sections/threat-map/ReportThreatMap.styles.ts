@@ -34,6 +34,7 @@ export const AddOnButton = styled.button`
 export const GraphContainer = styled.div`
   text-align: center;
   border-radius: 6px;
+  background-color: white;
   box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
   height: -moz-fit-content;
   width: 34.5rem;
@@ -45,12 +46,29 @@ export const GraphContainer = styled.div`
 
 export const AddOn = styled.div<Props>`
   display: none;
-  height: fit-content;
+  background-color: white;
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 30rem;
+  z-index: 10;
+  position: fixed;
+  top: 10vh;
+  left: calc(50% - 15rem);
   ${({ addOnOpen }: Props) =>
     addOnOpen &&
     css`
       display: block;
     `}
+`;
+
+export const AddOnTitle = styled.h2`
+  font-size: 20px;
+`;
+
+export const AddOnDesc = styled.p`
+  word-break: keep-all;
 `;
 
 export const ReportTitle = styled.h1`

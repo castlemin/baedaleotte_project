@@ -1,16 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { customAnimation } from '../../../../components/UI/global/css.styles';
 
 export const ReportContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  background-image: linear-gradient(
-    rgba(244, 255, 252, 0),
-    rgb(238, 253, 250),
-    rgb(235, 252, 248)
-  );
 `;
 
 export const ReportTitle = styled.h1`
@@ -23,6 +17,36 @@ export const ReportSubtitle = styled.h2`
   font-size: 24px;
   text-align: center;
   word-break: all;
+`;
+
+export const ThreatMapReportSection = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to bottom, #ffefba, #ffffff);
+`;
+
+export const ThreatRankReportSection = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to top, #ffefba, #ffffff);
+`;
+
+export const VaccineReportSection = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to bottom, #ffefba, #ffffff);
+`;
+
+export const ConfirmedAllReportSection = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to top, #ffefba, #ffffff);
+`;
+
+export const ConfirmedGuReportSection = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to bottom, #ffefba, #ffffff);
 `;
 
 export const ButtonWrapper = styled.div`

@@ -43,3 +43,6 @@ export const RISK_SCORE_DETAIL_URL =
 
 export const GRAPH_URL =
   'http://elice-kdt-3rd-team-04.koreacentral.cloudapp.azure.com/data/';
+
+export const CATEGORY_TOP_5 =
+  'http://elice-kdt-3rd-team-04.koreacentral.cloudapp.azure.com/data/categorytop5';
