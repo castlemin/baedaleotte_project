@@ -6,19 +6,20 @@ interface Props {
 }
 
 const linkCSS = css`
-  background-color: #f35434;
+  background-color: #fd7555;
   color: white;
   text-decoration: none;
   font-size: 16px;
   border-radius: 4px;
   padding: 12px 20px;
-  margin: 0 12px 0 0;
-  box-shadow: 1px 2px 1px 1px crimson;
   border: none;
   cursor: pointer;
 
   &:hover {
-    background-color: #f35404;
+    transition: ease-in-out 200ms;
+    padding: 11px 18px;
+    font-weight: bold;
+    font-size: 17px;
   }
 `;
 

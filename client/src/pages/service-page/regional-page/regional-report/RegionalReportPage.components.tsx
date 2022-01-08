@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react';
+import Plot from 'react-plotly.js';
 import axios from 'axios';
 import Header from '../../../../components/UI/header/Header.component';
 import { useNavigate } from 'react-router-dom';
@@ -19,12 +20,15 @@ import {
   NextButton,
   ReportTitle,
   ReportContainer,
+  ReportSection,
   ButtonWrapper,
   ThreatMapReportSection,
   ThreatRankReportSection,
   VaccineReportSection,
   ConfirmedAllReportSection,
   ConfirmedGuReportSection,
+  GraphContainer,
+  ReportDesc,
 } from './RegionalReportPage.styles';
 import BackDrop from '../../../../components/UI/BackDrop/BackDrop.component';
 import { RiskScore } from '../../../../assets/data/RiskScore';
@@ -103,56 +107,53 @@ const RegionalReportPage: React.FC = () => {
       const confirmedGuData = await confirmedGuRes.data;
       const riskScoreRes = await axios.get(`${RISK_SCORE_URL}${userDistrict}`);
       const riskScoreData = await riskScoreRes.data;
-      setGraphs({
-        tm: threatMapData,
-        tr: threatRankData,
-        vc: vaccineData,
-        ct: confirmedTotalData,
-        cg: confirmedGuData,
-      });
+      setGraphs([
+        threatMapData,
+        threatRankData,
+        vaccineData,
+        confirmedTotalData,
+        confirmedGuData,
+      ]);
       setRiskScore(riskScoreData);
     };
     getGraph();
   }, []);
 
-  console.log(graphs);
-
   return (
-    <>
-      <ReportContainer>
-        <Suspense fallback={<Loading />}>
-          <ThreatMapReportSection>
-            <ReportTitle>내 지역 코로나 리포트</ReportTitle>
-            {/* <ReportThreatMap /> */}
-          </ThreatMapReportSection>
-          <ThreatRankReportSection>
-            {/* <ReportThreatRank /> */}
-          </ThreatRankReportSection>
-          <VaccineReportSection>
-            {/* <ReportVaccineGraph /> */}
-          </VaccineReportSection>
-          <ConfirmedAllReportSection>
-            {/* <ReportTotalConfirmed /> */}
-          </ConfirmedAllReportSection>
-          <ConfirmedGuReportSection>
-            {/* <ReportConfirmedByGu /> */}
-          </ConfirmedGuReportSection>
-        </Suspense>
-        <ButtonWrapper>
-          <NextButton id='toDelivery' onClick={handleToCategory}>
-            내 지역 배달 음식점 찾으러 가기
-          </NextButton>
-          <>
+    <ReportContainer>
+      {!graphs ? (
+        <Loading />
+      ) : (
+        <>
+          <Suspense fallback={<Loading />}>
+            <ReportTitle style={{ display: 'absolute' }}>
+              내 지역 코로나 리포트
+            </ReportTitle>
+            {graphs.map((graph: any, idx: string) => (
+              <ReportSection key={idx} id={idx}>
+                <GraphContainer>
+                  <Plot data={graph.data} layout={graph.layout} />
+                </GraphContainer>
+                <ReportDesc>설명글</ReportDesc>
+              </ReportSection>
+            ))}
+          </Suspense>
+          <ButtonWrapper>
             <NextButton id='toDelivery' onClick={handleToCategory}>
               내 지역 배달 음식점 찾으러 가기
             </NextButton>
-            <NextButton id='toEatOut' onClick={handleToCategory}>
-              내 근처 외식점 찾으러 가기
-            </NextButton>
-          </>
-        </ButtonWrapper>
-      </ReportContainer>
-    </>
+            <>
+              <NextButton id='toDelivery' onClick={handleToCategory}>
+                내 지역 배달 음식점 찾으러 가기
+              </NextButton>
+              <NextButton id='toEatOut' onClick={handleToCategory}>
+                내 근처 외식점 찾으러 가기
+              </NextButton>
+            </>
+          </ButtonWrapper>
+        </>
+      )}
+    </ReportContainer>
   );
 };
 
