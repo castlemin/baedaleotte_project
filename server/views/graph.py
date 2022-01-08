@@ -34,6 +34,7 @@ def df_dic(df, region):
             'population' : df.loc[region]['생활인구'],
             'family' : df.loc[region]['평균가구'],
             'rate' : round((df.loc[region]['rate'] / 0.3), 1),
+            'rank' : list(점수df['합계'].sort_values(ascending = False).index).index(region)+1,
     }
     return dic
 
