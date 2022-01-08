@@ -12,6 +12,11 @@ import {
   ReportTitle,
   ReportContainer,
   ButtonWrapper,
+  ThreatMapReportSection,
+  ThreatRankReportSection,
+  VaccineReportSection,
+  ConfirmedAllReportSection,
+  ConfirmedGuReportSection,
 } from './RegionalReportPage.styles';
 import BackDrop from '../../../../components/UI/BackDrop/BackDrop.component';
 import { RiskScore } from '../../../../assets/data/RiskScore';
@@ -73,14 +78,24 @@ const RegionalReportPage: React.FC = () => {
 
   return (
     <>
-      <ReportTitle>내 지역 코로나 리포트</ReportTitle>
       <ReportContainer>
         <Suspense fallback={<Loading />}>
-          <ReportThreatMap />
-          <ReportThreatRank />
-          <ReportVaccineGraph />
-          <ReportTotalConfirmed />
-          <ReportConfirmedByGu />
+          <ThreatMapReportSection>
+            <ReportTitle>내 지역 코로나 리포트</ReportTitle>
+            <ReportThreatMap />
+          </ThreatMapReportSection>
+          <ThreatRankReportSection>
+            <ReportThreatRank />
+          </ThreatRankReportSection>
+          <VaccineReportSection>
+            <ReportVaccineGraph />
+          </VaccineReportSection>
+          <ConfirmedAllReportSection>
+            <ReportTotalConfirmed />
+          </ConfirmedAllReportSection>
+          <ConfirmedGuReportSection>
+            <ReportConfirmedByGu />
+          </ConfirmedGuReportSection>
         </Suspense>
         <ButtonWrapper>
           {riskScore >= 60 ? (

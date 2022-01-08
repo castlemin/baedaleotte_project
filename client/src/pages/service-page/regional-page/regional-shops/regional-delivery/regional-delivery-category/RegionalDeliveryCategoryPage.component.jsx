@@ -22,7 +22,7 @@ import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.componen
 import { NextButton } from './RegionalDeliveryCategory.styles';
 import { DELIVERY_IMAGES } from '../../../../../../assets/data/imgMapper';
 import { selectedDeliveryCategory } from '../../../../../../store/store';
-import { CategoryTop5 } from '../../../../../../assets/data/CategoryTop5';
+import { CategoryTop5 } from '../../../../../../assets/data/Graphs/CategoryTop5';
 
 const RegionalDeliveryCategoryPage = () => {
   const navigate = useNavigate();

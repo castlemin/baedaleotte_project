@@ -29,7 +29,8 @@ import { useNavigate } from 'react-router-dom';
 
 const RegionalDeliveryShopsPage = () => {
   const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
-  const params = userLocation;
+  const params = { lat: 37.48441, lng: 127.087437 };
+
   const navigate = useNavigate();
 
   const [selectShop, setSelectDeliveryShop] = useState('');
@@ -42,9 +43,11 @@ const RegionalDeliveryShopsPage = () => {
   const [error, setError] = useState<any>();
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
+
+  console.log(params);
 
   const cardHeightRef = useRef<any>();
-
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
@@ -56,9 +59,8 @@ const RegionalDeliveryShopsPage = () => {
             item.categories.includes(chosenDeliveryCategories[1])
         );
         setDeliveryShopList(filteredData);
-      } catch (error) {
+      } catch (error: any) {
         console.log(error);
-        setError(error);
       }
     };
     fetchRestaurants();
@@ -130,71 +132,67 @@ const RegionalDeliveryShopsPage = () => {
 
   return (
     <>
-      {!deliveryShopList ? (
-        <Loading />
-      ) : (
-        <>
-          <HeadingContainer>
-            <CategoryIndicator>
-              선택하신{' '}
-              {chosenDeliveryCategories.map((item) => (
-                <CategoryNameContainer>[{item}]</CategoryNameContainer>
-              ))}
-              에 대한 추천 결과입니다.
-            </CategoryIndicator>
-            <SortButtonContainer>
-              <SortButton id='time' onClick={handleClickSort}>
-                빠른배달순
-              </SortButton>
-              <SortButton id='review' onClick={handleClickSort}>
-                높은평점순
-              </SortButton>
-            </SortButtonContainer>
-          </HeadingContainer>
-          <ShopListContainer layout={deliveryShopList.length}>
-            {isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
-            {isDetailOpen && (
-              <RegionalShopDetail
-                shopData={deliveryShopList}
-                selected={selectShop}
-                onCancel={handleToggleDetail}
-                viewHeight={detailViewHeight}
-              />
-            )}
-            {limitNumOfItems(deliveryShopList).map((item, idx) => (
-              <ShopContainer
-                key={idx}
-                onClick={handleToDeliveryDetail}
-                id={item.restaurant_id}
-                ref={cardHeightRef}
-              >
-                <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
-                <ShopTitleContainer id={item.restaurant_id}>
-                  {item.name}
-                </ShopTitleContainer>
-                <ShopDescContainer id={item.restaurant_id}>
-                  <b>카테고리</b>:{' '}
-                  {item.categories.map((cat: string[]) => (
-                    <li id={item.restaurant_id}>{cat}</li>
-                  ))}
-                  <b>영업시간</b>: {item.begin.slice(0, -3)}시 -{' '}
-                  {item.end.slice(0, -3)}시
-                  <br />
-                  <b>평균평점</b>:{' '}
-                  {item.review_avg === 0 ? '평점 없음' : `${item.review_avg}점`}
-                  <br />
-                  <b>배달 소요시간</b>: {item.estimated_delivery_time}
-                </ShopDescContainer>
-              </ShopContainer>
-            ))}
-            <div ref={setTarget}>
-              {isLoaded && deliveryShopList.length >= lastIdx ? (
-                <div>loading...</div>
-              ) : null}
-            </div>
-          </ShopListContainer>
-        </>
-      )}
+      <HeadingContainer>
+        <CategoryIndicator>
+          선택하신{' '}
+          {chosenDeliveryCategories.map((item) => (
+            <CategoryNameContainer>[{item}]</CategoryNameContainer>
+          ))}
+          에 대한 추천 결과입니다.
+        </CategoryIndicator>
+        <SortButtonContainer>
+          <SortButton id='time' onClick={handleClickSort}>
+            빠른배달순
+          </SortButton>
+          <SortButton id='review' onClick={handleClickSort}>
+            높은평점순
+          </SortButton>
+        </SortButtonContainer>
+      </HeadingContainer>
+      <ShopListContainer layout={deliveryShopList.length}>
+        {isDetailOpen && <BackDrop onCancel={handleToggleDetail} />}
+        {isDetailOpen && (
+          <RegionalShopDetail
+            shopData={deliveryShopList}
+            selected={selectShop}
+            onCancel={handleToggleDetail}
+            viewHeight={detailViewHeight}
+          />
+        )}
+        <Suspense fallback={<Loading />}>
+          {limitNumOfItems(deliveryShopList).map((item, idx) => (
+            <ShopContainer
+              key={idx}
+              onClick={handleToDeliveryDetail}
+              id={item.restaurant_id}
+              ref={cardHeightRef}
+            >
+              <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
+              <ShopTitleContainer id={item.restaurant_id}>
+                {item.name}
+              </ShopTitleContainer>
+              <ShopDescContainer id={item.restaurant_id}>
+                <b>카테고리</b>:{' '}
+                {item.categories.map((cat: string[]) => (
+                  <li id={item.restaurant_id}>{cat}</li>
+                ))}
+                <b>영업시간</b>: {item.begin.slice(0, -3)}시 -{' '}
+                {item.end.slice(0, -3)}시
+                <br />
+                <b>평균평점</b>:{' '}
+                {item.review_avg === 0 ? '평점 없음' : `${item.review_avg}점`}
+                <br />
+                <b>배달 소요시간</b>: {item.estimated_delivery_time}
+              </ShopDescContainer>
+            </ShopContainer>
+          ))}
+        </Suspense>
+        <div ref={setTarget}>
+          {isLoaded && deliveryShopList.length >= lastIdx ? (
+            <div>loading...</div>
+          ) : null}
+        </div>
+      </ShopListContainer>
     </>
   );
 };

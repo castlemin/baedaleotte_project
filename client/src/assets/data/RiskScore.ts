@@ -11,6 +11,7 @@ export const RiskScore = () => {
     const fetchScore = async () => {
       const response = await axios.get(`${RISK_SCORE_URL}${userDistrict}`);
       setScore(response.data);
+      console.log(userDistrict);
     };
     fetchScore();
   }, []);

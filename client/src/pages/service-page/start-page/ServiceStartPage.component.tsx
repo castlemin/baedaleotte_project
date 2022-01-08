@@ -66,9 +66,7 @@ const ServiceStartPage: React.FC = () => {
 
   const handleClick = (e: any) => {
     getLocation();
-    e.target.name === 'toRegional'
-      ? navigate('regional/report')
-      : navigate('preference');
+    navigate('regional/report');
   };
 
   return (
@@ -93,7 +91,7 @@ const ServiceStartPage: React.FC = () => {
           <ApproveLabel htmlFor='approval'>
             <ApprovalCheck
               type='checkbox'
-              name='approval'
+              id='approval'
               defaultChecked={checked}
             />
             위치 정보 제공을 동의합니다.
@@ -101,7 +99,7 @@ const ServiceStartPage: React.FC = () => {
         </ApprovalContainer>
         <ToServiceBtnContainer>
           <ToServiceBtn
-            name='toRegional'
+            id='toRegional'
             onClick={handleClick}
             disabled={checked === false}
           >
