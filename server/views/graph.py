@@ -73,7 +73,10 @@ def seoul_risk_map_all():
 @cross_origin()
 def seoul_risk_map():
     region = request.args['region']
-    return da.서울코로나위험도지도(점수df, region)
+    if region != '':
+        return da.서울코로나위험도지도(점수df, region)
+    else:
+        return da.서울코로나위험도지도(점수df)
 
 @bp.route('/risk_rank')
 @cross_origin()
