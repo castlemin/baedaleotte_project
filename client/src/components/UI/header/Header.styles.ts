@@ -5,6 +5,10 @@ interface Props {
   serviceStatic?: boolean;
 }
 
+interface Props {
+  serviceStatic?: boolean;
+}
+
 const linkCSS = css`
   background-color: #fd7555;
   color: white;

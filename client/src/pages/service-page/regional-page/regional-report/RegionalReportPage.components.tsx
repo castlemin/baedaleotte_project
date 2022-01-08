@@ -32,6 +32,7 @@ import {
 } from './RegionalReportPage.styles';
 import BackDrop from '../../../../components/UI/BackDrop/BackDrop.component';
 import { RiskScore } from '../../../../assets/data/RiskScore';
+import { ReportThreatMap } from './report-sections/threat-map/ReportThreatMap.component';
 
 /* 리포트에서 사용하는 그래프입니다. */
 // const ReportThreatMap = React.lazy(() =>
@@ -78,9 +79,13 @@ const RegionalReportPage: React.FC = () => {
 
   const params = { lat: 37.5384, lng: 126.9654 };
 
+  const cors = axios.create({
+    headers: { 'Access-Control-Allow-Origin': '*' },
+  });
+
   useEffect(() => {
     const sendUserLocation = async () => {
-      const sendCoords = await axios.post(USER_LOCATION_URL, params);
+      const sendCoords = await cors.post(USER_LOCATION_URL, params);
       const targetDistrict = sendCoords.data.region;
       setUserDistrict(targetDistrict);
     };
@@ -89,23 +94,23 @@ const RegionalReportPage: React.FC = () => {
 
   useEffect(() => {
     const getGraph = async () => {
-      const threatMapRes = await axios.get(
+      const threatMapRes = await cors.get(
         `${SEOUL_RISK_MAP_URL}${userDistrict}`
       );
       const threatMapData = await threatMapRes.data;
-      const threatRankRes = await axios.get(
+      const threatRankRes = await cors.get(
         `${RISK_RANK_GRAPH_URL}${userDistrict}`
       );
       const threatRankData = await threatRankRes.data;
-      const vaccineRes = await axios.get(VAC_GRAPH_URL);
+      const vaccineRes = await cors.get(VAC_GRAPH_URL);
       const vaccineData = await vaccineRes.data;
-      const confirmedTotalRes = await axios.get(CONFIRMED_ALL_URL);
+      const confirmedTotalRes = await cors.get(CONFIRMED_ALL_URL);
       const confirmedTotalData = await confirmedTotalRes.data;
-      const confirmedGuRes = await axios.get(
+      const confirmedGuRes = await cors.get(
         `${CONFIRMED_BY_GU_URL}${userDistrict}`
       );
       const confirmedGuData = await confirmedGuRes.data;
-      const riskScoreRes = await axios.get(`${RISK_SCORE_URL}${userDistrict}`);
+      const riskScoreRes = await cors.get(`${RISK_SCORE_URL}${userDistrict}`);
       const riskScoreData = await riskScoreRes.data;
       setGraphs([
         threatMapData,
@@ -133,8 +138,13 @@ const RegionalReportPage: React.FC = () => {
               <ReportSection key={idx} id={idx}>
                 <GraphContainer>
                   <Plot data={graph.data} layout={graph.layout} />
+<<<<<<< HEAD
                 </GraphContainer>
                 <ReportDesc>설명글</ReportDesc>
+=======
+                  <ReportThreatMap />
+                </GraphContainer>
+>>>>>>> feature/Frontend#22
               </ReportSection>
             ))}
           </Suspense>
