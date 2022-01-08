@@ -27,6 +27,7 @@ import {
   SortButton,
   SortButtonContainer,
   ShopContainer,
+  EatoutShopListTitle,
 } from './RegionalEatOutShopsPage.styles';
 import { EAT_OUT_LIST_URL } from '../../../../../../assets/data/requestUrls';
 
@@ -49,7 +50,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
     () => import('../eatout-shops-detail/RegionalEatOutShopDetail.component')
   );
 
-  const params = userCoords;
+  const params = { lat: 37.48441, lng: 127.087437 };
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -128,6 +129,9 @@ const RegionalEatOutShopsPage: React.FC = () => {
         <Loading />
       ) : (
         <>
+          <EatoutShopListTitle>
+            내 주변 외식 음식점 추천 리스트
+          </EatoutShopListTitle>
           <HeadingContainer
             style={{
               display: 'flex',

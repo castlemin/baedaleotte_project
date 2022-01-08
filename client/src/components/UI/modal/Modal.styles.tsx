@@ -7,7 +7,7 @@ export const ModalContainer = styled.div`
   padding: 1rem;
   text-align: center;
   width: 30rem;
-  z-index: 10;
+  z-index: 11;
   position: fixed;
   top: 25vh;
   left: calc(50% - 15rem);

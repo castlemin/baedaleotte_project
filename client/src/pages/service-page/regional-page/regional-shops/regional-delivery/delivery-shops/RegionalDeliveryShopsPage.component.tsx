@@ -1,15 +1,12 @@
 import axios from 'axios';
-import React, { Suspense, useEffect, useState, useRef } from 'react';
+import { Suspense, useEffect, useState, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
 /* import axios from 'axios'; */
 import Loading from '../../../../../../components/UI/loading/Loading.component';
 import RegionalShopDetail from '../delivery-shops-detail/RegionalDeliveryShopDetail.component';
-import {
-  selectedDeliveryCategory,
-  userLocation,
-} from '../../../../../../store/store';
+import { selectedDeliveryCategory } from '../../../../../../store/store';
 // import useLoadShops from '../../../../hooks/useLoadShops.component';
 
 import {
@@ -23,13 +20,17 @@ import {
   SortButtonContainer,
   ShopContainer,
   SortButton,
+  DeliveryShopListTitle,
+  ToMainPageButton,
 } from './RegionalDeliveryShopsPage.styles';
 import { FOOD_DELIVERY_LIST_URL } from '../../../../../../assets/data/requestUrls';
 import { useNavigate } from 'react-router-dom';
+import { formatTime } from '../../../../../../functions/formatter';
 
 const RegionalDeliveryShopsPage = () => {
   const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
-  const params = userLocation;
+  const params = { lat: 37.48441, lng: 127.087437 };
+
   const navigate = useNavigate();
 
   const [selectShop, setSelectDeliveryShop] = useState('');
@@ -42,31 +43,42 @@ const RegionalDeliveryShopsPage = () => {
   const [error, setError] = useState<any>();
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
+
+  const cors = axios.create({
+    headers: { 'Access-Control-Allow-Origin': '*' },
+  });
 
   const cardHeightRef = useRef<any>();
-
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
-        const res = await axios.post(FOOD_DELIVERY_LIST_URL, params);
+        const res = await cors.post(
+          'http://elice-kdt-3rd-team-04.koreacentral.cloudapp.azure.com/restaurants/near',
+          {
+            lat: 37.48441,
+            lng: 127.087437,
+          }
+        );
         const data = await res.data;
+
         const filteredData = await data.filter(
           (item: any) =>
             item.categories.includes(chosenDeliveryCategories[0]) ||
             item.categories.includes(chosenDeliveryCategories[1])
         );
         setDeliveryShopList(filteredData);
-      } catch (error) {
+      } catch (error: any) {
         console.log(error);
-        setError(error);
       }
     };
     fetchRestaurants();
   }, []);
 
-  if (error === '500') {
+  if (error === 500) {
     navigate('/500-error');
   }
+  console.log(deliveryShopList);
 
   const lastIdx = currentPage * postPerPage;
 
@@ -80,13 +92,13 @@ const RegionalDeliveryShopsPage = () => {
     setIsLoaded(true);
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setCurrentPage((prev) => prev + 1);
+    setIsLoaded(false);
   };
 
   const onIntersect = async ([entry]: any, observer: any): Promise<any> => {
     if (entry.isIntersecting && !isLoaded) {
       observer.unobserve(entry.target);
       await getMoreItem();
-      setIsLoaded(false);
       observer.observe(entry.target);
     }
   };
@@ -106,6 +118,10 @@ const RegionalDeliveryShopsPage = () => {
     setSelectDeliveryShop(event.target.id);
     handleToggleDetail();
     console.log(selectShop);
+  };
+
+  const handleToMain = () => {
+    navigate('/');
   };
 
   const handleToggleDetail = () => {
@@ -130,11 +146,17 @@ const RegionalDeliveryShopsPage = () => {
 
   return (
     <>
-      {!deliveryShopList ? (
+      {!deliveryShopList.length ? (
         <Loading />
       ) : (
         <>
+          <DeliveryShopListTitle>
+            내 주변 외식 음식점 추천 리스트
+          </DeliveryShopListTitle>
           <HeadingContainer>
+            <ToMainPageButton onClick={handleToMain}>
+              메인 화면
+            </ToMainPageButton>
             <CategoryIndicator>
               선택하신{' '}
               {chosenDeliveryCategories.map((item) => (
@@ -161,32 +183,38 @@ const RegionalDeliveryShopsPage = () => {
                 viewHeight={detailViewHeight}
               />
             )}
-            {limitNumOfItems(deliveryShopList).map((item, idx) => (
-              <ShopContainer
-                key={idx}
-                onClick={handleToDeliveryDetail}
-                id={item.restaurant_id}
-                ref={cardHeightRef}
-              >
-                <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
-                <ShopTitleContainer id={item.restaurant_id}>
-                  {item.name}
-                </ShopTitleContainer>
-                <ShopDescContainer id={item.restaurant_id}>
-                  <b>카테고리</b>:{' '}
-                  {item.categories.map((cat: string[]) => (
-                    <li id={item.restaurant_id}>{cat}</li>
-                  ))}
-                  <b>영업시간</b>: {item.begin.slice(0, -3)}시 -{' '}
-                  {item.end.slice(0, -3)}시
-                  <br />
-                  <b>평균평점</b>:{' '}
-                  {item.review_avg === 0 ? '평점 없음' : `${item.review_avg}점`}
-                  <br />
-                  <b>배달 소요시간</b>: {item.estimated_delivery_time}
-                </ShopDescContainer>
-              </ShopContainer>
-            ))}
+            <Suspense fallback={<Loading />}>
+              {limitNumOfItems(deliveryShopList).map((item, idx) => (
+                <ShopContainer
+                  key={idx}
+                  onClick={handleToDeliveryDetail}
+                  id={item.restaurant_id}
+                  ref={cardHeightRef}
+                >
+                  <ShopImgContainer
+                    id={item.restaurant_id}
+                    url={item.logo_url}
+                  />
+                  <ShopTitleContainer id={item.restaurant_id}>
+                    {item.name}
+                  </ShopTitleContainer>
+                  <ShopDescContainer id={item.restaurant_id}>
+                    <b>카테고리</b>:{' '}
+                    {item.categories.map((cat: string[]) => (
+                      <li id={item.restaurant_id}>{cat}</li>
+                    ))}
+                    <b>영업시간</b>: {formatTime(item.begin, item.end)}시
+                    <br />
+                    <b>평균평점</b>:{' '}
+                    {item.review_avg === 0
+                      ? '평점 없음'
+                      : `${item.review_avg}점`}
+                    <br />
+                    <b>배달 소요시간</b>: {item.estimated_delivery_time}
+                  </ShopDescContainer>
+                </ShopContainer>
+              ))}
+            </Suspense>
             <div ref={setTarget}>
               {isLoaded && deliveryShopList.length >= lastIdx ? (
                 <div>loading...</div>

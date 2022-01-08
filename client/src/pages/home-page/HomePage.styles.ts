@@ -99,6 +99,11 @@ export const PrefIntroContainer = styled.div`
 export const TeamIntroContainer = styled.div`
   display: flex;
   align-items: center;
+  background: linear-gradient(
+    rgb(235, 252, 248),
+    rgb(238, 253, 250),
+    rgba(244, 255, 252, 0)
+  );
   ${pageDefault}
 `;
 
@@ -106,7 +111,6 @@ export const TeamImage = styled.img`
   width: 100%;
 `;
 
-/* .showBtn {
-  opacity: 1;
-  transform: translateY(0);
-} */
+export const Notice = styled.p`
+  color: darkred;
+`;

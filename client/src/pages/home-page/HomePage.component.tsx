@@ -17,6 +17,7 @@ import {
   RegIntroContainer,
   TeamIntroContainer,
   TeamImage,
+  Notice,
 } from './HomePage.styles';
 
 const HomePage: React.FC = () => {
@@ -71,6 +72,9 @@ const HomePage: React.FC = () => {
             <DescContainer aniLevitate position={position}>
               배달어때?
             </DescContainer>
+            <Notice>
+              해당 서비스는 서울시에 거주하는/재류하는 사용자를 대상으로 합니다.
+            </Notice>
             <StartButton onClick={handleToService}>바로 시작하기!</StartButton>
           </TextWrapper>
         </ContentsContainer>

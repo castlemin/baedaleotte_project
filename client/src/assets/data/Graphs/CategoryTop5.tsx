@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { CATEGORY_TOP_5 } from '../requestUrls';
 
 export const CategoryTop5 = () => {
   const [topCategory, setTopCategory] = useState('');
-  const url = 'http://111.67.218.43:5000/data/categorytop5';
 
   useEffect(() => {
     const fetchTopCategory = async () => {
-      const response = await axios.get(url);
+      const response = await axios.get(CATEGORY_TOP_5);
       setTopCategory(response.data);
     };
     fetchTopCategory();

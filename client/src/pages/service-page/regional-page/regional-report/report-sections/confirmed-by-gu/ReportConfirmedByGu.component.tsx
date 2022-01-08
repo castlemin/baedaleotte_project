@@ -19,7 +19,14 @@ export const ReportConfirmedByGu: React.FC = () => {
         <ConfirmedByGuGraph />
       </GraphContainer>
       <ReportSubtitle>
-        현재 당신의 지역 위험도는 점, '이불밖은 위험해' 입니다.
+        {score >= 60 ? (
+          <p>당신의 행정구에는 확진자들이 득세하고 있습니다.</p>
+        ) : (
+          <>
+            <p>당신의 행정구는 다른 행정구보다 상대적으로 안전합니다.</p>
+            <p>다른 행정구 대비 {score} 퍼센트 확진자 비율이 낮습니다.</p>
+          </>
+        )}
       </ReportSubtitle>
     </DescriptionSection>
   );
