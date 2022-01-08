@@ -36,12 +36,6 @@ export const ReportThreatMap: React.FC = () => {
         </AddOnButton>
       </GraphContainer>
       <ReportSubtitle>
-<<<<<<< HEAD
-        현재 당신의 지역 위험도는 {score}점,
-        <br /> 등급은 {riskScoreParser(score)}
-        입니다.
-        <br />
-=======
         <div>
           <p>현재 당신의 지역 위험도는 {score}점,</p>
           <p>
@@ -50,7 +44,6 @@ export const ReportThreatMap: React.FC = () => {
           </p>
           <p>우울한 기분 전환도 할 겸 오늘은 스테이크나 썰러가시죠.</p>
         </div>
->>>>>>> feature/Frontend#22
       </ReportSubtitle>
 
       {open && (

@@ -123,21 +123,6 @@ const RegionalReportPage: React.FC = () => {
         <Suspense fallback={<Loading />}>
           <ThreatMapReportSection>
             <ReportTitle>내 지역 코로나 리포트</ReportTitle>
-<<<<<<< HEAD
-            <ReportThreatMap />
-          </ThreatMapReportSection>
-          <ThreatRankReportSection>
-            <ReportThreatRank />
-          </ThreatRankReportSection>
-          <VaccineReportSection>
-            <ReportVaccineGraph />
-          </VaccineReportSection>
-          <ConfirmedAllReportSection>
-            <ReportTotalConfirmed />
-          </ConfirmedAllReportSection>
-          <ConfirmedGuReportSection>
-            <ReportConfirmedByGu />
-=======
             {/* <ReportThreatMap /> */}
           </ThreatMapReportSection>
           <ThreatRankReportSection>
@@ -151,7 +136,6 @@ const RegionalReportPage: React.FC = () => {
           </ConfirmedAllReportSection>
           <ConfirmedGuReportSection>
             {/* <ReportConfirmedByGu /> */}
->>>>>>> feature/Frontend#22
           </ConfirmedGuReportSection>
         </Suspense>
         <ButtonWrapper>

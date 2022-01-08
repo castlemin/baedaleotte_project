@@ -43,16 +43,6 @@ const TeamPage = () => {
             alt='Team Leader, backend developer'
           />
           <MemberDescription>
-<<<<<<< HEAD
-            안녕하세요! 백엔드, 서버 개발자로서 성장중인 윤상 입니다. 배달어때
-            프로젝트에선 플라스크를 이용한 백엔드 코딩과 데이터 크롤링(공공API
-            및 구글MAPS API 활용), 서버 DB세팅 및 배포를 담당 하였습니다!
-            <p>
-              평소 코딩하는것을 즐겁게 생각하였고, 학부생 시절에도 알고리즘
-              강의를 가장 재밋게 들었던 기억이 있어 지속적으로 개발자로서
-              성장하고 싶어 엘리스에 지원하였고 열심히 성장 중입니다!
-            </p>
-=======
             <Introduction>
               안녕하세요! 백엔드, 서버 개발자로서 성장중인 윤상 입니다. 배달어때
               프로젝트에선 플라스크를 이용한 백엔드 코딩과 데이터 크롤링(공공API
@@ -63,7 +53,6 @@ const TeamPage = () => {
               강의를 가장 재밋게 들었던 기억이 있어 지속적으로 개발자로서
               성장하고 싶어 엘리스에 지원하였고 열심히 성장 중입니다!
             </Introduction>
->>>>>>> feature/Frontend#22
           </MemberDescription>
         </FirstParagraph>
         <SecondParagraph>
@@ -72,15 +61,10 @@ const TeamPage = () => {
             alt='Team Leader, backend developer'
           />
           <MemberDescription>
-<<<<<<< HEAD
-            취미는 온라인 게임, 영화보기, 달리기 및 운동하기 입니다 (가끔
-            알고리즘 문제를 풀기도 합니다..)!
-=======
             <Introduction>
               취미는 온라인 게임, 영화보기, 달리기 및 운동하기 입니다 (가끔
               알고리즘 문제를 풀기도 합니다..)!
             </Introduction>
->>>>>>> feature/Frontend#22
           </MemberDescription>
         </SecondParagraph>
       </MemberContainer>
@@ -154,13 +138,6 @@ const TeamPage = () => {
         <FirstParagraph>
           <ProfileImage src={HYEONHEE_FACE_IMG} alt='data analylist' />
           <MemberDescription>
-<<<<<<< HEAD
-            컴퓨터가 좋아 IT직무를 떠돌던 풀스택 개발자 지망생.
-            <p>
-              원하는 기능 및 프로그램을 직접 만들어 낼 수 있는 개발자들 부러워
-              개발자를 목표로 하게 되었음
-            </p>
-=======
             <Introduction>
               컴퓨터가 좋아 IT직무를 떠돌던 풀스택 개발자 지망생.
             </Introduction>
@@ -168,19 +145,14 @@ const TeamPage = () => {
               원하는 기능 및 프로그램을 직접 만들어 낼 수 있는 개발자들 부러워
               개발자를 목표로 하게 되었음
             </Introduction>
->>>>>>> feature/Frontend#22
           </MemberDescription>
         </FirstParagraph>
         <SecondParagraph>
           <ProfileImage src={HYEONHEE_FULL_IMG} alt='data analylist' />
           <MemberDescription>
-<<<<<<< HEAD
-            좋아하는 건 책 읽기,맥주 마시기 그리고 식물 키우기
-=======
             <Introduction>
               좋아하는 건 책 읽기,맥주 마시기 그리고 식물 키우기
             </Introduction>
->>>>>>> feature/Frontend#22
           </MemberDescription>
         </SecondParagraph>
       </MemberContainer>
