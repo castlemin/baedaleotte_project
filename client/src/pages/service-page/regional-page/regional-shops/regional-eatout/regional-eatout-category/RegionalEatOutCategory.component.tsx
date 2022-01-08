@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import {
   CategoryTemplate,
   CategoryContainer,
@@ -62,10 +62,8 @@ const RegionalDeliveryCategoryPage = () => {
         <Modal message={message} onCancel={handleCloseModal} />
       )}
       {!isModalClosed && <BackDrop onCancel={handleCloseModal} />}
-      <CategoryTemplate style={{ display: 'flex', flexDirection: 'column' }}>
-        <PageTitle>
-          <SelectedOptionsTitle>선택 메뉴</SelectedOptionsTitle>
-        </PageTitle>
+      <CategoryTemplate>
+        <SelectedOptionsTitle>외식점 선택 메뉴</SelectedOptionsTitle>
         <SelectedContainer>
           <PlaceHolder selected={categoryStored.length}>
             카테고리를 선택해주세요.
