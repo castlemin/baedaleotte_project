@@ -40,9 +40,7 @@ const ServiceStartPage: React.FC = () => {
           });
         },
         (error) => {
-          if (error.code === 1) {
-            navigate('/');
-          }
+          console.log(error);
         },
         {
           enableHighAccuracy: false,

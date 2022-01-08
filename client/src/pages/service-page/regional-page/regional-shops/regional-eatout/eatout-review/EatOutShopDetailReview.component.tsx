@@ -14,7 +14,7 @@ interface Props {
   shopId: string;
 }
 
-const EatOutShopDetailReview = ({ shopId }: Props) => {
+const EatOutShopDetailReview: React.FC<Props> = ({ shopId }: Props) => {
   const [review, setReview] = useState([]);
 
   useEffect(() => {

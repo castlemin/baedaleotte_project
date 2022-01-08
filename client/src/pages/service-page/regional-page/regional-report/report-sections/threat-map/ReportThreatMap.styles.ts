@@ -51,11 +51,12 @@ export const AddOn = styled.div<Props>`
   background-color: white;
   padding: 1rem;
   text-align: center;
-  width: 30rem;
+  width: 70rem;
+  height: 45rem;
   z-index: 10;
   position: fixed;
   top: 10vh;
-  left: calc(50% - 15rem);
+  left: calc(50%- 50rem);
   ${({ addOnOpen }: Props) =>
     addOnOpen &&
     css`

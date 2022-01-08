@@ -22,7 +22,7 @@ import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.componen
 import { EATOUT_IMAGES } from '../../../../../../assets/data/imgMapper';
 import { selectedEatOutCategory } from '../../../../../../store/store';
 
-const RegionalDeliveryCategoryPage = () => {
+const RegionalDeliveryCategoryPage: React.FC = () => {
   const navigate = useNavigate();
   const [categoryStored, setCategoryStored] = useRecoilState<any>(
     selectedEatOutCategory

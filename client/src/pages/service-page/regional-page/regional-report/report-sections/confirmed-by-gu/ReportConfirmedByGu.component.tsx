@@ -5,18 +5,16 @@ import {
   ReportSubtitle,
 } from './ReportConfirmedByGu.styles';
 
-import { ConfirmedByGuGraph } from '../../../../../../assets/data/Graphs/ConfirmedByGuGraph';
-import { RiskScore } from '../../../../../../assets/data/RiskScore';
-import { riskScoreParser } from '../../../../../../assets/data/riskScoreParser';
+interface IProps {
+  score: any;
+}
 
-export const ReportConfirmedByGu: React.FC = () => {
-  const score = RiskScore();
-
+export const ReportConfirmedByGu: React.FC<IProps> = ({ score, children }) => {
   return (
     <DescriptionSection>
       <GraphContainer>
         <ReportSubtitle>행정구별 확진자 현황</ReportSubtitle>
-        <ConfirmedByGuGraph />
+        {children}
       </GraphContainer>
       <ReportSubtitle>
         {score >= 60 ? (

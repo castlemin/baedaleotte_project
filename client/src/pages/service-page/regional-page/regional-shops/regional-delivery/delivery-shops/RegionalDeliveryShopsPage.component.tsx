@@ -3,11 +3,12 @@ import { Suspense, useEffect, useState, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
-/* import axios from 'axios'; */
 import Loading from '../../../../../../components/UI/loading/Loading.component';
 import RegionalShopDetail from '../delivery-shops-detail/RegionalDeliveryShopDetail.component';
-import { selectedDeliveryCategory } from '../../../../../../store/store';
-// import useLoadShops from '../../../../hooks/useLoadShops.component';
+import {
+  selectedDeliveryCategory,
+  userLocation,
+} from '../../../../../../store/store';
 
 import {
   HeadingContainer,
@@ -29,7 +30,8 @@ import { formatTime } from '../../../../../../functions/formatter';
 
 const RegionalDeliveryShopsPage = () => {
   const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
-  const params = { lat: 37.48441, lng: 127.087437 };
+  const userDistrict = useRecoilValue(userLocation);
+  const params = userDistrict;
 
   const navigate = useNavigate();
 
@@ -53,13 +55,7 @@ const RegionalDeliveryShopsPage = () => {
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
-        const res = await cors.post(
-          'http://elice-kdt-3rd-team-04.koreacentral.cloudapp.azure.com/restaurants/near',
-          {
-            lat: 37.48441,
-            lng: 127.087437,
-          }
-        );
+        const res = await cors.post(`${FOOD_DELIVERY_LIST_URL}`, params);
         const data = await res.data;
 
         const filteredData = await data.filter(

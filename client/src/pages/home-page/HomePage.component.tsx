@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef, LegacyRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/UI/header/Header.component';
-import { GuMap } from '../../assets/data/Graphs/GuMap';
+import { SeoulMap } from '../../assets/data/Graphs/SeoulMap';
 import teamImg from '../../assets/images/team/team.png';
 import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
 import { HOME_IMG_CONFIG } from '../../assets/data/homeImgConfig';
+import { useFetchGraph } from '../../hooks/useFetchJson';
 
 import {
   HomePageContainer,
@@ -19,10 +20,14 @@ import {
   TeamImage,
   Notice,
 } from './HomePage.styles';
+import { useRecoilValue } from 'recoil';
+import { userGu } from '../../store/store';
 
 const HomePage: React.FC = () => {
+  const userDistrict = useRecoilValue(userGu);
   const [position, setPosition] = useState(0);
   const [height, setHeight] = useState(0);
+  const seoulMapJson = useFetchGraph(`seoul_risk_map_all`);
 
   const navigate = useNavigate();
 
@@ -81,7 +86,7 @@ const HomePage: React.FC = () => {
       </HomePageContainer>
       <RegIntroContainer>
         <ContentsContainer>
-          <GuMap />
+          <SeoulMap data={seoulMapJson.data} layout={seoulMapJson.layout} />
           <TextWrapper>
             <TitleContainer>집콕 배달 추천</TitleContainer>
             <SubtitleContainer position={position}>

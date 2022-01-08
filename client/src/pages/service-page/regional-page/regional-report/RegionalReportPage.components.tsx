@@ -8,6 +8,7 @@ import {
   CONFIRMED_ALL_URL,
   CONFIRMED_BY_GU_URL,
   RISK_RANK_GRAPH_URL,
+  RISK_SCORE_DETAIL_URL,
   RISK_SCORE_URL,
   SEOUL_RISK_MAP_URL,
   USER_LOCATION_URL,
@@ -33,6 +34,11 @@ import {
 import BackDrop from '../../../../components/UI/BackDrop/BackDrop.component';
 import { RiskScore } from '../../../../assets/data/RiskScore';
 import { ReportThreatMap } from './report-sections/threat-map/ReportThreatMap.component';
+import { ReportThreatRank } from './report-sections/threat-rank/ReportThreatRank.component';
+import { VaccineGraph } from '../../../../assets/data/Graphs/VaccineGraph';
+import { ReportTotalConfirmed } from './report-sections/total-confirmed/ReportTotalConfirmed.component';
+import { ReportConfirmedByGu } from './report-sections/confirmed-by-gu/ReportConfirmedByGu.component';
+import { ReportVaccineGraph } from './report-sections/vaccine/ReportVaccineGraph.component';
 
 /* 리포트에서 사용하는 그래프입니다. */
 // const ReportThreatMap = React.lazy(() =>
@@ -67,6 +73,7 @@ const RegionalReportPage: React.FC = () => {
   const [userDistrict, setUserDistrict] = useRecoilState(userGu);
   const [graphs, setGraphs] = useState<any>();
   const [riskScore, setRiskScore] = useState();
+  const [riskScoreDetail, setRiskScoreDetail] = useState<any>();
 
   /* 카테고리 페이지 이동 함수 */
   const handleToCategory = (event: any) => {
@@ -112,6 +119,11 @@ const RegionalReportPage: React.FC = () => {
       const confirmedGuData = await confirmedGuRes.data;
       const riskScoreRes = await cors.get(`${RISK_SCORE_URL}${userDistrict}`);
       const riskScoreData = await riskScoreRes.data;
+      const riskScoreDetailRes = await cors.get(
+        `${RISK_SCORE_DETAIL_URL}${userDistrict}`
+      );
+      const riskScoreDetailData = await riskScoreDetailRes.data;
+
       setGraphs([
         threatMapData,
         threatRankData,
@@ -120,10 +132,12 @@ const RegionalReportPage: React.FC = () => {
         confirmedGuData,
       ]);
       setRiskScore(riskScoreData);
+      setRiskScoreDetail(riskScoreDetailData);
     };
     getGraph();
   }, []);
 
+  console.log(riskScoreDetail);
   return (
     <ReportContainer>
       {!graphs ? (
@@ -137,29 +151,60 @@ const RegionalReportPage: React.FC = () => {
             {graphs.map((graph: any, idx: string) => (
               <ReportSection key={idx} id={idx}>
                 <GraphContainer>
-                  <Plot data={graph.data} layout={graph.layout} />
-<<<<<<< HEAD
+                  {Number(idx) === 0 ? (
+                    <ReportThreatMap
+                      location={userDistrict}
+                      score={riskScore}
+                      rate={riskScoreDetail['rate']}
+                      population={riskScoreDetail['population']}
+                      family={riskScoreDetail['family']}
+                      facillity={riskScoreDetail['fac']}
+                    >
+                      <Plot data={graph.data} layout={graph.layout} />
+                    </ReportThreatMap>
+                  ) : Number(idx) === 1 ? (
+                    <ReportThreatRank rank={riskScoreDetail['rank']}>
+                      <Plot data={graph.data} layout={graph.layout} />
+                    </ReportThreatRank>
+                  ) : Number(idx) === 2 ? (
+                    <ReportVaccineGraph
+                      vacRate={graphs[2].data[1].text[6]}
+                      date={graphs[2].data[0].x[6]}
+                    >
+                      <Plot data={graph.data} layout={graph.layout} />
+                    </ReportVaccineGraph>
+                  ) : Number(idx) === 3 ? (
+                    <ReportTotalConfirmed
+                      totalNum={graphs[3].data[0].text[6]}
+                      addNum={graphs[3].data[1].text[6]}
+                      date={graphs[3].data[0].x[6]}
+                    >
+                      <Plot data={graph.data} layout={graph.layout} />
+                    </ReportTotalConfirmed>
+                  ) : (
+                    <ReportConfirmedByGu score={riskScore}>
+                      <Plot data={graph.data} layout={graph.layout} />
+                    </ReportConfirmedByGu>
+                  )}
                 </GraphContainer>
-                <ReportDesc>설명글</ReportDesc>
-=======
-                  <ReportThreatMap />
-                </GraphContainer>
->>>>>>> feature/Frontend#22
               </ReportSection>
             ))}
           </Suspense>
           <ButtonWrapper>
-            <NextButton id='toDelivery' onClick={handleToCategory}>
-              내 지역 배달 음식점 찾으러 가기
-            </NextButton>
-            <>
+            {Number(riskScore) >= 60 ? (
               <NextButton id='toDelivery' onClick={handleToCategory}>
                 내 지역 배달 음식점 찾으러 가기
               </NextButton>
-              <NextButton id='toEatOut' onClick={handleToCategory}>
-                내 근처 외식점 찾으러 가기
-              </NextButton>
-            </>
+            ) : (
+              <>
+                <NextButton id='toDelivery' onClick={handleToCategory}>
+                  내 지역 배달 음식점 찾으러 가기
+                </NextButton>
+                <NextButton id='toEatOut' onClick={handleToCategory}>
+                  내 근처 외식점 찾으러 가기
+                </NextButton>
+              </>
+            )}
           </ButtonWrapper>
         </>
       )}

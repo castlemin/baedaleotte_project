@@ -38,7 +38,6 @@ export const GraphContainer = styled.div`
   width: fit-content;
   height: fit-content;
   margin: 0 50px;
-  z-index: 11;
 `;
 
 export const ReportDesc = styled.div`

@@ -7,19 +7,31 @@ import {
 
 import { VaccineGraph } from '../../../../../../assets/data/Graphs/VaccineGraph';
 import { RiskScore } from '../../../../../../assets/data/RiskScore';
+import { workerData } from 'worker_threads';
 
-export const ReportVaccineGraph: React.FC = () => {
+interface IProps {
+  vacRate: number;
+  date: string;
+}
+
+export const ReportVaccineGraph: React.FC<IProps> = ({
+  vacRate,
+  date,
+  children,
+}) => {
   const score = RiskScore();
 
   return (
     <DescriptionSection>
       <GraphContainer>
         <ReportSubtitle>서울시 백신 접종률</ReportSubtitle>
-        <VaccineGraph />
+        {children}
       </GraphContainer>
       <ReportSubtitle>
-        <p>현재 서울시의 백신 접종률은 {score}%입니다.</p>
-        <p></p>
+        <p>{date}일 기준으로,</p>
+        <p style={{ wordBreak: 'keep-all' }}>
+          현재 서울시 전체의 2차 백신 접종률은 {vacRate}%입니다.
+        </p>
       </ReportSubtitle>
     </DescriptionSection>
   );
