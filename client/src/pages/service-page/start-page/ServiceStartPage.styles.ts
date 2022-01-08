@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const BackgroundContainer = styled.div`
-  background-color: linear-gradient(
+  background: linear-gradient(
     rgba(244, 255, 252, 0),
     rgb(238, 253, 250),
     rgb(235, 252, 248)
@@ -15,6 +15,7 @@ export const GPSRequestContainer = styled.div`
   border-radius: 6px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
   height: -moz-fit-content;
+  background-color: white;
   width: 45rem;
   margin: auto;
   display: flex;

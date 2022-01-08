@@ -8,6 +8,7 @@ export const ReportContainer = styled.section`
 `;
 
 export const ReportTitle = styled.h1`
+  color: #2c3e50;
   font-size: 40px;
   line-height: 60px 50px;
   text-align: center;

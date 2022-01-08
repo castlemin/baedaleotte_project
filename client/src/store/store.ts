@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
 export const selectedDeliveryCategory = atom({
   key: 'selectedDeliveryCategory',
@@ -28,4 +28,9 @@ export const userGu = atom({
 export const RegionName = atom({
   key: 'regionName',
   default: '',
+});
+
+export const CoronicNumberByGu = atom({
+  key: 'coronicNum',
+  default: [],
 });

@@ -9,6 +9,7 @@ import RegionalReportPage from './pages/service-page/regional-page/regional-repo
 import RegionalDeliveryCategoryPage from './pages/service-page/regional-page/regional-shops/regional-delivery/regional-delivery-category/RegionalDeliveryCategoryPage.component.jsx';
 import RegionalEatOutCategoryPage from './pages/service-page/regional-page/regional-shops/regional-eatout/regional-eatout-category/RegionalEatOutCategory.component';
 import Error404 from './components/UI/Error/404.error';
+import Error500 from './components/UI/Error/500.error';
 
 const App: React.FC = () => {
   return (
@@ -38,6 +39,7 @@ const App: React.FC = () => {
         />
         <Route path='/team' element={<TeamHome />} />
         <Route path='/*' element={<Error404 />} />
+        <Route path='/500-error' element={<Error500 />} />
       </Routes>
     </>
   );
