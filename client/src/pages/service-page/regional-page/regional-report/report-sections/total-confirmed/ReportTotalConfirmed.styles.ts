@@ -11,7 +11,7 @@ export const GraphContainer = styled.div`
   border-radius: 6px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
   height: -moz-fit-content;
-  width: 45rem;
+  width: 34.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

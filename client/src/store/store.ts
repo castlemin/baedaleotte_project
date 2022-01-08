@@ -20,6 +20,11 @@ export const userLocation = atom({
   default: {},
 });
 
+export const userGu = atom({
+  key: 'userGu',
+  default: {},
+});
+
 export const RegionName = atom({
   key: 'regionName',
   default: '',

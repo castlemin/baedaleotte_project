@@ -91,6 +91,7 @@ export const SelectedCategory = styled.div`
   height: 100px;
   width: 100px;
   margin: 5px 10px;
+  cursor: pointer;
 `;
 
 export const SelectedTitle = styled.h3`

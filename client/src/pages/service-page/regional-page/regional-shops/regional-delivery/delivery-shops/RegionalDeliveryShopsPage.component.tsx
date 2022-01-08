@@ -6,7 +6,10 @@ import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.componen
 /* import axios from 'axios'; */
 import Loading from '../../../../../../components/UI/loading/Loading.component';
 import RegionalShopDetail from '../delivery-shops-detail/RegionalDeliveryShopDetail.component';
-import { selectedDeliveryCategory } from '../../../../../../store/store';
+import {
+  selectedDeliveryCategory,
+  userLocation,
+} from '../../../../../../store/store';
 // import useLoadShops from '../../../../hooks/useLoadShops.component';
 
 import {
@@ -21,9 +24,13 @@ import {
   ShopContainer,
   SortButton,
 } from './RegionalDeliveryShopsPage.styles';
+import { FOOD_DELIVERY_LIST_URL } from '../../../../../../assets/data/requestUrls';
+import { useNavigate } from 'react-router-dom';
 
 const RegionalDeliveryShopsPage = () => {
   const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
+  const params = userLocation;
+  const navigate = useNavigate();
 
   const [selectShop, setSelectDeliveryShop] = useState('');
   const [deliveryShopList, setDeliveryShopList] = useState<any>([]);
@@ -32,6 +39,7 @@ const RegionalDeliveryShopsPage = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(8);
+  const [error, setError] = useState<any>();
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -39,19 +47,26 @@ const RegionalDeliveryShopsPage = () => {
 
   useEffect(() => {
     const fetchRestaurants = async () => {
-      const res = await axios.get(
-        'https://bf13481e-d0b7-4fc0-a3d3-05a66db58f51.mock.pstmn.io/restaurants/near'
-      );
-      const data = await res.data;
-      const filteredData = await data.filter(
-        (item: any) =>
-          item.categories.includes(chosenDeliveryCategories[0]) ||
-          item.categories.includes(chosenDeliveryCategories[1])
-      );
-      setDeliveryShopList(filteredData);
+      try {
+        const res = await axios.post(FOOD_DELIVERY_LIST_URL, params);
+        const data = await res.data;
+        const filteredData = await data.filter(
+          (item: any) =>
+            item.categories.includes(chosenDeliveryCategories[0]) ||
+            item.categories.includes(chosenDeliveryCategories[1])
+        );
+        setDeliveryShopList(filteredData);
+      } catch (error) {
+        console.log(error);
+        setError(error);
+      }
     };
     fetchRestaurants();
   }, []);
+
+  if (error === '500') {
+    navigate('/500-error');
+  }
 
   const lastIdx = currentPage * postPerPage;
 
@@ -85,8 +100,6 @@ const RegionalDeliveryShopsPage = () => {
     }
     return () => observer && observer.disconnect();
   }, [target]);
-
-  console.log(deliveryShopList);
 
   const handleToDeliveryDetail = (event: any) => {
     setDetailViewHeight(cardHeightRef.current.clientHeight);

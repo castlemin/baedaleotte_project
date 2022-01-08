@@ -41,7 +41,7 @@ export const ShopListContainer = styled.div<Props>`
 
 export const ShopTitleContainer = styled.p`
   height: fit-content;
-  font-weight: bold;
+  font-size: 18px;
   text-align: center;
   border-radius: 6px 6px 0 0;
 `;
@@ -65,7 +65,7 @@ export const ShopImgContainer = styled.div<Props>`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  border-radius: 6px 6px 0 0;
+  border-radius: 6px;
 
   ${({ url }: Props) =>
     css`

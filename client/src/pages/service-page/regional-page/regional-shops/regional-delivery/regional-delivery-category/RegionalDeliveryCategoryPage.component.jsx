@@ -67,14 +67,21 @@ const RegionalDeliveryCategoryPage = () => {
       <CategoryTemplate style={{ display: 'flex', flexDirection: 'column' }}>
         <PageTitle>
           오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는: <CategoryTop5 />
-          <SelectedOptionsTitle>선택 메뉴</SelectedOptionsTitle>
+          <SelectedOptionsTitle>
+            선택 메뉴
+            <br />
+            메뉴는 1개 이상 선택해주세요.
+          </SelectedOptionsTitle>
         </PageTitle>
         <SelectedContainer>
           <PlaceHolder selected={categoryStored.length}>
             카테고리를 선택해주세요.
           </PlaceHolder>
           {categoryStored.map((item) => (
-            <SelectedCategory imgUrl={DELIVERY_IMAGES[item]}>
+            <SelectedCategory
+              onClick={handleToggleCategory}
+              imgUrl={DELIVERY_IMAGES[item]}
+            >
               <SelectedTitle>{item}</SelectedTitle>
             </SelectedCategory>
           ))}
@@ -83,7 +90,7 @@ const RegionalDeliveryCategoryPage = () => {
           onClick={handleToShopList}
           disabled={categoryStored.length < 1}
         >
-          추천 가게
+          추천 가게 보기
         </NextButton>
         <CategoryListContainer>
           {deliveryCategories.map((cat) => (

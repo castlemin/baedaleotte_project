@@ -98,13 +98,10 @@ const RegionalEatOutShopsPage: React.FC = () => {
     return () => observer && observer.disconnect();
   }, [target]);
 
-  console.log(eatOutShopList);
-
   const handleToEatOutDetail = (event: any) => {
     setSelectShop(event.target.id);
     setDetailViewHeight(cardHeightRef.current.scrollHeight);
     handleToggleDetail();
-    console.log();
   };
 
   const handleToggleDetail = () => {

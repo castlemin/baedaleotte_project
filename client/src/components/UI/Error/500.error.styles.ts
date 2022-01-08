@@ -7,10 +7,6 @@ export const NoneExistsContainer = styled.div`
   align-items: center;
 `;
 
-export const ErrorSubtitle = styled.p`
-  font-size: 20px;
-`;
-
 export const ErrorTitle = styled.h1`
-  font-size: 45px;
+  font-size: 50px;
 `;

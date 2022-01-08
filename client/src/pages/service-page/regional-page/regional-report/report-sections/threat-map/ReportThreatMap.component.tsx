@@ -11,8 +11,11 @@ import { GuMap } from '../../../../../../assets/data/Graphs/GuMap';
 import { RiskScore } from '../../../../../../assets/data/RiskScore';
 import { Card } from '../../../../../../components/UI/Card/Card.styles';
 import { riskScoreParser } from '../../../../../../assets/data/riskScoreParser';
+import { useRecoilValue } from 'recoil';
+import { userGu } from '../../../../../../store/store';
 
 export const ReportThreatMap: React.FC = () => {
+  const userDistrict = useRecoilValue(userGu);
   const [open, setOpen] = useState(false);
   const score = RiskScore();
 
@@ -37,7 +40,7 @@ export const ReportThreatMap: React.FC = () => {
           </p>
           <hr />
           <p>
-            <b>내 지역</b>: 강남구
+            <b>내 지역</b>: {userDistrict}
           </p>
           <p>
             <b>위험도 점수</b>: {score}
@@ -64,7 +67,8 @@ export const ReportThreatMap: React.FC = () => {
         </AddOn>
       </GraphContainer>
       <ReportSubtitle>
-        현재 당신의 지역 위험도는 {score}점, 등급은 {riskScoreParser(score)}
+        현재 당신의 지역 위험도는 {score}점,
+        <br /> 등급은 {riskScoreParser(score)}
         입니다.
       </ReportSubtitle>
     </DescriptionSection>

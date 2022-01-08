@@ -8,7 +8,7 @@ import RegionalHome from './pages/service-page/regional-page/regional-home/Regio
 import RegionalDeliveryShopsPage from './pages/service-page/regional-page/regional-shops/regional-delivery/delivery-shops/RegionalDeliveryShopsPage.component';
 import RegionalEatOutShopsPage from './pages/service-page/regional-page/regional-shops/regional-eatout/eatout-shops/RegionalEatOutShopsPage.component';
 import RegionalReportPage from './pages/service-page/regional-page/regional-report/RegionalReportPage.components';
-import RegionalDeliveryCategoryPage from './pages/service-page/regional-page/regional-shops/regional-delivery/regional-delivery-category/RegionalDeliveryCategoryPage.component';
+import RegionalDeliveryCategoryPage from './pages/service-page/regional-page/regional-shops/regional-delivery/regional-delivery-category/RegionalDeliveryCategoryPage.component.jsx';
 import RegionalEatOutCategoryPage from './pages/service-page/regional-page/regional-shops/regional-eatout/regional-eatout-category/RegionalEatOutCategory.component';
 import Error404 from './components/UI/Error/404.error';
 

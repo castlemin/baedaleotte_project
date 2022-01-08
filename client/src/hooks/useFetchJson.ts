@@ -9,7 +9,6 @@ export const useFetchGraph = (endPoint: string) => {
       const url = `${GRAPH_URL}${endPoint}`;
       const response = await axios.get(url);
       setState(response.data);
-      console.log(endPoint);
     }
     fetchGraph();
   }, []);
