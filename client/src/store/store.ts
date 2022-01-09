@@ -34,3 +34,13 @@ export const CoronicNumberByGu = atom({
   key: 'coronicNum',
   default: [],
 });
+
+export const ThreatScore = atom({
+  key: 'threatScore',
+  default: '',
+});
+
+export const ThreatScoreDetail = atom({
+  key: 'threatScoreDetail',
+  default: [],
+});

@@ -14,7 +14,12 @@ import {
   USER_LOCATION_URL,
   VAC_GRAPH_URL,
 } from '../../../../assets/data/requestUrls';
-import { userLocation, userGu } from '../../../../store/store';
+import {
+  userLocation,
+  userGu,
+  ThreatScore,
+  ThreatScoreDetail,
+} from '../../../../store/store';
 import Loading from '../../../../components/UI/loading/Loading.component';
 
 import {
@@ -72,8 +77,9 @@ const RegionalReportPage: React.FC = () => {
   const userCoords = useRecoilValue(userLocation);
   const [userDistrict, setUserDistrict] = useRecoilState(userGu);
   const [graphs, setGraphs] = useState<any>();
-  const [riskScore, setRiskScore] = useState();
-  const [riskScoreDetail, setRiskScoreDetail] = useState<any>();
+  const [riskScore, setRiskScore] = useRecoilState(ThreatScore);
+  const [riskScoreDetail, setRiskScoreDetail] =
+    useRecoilState<any>(ThreatScoreDetail);
 
   /* 카테고리 페이지 이동 함수 */
   const handleToCategory = (event: any) => {
@@ -155,15 +161,15 @@ const RegionalReportPage: React.FC = () => {
                     <ReportThreatMap
                       location={userDistrict}
                       score={riskScore}
-                      rate={riskScoreDetail['rate']}
-                      population={riskScoreDetail['population']}
-                      family={riskScoreDetail['family']}
-                      facillity={riskScoreDetail['fac']}
+                      rate={riskScoreDetail.rate}
+                      population={riskScoreDetail.population}
+                      family={riskScoreDetail.family}
+                      facillity={riskScoreDetail.fac}
                     >
                       <Plot data={graph.data} layout={graph.layout} />
                     </ReportThreatMap>
                   ) : Number(idx) === 1 ? (
-                    <ReportThreatRank rank={riskScoreDetail['rank']}>
+                    <ReportThreatRank rank={riskScoreDetail.rank}>
                       <Plot data={graph.data} layout={graph.layout} />
                     </ReportThreatRank>
                   ) : Number(idx) === 2 ? (
@@ -182,7 +188,10 @@ const RegionalReportPage: React.FC = () => {
                       <Plot data={graph.data} layout={graph.layout} />
                     </ReportTotalConfirmed>
                   ) : (
-                    <ReportConfirmedByGu score={riskScore}>
+                    <ReportConfirmedByGu
+                      score={riskScore}
+                      regionRate={riskScoreDetail.region_rate}
+                    >
                       <Plot data={graph.data} layout={graph.layout} />
                     </ReportConfirmedByGu>
                   )}

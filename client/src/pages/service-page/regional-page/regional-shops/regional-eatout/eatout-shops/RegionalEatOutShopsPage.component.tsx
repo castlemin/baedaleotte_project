@@ -50,7 +50,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
     () => import('../eatout-shops-detail/RegionalEatOutShopDetail.component')
   );
 
-  const params = userCoords;
+  const params = { lat: 37.5384, lng: 126.9654 };
 
   useEffect(() => {
     const fetchRestaurants = async () => {

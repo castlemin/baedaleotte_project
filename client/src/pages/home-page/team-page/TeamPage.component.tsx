@@ -156,11 +156,14 @@ const TeamPage = () => {
           <ProfileImage src={HYEONHEE_FACE_IMG} alt='data analylist' />
           <MemberDescription>
             <Introduction>
-              컴퓨터가 좋아 IT직무를 떠돌던 풀스택 개발자 지망생.
+              안녕하세요 이번 프로젝트에서 데이터 분석을 맡은 강현희입니다. 서버
+              엔지니어로 일했던 경력이 있으며, 원하는 기능 및 프로그램을 직접
+              만들어 낼 수 있는 개발자들이 부러워 개발자를 목표로 하게
+              되었습니다.
             </Introduction>
             <Introduction>
-              원하는 기능 및 프로그램을 직접 만들어 낼 수 있는 개발자들 부러워
-              개발자를 목표로 하게 되었음
+              배달어때 서비스를 팀원들과 함께 만들어 가며 개발자의 노고와
+              즐거움을 함께 느낄 수 있었습니다.
             </Introduction>
           </MemberDescription>
         </FirstParagraph>
@@ -168,7 +171,8 @@ const TeamPage = () => {
           <ProfileImage src={HYEONHEE_FULL_IMG} alt='data analylist' />
           <MemberDescription>
             <Introduction>
-              좋아하는 건 책 읽기,맥주 마시기 그리고 식물 키우기
+              좋아하는건 의자에 누워 책 읽기, 에일 맥주 마시기 그리고 식물
+              키우기 입니다.
             </Introduction>
           </MemberDescription>
         </SecondParagraph>

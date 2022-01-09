@@ -31,7 +31,7 @@ import { formatTime } from '../../../../../../functions/formatter';
 const RegionalDeliveryShopsPage = () => {
   const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
   const userDistrict = useRecoilValue(userLocation);
-  const params = userDistrict;
+  const params = { lat: 37.5384, lng: 126.9654 };
 
   const navigate = useNavigate();
 
