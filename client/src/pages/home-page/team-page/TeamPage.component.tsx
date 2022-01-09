@@ -29,7 +29,7 @@ const TeamPage = () => {
   const sectionRef = useRef<any>(null);
 
   useEffect(() => {
-    setViewHeight(sectionRef.current.scrollHeight);
+    setViewHeight(sectionRef.current.clientHeight);
   }, []);
 
   return (
