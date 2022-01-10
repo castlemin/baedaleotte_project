@@ -1,14 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-interface Props {
-  serviceStatic?: boolean;
-}
-
-interface Props {
-  serviceStatic?: boolean;
-}
-
 const linkCSS = css`
   background-color: #fd7555;
   color: white;
@@ -27,7 +19,7 @@ const linkCSS = css`
   }
 `;
 
-export const HeaderContainer = styled.nav<Props>`
+export const HeaderContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   background-color: #fd7555;
@@ -36,12 +28,6 @@ export const HeaderContainer = styled.nav<Props>`
   width: 100vw;
   position: fixed;
   z-index: 100;
-
-  ${({ serviceStatic }: Props) =>
-    serviceStatic &&
-    css`
-      position: static;
-    `}
 `;
 
 export const LogoContainer = styled(Link)`

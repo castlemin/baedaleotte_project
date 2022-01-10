@@ -26,16 +26,23 @@ import { CategoryTop5 } from '../../../../../../assets/data/Graphs/CategoryTop5'
 
 const RegionalDeliveryCategoryPage = () => {
   const navigate = useNavigate();
+
+  /* 선택한 카테고리를 담는 recoil 상태값 */
   const [categoryStored, setCategoryStored] = useRecoilState(
     selectedDeliveryCategory
   );
+
   const [isModalClosed, setIsModalClosed] = useState(true);
+
+  /* 모달 경고 메시지를 설정 */
   const [message, setMessage] = useState('');
 
+  /* shopList 로 이동 */
   const handleToShopList = () => {
     navigate('/service/regional/delivery_shop_list');
   };
 
+  /* 모달 여닫기용 플래그 상태값 */
   const handleCloseModal = () => {
     setIsModalClosed((prev) => !prev);
   };

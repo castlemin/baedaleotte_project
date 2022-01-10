@@ -85,10 +85,16 @@ export const ShopDescContainer = styled.p`
   display: none;
   text-align: left;
   font-size: 13px;
+`;
 
-  > li {
-    list-style: none;
-  }
+export const ListItem = styled.li`
+  list-style: none;
+`;
+
+export const DescItem = styled.p``;
+
+export const DescName = styled.span`
+  font-weight: bold;
 `;
 
 export const ShopImgContainer = styled.div<Props>`

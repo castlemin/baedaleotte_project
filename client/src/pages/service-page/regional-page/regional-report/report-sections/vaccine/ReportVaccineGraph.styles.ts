@@ -28,3 +28,5 @@ export const ReportSubtitle = styled.div`
   margin-left: 40px;
   word-break: all;
 `;
+
+export const ReportDesc = styled.p``;

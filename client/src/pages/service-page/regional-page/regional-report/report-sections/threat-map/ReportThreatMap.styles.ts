@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 interface Props {
-  addOnOpen: boolean;
+  addOnOpen?: boolean;
+  imgUrl?: string;
 }
 
 export const DescriptionSection = styled.section`
@@ -52,10 +53,10 @@ export const AddOn = styled.div<Props>`
   padding: 1rem;
   text-align: center;
   width: 70rem;
-  height: 45rem;
+  height: 42rem;
   z-index: 10;
   position: fixed;
-  top: 10vh;
+  top: 5vh;
   left: calc(50%- 50rem);
   ${({ addOnOpen }: Props) =>
     addOnOpen &&
@@ -64,12 +65,62 @@ export const AddOn = styled.div<Props>`
     `}
 `;
 
+export const AddOnCloseButton = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 0;
+  border: none;
+  background: none;
+  font-size: 25px;
+  cursor: pointer;
+`;
+
 export const AddOnTitle = styled.h2`
   font-size: 20px;
 `;
 
 export const AddOnDesc = styled.p`
   word-break: keep-all;
+`;
+
+export const GradeSection = styled.section``;
+
+export const GradeList = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+export const RateDesc = styled.p`
+  text-align: center;
+  font-size: 20px;
+`;
+
+export const ContentDivider = styled.hr`
+  font-size: 2px;
+`;
+
+export const ElementDescSection = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+export const RateSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const AddOnGraphContainer = styled.div<Props>`
+  height: 270px;
+  width: 420px;
+  margin-top: 0;
+  ${({ imgUrl }: Props) => css`
+    background-image: url(${imgUrl});
+  `}
+  background-size: cover;
+  background-position: center;
 `;
 
 export const ReportTitle = styled.h1`

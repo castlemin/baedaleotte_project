@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 import {
   AddOn,
   AddOnButton,
+  AddOnCloseButton,
   AddOnDesc,
+  AddOnGraphContainer,
   AddOnTitle,
+  ContentDivider,
+  ElementDescSection,
+  GradeList,
+  GradeSection,
   GraphContainer,
+  RateDesc,
+  RateSection,
   ReportSubtitle,
 } from './ReportThreatMap.styles';
 
@@ -45,9 +53,8 @@ export const ReportThreatMap: React.FC<IProps> = ({
         {children}
       </GraphContainer>
       <ReportSubtitle>
-        현재 당신의 지역 위험도는 {score}점,
-        <br /> {riskScoreParser(score)}등급은 입니다.
-        <br />
+        <p>현재 당신의 지역 위험도는 {score}점,</p>
+        <p>{riskScoreParser(score)}등급은 입니다.</p>
         <AddOnButton onClick={handleOpen}>
           위험도 산출 방식이 궁금하다면
         </AddOnButton>
@@ -56,18 +63,7 @@ export const ReportThreatMap: React.FC<IProps> = ({
         <>
           <BackDrop onCancel={handleOpen} />
           <AddOn addOnOpen={open}>
-            <div
-              onClick={handleOpen}
-              style={{
-                position: 'absolute',
-                right: '10px',
-                top: '0',
-                fontSize: '25px',
-                cursor: 'pointer',
-              }}
-            >
-              x
-            </div>
+            <AddOnCloseButton onClick={handleOpen}>x</AddOnCloseButton>
             <AddOnTitle>코로나 위험도 산출 공식</AddOnTitle>
             <AddOnDesc>
               최근 5일 간의 신규 코로나 확진자 (40점) + 3일 간의 코로나 증감
@@ -75,65 +71,41 @@ export const ReportThreatMap: React.FC<IProps> = ({
               다중이용시설 분포 점수 (5점)
             </AddOnDesc>
             <hr />
-            <p>
+            <AddOnDesc>
               <b>내 지역</b>: "{location}"
-            </p>
-            <p>
+            </AddOnDesc>
+            <AddOnDesc>
               <b>위험도 점수</b>: {score} 점
-            </p>
-            <div>
-              <p>
+            </AddOnDesc>
+            <GradeSection>
+              <AddOnDesc>
                 <b>등급표</b>: {riskScoreParser(score)}
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0 }}>
+              </AddOnDesc>
+              <GradeList>
                 <li>30점 미만 = {riskScoreParser(29)}</li>
                 <li>60점 미만 = {riskScoreParser(59)}</li>
                 <li>60점 이상 = {riskScoreParser(60)}</li>
-              </ul>
-            </div>
-            <hr />
-            <p style={{ textAlign: 'center', fontSize: '20px' }}>
+              </GradeList>
+            </GradeSection>
+            <ContentDivider />
+            <RateDesc>
               이후 3일 동안의 코로나 증감률 예측치 =<b>{rate}%</b>
-            </p>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
-              }}
-            >
-              <div>
-                <p>
+            </RateDesc>
+            <ElementDescSection>
+              <RateSection>
+                <AddOnDesc>
                   <b>생활인구 지수</b>: {population}
-                </p>
-                <p>
+                </AddOnDesc>
+                <AddOnDesc>
                   <b>평균 가구 수</b>: {family}
-                </p>
-                <p>
+                </AddOnDesc>
+                <AddOnDesc>
                   <b>대중이용시설 분포</b>: {facillity}
-                </p>
-              </div>
-              <Card
-                style={{
-                  height: '270px',
-                  width: '420px',
-                  marginTop: 0,
-                  backgroundImage: `url(${prophet})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              ></Card>
-              <Card
-                style={{
-                  marginTop: 0,
-                  height: '270px',
-                  width: '420px',
-                  backgroundImage: `url(${prophet2})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              ></Card>
-            </div>
+                </AddOnDesc>
+              </RateSection>
+              <AddOnGraphContainer imgUrl={prophet}></AddOnGraphContainer>
+              <AddOnGraphContainer imgUrl={prophet2}></AddOnGraphContainer>
+            </ElementDescSection>
           </AddOn>
         </>
       )}

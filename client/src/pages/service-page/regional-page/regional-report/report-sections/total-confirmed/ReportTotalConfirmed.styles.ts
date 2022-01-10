@@ -23,6 +23,8 @@ export const ReportTitle = styled.h1`
   text-align: center;
 `;
 
+export const ReportDesc = styled.p``;
+
 export const ReportSubtitle = styled.div`
   font-size: 24px;
   margin-right: 40px;

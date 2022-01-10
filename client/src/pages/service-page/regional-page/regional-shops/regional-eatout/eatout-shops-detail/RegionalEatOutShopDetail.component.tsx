@@ -14,6 +14,7 @@ import {
   CloseBtn,
   DetailShopTitle,
   DetailItemsWrapper,
+  CategoryName,
 } from './RegionalEatOutShopDetail.styles';
 
 interface Props {
@@ -52,28 +53,30 @@ const RegionalEatOutShopDetail: React.FC<Props> = ({
             <DetailImage imgUrl={item.img_url_2}></DetailImage>
             <CategoryListWrapper>
               <DetailCategoryList>
-                <b>카테고리</b>: {item.category}
+                <CategoryName>카테고리</CategoryName>: {item.category}
               </DetailCategoryList>
               <DetailDescContent>
-                <b>평균평점</b>: {item.rating}
+                <CategoryName>평균평점</CategoryName>: {item.rating}
               </DetailDescContent>
               <DetailDescContent>
-                <b>전화번호</b>: {item.phone}
+                <CategoryName>전화번호</CategoryName>: {item.phone}
               </DetailDescContent>
               <DetailDescContent>
-                <b>영업시간(주중)</b>: {formatEatOutWeekdayHour(item.hour)}
+                <CategoryName>영업시간(주중)</CategoryName>:{' '}
+                {formatEatOutWeekdayHour(item.hour)}
               </DetailDescContent>
               <DetailDescContent>
                 {formatEatOutWeekendHour(item.hour) === '' ? (
                   ''
                 ) : (
                   <DetailDescContent>
-                    <b>영업시간(주말)</b>: {formatEatOutWeekendHour(item.hour)}
+                    <CategoryName>영업시간(주말)</CategoryName>:{' '}
+                    {formatEatOutWeekendHour(item.hour)}
                   </DetailDescContent>
                 )}
               </DetailDescContent>
               <DetailDescContent>
-                <b>평균가격</b>: {item.price}
+                <CategoryName>평균가격</CategoryName>: {item.price}
               </DetailDescContent>
             </CategoryListWrapper>
           </DetailItemsWrapper>

@@ -40,13 +40,8 @@ export const GraphContainer = styled.div`
   margin: 0 50px;
 `;
 
-export const ReportDesc = styled.div`
-  font-size: 24px;
-  text-align: center;
-  margin-left: 40px;
-  word-break: all;
-`;
-
+/* 리포트 전체를 묶는 란, id 에 따라 
+짝수번째는 왼쪽 정렬, 홀수는 오른쪽으로 정렬합니다.*/
 export const ReportSection = styled.div`
   height: 100vh;
   width: 100vw;
@@ -61,36 +56,8 @@ export const ReportSection = styled.div`
           flex-direction: row-reverse;
         `}
 `;
-export const ThreatMapReportSection = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to bottom, #ffefba, #ffffff);
-`;
 
-export const ThreatRankReportSection = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to top, #ffefba, #ffffff);
-`;
-
-export const VaccineReportSection = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to bottom, #ffefba, #ffffff);
-`;
-
-export const ConfirmedAllReportSection = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to top, #ffefba, #ffffff);
-`;
-
-export const ConfirmedGuReportSection = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to bottom, #ffefba, #ffffff);
-`;
-
+/* 버튼들을 flex 레이아웃 지정 */
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;

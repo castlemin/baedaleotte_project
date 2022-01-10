@@ -19,7 +19,7 @@ const Header: React.FC<Props> = ({ serviceStatic, viewHeight }) => {
   //   window.scrollTo({ top: position, behavior: 'smooth' });
   // };
   return (
-    <HeaderContainer serviceStatic={serviceStatic}>
+    <HeaderContainer>
       <div>
         <LogoContainer to='/'>
           <Logo />

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/UI/header/Header.component';
 import { SeoulMap } from '../../assets/data/Graphs/SeoulMap';
-import teamImg from '../../assets/images/team/team.png';
+import teamImg from '../../../public/img/team/team.png';
 import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
 import { HOME_IMG_CONFIG } from '../../assets/data/homeImgConfig';
 import { useFetchGraph } from '../../hooks/useFetchJson';
@@ -20,11 +20,8 @@ import {
   TeamImage,
   Notice,
 } from './HomePage.styles';
-import { useRecoilValue } from 'recoil';
-import { userGu } from '../../store/store';
 
 const HomePage: React.FC = () => {
-  const userDistrict = useRecoilValue(userGu);
   const [position, setPosition] = useState(0);
   const [height, setHeight] = useState(0);
   const seoulMapJson = useFetchGraph(`seoul_risk_map_all`);
@@ -33,6 +30,7 @@ const HomePage: React.FC = () => {
 
   const homePageRef = useRef<any>(null);
 
+  /* 홈페이지 크기를 지정 */
   useEffect(() => {
     setHeight(homePageRef.current.scrollHeight);
   }, []);
@@ -41,11 +39,13 @@ const HomePage: React.FC = () => {
     setPosition(window.scrollY);
   };
 
+  /* 서비스 소개 섹션으로 스크롤 */
   const handleToService = () => {
     navigate('/service');
   };
 
-  const handleToTeamPage = () => {
+  /* 팀 소개 섹션으로 스크롤 */
+  const handleToTeamSection = () => {
     navigate('/team');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -106,7 +106,7 @@ const HomePage: React.FC = () => {
       </RegIntroContainer>
       <TeamIntroContainer>
         <ContentsContainer>
-          <TeamImage src={teamImg} style={HOME_IMG_CONFIG} alt='team' />
+          <TeamImage src='img/team.png' style={HOME_IMG_CONFIG} alt='team' />
           <TextWrapper>
             <TitleContainer>팀 소개</TitleContainer>
             <SubtitleContainer position={position}>
@@ -122,7 +122,9 @@ const HomePage: React.FC = () => {
             <DescContainer position={position}>
               우리 개발팀을 만나보세요.
             </DescContainer>
-            <StartButton onClick={handleToTeamPage}>팀 소개로 이동</StartButton>
+            <StartButton onClick={handleToTeamSection}>
+              팀 소개로 이동
+            </StartButton>
           </TextWrapper>
         </ContentsContainer>
       </TeamIntroContainer>
