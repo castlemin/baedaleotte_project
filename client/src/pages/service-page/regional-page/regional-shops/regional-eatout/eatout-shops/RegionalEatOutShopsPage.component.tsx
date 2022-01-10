@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { Suspense, useEffect, useState, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Audio } from 'react-loader-spinner';
+import { useNavigate } from 'react-router-dom';
+
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
-/* import axios from 'axios'; */
 import Loading from '../../../../../../components/UI/loading/Loading.component';
 import {
   selectedEatOutCategory,
@@ -28,8 +29,13 @@ import {
   SortButtonContainer,
   ShopContainer,
   EatoutShopListTitle,
+  Threshold,
 } from './RegionalEatOutShopsPage.styles';
 import { EAT_OUT_LIST_URL } from '../../../../../../assets/data/requestUrls';
+import {
+  DescName,
+  ToMainPageButton,
+} from '../../regional-delivery/delivery-shops/RegionalDeliveryShopsPage.styles';
 
 const RegionalEatOutShopsPage: React.FC = () => {
   const [eatOutShopList, setEatOutShopList] = useState<any[]>([]);
@@ -38,6 +44,8 @@ const RegionalEatOutShopsPage: React.FC = () => {
   const [detailViewHeight, setDetailViewHeight] = useState(0);
   const chosenEatOutCategories = useRecoilValue(selectedEatOutCategory);
   const userCoords = useRecoilValue(userLocation);
+
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(8);
@@ -52,9 +60,15 @@ const RegionalEatOutShopsPage: React.FC = () => {
 
   const params = { lat: 37.5384, lng: 126.9654 };
 
+  const cors = axios.create({
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  });
+
   useEffect(() => {
     const fetchRestaurants = async () => {
-      const res = await axios.post(EAT_OUT_LIST_URL, params);
+      const res = await cors.post(EAT_OUT_LIST_URL, params);
       const data = res.data;
       const filteredData = await data.filter(
         (item: any) =>
@@ -109,6 +123,10 @@ const RegionalEatOutShopsPage: React.FC = () => {
     setIsDetailOpen((prev) => !prev);
   };
 
+  const handleToMain = () => {
+    navigate('/');
+  };
+
   const handleClickSort = (event: any) => {
     if (event.target.id === 'review') {
       setEatOutShopList((prev) => [
@@ -125,20 +143,15 @@ const RegionalEatOutShopsPage: React.FC = () => {
 
   return (
     <>
-      {!eatOutShopList.length ? (
+      {!eatOutShopList ? (
         <Loading />
       ) : (
         <>
           <EatoutShopListTitle>
             내 주변 외식 음식점 추천 리스트
           </EatoutShopListTitle>
-          <HeadingContainer
-            style={{
-              display: 'flex',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
-            }}
-          >
+          <HeadingContainer>
+            <ToMainPageButton onClick={handleToMain}>메인으로</ToMainPageButton>
             <CategoryIndicator>
               선택하신{' '}
               {chosenEatOutCategories.map((item) => (
@@ -180,33 +193,34 @@ const RegionalEatOutShopsPage: React.FC = () => {
                 </ShopTitleContainer>
                 <ShopDescContainer id={item.id}>
                   <ShopDescContent>
-                    <b>카테고리</b>: {item.category}
+                    <DescName>카테고리</DescName>: {item.category}
                   </ShopDescContent>
                   <ShopDescContent>
-                    <b>영업시간(주중)</b>: {formatEatOutWeekdayHour(item.hour)}
+                    <DescName>영업시간(주중)</DescName>:{' '}
+                    {formatEatOutWeekdayHour(item.hour)}
                   </ShopDescContent>
                   <ShopDescContent>
                     {formatEatOutWeekendHour(item.hour) === '' ? (
                       ''
                     ) : (
                       <ShopDescContent>
-                        <b>영업시간(주말)</b>:{' '}
+                        <DescName>영업시간(주말)</DescName>:{' '}
                         {formatEatOutWeekendHour(item.hour)}
                       </ShopDescContent>
                     )}
                   </ShopDescContent>
                   <ShopDescContent>
-                    <b>평균평점</b>:{' '}
+                    <DescName>평균평점</DescName>:{' '}
                     {item.rating === 0 ? '평점 없음' : `${item.rating}점`}
                   </ShopDescContent>
 
                   <ShopDescContent>
-                    <b>주소</b>: {item.address}
+                    <DescName>주소</DescName>: {item.address}
                   </ShopDescContent>
                 </ShopDescContainer>
               </ShopContainer>
             ))}
-            <div ref={setTarget}>
+            <Threshold ref={setTarget}>
               {isLoaded && eatOutShopList.length >= lastIdx ? (
                 <Audio
                   height='100'
@@ -215,7 +229,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
                   arialLabel='loading...'
                 ></Audio>
               ) : null}
-            </div>
+            </Threshold>
           </ShopListContainer>
         </>
       )}

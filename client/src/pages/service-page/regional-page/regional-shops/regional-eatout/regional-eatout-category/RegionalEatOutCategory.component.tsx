@@ -13,6 +13,7 @@ import {
   SelectedOptionsTitle,
   PlaceHolder,
   NextButton,
+  ToMainButton,
 } from './RegionalEatOutCategory.styles';
 
 import Header from '../../../../../../components/UI/header/Header.component';
@@ -21,6 +22,7 @@ import Modal from '../../../../../../components/UI/modal/Modal.component';
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
 import { EATOUT_IMAGES } from '../../../../../../assets/data/imgMapper';
 import { selectedEatOutCategory } from '../../../../../../store/store';
+import { ButtonsContainer } from '../../regional-delivery/regional-delivery-category/RegionalDeliveryCategory.styles';
 
 const RegionalDeliveryCategoryPage: React.FC = () => {
   const navigate = useNavigate();
@@ -32,6 +34,10 @@ const RegionalDeliveryCategoryPage: React.FC = () => {
 
   const handleToShopList = () => {
     navigate('/service/regional/eatout_shop_list');
+  };
+
+  const handleToMain = () => {
+    navigate('/');
   };
 
   const handleCloseModal = () => {
@@ -57,29 +63,34 @@ const RegionalDeliveryCategoryPage: React.FC = () => {
 
   return (
     <>
-      <Header serviceStatic />
       {!isModalClosed && (
         <Modal message={message} onCancel={handleCloseModal} />
       )}
       {!isModalClosed && <BackDrop onCancel={handleCloseModal} />}
       <CategoryTemplate>
-        <SelectedOptionsTitle>외식점 선택 메뉴</SelectedOptionsTitle>
+        <SelectedOptionsTitle>외식점 메뉴 선택</SelectedOptionsTitle>
         <SelectedContainer>
           <PlaceHolder selected={categoryStored.length}>
             카테고리를 선택해주세요.
           </PlaceHolder>
           {categoryStored.map((item: any) => (
-            <SelectedCategory imgUrl={EATOUT_IMAGES[item]}>
+            <SelectedCategory
+              onClick={handleToggleCategory}
+              imgUrl={EATOUT_IMAGES[item]}
+            >
               <SelectedTitle>{item}</SelectedTitle>
             </SelectedCategory>
           ))}
         </SelectedContainer>
-        <NextButton
-          onClick={handleToShopList}
-          disabled={categoryStored.length < 1}
-        >
-          추천 가게
-        </NextButton>
+        <ButtonsContainer>
+          <ToMainButton onClick={handleToMain}>메인으로</ToMainButton>
+          <NextButton
+            onClick={handleToShopList}
+            disabled={categoryStored.length < 1}
+          >
+            추천 가게
+          </NextButton>
+        </ButtonsContainer>
         <CategoryListContainer>
           {eatoutCategories.map((cat) => (
             <CategoryContainer

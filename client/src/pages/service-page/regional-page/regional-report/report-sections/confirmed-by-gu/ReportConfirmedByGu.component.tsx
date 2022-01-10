@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReportDesc } from '../total-confirmed/ReportTotalConfirmed.styles';
 import {
   DescriptionSection,
   GraphContainer,
@@ -23,13 +24,17 @@ export const ReportConfirmedByGu: React.FC<IProps> = ({
       </GraphContainer>
       <ReportSubtitle>
         {Number(score) >= 60 ? (
-          <p>당신의 행정구에는 확진자들이 득세하고 있습니다.</p>
+          <ReportDesc>
+            당신의 행정구에는 확진자들이 득세하고 있습니다.
+          </ReportDesc>
         ) : (
           <>
-            <p>당신의 행정구는 다른 행정구보다 상대적으로 안전합니다.</p>
-            <p>
+            <ReportDesc>
+              당신의 행정구는 다른 행정구보다 상대적으로 안전합니다.
+            </ReportDesc>
+            <ReportDesc>
               해당 지역구의 확진자는 서울 전체 확진자의 {regionRate} % 입니다
-            </p>
+            </ReportDesc>
           </>
         )}
       </ReportSubtitle>

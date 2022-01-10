@@ -83,12 +83,18 @@ export const AddOnDesc = styled.p`
   word-break: keep-all;
 `;
 
+export const AddOnName = styled.span`
+  font-size: bold;
+`;
+
 export const GradeSection = styled.section``;
 
 export const GradeList = styled.ul`
   list-style: none;
   padding: 0;
 `;
+
+export const GradeListItem = styled.li``;
 
 export const RateDesc = styled.p`
   text-align: center;
@@ -134,3 +140,5 @@ export const ReportSubtitle = styled.div`
   margin-left: 40px;
   word-break: all;
 `;
+
+export const ReportDesc = styled.p``;

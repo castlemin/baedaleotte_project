@@ -5,22 +5,25 @@ import {
   AddOnCloseButton,
   AddOnDesc,
   AddOnGraphContainer,
+  AddOnName,
   AddOnTitle,
   ContentDivider,
   ElementDescSection,
   GradeList,
+  GradeListItem,
   GradeSection,
   GraphContainer,
   RateDesc,
   RateSection,
+  ReportDesc,
   ReportSubtitle,
 } from './ReportThreatMap.styles';
 
-import { Card } from '../../../../../../components/UI/Card/Card.styles';
 import { riskScoreParser } from '../../../../../../assets/data/riskScoreParser';
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
 import prophet from '../../../../../../assets/images/dataset/prophet.png';
 import prophet2 from '../../../../../../assets/images/dataset/prophet2.png';
+import { DescName } from '../../../regional-shops/regional-delivery/delivery-shops-detail/RegionalDeliveryShopDetail.styles';
 
 interface IProps {
   location: string;
@@ -53,8 +56,8 @@ export const ReportThreatMap: React.FC<IProps> = ({
         {children}
       </GraphContainer>
       <ReportSubtitle>
-        <p>현재 당신의 지역 위험도는 {score}점,</p>
-        <p>{riskScoreParser(score)}등급은 입니다.</p>
+        <ReportDesc>현재 당신의 지역 위험도는 {score}점,</ReportDesc>
+        <ReportDesc>{riskScoreParser(score)}등급은 입니다.</ReportDesc>
         <AddOnButton onClick={handleOpen}>
           위험도 산출 방식이 궁금하다면
         </AddOnButton>
@@ -72,35 +75,35 @@ export const ReportThreatMap: React.FC<IProps> = ({
             </AddOnDesc>
             <hr />
             <AddOnDesc>
-              <b>내 지역</b>: "{location}"
+              <AddOnName>내 지역</AddOnName>: "{location}"
             </AddOnDesc>
             <AddOnDesc>
-              <b>위험도 점수</b>: {score} 점
+              <AddOnName>위험도 점수</AddOnName>: {score} 점
             </AddOnDesc>
             <GradeSection>
               <AddOnDesc>
-                <b>등급표</b>: {riskScoreParser(score)}
+                <AddOnName>등급표</AddOnName>: {riskScoreParser(score)}
               </AddOnDesc>
               <GradeList>
-                <li>30점 미만 = {riskScoreParser(29)}</li>
-                <li>60점 미만 = {riskScoreParser(59)}</li>
-                <li>60점 이상 = {riskScoreParser(60)}</li>
+                <GradeListItem>30점 미만 = {riskScoreParser(29)}</GradeListItem>
+                <GradeListItem>60점 미만 = {riskScoreParser(59)}</GradeListItem>
+                <GradeListItem>60점 이상 = {riskScoreParser(60)}</GradeListItem>
               </GradeList>
             </GradeSection>
             <ContentDivider />
             <RateDesc>
-              이후 3일 동안의 코로나 증감률 예측치 =<b>{rate}%</b>
+              이후 3일 동안의 코로나 증감률 예측치 =<DescName>{rate}%</DescName>
             </RateDesc>
             <ElementDescSection>
               <RateSection>
                 <AddOnDesc>
-                  <b>생활인구 지수</b>: {population}
+                  <DescName>생활인구 지수</DescName>: {population}
                 </AddOnDesc>
                 <AddOnDesc>
-                  <b>평균 가구 수</b>: {family}
+                  <DescName>평균 가구 수</DescName>: {family}
                 </AddOnDesc>
                 <AddOnDesc>
-                  <b>대중이용시설 분포</b>: {facillity}
+                  <DescName>대중이용시설 분포</DescName>: {facillity}
                 </AddOnDesc>
               </RateSection>
               <AddOnGraphContainer imgUrl={prophet}></AddOnGraphContainer>

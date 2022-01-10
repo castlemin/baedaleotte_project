@@ -102,7 +102,7 @@ const RegionalReportPage: React.FC = () => {
   };
 
   /* post 요청에 params로 넘겨줄 유저 좌표 */
-  const params = userCoords;
+  const params = { lat: 37.5384, lng: 126.9654 };
 
   /* CORS 규약 위반 에러 방지를 위한 header 설정 */
   const cors = axios.create({

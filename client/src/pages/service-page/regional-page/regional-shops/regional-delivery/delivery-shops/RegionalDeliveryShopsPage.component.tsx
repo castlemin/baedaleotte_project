@@ -29,6 +29,7 @@ import {
   DescItem,
   DescName,
   ListItem,
+  Threshold,
 } from './RegionalDeliveryShopsPage.styles';
 
 import { FOOD_DELIVERY_LIST_URL } from '../../../../../../assets/data/requestUrls';
@@ -68,8 +69,7 @@ const RegionalDeliveryShopsPage = () => {
   /* CORS 규약 위반 에러 방지를 위한 헤더 */
   const cors = axios.create({
     headers: {
-      'Access-Control-Allow-Origin':
-        'http://elice-kdt-3rd-team-04.koreacentral.cloudapp.azure.com',
+      'Access-Control-Allow-Origin': '*',
     },
   });
 
@@ -176,10 +176,11 @@ const RegionalDeliveryShopsPage = () => {
       ]);
     }
   };
+  console.log(deliveryShopList);
 
   return (
     <>
-      {!deliveryShopList.length ? (
+      {!deliveryShopList ? (
         <Loading />
       ) : (
         <>
@@ -187,9 +188,7 @@ const RegionalDeliveryShopsPage = () => {
             내 주변 외식 음식점 추천 리스트
           </DeliveryShopListTitle>
           <HeadingContainer>
-            <ToMainPageButton onClick={handleToMain}>
-              메인 화면
-            </ToMainPageButton>
+            <ToMainPageButton onClick={handleToMain}>메인으로</ToMainPageButton>
             <CategoryIndicator>
               선택하신{' '}
               {chosenDeliveryCategories.map((item) => (
@@ -252,7 +251,7 @@ const RegionalDeliveryShopsPage = () => {
                 </ShopContainer>
               ))}
             </Suspense>
-            <div ref={setTarget}>
+            <Threshold ref={setTarget}>
               {isLoaded && deliveryShopList.length >= lastIdx ? (
                 <Audio
                   height='100'
@@ -261,7 +260,7 @@ const RegionalDeliveryShopsPage = () => {
                   arialLabel='loading...'
                 ></Audio>
               ) : null}
-            </div>
+            </Threshold>
           </ShopListContainer>
         </>
       )}

@@ -12,6 +12,8 @@ import {
   SelectedTitle,
   SelectedOptionsTitle,
   PlaceHolder,
+  ToMainButton,
+  ButtonsContainer,
 } from './RegionalDeliveryCategory.styles';
 
 import { weekDay, hour } from '../../../../../../assets/data/weekDay';
@@ -47,6 +49,11 @@ const RegionalDeliveryCategoryPage = () => {
     setIsModalClosed((prev) => !prev);
   };
 
+  const handleToMain = () => {
+    navigate('/');
+  };
+
+  /* 카테고리 모달 경고창 여닫기 함수 */
   const handleToggleCategory = (event) => {
     if (
       categoryStored.length >= 2 &&
@@ -66,7 +73,6 @@ const RegionalDeliveryCategoryPage = () => {
 
   return (
     <>
-      <Header serviceStatic />
       {!isModalClosed && (
         <Modal message={message} onCancel={handleCloseModal} />
       )}
@@ -75,9 +81,7 @@ const RegionalDeliveryCategoryPage = () => {
         <PageTitle>
           오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는: <CategoryTop5 />
           <SelectedOptionsTitle>
-            선택 메뉴
-            <br />
-            메뉴는 1개 이상 선택해주세요.
+            선택 메뉴 메뉴는 1개 이상 선택해주세요.
           </SelectedOptionsTitle>
         </PageTitle>
         <SelectedContainer>
@@ -93,12 +97,15 @@ const RegionalDeliveryCategoryPage = () => {
             </SelectedCategory>
           ))}
         </SelectedContainer>
-        <NextButton
-          onClick={handleToShopList}
-          disabled={categoryStored.length < 1}
-        >
-          추천 가게 보기
-        </NextButton>
+        <ButtonsContainer>
+          <ToMainButton onClick={handleToMain}>메인으로</ToMainButton>
+          <NextButton
+            onClick={handleToShopList}
+            disabled={categoryStored.length < 1}
+          >
+            추천 가게 보기
+          </NextButton>
+        </ButtonsContainer>
         <CategoryListContainer>
           {deliveryCategories.map((cat) => (
             <CategoryContainer

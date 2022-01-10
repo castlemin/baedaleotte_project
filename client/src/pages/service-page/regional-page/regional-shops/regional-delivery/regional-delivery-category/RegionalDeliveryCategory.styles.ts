@@ -54,7 +54,7 @@ export const PageTitle = styled.h2`
 
 export const SelectedOptionsTitle = styled.h3`
   font-size: 1.5rem;
-  margin-bottom: 0;
+  margin-bottom: 10px;
 `;
 
 export const SelectedContainer = styled.div`
@@ -85,6 +85,7 @@ export const SelectedCategory = styled.div`
     css`
       background-image: url(${imgUrl});
     `}
+
   background-size: cover;
   background-position: center;
   border-radius: 3px;
@@ -102,9 +103,35 @@ export const SelectedTitle = styled.h3`
   border-radius: 3px 3px 0 0;
 `;
 
+export const ButtonsContainer = styled.div`
+  margin: auto;
+`;
+
+export const ToMainButton = styled.button`
+  ackground-color: white;
+  width: 120px;
+  height: 50px;
+  margin: 0 auto 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 1px 2px 1px 1px darkgrey;
+  box-sizing: border-box;
+  padding: 0;
+  :hover {
+    background-color: #88aed0;
+    transition: ease-in 185ms;
+    box-shadow: 1px 2px 1px 1px grey;
+    border-color: wheat;
+    color: white;
+  }
+`;
+
 export const NextButton = styled.button`
   background-color: white;
-  margin: 0 auto 20px;
+  margin-left: 20px;
   width: 120px;
   height: 50px;
   font-size: 18px;

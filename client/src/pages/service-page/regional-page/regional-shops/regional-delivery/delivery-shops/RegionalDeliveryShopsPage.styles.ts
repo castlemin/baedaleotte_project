@@ -168,3 +168,5 @@ export const SortButton = styled.button`
     color: white;
   }
 `;
+
+export const Threshold = styled.div``;
