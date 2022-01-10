@@ -39,10 +39,13 @@ import {
 
 const RegionalEatOutShopsPage: React.FC = () => {
   const [eatOutShopList, setEatOutShopList] = useState<any[]>([]);
+
   const [selectShop, setSelectShop] = useState('');
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const [detailViewHeight, setDetailViewHeight] = useState(0);
   const chosenEatOutCategories = useRecoilValue(selectedEatOutCategory);
+
+  const [detailViewHeight, setDetailViewHeight] = useState(0);
+
   const userCoords = useRecoilValue(userLocation);
 
   const navigate = useNavigate();
@@ -58,6 +61,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
     () => import('../eatout-shops-detail/RegionalEatOutShopDetail.component')
   );
 
+  /* 좌표를 딤아 넘겨 줄 params */
   const params = { lat: 37.5384, lng: 126.9654 };
 
   const cors = axios.create({

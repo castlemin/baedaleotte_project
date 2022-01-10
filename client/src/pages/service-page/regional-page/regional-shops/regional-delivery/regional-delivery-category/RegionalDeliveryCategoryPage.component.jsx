@@ -77,7 +77,7 @@ const RegionalDeliveryCategoryPage = () => {
         <Modal message={message} onCancel={handleCloseModal} />
       )}
       {!isModalClosed && <BackDrop onCancel={handleCloseModal} />}
-      <CategoryTemplate style={{ display: 'flex', flexDirection: 'column' }}>
+      <CategoryTemplate>
         <PageTitle>
           오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는: <CategoryTop5 />
           <SelectedOptionsTitle>

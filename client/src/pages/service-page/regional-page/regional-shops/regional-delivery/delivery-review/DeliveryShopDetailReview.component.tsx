@@ -13,6 +13,7 @@ import {
   PrevButton,
   NextButton,
   ButtonWrapper,
+  CommentName,
 } from './DeliveryShopDetailReview.styles';
 
 interface Props {
@@ -51,7 +52,7 @@ const DeliveryShopDetailReview = ({ shopId }: Props) => {
         {limitCurItems(review).map((item: any) => (
           <Content>
             <Comment>
-              <b>{item.row_num}.</b> {item.comment}
+              <CommentName>{item.row_num}.</CommentName> {item.comment}
             </Comment>
             <CommentRating>{formatRating(item.rating)}</CommentRating>
           </Content>

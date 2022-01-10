@@ -8,6 +8,10 @@ export const Comment = styled.li`
   word-break: keep-all;
 `;
 
+export const CommentName = styled.span`
+  font-weight: bold;
+`;
+
 export const CommentWrapper = styled.ul`
   margin: 1rem 0;
   list-style: none;

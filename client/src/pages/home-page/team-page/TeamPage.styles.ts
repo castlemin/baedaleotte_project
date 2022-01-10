@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { pageDefault } from '../../../components/UI/global/css.styles';
 
-interface Props {
-  imgName?: string;
-}
-
 export const TeamPageContainer = styled.div`
   ${pageDefault}
 `;

@@ -39,7 +39,14 @@ export const DetailCategoryList = styled.ul`
 
 export const DetailDescContent = styled.p``;
 
-export const DescName = styled.span``;
+export const DescName = styled.span`
+  font-size: 18px;
+`;
+
+export const FigureTitle = styled.span`
+  font-size: 18px;
+  margin-left: 200px;
+`;
 
 export const DetailCategoryItem = styled.li`
   list-style: none;

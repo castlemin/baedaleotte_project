@@ -9,6 +9,7 @@ import {
 import { ConfirmedGraph } from '../../../../../../assets/data/Graphs/ConfirmedGraph';
 
 interface IProps {
+  position: number;
   totalNum: number;
   addNum: number;
   date: string;
@@ -18,13 +19,20 @@ export const ReportTotalConfirmed: React.FC<IProps> = ({
   totalNum,
   addNum,
   date,
+  position,
 }) => {
   return (
-    <DescriptionSection>
+    <DescriptionSection style={{ opacity: (position - 2000) / 80 }}>
       <ReportSubtitle>
-        <ReportDesc>{date}일 기준으로,</ReportDesc>
-        <ReportDesc>서울시 전체 확진자 수는 {totalNum}명이며,</ReportDesc>
-        <ReportDesc>서울시 추가 확진자 수는 {addNum}명입니다.</ReportDesc>
+        <ReportDesc style={{ opacity: (position - 2200) / 80 }}>
+          {date}일 기준으로,
+        </ReportDesc>
+        <ReportDesc style={{ opacity: (position - 2250) / 80 }}>
+          서울시 전체 확진자 수는 {totalNum}명이며,
+        </ReportDesc>
+        <ReportDesc style={{ opacity: (position - 2300) / 80 }}>
+          서울시 추가 확진자 수는 {addNum}명입니다.{' '}
+        </ReportDesc>
       </ReportSubtitle>
       <GraphContainer>
         <ReportSubtitle>서울시 전체 확진자 현황</ReportSubtitle>

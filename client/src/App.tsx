@@ -10,6 +10,7 @@ import RegionalDeliveryCategoryPage from './pages/service-page/regional-page/reg
 import RegionalEatOutCategoryPage from './pages/service-page/regional-page/regional-shops/regional-eatout/regional-eatout-category/RegionalEatOutCategory.component';
 import Error404 from './components/UI/Error/404.error';
 import Error500 from './components/UI/Error/500.error';
+import ConfirmPage from './pages/service-page/start-page/ConfirmPage.component';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/service' element={<ServiceStartPage />} />
+        <Route path='/service/confirm' element={<ConfirmPage />} />
         <Route
           path='/service/regional/report'
           element={<RegionalReportPage />}

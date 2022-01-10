@@ -66,6 +66,7 @@ export const ButtonWrapper = styled.div`
 export const NextButton = styled.button`
   background-color: white;
   margin: 40px auto;
+  margin-top: 0;
   padding: 5px 20px;
   width: 200px;
   height: 60px;
