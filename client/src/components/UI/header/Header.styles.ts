@@ -1,28 +1,25 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-interface Props {
-  serviceStatic?: boolean;
-}
-
 const linkCSS = css`
-  background-color: #f35434;
+  background-color: #fd7555;
   color: white;
   text-decoration: none;
   font-size: 16px;
   border-radius: 4px;
   padding: 12px 20px;
-  margin: 0 12px 0 0;
-  box-shadow: 1px 2px 1px 1px crimson;
   border: none;
   cursor: pointer;
 
   &:hover {
-    background-color: #f35404;
+    transition: ease-in-out 200ms;
+    padding: 11px 18px;
+    font-weight: bold;
+    font-size: 17px;
   }
 `;
 
-export const HeaderContainer = styled.nav<Props>`
+export const HeaderContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   background-color: #fd7555;
@@ -31,12 +28,6 @@ export const HeaderContainer = styled.nav<Props>`
   width: 100vw;
   position: fixed;
   z-index: 100;
-
-  ${({ serviceStatic }: Props) =>
-    serviceStatic &&
-    css`
-      position: static;
-    `}
 `;
 
 export const LogoContainer = styled(Link)`
@@ -57,16 +48,20 @@ export const LogoContainer = styled(Link)`
 `;
 
 /* 해당 링크 페이지에 따라 밑줄 위치가 이동하는 식으로 구현한다. */
-export const LinkContainer = styled.div``;
+export const LinkContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+`;
 
-export const RegionalLink = styled.button`
+export const ToMainIntro = styled.button`
   ${linkCSS}
 `;
 
-export const PreferenceLink = styled.button`
+export const ToServiceIntro = styled.button`
   ${linkCSS}
 `;
 
-export const TeamLink = styled.button`
+export const ToTeamIntro = styled.button`
   ${linkCSS}
 `;

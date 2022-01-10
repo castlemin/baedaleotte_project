@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import { pageDefault } from '../../../components/UI/global/css.styles';
 
+interface Props {
+  imgName?: string;
+}
+
 export const TeamPageContainer = styled.div`
   ${pageDefault}
-  padding: 20px;
 `;
 
 export const TitleContainer = styled.h1`
@@ -39,6 +42,7 @@ export const ProfileImage = styled.img`
 
 export const Introduction = styled.p`
   font-size: 100%;
+  word-break: keep-all;
 `;
 
 export const MemberDescription = styled.p`

@@ -37,6 +37,8 @@ export const DetailCategoryList = styled.ul`
   padding: 0;
 `;
 
+export const CategoryName = styled.span``;
+
 export const DetailDescContent = styled.p``;
 
 export const DetailCategoryItem = styled.li`

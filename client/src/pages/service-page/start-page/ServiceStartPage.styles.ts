@@ -17,7 +17,7 @@ export const GPSRequestContainer = styled.div`
   height: -moz-fit-content;
   background-color: white;
   width: 45rem;
-  margin: auto;
+  margin: 10px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,11 +35,11 @@ export const RequestDescContainer = styled.p`
   font-size: 20px;
   font-weight: bold;
   word-break: keep-all;
-  margin: 0 46px;
+  margin: 20px 46px;
 `;
 
 export const ApprovalContainer = styled.form`
-  margin: 10px auto;
+  margin: 0 auto;
   border-radius: 5px;
   background-color: lightgrey;
   width: 215px;

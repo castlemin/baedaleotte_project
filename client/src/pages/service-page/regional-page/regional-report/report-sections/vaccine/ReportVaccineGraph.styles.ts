@@ -10,7 +10,6 @@ export const GraphContainer = styled.div`
   text-align: center;
   border-radius: 6px;
   background-color: white;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
   height: -moz-fit-content;
   width: 39.5rem;
   display: flex;
@@ -29,3 +28,5 @@ export const ReportSubtitle = styled.div`
   margin-left: 40px;
   word-break: all;
 `;
+
+export const ReportDesc = styled.p``;

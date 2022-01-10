@@ -9,6 +9,8 @@ export const Comment = styled.li`
   font-weight: bold;
 `;
 
+export const CommentDate = styled.p``;
+
 export const CommentWrapper = styled.ul`
   margin: 1rem 0;
   list-style: none;

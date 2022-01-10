@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sentry_sdk.integrations.flask import FlaskIntegration
 from werkzeug.exceptions import BadRequestKeyError, Forbidden, MethodNotAllowed, RequestTimeout, NotAcceptable, \
     Conflict, InternalServerError, BadGateway
-
+from flask_cors import CORS
 import config
 from static.projectKeys.personalKey import db_setting, secretKey, sentry_dsn
 
@@ -20,6 +20,7 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
     sentry_sdk.init(
         dsn=sentry_dsn,
         integrations=[FlaskIntegration()],

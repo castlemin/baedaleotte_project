@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 import { customAnimation } from '../../../../components/UI/global/css.styles';
 
+interface IProps {
+  id: string;
+}
+
 export const ReportContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -10,8 +14,13 @@ export const ReportContainer = styled.section`
 export const ReportTitle = styled.h1`
   color: #2c3e50;
   font-size: 40px;
+  width: 100%;
+  heigth: 100%;
+  margin: 0;
+  padding: 50px 0 80px 0;
   line-height: 60px 50px;
   text-align: center;
+  background: linear-gradient(to top, #ffefba, #ffffff);
 `;
 
 export const ReportSubtitle = styled.h2`
@@ -20,36 +29,35 @@ export const ReportSubtitle = styled.h2`
   word-break: all;
 `;
 
-export const ThreatMapReportSection = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to bottom, #ffefba, #ffffff);
+export const GraphContainer = styled.div`
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 50px;
 `;
 
-export const ThreatRankReportSection = styled.div`
+/* 리포트 전체를 묶는 란, id 에 따라 
+짝수번째는 왼쪽 정렬, 홀수는 오른쪽으로 정렬합니다.*/
+export const ReportSection = styled.div`
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(to top, #ffefba, #ffffff);
+  display: flex;
+  ${({ id }: IProps) =>
+    Number(id) % 2 === 0
+      ? css`
+          background: linear-gradient(to bottom, #ffefba, #ffffff);
+        `
+      : css`
+          background: linear-gradient(to top, #ffefba, #ffffff);
+          flex-direction: row-reverse;
+        `}
 `;
 
-export const VaccineReportSection = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to bottom, #ffefba, #ffffff);
-`;
-
-export const ConfirmedAllReportSection = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to top, #ffefba, #ffffff);
-`;
-
-export const ConfirmedGuReportSection = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(to bottom, #ffefba, #ffffff);
-`;
-
+/* 버튼들을 flex 레이아웃 지정 */
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;

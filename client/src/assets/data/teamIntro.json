@@ -1,0 +1,47 @@
+[
+  {
+    "memberName": "윤상",
+    "memberRole": "팀 리더, 백엔드 개발자",
+    "memberImage1": "../../../assets/images/team/윤상_face.png",
+    "memberImage2": "../../../assets/images/team/윤상_face.png",
+    "memberIntro1": "안녕하세요! 백엔드, 서버 개발자로서 성장중인 윤상 입니다. 배달어때 프로젝트에선 플라스크를 이용한 백엔드 코딩과 데이터 크롤링(공공API 및 구글MAPS API 활용), 서버 DB세팅 및 배포를 담당 하였습니다!",
+    "memberInto2": "평소 코딩하는것을 즐겁게 생각하였고, 학부생 시절에도 알고리즘 강의를 가장 재밋게 들었던 기억이 있어 지속적으로 개발자로서 성장하고 싶어 엘리스에 지원하였고 열심히 성장 중입니다!",
+    "memberIntro3": "취미는 온라인 게임, 영화보기, 달리기 및 운동하기 입니다 (가끔 알고리즘 문제를 풀기도 합니다..)!"
+  },
+  {
+    "memberName": "유환익",
+    "memberRole": "프론트엔드 개발자",
+    "memberImage1": "../../../assets/images/team/유환익_face.png",
+    "memberImage2": "../../../assets/images/team/유환익_face.png",
+    "memberIntro1": "안녕하세요! 프론트엔드 개발자 + 미래 사업가 유환익입니다. 프로젝트에서는 프론트엔드 개발자로써, 화면 디자인, UI 개발, 백엔드와의 API 통신을 담당하였습니다.",
+    "memberIntro2": "프론트엔드 개발자로서 사람들의 정보 격차를 줄이고 모두에게 평등한 세상을 만드는 데에 기여하는 것을 목표로 하고 있습니다. 따라서, 사용자의 서비스 접근성과 편의성, 유쾌하고 명시적인 UI 및 UX를 만드는 데에 포커스를 두고 있습니다.",
+    "memberIntro3": "맛집 발굴에도 진심인 Foodie 입니다. 네이버 지도와 구글 맵에 저만의 맛집넷을 만드는 재미로 살고 있습니다."
+  },
+  {
+    "memberName": "최성민",
+    "memberRole": "백엔드 개발자",
+    "memberImage1": "../../../assets/images/team/최성민_face.png",
+    "memberImage2": "../../../assets/images/team/최성민_full.png",
+    "memberIntro1": "안녕하세요. 백엔드 개발파트를 맡은 최성민이라고 합니다. 이번 프로젝트에서 뛰어나신 팀원분들과 함께 서버 개발과 DB 구축 등에 기여할 수 있었습니다.",
+    "memberIntro2": "예전부터 it 스타트업에 관심을 갖고 있었는데 정신을 차리니 직접 개발을 배우고 있습니다. 개발과 소통은 물론이고 시장과 서비스에 대한 이해가 뛰어난 개발자로 성장하는 것을 목표로 하고 있습니다.",
+    "memberIntro3": "작년말부터 친구들과 축구학원을 다니기 시작해서 요즘은 축구가 가장 큰 취미입니다. 나중에 프리미어리그에서 봬요."
+  },
+  {
+    "memberName": "김수현",
+    "memberRole": "데이터 분석가",
+    "memberImage1": "../../../assets/images/team/김수현_face.png",
+    "memberImage2": "../../../assets/images/team/김수현_full.png",
+    "memberIntro1": "안녕하세요. 배달어때 프로젝트에서 데이터 분석을 맡은 김수현입니다. 재미있는 프로젝트를 멋진 팀원분들과 함께하게 되어 영광입니다.",
+    "memberIntro2": "데이터 분석 및 모델링을 통해 미래를 예측하여 세상에 도움이 되고 싶어서 데이터 분석/사이언티스트를 목표로 하게 되었습니다. 여러 데이터를 분석해보며 더 성장하고 더 나아갈 것입니다!",
+    "memberIntro3": "좋아하는 것은 아바라 마시며 코딩하기, 간맥하기, 여행다니기 입니다."
+  },
+  {
+    "memberName": "강현희",
+    "memberRole": "데이터 분석가",
+    "memberImage1": "../../../assets/images/team/강현희_face.png",
+    "memberImage2": "../../../assets/images/team/강현희_face.png",
+    "memberIntro1": "안녕하세요 이번 프로젝트에서 데이터 분석을 맡은 강현희입니다. 서버 엔지니어로 일했던 경력이 있으며, 원하는 기능 및 프로그램을 직접 만들어 낼 수 있는 개발자들이 부러워 개발자를 목표로 하게 되었습니다.",
+    "memberIntro2": "배달어때 서비스를 팀원들과 함께 만들어 가며 개발자의 노고와 즐거움을 함께 느낄 수 있었습니다.",
+    "memberIntro3": "좋아하는건 의자에 누워 책 읽기, 에일 맥주 마시기 그리고 식물 키우기 입니다."
+  }
+]

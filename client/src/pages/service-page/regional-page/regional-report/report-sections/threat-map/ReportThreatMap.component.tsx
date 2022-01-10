@@ -2,54 +2,68 @@ import React, { useState } from 'react';
 import {
   AddOn,
   AddOnButton,
+  AddOnCloseButton,
   AddOnDesc,
+  AddOnGraphContainer,
   AddOnTitle,
-  DescriptionSection,
+  ContentDivider,
+  ElementDescSection,
+  GradeList,
+  GradeSection,
   GraphContainer,
+  RateDesc,
+  RateSection,
   ReportSubtitle,
 } from './ReportThreatMap.styles';
 
-import { GuMap } from '../../../../../../assets/data/Graphs/GuMap';
-import { RiskScore } from '../../../../../../assets/data/RiskScore';
 import { Card } from '../../../../../../components/UI/Card/Card.styles';
 import { riskScoreParser } from '../../../../../../assets/data/riskScoreParser';
-import { useRecoilValue } from 'recoil';
-import { userGu } from '../../../../../../store/store';
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
+import prophet from '../../../../../../assets/images/dataset/prophet.png';
+import prophet2 from '../../../../../../assets/images/dataset/prophet2.png';
 
-export const ReportThreatMap: React.FC = () => {
-  const userDistrict = useRecoilValue(userGu);
+interface IProps {
+  location: string;
+  score: any;
+  population: number;
+  family: number;
+  facillity: number;
+  rate: number;
+}
+
+export const ReportThreatMap: React.FC<IProps> = ({
+  location,
+  score,
+  population,
+  family,
+  facillity,
+  children,
+  rate,
+}) => {
   const [open, setOpen] = useState(false);
-  const score = RiskScore();
 
   const handleOpen = () => {
     setOpen((prev) => !prev);
   };
 
   return (
-    <DescriptionSection>
+    <>
       <GraphContainer>
         <ReportSubtitle>내 행정구 위험도 지도</ReportSubtitle>
-        <GuMap />
+        {children}
+      </GraphContainer>
+      <ReportSubtitle>
+        <p>현재 당신의 지역 위험도는 {score}점,</p>
+        <p>{riskScoreParser(score)}등급은 입니다.</p>
         <AddOnButton onClick={handleOpen}>
           위험도 산출 방식이 궁금하다면
         </AddOnButton>
-      </GraphContainer>
-      <ReportSubtitle>
-        <div>
-          <p>현재 당신의 지역 위험도는 {score}점,</p>
-          <p>
-            등급은 {riskScoreParser(score)}
-            입니다.
-          </p>
-          <p>우울한 기분 전환도 할 겸 오늘은 스테이크나 썰러가시죠.</p>
-        </div>
       </ReportSubtitle>
-
       {open && (
         <>
           <BackDrop onCancel={handleOpen} />
           <AddOn addOnOpen={open}>
+            <AddOnCloseButton onClick={handleOpen}>x</AddOnCloseButton>
             <AddOnTitle>코로나 위험도 산출 공식</AddOnTitle>
             <AddOnDesc>
               최근 5일 간의 신규 코로나 확진자 (40점) + 3일 간의 코로나 증감
@@ -57,34 +71,44 @@ export const ReportThreatMap: React.FC = () => {
               다중이용시설 분포 점수 (5점)
             </AddOnDesc>
             <hr />
-            <p>
-              <b>내 지역</b>: {userDistrict}
-            </p>
-            <p>
-              <b>위험도 점수</b>: {score}
-            </p>
-            <div>
-              <p>
-                <b>등급표</b>
-              </p>
-              (현재 등급 = {riskScoreParser(score)})
-              <ul style={{ listStyle: 'none', padding: 0 }}>
+            <AddOnDesc>
+              <b>내 지역</b>: "{location}"
+            </AddOnDesc>
+            <AddOnDesc>
+              <b>위험도 점수</b>: {score} 점
+            </AddOnDesc>
+            <GradeSection>
+              <AddOnDesc>
+                <b>등급표</b>: {riskScoreParser(score)}
+              </AddOnDesc>
+              <GradeList>
                 <li>30점 미만 = {riskScoreParser(29)}</li>
                 <li>60점 미만 = {riskScoreParser(59)}</li>
                 <li>60점 이상 = {riskScoreParser(60)}</li>
-              </ul>
-            </div>
-            <hr />
-            <p style={{ textAlign: 'left' }}>
-              이후 3일 동안의 코로나 증감률 예측치 ={' '}
-            </p>
-            <div style={{ display: 'flex' }}>
-              <Card style={{ height: '150px', width: '240px' }}></Card>
-              <Card style={{ height: '150px', width: '240px' }}></Card>
-            </div>
+              </GradeList>
+            </GradeSection>
+            <ContentDivider />
+            <RateDesc>
+              이후 3일 동안의 코로나 증감률 예측치 =<b>{rate}%</b>
+            </RateDesc>
+            <ElementDescSection>
+              <RateSection>
+                <AddOnDesc>
+                  <b>생활인구 지수</b>: {population}
+                </AddOnDesc>
+                <AddOnDesc>
+                  <b>평균 가구 수</b>: {family}
+                </AddOnDesc>
+                <AddOnDesc>
+                  <b>대중이용시설 분포</b>: {facillity}
+                </AddOnDesc>
+              </RateSection>
+              <AddOnGraphContainer imgUrl={prophet}></AddOnGraphContainer>
+              <AddOnGraphContainer imgUrl={prophet2}></AddOnGraphContainer>
+            </ElementDescSection>
           </AddOn>
         </>
       )}
-    </DescriptionSection>
+    </>
   );
 };

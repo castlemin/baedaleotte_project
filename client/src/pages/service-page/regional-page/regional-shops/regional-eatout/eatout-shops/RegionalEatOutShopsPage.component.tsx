@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Suspense, useEffect, useState, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
-
+import { Audio } from 'react-loader-spinner';
 import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
 /* import axios from 'axios'; */
 import Loading from '../../../../../../components/UI/loading/Loading.component';
@@ -50,7 +50,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
     () => import('../eatout-shops-detail/RegionalEatOutShopDetail.component')
   );
 
-  const params = { lat: 37.48441, lng: 127.087437 };
+  const params = { lat: 37.5384, lng: 126.9654 };
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -125,7 +125,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
 
   return (
     <>
-      {!eatOutShopList ? (
+      {!eatOutShopList.length ? (
         <Loading />
       ) : (
         <>
@@ -208,7 +208,12 @@ const RegionalEatOutShopsPage: React.FC = () => {
             ))}
             <div ref={setTarget}>
               {isLoaded && eatOutShopList.length >= lastIdx ? (
-                <div>loading...</div>
+                <Audio
+                  height='100'
+                  width='100'
+                  color='grey'
+                  arialLabel='loading...'
+                ></Audio>
               ) : null}
             </div>
           </ShopListContainer>

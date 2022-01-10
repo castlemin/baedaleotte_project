@@ -25,11 +25,17 @@ const SeoulMap = React.lazy(() =>
 
 const ServiceStartPage: React.FC = () => {
   const navigate = useNavigate();
+
+  /* 사용자의 좌표를 저장할 상태값 */
   const [userCoords, setUserCoords] = useRecoilState(userLocation);
+
+  /* 사용자가 동의서에 체크 했는지 판단 */
   const [checked, setChecked] = useState(false);
 
+  /* 서울 전체 지도를 불러옴 */
   const seoulMapJson = useFetchGraph('seoul_risk_map_all');
 
+  /* 좌표 정보를 가져온다. */
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -40,9 +46,7 @@ const ServiceStartPage: React.FC = () => {
           });
         },
         (error) => {
-          if (error.code === 1) {
-            navigate('/');
-          }
+          console.log(error);
         },
         {
           enableHighAccuracy: false,
@@ -59,11 +63,12 @@ const ServiceStartPage: React.FC = () => {
     setChecked((checked) => !checked);
   };
 
-  /* memory leak 방지 코드입니다. */
+  /* memory leak 방지 코드 */
   useEffect(() => {
     return () => setChecked(false);
   }, []);
 
+  /* 좌표 가져오기 함수를 실행, 리포트 페이지로 이동 */
   const handleClick = (e: any) => {
     getLocation();
     navigate('regional/report');
@@ -80,10 +85,9 @@ const ServiceStartPage: React.FC = () => {
           <SeoulMap data={seoulMapJson.data} layout={seoulMapJson.layout} />
         </Suspense>
         <RequestDescContainer>
-          보시는 것 처럼 사용자님의 현재 위치 정보를 통해, 위치하신 지역의
-          코로나 위험도를 분석하고 근방 배달음식점을 파악해야 하기 때문이죠.
+          보시는 것처럼 사용자님의 현재 위치 정보를 통해, 위치하신 지역의 코로나
+          위험도를 분석하고 근방 배달음식점을 파악해야 하기 때문이죠.
         </RequestDescContainer>
-        <br />
         <RequestDescContainer>
           회원님의 GPS 정보 사용에 동의하시겠습니까?
         </RequestDescContainer>
