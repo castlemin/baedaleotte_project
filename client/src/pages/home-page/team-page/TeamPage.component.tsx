@@ -47,7 +47,7 @@ const TeamPage = () => {
 
   return (
     <TeamPageContainer ref={sectionRef}>
-      <TeamHeader viewHeight={viewHeight} />
+      <TeamHeader viewHeight={viewHeight} onSetViewHeight={setViewHeight} />
       <MemberContainer>
         <MemberName>윤상</MemberName>
         <FirstParagraph>

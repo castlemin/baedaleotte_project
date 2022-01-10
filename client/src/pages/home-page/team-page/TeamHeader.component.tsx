@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { SetStateAction, useEffect } from 'react';
+import { Dispatch } from 'react';
 import {
   HeaderContainer,
   LeaderLink,
@@ -15,12 +16,16 @@ import { ReactComponent as Logo } from '../../../assets/delivery.svg';
 interface Props {
   serviceStatic?: boolean;
   viewHeight?: any;
+  onSetViewHeight: Dispatch<SetStateAction<number>>;
 }
 
-const TeamHeader: React.FC<Props> = ({ viewHeight }) => {
+const TeamHeader: React.FC<Props> = ({ viewHeight, onSetViewHeight }) => {
   // const handleScroll = (position: number) => {
   //   window.scrollTo({ top: position, behavior: 'smooth' });
   // };
+  useEffect(() => {
+    onSetViewHeight(() => viewHeight);
+  }, []);
   return (
     <HeaderContainer>
       <div>

@@ -17,7 +17,7 @@ export const GPSRequestContainer = styled.div`
   height: -moz-fit-content;
   background-color: white;
   width: 45rem;
-  margin: 10px auto;
+  margin: 30px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
