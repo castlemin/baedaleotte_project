@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import {
@@ -14,6 +15,7 @@ import {
   PlaceHolder,
   ToMainButton,
   ButtonsContainer,
+  TopCategories,
 } from './RegionalDeliveryCategory.styles';
 
 import { weekDay, hour } from '../../../../../../assets/data/weekDay';
@@ -24,10 +26,12 @@ import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.componen
 import { NextButton } from './RegionalDeliveryCategory.styles';
 import { DELIVERY_IMAGES } from '../../../../../../assets/data/imgMapper';
 import { selectedDeliveryCategory } from '../../../../../../store/store';
-import { CategoryTop5 } from '../../../../../../assets/data/Graphs/CategoryTop5';
+import { CATEGORY_TOP_5 } from '../../../../../../assets/data/requestUrls';
 
 const RegionalDeliveryCategoryPage = () => {
   const navigate = useNavigate();
+
+  const [topCategory, setTopCategory] = useState('');
 
   /* 선택한 카테고리를 담는 recoil 상태값 */
   const [categoryStored, setCategoryStored] = useRecoilState(
@@ -38,6 +42,14 @@ const RegionalDeliveryCategoryPage = () => {
 
   /* 모달 경고 메시지를 설정 */
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const fetchTopCategory = async () => {
+      const response = await axios.get(CATEGORY_TOP_5);
+      setTopCategory(response.data);
+    };
+    fetchTopCategory();
+  }, []);
 
   /* shopList 로 이동 */
   const handleToShopList = () => {
@@ -79,26 +91,27 @@ const RegionalDeliveryCategoryPage = () => {
       {!isModalClosed && <BackDrop onCancel={handleCloseModal} />}
       <CategoryTemplate>
         <PageTitle>
-          오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는: <CategoryTop5 />
+          오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는:{' '}
+          <TopCategories>{topCategory}</TopCategories>
           <SelectedOptionsTitle>
             선택 메뉴 메뉴는 1개 이상 선택해주세요.
           </SelectedOptionsTitle>
         </PageTitle>
-        <SelectedContainer>
-          <PlaceHolder selected={categoryStored.length}>
-            카테고리를 선택해주세요.
-          </PlaceHolder>
-          {categoryStored.map((item) => (
-            <SelectedCategory
-              onClick={handleToggleCategory}
-              imgUrl={DELIVERY_IMAGES[item]}
-            >
-              <SelectedTitle>{item}</SelectedTitle>
-            </SelectedCategory>
-          ))}
-        </SelectedContainer>
         <ButtonsContainer>
           <ToMainButton onClick={handleToMain}>메인으로</ToMainButton>
+          <SelectedContainer>
+            <PlaceHolder selected={categoryStored.length}>
+              카테고리를 선택해주세요.
+            </PlaceHolder>
+            {categoryStored.map((item) => (
+              <SelectedCategory
+                onClick={handleToggleCategory}
+                imgUrl={DELIVERY_IMAGES[item]}
+              >
+                <SelectedTitle>{item}</SelectedTitle>
+              </SelectedCategory>
+            ))}
+          </SelectedContainer>
           <NextButton
             onClick={handleToShopList}
             disabled={categoryStored.length < 1}

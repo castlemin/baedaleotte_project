@@ -1,19 +1,19 @@
-import pork_url from '../images/pork_feet.jpeg';
-import night_food_url from '../images/night_food.jpeg';
-import stew_url from '../images/stew.png';
-import japanese_url from '../images/japanese.jpeg';
-import chicken_url from '../images/fried_chicken.jpg';
-import sushi_url from '../images/sushi.jpeg';
-import snack_url from '../images/snack.jpeg';
-import pizza_url from '../images/pizza.jpeg';
-import dessert_url from '../images/dessert.jpeg';
-import porridge_url from '../images/porridge.jpeg';
-import asian_url from '../images/asian.png';
-import burger_url from '../images/burger.jpeg';
-import chinese_url from '../images/chinese.jpeg';
-import korean_url from '../images/korean.jpeg';
-import western_url from '../images/western.jpeg';
-import alcohol_url from '../images/alcohol.jpeg';
+import pork_url from '../images/foodOptions/pork_feet.jpeg';
+import night_food_url from '../images/foodOptions/night_food.jpeg';
+import stew_url from '../images/foodOptions/stew.png';
+import japanese_url from '../images/foodOptions/japanese.jpeg';
+import chicken_url from '../images/foodOptions/fried_chicken.jpg';
+import sushi_url from '../images/foodOptions/sushi.jpeg';
+import snack_url from '../images/foodOptions/snack.jpeg';
+import pizza_url from '../images/foodOptions/pizza.jpeg';
+import dessert_url from '../images/foodOptions/dessert.jpeg';
+import porridge_url from '../images/foodOptions/porridge.jpeg';
+import asian_url from '../images/foodOptions/asian.png';
+import burger_url from '../images/foodOptions/burger.jpeg';
+import chinese_url from '../images/foodOptions/chinese.jpeg';
+import korean_url from '../images/foodOptions/korean.jpeg';
+import western_url from '../images/foodOptions/western.jpeg';
+import alcohol_url from '../images/foodOptions/alcohol.jpeg';
 
 interface imageUrl {
   [index: string]: string;

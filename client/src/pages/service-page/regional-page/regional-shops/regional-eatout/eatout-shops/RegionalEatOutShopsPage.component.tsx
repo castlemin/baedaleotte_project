@@ -147,7 +147,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
 
   return (
     <>
-      {!eatOutShopList ? (
+      {!eatOutShopList.length ? (
         <Loading />
       ) : (
         <>

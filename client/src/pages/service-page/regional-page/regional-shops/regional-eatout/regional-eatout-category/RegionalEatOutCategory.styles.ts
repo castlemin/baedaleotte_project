@@ -103,11 +103,15 @@ export const SelectedTitle = styled.h3`
   border-radius: 3px 3px 0 0;
 `;
 
-export const ButtonsContainer = styled.div``;
+export const ButtonsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+  margin: 0 auto;
+`;
 
 export const ToMainButton = styled.button`
   background-color: white;
-  margin: 0 auto 20px;
   width: 120px;
   height: 50px;
   font-size: 18px;
@@ -129,7 +133,6 @@ export const ToMainButton = styled.button`
 
 export const NextButton = styled.button`
   background-color: white;
-  margin-left: 20px;
   width: 120px;
   height: 50px;
   font-size: 18px;

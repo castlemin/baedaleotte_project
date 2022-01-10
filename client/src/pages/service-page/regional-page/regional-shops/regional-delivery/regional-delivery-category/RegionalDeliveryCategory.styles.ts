@@ -52,6 +52,10 @@ export const PageTitle = styled.h2`
   text-align: center;
 `;
 
+export const TopCategories = styled.span`
+  color: darkred;
+`;
+
 export const SelectedOptionsTitle = styled.h3`
   font-size: 1.5rem;
   margin-bottom: 10px;
@@ -104,14 +108,16 @@ export const SelectedTitle = styled.h3`
 `;
 
 export const ButtonsContainer = styled.div`
-  margin: auto;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto;
 `;
 
 export const ToMainButton = styled.button`
   ackground-color: white;
   width: 120px;
   height: 50px;
-  margin: 0 auto 20px;
   font-size: 18px;
   font-weight: bold;
   border: none;
@@ -131,7 +137,6 @@ export const ToMainButton = styled.button`
 
 export const NextButton = styled.button`
   background-color: white;
-  margin-left: 20px;
   width: 120px;
   height: 50px;
   font-size: 18px;

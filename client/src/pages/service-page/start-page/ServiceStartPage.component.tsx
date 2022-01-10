@@ -1,5 +1,4 @@
-import React, { Suspense, useEffect, useState, useMemo } from 'react';
-import axios from 'axios';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { useFetchGraph } from '../../../hooks/useFetchJson';
@@ -15,9 +14,8 @@ import {
   RequestDescContainer,
   ExampleTitle,
 } from './ServiceStartPage.styles';
-import { userGu, userLocation } from '../../../store/store';
+import { userLocation } from '../../../store/store';
 import Loading from '../../../components/UI/loading/Loading.component';
-import { USER_LOCATION_URL } from '../../../assets/data/requestUrls';
 
 const SeoulMap = React.lazy(() =>
   import('../../../assets/data/Graphs/SeoulMap').then(({ SeoulMap }) => ({

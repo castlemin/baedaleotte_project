@@ -176,11 +176,10 @@ const RegionalDeliveryShopsPage = () => {
       ]);
     }
   };
-  console.log(deliveryShopList);
 
   return (
     <>
-      {!deliveryShopList ? (
+      {!deliveryShopList.length ? (
         <Loading />
       ) : (
         <>

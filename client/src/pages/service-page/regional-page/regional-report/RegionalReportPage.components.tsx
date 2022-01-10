@@ -10,11 +10,9 @@ import {
   RISK_SCORE_DETAIL_URL,
   RISK_SCORE_URL,
   SEOUL_RISK_MAP_URL,
-  USER_LOCATION_URL,
   VAC_GRAPH_URL,
 } from '../../../../assets/data/requestUrls';
 import {
-  userLocation,
   userGu,
   ThreatScore,
   ThreatScoreDetail,
@@ -39,9 +37,6 @@ const RegionalReportPage: React.FC = () => {
   const [position, setPosition] = useState(0);
 
   const navigate = useNavigate();
-
-  /* 사용자의 좌표 정보 상태값을 전역 store에서 가져옴 */
-  const userCoords = useRecoilValue(userLocation);
 
   /* userGu 상태 atom에 userDistrict이름으로 저장하기 위한 상태값 */
   const userDistrict = useRecoilValue(userGu);
@@ -147,7 +142,6 @@ const RegionalReportPage: React.FC = () => {
     };
   }, []);
 
-  console.log(riskScoreDetail);
   return (
     <ReportContainer>
       {/* 그래프가 로드 되지 않았을 시, 대신 로딩 페이지를 보여줍니다. */}
@@ -215,7 +209,7 @@ const RegionalReportPage: React.FC = () => {
             ))}
           </Suspense>
           {/* 위험도 점수가 60점 이상이라면 내 지역 배달 음식 카테고리로, 
-          그렇지 않다면 외식점 카테고리 와 배달음식점 으로 이동을 제한. */}
+          그렇지 않다면 (외식점 카테고리 또는 배달음식점) 으로 이동을 제한. */}
           <ButtonWrapper>
             {Number(riskScore) >= 60 ? (
               <NextButton id='toDelivery' onClick={handleToCategory}>

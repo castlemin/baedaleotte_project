@@ -33,8 +33,6 @@ const ConfirmPage = () => {
     sendUserLocation();
   }, []);
 
-  console.log(userDistrict);
-
   const handleToReport = () => {
     navigate('/service/regional/report');
   };

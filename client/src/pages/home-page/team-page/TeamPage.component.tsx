@@ -45,8 +45,6 @@ const TeamPage = () => {
     };
   }, []);
 
-  console.log(position);
-
   return (
     <TeamPageContainer ref={sectionRef}>
       <TeamHeader viewHeight={viewHeight} />
