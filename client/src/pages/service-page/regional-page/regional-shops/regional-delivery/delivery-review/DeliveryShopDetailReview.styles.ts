@@ -34,6 +34,8 @@ export const ButtonWrapper = styled.div`
   align-items: center;
 `;
 
+export const PageNum = styled.span``;
+
 export const NextButton = styled.button`
   background-color: white;
   margin: 20px;
