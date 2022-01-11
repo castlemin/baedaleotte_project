@@ -104,6 +104,10 @@ export const ShopImgContainer = styled.div<Props>`
     css`
       background-image: url(${url});
     `};
+
+  &:hover {
+    opacity: 0.85;
+  }
 `;
 
 export const ShopContainer = styled.div`

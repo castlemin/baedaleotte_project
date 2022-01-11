@@ -31,9 +31,11 @@ export const CategoryContainer = styled.div`
   margin: 10px;
   border-radius: 6px;
   cursor: pointer;
+  opacity: 0.85;
 
   &:hover {
     box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+    opacity: 1;
     transition: 200ms ease;
     transform: scale(1.03);
   }
@@ -93,6 +95,14 @@ export const SelectedCategory = styled.div`
   width: 100px;
   margin: 5px 10px;
   cursor: pointer;
+  opacity: 0.85;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+    transition: 200ms ease;
+    transform: scale(1.03);
+    opacity: 1;
+  }
 `;
 
 export const SelectedTitle = styled.h3`

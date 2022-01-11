@@ -24,6 +24,7 @@ export const CategoryContainer = styled.div`
     css`
       background-image: url(${imgUrl});
     `}
+  opacity: 0.85;
   background-size: cover;
   background-position: center;
   height: 200px;
@@ -36,6 +37,7 @@ export const CategoryContainer = styled.div`
     box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
     transition: 200ms ease;
     transform: scale(1.03);
+    opacity: 1;
   }
 `;
 
@@ -89,7 +91,7 @@ export const SelectedCategory = styled.div`
     css`
       background-image: url(${imgUrl});
     `}
-
+  opacity: 0.85;
   background-size: cover;
   background-position: center;
   border-radius: 3px;
@@ -97,6 +99,13 @@ export const SelectedCategory = styled.div`
   width: 100px;
   margin: 5px 10px;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+    transform: scale(1.03);
+    transition: 200ms ease;
+    opacity: 1;
+  }
 `;
 
 export const SelectedTitle = styled.h3`

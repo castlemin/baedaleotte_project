@@ -34,4 +34,5 @@ export const ConfirmButton = styled.button`
   height; 80px;
   background: none;
   border: none;
+  cursor: pointer;
 `;
