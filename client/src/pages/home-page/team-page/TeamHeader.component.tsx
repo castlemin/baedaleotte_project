@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { SetStateAction, useEffect } from 'react';
+import { Dispatch } from 'react';
 import {
   HeaderContainer,
   LeaderLink,
@@ -15,12 +16,15 @@ import { ReactComponent as Logo } from '../../../assets/delivery.svg';
 interface Props {
   serviceStatic?: boolean;
   viewHeight?: any;
+  onSetViewHeight: Dispatch<SetStateAction<number>>;
 }
 
-const TeamHeader: React.FC<Props> = ({ viewHeight }) => {
-  // const handleScroll = (position: number) => {
-  //   window.scrollTo({ top: position, behavior: 'smooth' });
-  // };
+const TeamHeader: React.FC<Props> = ({ viewHeight, onSetViewHeight }) => {
+  /* 스크롤 액션을 위한 뷰 포트에 따른 위치 지정, 화면 렌더링 이후 저장*/
+  useEffect(() => {
+    onSetViewHeight(() => viewHeight);
+  }, []);
+
   return (
     <HeaderContainer>
       <div>

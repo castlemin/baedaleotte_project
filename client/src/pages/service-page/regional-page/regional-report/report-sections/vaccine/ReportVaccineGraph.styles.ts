@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const DescriptionSection = styled.section`
-  margin-top: 8%;
   display: flex;
   align-items: center;
 `;

@@ -4,14 +4,11 @@ import { useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { Audio } from 'react-loader-spinner';
 
-import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
+import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
 import Loading from '../../../../../../components/UI/loading/Loading.component';
 import RegionalShopDetail from '../delivery-shops-detail/RegionalDeliveryShopDetail.component';
 
-import {
-  selectedDeliveryCategory,
-  userLocation,
-} from '../../../../../../store/store';
+import { selectedDeliveryCategory } from '../../../../../../store/store';
 
 import {
   HeadingContainer,
@@ -29,6 +26,7 @@ import {
   DescItem,
   DescName,
   ListItem,
+  Threshold,
 } from './RegionalDeliveryShopsPage.styles';
 
 import { FOOD_DELIVERY_LIST_URL } from '../../../../../../assets/data/requestUrls';
@@ -36,7 +34,6 @@ import { formatTime } from '../../../../../../functions/formatter';
 
 const RegionalDeliveryShopsPage = () => {
   const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
-  const userDistrict = useRecoilValue(userLocation);
   const params = { lat: 37.5384, lng: 126.9654 };
 
   const navigate = useNavigate();
@@ -68,8 +65,7 @@ const RegionalDeliveryShopsPage = () => {
   /* CORS 규약 위반 에러 방지를 위한 헤더 */
   const cors = axios.create({
     headers: {
-      'Access-Control-Allow-Origin':
-        'http://elice-kdt-3rd-team-04.koreacentral.cloudapp.azure.com',
+      'Access-Control-Allow-Origin': '*',
     },
   });
 
@@ -187,13 +183,13 @@ const RegionalDeliveryShopsPage = () => {
             내 주변 외식 음식점 추천 리스트
           </DeliveryShopListTitle>
           <HeadingContainer>
-            <ToMainPageButton onClick={handleToMain}>
-              메인 화면
-            </ToMainPageButton>
+            <ToMainPageButton onClick={handleToMain}>메인으로</ToMainPageButton>
             <CategoryIndicator>
               선택하신{' '}
-              {chosenDeliveryCategories.map((item) => (
-                <CategoryNameContainer>[{item}]</CategoryNameContainer>
+              {chosenDeliveryCategories.map((item: any) => (
+                <CategoryNameContainer key={item.restaurant_id}>
+                  [{item}]
+                </CategoryNameContainer>
               ))}
               에 대한 추천 결과입니다.
             </CategoryIndicator>
@@ -233,8 +229,13 @@ const RegionalDeliveryShopsPage = () => {
                   </ShopTitleContainer>
                   <ShopDescContainer id={item.restaurant_id}>
                     <DescName>카테고리</DescName>:{' '}
-                    {item.categories.map((cat: string[]) => (
-                      <ListItem id={item.restaurant_id}>{cat}</ListItem>
+                    {item.categories.map((cat: any) => (
+                      <ListItem
+                        key={`${cat.restaurant_id}${cat.name}`}
+                        id={item.restaurant_id}
+                      >
+                        {cat}
+                      </ListItem>
                     ))}
                     <DescItem>
                       <DescName>영업시간</DescName>:{' '}
@@ -252,7 +253,7 @@ const RegionalDeliveryShopsPage = () => {
                 </ShopContainer>
               ))}
             </Suspense>
-            <div ref={setTarget}>
+            <Threshold ref={setTarget}>
               {isLoaded && deliveryShopList.length >= lastIdx ? (
                 <Audio
                   height='100'
@@ -261,7 +262,7 @@ const RegionalDeliveryShopsPage = () => {
                   arialLabel='loading...'
                 ></Audio>
               ) : null}
-            </div>
+            </Threshold>
           </ShopListContainer>
         </>
       )}

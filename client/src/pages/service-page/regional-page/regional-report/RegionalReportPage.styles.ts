@@ -9,6 +9,7 @@ export const ReportContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  ${customAnimation}
 `;
 
 export const ReportTitle = styled.h1`
@@ -38,6 +39,7 @@ export const GraphContainer = styled.div`
   width: fit-content;
   height: fit-content;
   margin: 0 50px;
+  animation: fadein 1s;
 `;
 
 /* 리포트 전체를 묶는 란, id 에 따라 
@@ -66,6 +68,7 @@ export const ButtonWrapper = styled.div`
 export const NextButton = styled.button`
   background-color: white;
   margin: 40px auto;
+  margin-top: 0;
   padding: 5px 20px;
   width: 200px;
   height: 60px;

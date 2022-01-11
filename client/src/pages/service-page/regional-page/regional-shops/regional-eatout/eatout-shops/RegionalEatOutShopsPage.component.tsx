@@ -1,14 +1,13 @@
 import axios from 'axios';
 import React, { Suspense, useEffect, useState, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
-import { Audio } from 'react-loader-spinner';
-import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
-/* import axios from 'axios'; */
+import { TailSpin } from 'react-loader-spinner';
+import { useNavigate } from 'react-router-dom';
+import { BaseProps } from 'react-loader-spinner/dist/type';
+
+import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
 import Loading from '../../../../../../components/UI/loading/Loading.component';
-import {
-  selectedEatOutCategory,
-  userLocation,
-} from '../../../../../../store/store';
+import { selectedEatOutCategory } from '../../../../../../store/store';
 
 import {
   formatEatOutWeekdayHour,
@@ -28,16 +27,29 @@ import {
   SortButtonContainer,
   ShopContainer,
   EatoutShopListTitle,
+  Threshold,
 } from './RegionalEatOutShopsPage.styles';
 import { EAT_OUT_LIST_URL } from '../../../../../../assets/data/requestUrls';
+import {
+  DescName,
+  ToMainPageButton,
+} from '../../regional-delivery/delivery-shops/RegionalDeliveryShopsPage.styles';
+
+interface TailSpinProps extends BaseProps {
+  radius?: string | number;
+  type: string;
+}
 
 const RegionalEatOutShopsPage: React.FC = () => {
   const [eatOutShopList, setEatOutShopList] = useState<any[]>([]);
+
   const [selectShop, setSelectShop] = useState('');
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const [detailViewHeight, setDetailViewHeight] = useState(0);
   const chosenEatOutCategories = useRecoilValue(selectedEatOutCategory);
-  const userCoords = useRecoilValue(userLocation);
+
+  const [detailViewHeight, setDetailViewHeight] = useState(0);
+
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(8);
@@ -50,11 +62,18 @@ const RegionalEatOutShopsPage: React.FC = () => {
     () => import('../eatout-shops-detail/RegionalEatOutShopDetail.component')
   );
 
+  /* 좌표를 딤아 넘겨 줄 params */
   const params = { lat: 37.5384, lng: 126.9654 };
+
+  const cors = axios.create({
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  });
 
   useEffect(() => {
     const fetchRestaurants = async () => {
-      const res = await axios.post(EAT_OUT_LIST_URL, params);
+      const res = await cors.post(EAT_OUT_LIST_URL, params);
       const data = res.data;
       const filteredData = await data.filter(
         (item: any) =>
@@ -109,6 +128,10 @@ const RegionalEatOutShopsPage: React.FC = () => {
     setIsDetailOpen((prev) => !prev);
   };
 
+  const handleToMain = () => {
+    navigate('/');
+  };
+
   const handleClickSort = (event: any) => {
     if (event.target.id === 'review') {
       setEatOutShopList((prev) => [
@@ -132,17 +155,14 @@ const RegionalEatOutShopsPage: React.FC = () => {
           <EatoutShopListTitle>
             내 주변 외식 음식점 추천 리스트
           </EatoutShopListTitle>
-          <HeadingContainer
-            style={{
-              display: 'flex',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
-            }}
-          >
+          <HeadingContainer>
+            <ToMainPageButton onClick={handleToMain}>메인으로</ToMainPageButton>
             <CategoryIndicator>
               선택하신{' '}
-              {chosenEatOutCategories.map((item) => (
-                <CategoryNameContainer>[{item}]</CategoryNameContainer>
+              {chosenEatOutCategories.map((item: any) => (
+                <CategoryNameContainer key={item.categories}>
+                  [{item}]
+                </CategoryNameContainer>
               ))}
               에 대한 추천 결과입니다.
             </CategoryIndicator>
@@ -180,42 +200,43 @@ const RegionalEatOutShopsPage: React.FC = () => {
                 </ShopTitleContainer>
                 <ShopDescContainer id={item.id}>
                   <ShopDescContent>
-                    <b>카테고리</b>: {item.category}
+                    <DescName>카테고리</DescName>: {item.category}
                   </ShopDescContent>
                   <ShopDescContent>
-                    <b>영업시간(주중)</b>: {formatEatOutWeekdayHour(item.hour)}
+                    <DescName>영업시간(주중)</DescName>:{' '}
+                    {formatEatOutWeekdayHour(item.hour)}
                   </ShopDescContent>
                   <ShopDescContent>
                     {formatEatOutWeekendHour(item.hour) === '' ? (
                       ''
                     ) : (
                       <ShopDescContent>
-                        <b>영업시간(주말)</b>:{' '}
+                        <DescName>영업시간(주말)</DescName>:{' '}
                         {formatEatOutWeekendHour(item.hour)}
                       </ShopDescContent>
                     )}
                   </ShopDescContent>
                   <ShopDescContent>
-                    <b>평균평점</b>:{' '}
+                    <DescName>평균평점</DescName>:{' '}
                     {item.rating === 0 ? '평점 없음' : `${item.rating}점`}
                   </ShopDescContent>
 
                   <ShopDescContent>
-                    <b>주소</b>: {item.address}
+                    <DescName>주소</DescName>: {item.address}
                   </ShopDescContent>
                 </ShopDescContainer>
               </ShopContainer>
             ))}
-            <div ref={setTarget}>
+            <Threshold ref={setTarget}>
               {isLoaded && eatOutShopList.length >= lastIdx ? (
-                <Audio
-                  height='100'
-                  width='100'
-                  color='grey'
-                  arialLabel='loading...'
-                ></Audio>
+                <TailSpin
+                  color='#00BFFF'
+                  height={80}
+                  width={80}
+                  arialLabel='loading'
+                />
               ) : null}
-            </div>
+            </Threshold>
           </ShopListContainer>
         </>
       )}

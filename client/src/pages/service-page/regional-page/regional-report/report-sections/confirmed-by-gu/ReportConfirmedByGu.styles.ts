@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const DescriptionSection = styled.section`
-  margin-top: 8%;
   display: flex;
   align-items: center;
 `;
@@ -22,7 +21,7 @@ export const ReportTitle = styled.h1`
   font-size: 40px;
   text-align: center;
 `;
-
+export const ReportDesc = styled.p``;
 export const ReportSubtitle = styled.div`
   font-size: 24px;
   text-align: center;

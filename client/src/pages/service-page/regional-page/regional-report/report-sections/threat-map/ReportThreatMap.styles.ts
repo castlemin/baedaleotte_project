@@ -6,6 +6,7 @@ interface Props {
 }
 
 export const DescriptionSection = styled.section`
+  margin-bottom: 5%;
   display: flex;
   align-items: center;
 `;
@@ -36,7 +37,6 @@ export const GraphContainer = styled.div`
   text-align: center;
   border-radius: 6px;
   background-color: white;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
   height: -moz-fit-content;
   width: 34.5rem;
   display: flex;
@@ -53,7 +53,7 @@ export const AddOn = styled.div<Props>`
   padding: 1rem;
   text-align: center;
   width: 70rem;
-  height: 42rem;
+  height: 48rem;
   z-index: 10;
   position: fixed;
   top: 5vh;
@@ -83,12 +83,18 @@ export const AddOnDesc = styled.p`
   word-break: keep-all;
 `;
 
+export const AddOnName = styled.span`
+  font-size: bold;
+`;
+
 export const GradeSection = styled.section``;
 
 export const GradeList = styled.ul`
   list-style: none;
   padding: 0;
 `;
+
+export const GradeListItem = styled.li``;
 
 export const RateDesc = styled.p`
   text-align: center;
@@ -134,3 +140,5 @@ export const ReportSubtitle = styled.div`
   margin-left: 40px;
   word-break: all;
 `;
+
+export const ReportDesc = styled.p``;

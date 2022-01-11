@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/UI/header/Header.component';
-import { SeoulMap } from '../../assets/data/Graphs/SeoulMap';
-import teamImg from '../../../public/img/team/team.png';
-import IntroLottie from '../../components/UI/IntroLottie/IntroLottie.component';
+import { SeoulMap } from '../../assets/data/graphs/SeoulMap';
+import teamImg from '../../assets/images/team/team.png';
+import IntroLottie from '../../components/UI/introLottie/IntroLottie.component';
 import { HOME_IMG_CONFIG } from '../../assets/data/homeImgConfig';
 import { useFetchGraph } from '../../hooks/useFetchJson';
 
@@ -19,6 +19,7 @@ import {
   TeamIntroContainer,
   TeamImage,
   Notice,
+  IntroductionTitle,
 } from './HomePage.styles';
 
 const HomePage: React.FC = () => {
@@ -64,7 +65,7 @@ const HomePage: React.FC = () => {
         <ContentsContainer>
           <IntroLottie />
           <TextWrapper>
-            <TitleContainer>배달어때?</TitleContainer>
+            <TitleContainer position={position}>배달어때?</TitleContainer>
             <SubtitleContainer aniLevitate position={position}>
               오늘 배달시키기 딱 좋은 날이구나!
             </SubtitleContainer>
@@ -88,17 +89,29 @@ const HomePage: React.FC = () => {
         <ContentsContainer>
           <SeoulMap data={seoulMapJson.data} layout={seoulMapJson.layout} />
           <TextWrapper>
-            <TitleContainer>집콕 배달 추천</TitleContainer>
-            <SubtitleContainer position={position}>
+            <TitleContainer position={position}>집콕 배달 추천</TitleContainer>
+            <IntroductionTitle
+              style={{ opacity: (position - 320) / 80 }}
+              position={position}
+            >
               오늘이 나가먹을 상인가?!
-            </SubtitleContainer>
-            <DescContainer position={position}>
+            </IntroductionTitle>
+            <DescContainer
+              style={{ opacity: (position - 380) / 80 }}
+              position={position}
+            >
               지역의 안전도를 확인하세요.
             </DescContainer>
-            <DescContainer position={position}>
+            <DescContainer
+              style={{ opacity: (position - 440) / 80 }}
+              position={position}
+            >
               그리고, 오늘이 외식날인지
             </DescContainer>
-            <DescContainer position={position}>
+            <DescContainer
+              style={{ opacity: (position - 500) / 80 }}
+              position={position}
+            >
               배달날인지 파악하세요.
             </DescContainer>
           </TextWrapper>
@@ -106,23 +119,48 @@ const HomePage: React.FC = () => {
       </RegIntroContainer>
       <TeamIntroContainer>
         <ContentsContainer>
-          <TeamImage src='img/team.png' style={HOME_IMG_CONFIG} alt='team' />
+          <TeamImage src={teamImg} style={HOME_IMG_CONFIG} alt='team' />
           <TextWrapper>
-            <TitleContainer>팀 소개</TitleContainer>
-            <SubtitleContainer position={position}>
+            <TitleContainer
+              style={{ opacity: (position - 1100) / 80 }}
+              position={position}
+            >
+              팀 소개
+            </TitleContainer>
+            <IntroductionTitle
+              style={{ margin: 0, opacity: (position - 1160) / 80 }}
+              position={position}
+            >
               멋진 사람들, "언더톢의 반란"을
-              <br /> 소개합니다.
-            </SubtitleContainer>
-            <DescContainer position={position}>
+            </IntroductionTitle>
+            <IntroductionTitle
+              style={{ margin: 0, opacity: (position - 1220) / 80 }}
+              position={position}
+            >
+              소개합니다.
+            </IntroductionTitle>
+            <DescContainer
+              style={{ opacity: (position - 1280) / 80 }}
+              position={position}
+            >
               개발에 대한 열정으로 똘똘 뭉친
             </DescContainer>
-            <DescContainer position={position}>
+            <DescContainer
+              style={{ opacity: (position - 1340) / 80 }}
+              position={position}
+            >
               멋진 반란을 꾀하는 그들,
             </DescContainer>
-            <DescContainer position={position}>
+            <DescContainer
+              style={{ opacity: (position - 1400) / 80 }}
+              position={position}
+            >
               우리 개발팀을 만나보세요.
             </DescContainer>
-            <StartButton onClick={handleToTeamSection}>
+            <StartButton
+              style={{ opacity: (position - 1480) / 80 }}
+              onClick={handleToTeamSection}
+            >
               팀 소개로 이동
             </StartButton>
           </TextWrapper>

@@ -5,33 +5,38 @@ import {
   ReportSubtitle,
 } from './ReportVaccineGraph.styles';
 
-import { VaccineGraph } from '../../../../../../assets/data/Graphs/VaccineGraph';
-import { RiskScore } from '../../../../../../assets/data/RiskScore';
-import { workerData } from 'worker_threads';
 import { ReportDesc } from '../threat-rank/ReportThreatRank.styles';
 
 interface IProps {
-  vacRate: number;
+  secVacRate: number;
+  thrVacRate: number;
   date: string;
+  position: number;
 }
 
 export const ReportVaccineGraph: React.FC<IProps> = ({
-  vacRate,
+  secVacRate,
+  thrVacRate,
   date,
+  position,
   children,
 }) => {
-  const score = RiskScore();
-
   return (
-    <DescriptionSection>
+    <DescriptionSection style={{ opacity: (position - 1200) / 80 }}>
       <GraphContainer>
         <ReportSubtitle>서울시 백신 접종률</ReportSubtitle>
         {children}
       </GraphContainer>
       <ReportSubtitle>
         <ReportDesc>{date}일 기준으로,</ReportDesc>
-        <ReportDesc>
-          현재 서울시 전체의 2차 백신 접종률은 {vacRate}%입니다.
+        <ReportDesc style={{ opacity: (position - 1300) / 80 }}>
+          현재 서울시의 2차 백신 접종률은 {secVacRate}%입니다.
+        </ReportDesc>
+        <ReportDesc style={{ opacity: (position - 1350) / 80 }}>
+          현재 서울시의 3차 백신 접종률은 {thrVacRate}%입니다.
+        </ReportDesc>
+        <ReportDesc style={{ opacity: (position - 1400) / 80 }}>
+          {secVacRate}% 를 따라잡을 때까지 영차 영차!
         </ReportDesc>
       </ReportSubtitle>
     </DescriptionSection>

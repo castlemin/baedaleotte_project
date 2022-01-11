@@ -38,13 +38,12 @@ export const LogoContainer = styled(Link)`
   > svg {
     height: 40px;
   }
+`;
 
-  > div {
-    color: white;
-    margin-left: 5px;
-    font-size: 23px;
-    font-weight: bold;
-  }
+export const LogoTitle = styled.div`
+  color: white;
+  margin-left: 5px;
+  font-size: 23px;
 `;
 
 /* 해당 링크 페이지에 따라 밑줄 위치가 이동하는 식으로 구현한다. */

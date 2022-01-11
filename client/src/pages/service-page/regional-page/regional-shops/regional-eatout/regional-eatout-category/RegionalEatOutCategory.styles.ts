@@ -8,6 +8,8 @@ interface Props {
 export const CategoryTemplate = styled.div`
   display: flex;
   flex-direction: column;
+  background: linear-gradient(to top, #ffefba, #ffffff);
+  height: 100vh;
 `;
 
 export const CategoryListContainer = styled.div`
@@ -17,6 +19,7 @@ export const CategoryListContainer = styled.div`
   border-radius: 6px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
   margin: 0 200px;
+  background-color: white;
 `;
 
 export const CategoryContainer = styled.div`
@@ -31,9 +34,11 @@ export const CategoryContainer = styled.div`
   margin: 10px;
   border-radius: 6px;
   cursor: pointer;
+  opacity: 0.85;
 
   &:hover {
     box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+    opacity: 1;
     transition: 200ms ease;
     transform: scale(1.03);
   }
@@ -73,6 +78,7 @@ export const PlaceHolder = styled.p`
   display: block;
   margin: auto;
   font-weight: bold;
+  color: grey;
   ${({ selected }: Props) =>
     selected &&
     css`
@@ -92,6 +98,15 @@ export const SelectedCategory = styled.div`
   height: 100px;
   width: 100px;
   margin: 5px 10px;
+  cursor: pointer;
+  opacity: 0.85;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+    transition: 200ms ease;
+    transform: scale(1.03);
+    opacity: 1;
+  }
 `;
 
 export const SelectedTitle = styled.h3`
@@ -102,9 +117,36 @@ export const SelectedTitle = styled.h3`
   border-radius: 3px 3px 0 0;
 `;
 
+export const ButtonsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+  margin: 0 auto;
+`;
+
+export const ToMainButton = styled.button`
+  background-color: white;
+  width: 120px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 1px 2px 1px 1px darkgrey;
+  box-sizing: border-box;
+  padding: 0;
+  :hover {
+    background-color: #88aed0;
+    transition: ease-in 185ms;
+    box-shadow: 1px 2px 1px 1px grey;
+    border-color: wheat;
+    color: white;
+  }
+`;
+
 export const NextButton = styled.button`
   background-color: white;
-  margin: 0 auto 20px;
   width: 120px;
   height: 50px;
   font-size: 18px;

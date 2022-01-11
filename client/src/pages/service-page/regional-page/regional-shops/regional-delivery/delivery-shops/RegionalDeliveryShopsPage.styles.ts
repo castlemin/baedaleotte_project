@@ -109,6 +109,9 @@ export const ShopImgContainer = styled.div<Props>`
     css`
       background-image: url(https://www.yogiyo.co.kr/${url});
     `};
+  &:hover {
+    opacity: 0.85;
+  }
 `;
 
 export const ShopContainer = styled.div`
@@ -120,6 +123,7 @@ export const ShopContainer = styled.div`
   border-radius: 6px;
 
   &:hover {
+    opacity: 0.85;
     transition: all 200ms ease;
     cursor: pointer;
     transform: scale(1.2);
@@ -168,3 +172,5 @@ export const SortButton = styled.button`
     color: white;
   }
 `;
+
+export const Threshold = styled.div``;

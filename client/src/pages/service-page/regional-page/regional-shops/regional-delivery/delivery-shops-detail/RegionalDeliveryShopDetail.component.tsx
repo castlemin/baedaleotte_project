@@ -10,6 +10,7 @@ import {
   CloseBtn,
   DetailShopTitle,
   DetailItemsWrapper,
+  DescName,
 } from './RegionalDeliveryShopDetail.styles';
 import {
   formatPhoneNumber,
@@ -54,22 +55,28 @@ const RegionalShopDetail: React.FC<Props> = ({
             <DetailImage imgUrl={item.logo_url}></DetailImage>
             <CategoryListWrapper>
               <DetailCategoryList>
-                <b>카테고리</b>:{' '}
+                <DescName>카테고리</DescName>:{' '}
                 {item.categories.map((cat: any) => (
-                  <DetailCategoryItem>{cat}</DetailCategoryItem>
+                  <DetailCategoryItem
+                    key={`${item.restauran_id}${item.categories}`}
+                  >
+                    {cat}
+                  </DetailCategoryItem>
                 ))}
               </DetailCategoryList>
               <DetailDescContent>
-                <b>평균평점</b>: {formatRating(item.review_avg)}
+                <DescName>평균평점</DescName>: {formatRating(item.review_avg)}
               </DetailDescContent>
               <DetailDescContent>
-                <b>전화번호</b>: {formatPhoneNumber(item.phone)}
+                <DescName>전화번호</DescName>: {formatPhoneNumber(item.phone)}
               </DetailDescContent>
               <DetailDescContent>
-                <b>영업시간</b>: {formatTime(item.begin, item.end)}
+                <DescName>영업시간</DescName>:{' '}
+                {formatTime(item.begin, item.end)}
               </DetailDescContent>
               <DetailDescContent>
-                <b>최소주문금액</b>: {formatPrice(item.min_order_amount)}원
+                <DescName>최소주문금액</DescName>:{' '}
+                {formatPrice(item.min_order_amount)}원
               </DetailDescContent>
             </CategoryListWrapper>
           </DetailItemsWrapper>

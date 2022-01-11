@@ -13,6 +13,8 @@ import {
   PrevButton,
   NextButton,
   ButtonWrapper,
+  CommentName,
+  PageNum,
 } from './DeliveryShopDetailReview.styles';
 
 interface Props {
@@ -42,16 +44,14 @@ const DeliveryShopDetailReview = ({ shopId }: Props) => {
     return curItems;
   };
 
-  console.log(review);
-
   return (
     <div>
       <Title>리뷰</Title>
       <CommentWrapper>
         {limitCurItems(review).map((item: any) => (
-          <Content>
+          <Content key={item.row_num}>
             <Comment>
-              <b>{item.row_num}.</b> {item.comment}
+              <CommentName>{item.row_num}.</CommentName> {item.comment}
             </Comment>
             <CommentRating>{formatRating(item.rating)}</CommentRating>
           </Content>
@@ -63,7 +63,7 @@ const DeliveryShopDetailReview = ({ shopId }: Props) => {
           >
             이전
           </PrevButton>
-          <span>{curPage}/20</span>
+          <PageNum>{curPage}/20</PageNum>
           <NextButton
             onClick={() => setCurPage((prev) => prev + 1)}
             disabled={curPage === 20}

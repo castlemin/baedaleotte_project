@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   pageDefault,
   customAnimation,
@@ -31,11 +31,16 @@ export const TextWrapper = styled.div`
   margin-left: 20px;
 `;
 
-export const TitleContainer = styled.h1`
+export const TitleContainer = styled.h1<Props>`
   font-size: 3rem;
   font-weight: unset;
   margin: 0;
-  animation: fadein 2s;
+  ${({ position }: Props) =>
+    position - 200 <= 0 &&
+    css`
+      display: block;
+      animation: pop-up 2s;
+    `}
 `;
 
 export const SubtitleContainer = styled.h2<Props>`
@@ -46,21 +51,22 @@ export const SubtitleContainer = styled.h2<Props>`
     aniLevitate ? `fadein 2s` : 'none'};
 `;
 
+export const IntroductionTitle = styled.p<Props>`
+  font-size: 2.5rem;
+  font-weight: unset;
+  margin: 14px 0;
+  ${({ position }: Props) =>
+    css`
+      transform: translateY: ${-position}px;
+    `}
+`;
+
 export const DescContainer = styled.span<Props>`
   position: relative;
   font-size: 2rem;
   font-weight: unset;
-  transform: ${({ position, toLeft, toRight }: Props) =>
-    toLeft
-      ? `translateX(${-position}px)`
-      : toRight
-      ? `translateX(${position}px)`
-      : null};
   animation: ${({ aniLevitate }: Props) =>
     aniLevitate ? `pop-up 1s ease-in-out` : 'none'};
-  
-  opacity: ${({ position, fadeIn }: Props) =>
-    fadeIn ? position - 50 / 70 : 1}}
 `;
 
 export const StartButton = styled.button`

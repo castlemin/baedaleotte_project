@@ -32,8 +32,8 @@ const EatOutShopDetailReview: React.FC<Props> = ({ shopId }: Props) => {
     <div>
       <Title>리뷰</Title>
       <CommentWrapper>
-        {review.map((item: any) => (
-          <Content>
+        {review.map((item: any, idx: number) => (
+          <Content key={idx}>
             <Comment>1. {item.review_1.slice(0, -10)}</Comment>
             <CommentDate>-게시일: {item.review_1.slice(-10)} </CommentDate>
             <Comment>2. {item.review_2.slice(0, -10)}</Comment>

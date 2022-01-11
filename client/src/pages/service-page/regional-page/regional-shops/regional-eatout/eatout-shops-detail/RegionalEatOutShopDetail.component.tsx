@@ -46,8 +46,8 @@ const RegionalEatOutShopDetail: React.FC<Props> = ({
   return (
     <DetailCardContainer cardHeight={viewHeight}>
       <CloseBtn onClick={handleCloseModal}>x</CloseBtn>
-      {selectedShop.map((item) => (
-        <DetailDescContainer key={item.id}>
+      {selectedShop.map((item, idx) => (
+        <DetailDescContainer key={idx}>
           <DetailShopTitle>{item.name}</DetailShopTitle>
           <DetailItemsWrapper>
             <DetailImage imgUrl={item.img_url_2}></DetailImage>

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState, useMemo } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { useFetchGraph } from '../../../hooks/useFetchJson';
@@ -18,7 +18,7 @@ import { userLocation } from '../../../store/store';
 import Loading from '../../../components/UI/loading/Loading.component';
 
 const SeoulMap = React.lazy(() =>
-  import('../../../assets/data/Graphs/SeoulMap').then(({ SeoulMap }) => ({
+  import('../../../assets/data/graphs/SeoulMap').then(({ SeoulMap }) => ({
     default: SeoulMap,
   }))
 );
@@ -71,7 +71,7 @@ const ServiceStartPage: React.FC = () => {
   /* 좌표 가져오기 함수를 실행, 리포트 페이지로 이동 */
   const handleClick = (e: any) => {
     getLocation();
-    navigate('regional/report');
+    navigate('/service/confirm');
   };
 
   return (

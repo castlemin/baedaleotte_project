@@ -6,6 +6,7 @@ import {
   ToTeamIntro,
   LogoContainer,
   LinkContainer,
+  LogoTitle,
 } from './Header.styles';
 import { ReactComponent as Logo } from '../../../assets/delivery.svg';
 
@@ -23,7 +24,7 @@ const Header: React.FC<Props> = ({ serviceStatic, viewHeight }) => {
       <div>
         <LogoContainer to='/'>
           <Logo />
-          <div>배달어때</div>
+          <LogoTitle>배달어때</LogoTitle>
         </LogoContainer>
       </div>
       <LinkContainer>
