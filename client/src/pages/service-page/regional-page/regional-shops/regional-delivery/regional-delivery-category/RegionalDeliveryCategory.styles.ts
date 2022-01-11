@@ -58,9 +58,17 @@ export const TopCategories = styled.span`
   color: darkred;
 `;
 
+export const HighLight = styled.span`
+  color: darkred;
+`;
 export const SelectedOptionsTitle = styled.h3`
   font-size: 1.5rem;
   margin-bottom: 10px;
+`;
+
+export const OptionsInstruction = styled.p`
+  font-size: 1rem;
+  margin: 0;
 `;
 
 export const SelectedContainer = styled.div`

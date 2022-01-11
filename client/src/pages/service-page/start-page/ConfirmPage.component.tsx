@@ -14,6 +14,7 @@ import {
 const ConfirmPage = () => {
   const [userDistrict, setUserDistrict] = useRecoilState(userGu);
   const [message, setMessage] = useState('');
+  const [buttonOn, setButtonOn] = useState(true);
   const navigate = useNavigate();
 
   const cors = axios.create({
@@ -43,6 +44,7 @@ const ConfirmPage = () => {
     setMessage(
       '죄송합니다. 현 서비스는 서울시 만을 범위로 사용가능하십니다. 5초 뒤 메인화면으로 이동합니다.'
     );
+    setButtonOn(false);
     setTimeout(() => {
       handleToMain();
     }, 5000);
@@ -58,8 +60,12 @@ const ConfirmPage = () => {
           서울시 시민 혹은 서울에 현재 재류하고 계십니까?
         </ConfirmMessage>
         <p>{message}</p>
-        <ConfirmButton onClick={handleToReport}>예</ConfirmButton>
-        <ConfirmButton onClick={handleSetMessage}>아니오</ConfirmButton>
+        {buttonOn && (
+          <>
+            <ConfirmButton onClick={handleToReport}>예</ConfirmButton>
+            <ConfirmButton onClick={handleSetMessage}>아니오</ConfirmButton>
+          </>
+        )}
       </ConfirmCard>
     </ConfirmPageContainer>
   );

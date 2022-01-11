@@ -16,6 +16,8 @@ import {
   ToMainButton,
   ButtonsContainer,
   TopCategories,
+  OptionsInstruction,
+  HighLight,
 } from './RegionalDeliveryCategory.styles';
 
 import { weekDay, hour } from '../../../../../../assets/data/weekDay';
@@ -92,9 +94,10 @@ const RegionalDeliveryCategoryPage = () => {
         <PageTitle>
           오늘은 {weekDay}, 지금 {hour}시 인기 메뉴는:{' '}
           <TopCategories>{topCategory}</TopCategories>
-          <SelectedOptionsTitle>
-            선택 메뉴 메뉴는 1개 이상 선택해주세요.
-          </SelectedOptionsTitle>
+          <SelectedOptionsTitle>선택 메뉴</SelectedOptionsTitle>
+          <OptionsInstruction>
+            메뉴는 <HighLight>1개 이상</HighLight> 선택해주세요.
+          </OptionsInstruction>
         </PageTitle>
         <ButtonsContainer>
           <ToMainButton onClick={handleToMain}>메인으로</ToMainButton>
