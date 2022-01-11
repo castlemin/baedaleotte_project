@@ -31,7 +31,7 @@ const RegionalDeliveryCategoryPage: React.FC = () => {
   const [message, setMessage] = useState('');
 
   const handleToShopList = () => {
-    navigate('/service/regional/eatout_shop_list');
+    navigate('/service/regional/eatout-shop-list');
   };
 
   const handleToMain = () => {

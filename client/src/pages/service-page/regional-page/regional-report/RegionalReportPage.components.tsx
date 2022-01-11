@@ -42,7 +42,7 @@ const RegionalReportPage: React.FC = () => {
   const userDistrict = useRecoilValue(userGu);
 
   /* 모든 그래프 정보(JSON)를 담을 상태값 */
-  const [graphs, setGraphs] = useState<any>();
+  const [graphs, setGraphs] = useState<any>([]);
 
   /* 위험도 점수(String)를 담을 상태값 */
   const [riskScore, setRiskScore] = useRecoilState(ThreatScore);
@@ -61,9 +61,9 @@ const RegionalReportPage: React.FC = () => {
   /* 카테고리 페이지 이동 : id 가 toDelivery이면 배달음식 카테고리 페이지으로, 다른 경우 외식 카테고리 페이지로 이동*/
   const handleToCategory = (event: any) => {
     if (event.target.id === 'toDelivery') {
-      navigate('/service/regional/delivery_categories/');
+      navigate('/service/regional/delivery-categories/');
     } else {
-      navigate('/service/regional/eatout_categories/');
+      navigate('/service/regional/eatout-categories/');
     }
   };
 

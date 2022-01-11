@@ -24,19 +24,19 @@ const App: React.FC = () => {
           element={<RegionalReportPage />}
         />
         <Route
-          path='/service/regional/delivery_categories'
+          path='/service/regional/delivery-categories'
           element={<RegionalDeliveryCategoryPage />}
         />
         <Route
-          path='/service/regional/delivery_shop_list'
+          path='/service/regional/delivery-shop-list'
           element={<RegionalDeliveryShopsPage />}
         />
         <Route
-          path='/service/regional/eatout_categories'
+          path='/service/regional/eatout-categories'
           element={<RegionalEatOutCategoryPage />}
         />
         <Route
-          path='/service/regional/eatout_shop_list'
+          path='/service/regional/eatout-shop-list'
           element={<RegionalEatOutShopsPage />}
         />
         <Route path='/team' element={<TeamHome />} />

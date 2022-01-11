@@ -8,6 +8,8 @@ interface Props {
 export const CategoryTemplate = styled.div`
   display: flex;
   flex-direction: column;
+  background: linear-gradient(to top, #ffefba, #ffffff);
+  height: 170vh;
 `;
 
 export const CategoryListContainer = styled.div`
@@ -17,6 +19,7 @@ export const CategoryListContainer = styled.div`
   border-radius: 6px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
   margin: 0 200px;
+  background-color: white;
 `;
 
 export const CategoryContainer = styled.div`
@@ -86,6 +89,7 @@ export const PlaceHolder = styled.p`
   display: block;
   margin: auto;
   font-weight: bold;
+  color: grey;
   ${({ selected }: Props) =>
     selected &&
     css`
@@ -132,7 +136,7 @@ export const ButtonsContainer = styled.div`
 `;
 
 export const ToMainButton = styled.button`
-  ackground-color: white;
+  background-color: white;
   width: 120px;
   height: 50px;
   font-size: 18px;

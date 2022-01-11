@@ -54,7 +54,7 @@ const RegionalDeliveryCategoryPage = () => {
 
   /* shopList 로 이동 */
   const handleToShopList = () => {
-    navigate('/service/regional/delivery_shop_list');
+    navigate('/service/regional/delivery-shop-list');
   };
 
   /* 모달 여닫기용 플래그 상태값 */
