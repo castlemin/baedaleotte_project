@@ -1,3 +1,4 @@
+/* 일반 외식 음식점 카테고리 목록 */
 export const eatoutCategories: string[] = [
   '한식',
   '일식',

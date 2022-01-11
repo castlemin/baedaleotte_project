@@ -20,12 +20,11 @@ interface Props {
 }
 
 const TeamHeader: React.FC<Props> = ({ viewHeight, onSetViewHeight }) => {
-  // const handleScroll = (position: number) => {
-  //   window.scrollTo({ top: position, behavior: 'smooth' });
-  // };
+  /* 스크롤 이벤트를 위한 뷰 포트에 따른 위치 지정 */
   useEffect(() => {
     onSetViewHeight(() => viewHeight);
   }, []);
+
   return (
     <HeaderContainer>
       <div>

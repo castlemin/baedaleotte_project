@@ -1,3 +1,4 @@
+/* 배달음식 데이터 카테고리 목록 */
 export const deliveryCategories: string[] = [
   '족발보쌈',
   '야식',
