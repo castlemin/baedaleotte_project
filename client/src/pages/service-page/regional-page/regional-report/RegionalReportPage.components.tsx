@@ -142,72 +142,77 @@ const RegionalReportPage: React.FC = () => {
     };
   }, []);
 
+  console.log(graphs.length);
+
   return (
     <ReportContainer>
       {/* 그래프가 로드 되지 않았을 시, 대신 로딩 페이지를 보여줍니다. */}
-      {!graphs ? (
+      {!graphs.length ? (
         <Loading />
       ) : (
         <>
-          <Suspense fallback={<Loading />}>
-            <ReportTitle style={{ display: 'absolute' }}>
-              내 지역 코로나 리포트
-            </ReportTitle>
-            {graphs.map((graph: any, idx: string) => (
-              <ReportSection key={idx} id={idx}>
-                <GraphContainer>
-                  {/* Plot 데이터를 반복문으로 뽑으면서 각각 다른 스타일을 적용하기 위함 */}
-                  {Number(idx) === 0 ? (
-                    <ReportThreatMap
-                      location={userDistrict}
-                      score={riskScore}
-                      rate={riskScoreDetail.rate}
-                      population={riskScoreDetail.population}
-                      family={riskScoreDetail.family}
-                      facillity={riskScoreDetail.fac}
-                      stack={riskScoreDetail.stack}
-                    >
-                      <Plot data={graph.data} layout={graph.layout} />
-                    </ReportThreatMap>
-                  ) : Number(idx) === 1 ? (
-                    <ReportThreatRank
-                      position={position}
-                      rank={riskScoreDetail.rank}
-                    >
-                      <Plot data={graph.data} layout={graph.layout} />
-                    </ReportThreatRank>
-                  ) : Number(idx) === 2 ? (
-                    <ReportVaccineGraph
-                      position={position}
-                      thrVacRate={graphs[2].data[2].text[6]}
-                      secVacRate={graphs[2].data[1].text[6]}
-                      date={graphs[2].data[0].x[6]}
-                    >
-                      <Plot data={graph.data} layout={graph.layout} />
-                    </ReportVaccineGraph>
-                  ) : Number(idx) === 3 ? (
-                    <ReportTotalConfirmed
-                      position={position}
-                      totalNum={graphs[3].data[0].text[6]}
-                      addNum={graphs[3].data[1].text[6]}
-                      date={graphs[3].data[0].x[6]}
-                    >
-                      <Plot data={graph.data} layout={graph.layout} />
-                    </ReportTotalConfirmed>
-                  ) : (
-                    <ReportConfirmedByGu
-                      position={position}
-                      rank={riskScoreDetail.rank}
-                      regionRate={riskScoreDetail.region_rate}
-                    >
-                      <Plot data={graph.data} layout={graph.layout} />
-                    </ReportConfirmedByGu>
-                  )}
-                  {/* 그래프 화면 출력이 끝나는 지점 입니다. */}
-                </GraphContainer>
-              </ReportSection>
-            ))}
-          </Suspense>
+          <ReportTitle style={{ display: 'absolute' }}>
+            내 지역 코로나 리포트
+          </ReportTitle>
+          {graphs.map((graph: any, idx: string) => (
+            <ReportSection key={idx} id={idx}>
+              <GraphContainer>
+                {/* Plot 데이터를 반복문으로 뽑으면서 각각 다른 스타일을 적용하기 위함 */}
+                {Number(idx) === 0 ? (
+                  <ReportThreatMap
+                    key={idx}
+                    location={userDistrict}
+                    score={riskScore}
+                    rate={riskScoreDetail.rate}
+                    population={riskScoreDetail.population}
+                    family={riskScoreDetail.family}
+                    facillity={riskScoreDetail.fac}
+                    stack={riskScoreDetail.stack}
+                  >
+                    <Plot data={graph.data} layout={graph.layout} />
+                  </ReportThreatMap>
+                ) : Number(idx) === 1 ? (
+                  <ReportThreatRank
+                    key={idx}
+                    position={position}
+                    rank={riskScoreDetail.rank}
+                  >
+                    <Plot data={graph.data} layout={graph.layout} />
+                  </ReportThreatRank>
+                ) : Number(idx) === 2 ? (
+                  <ReportVaccineGraph
+                    key={idx}
+                    position={position}
+                    thrVacRate={graphs[2].data[2].text[6]}
+                    secVacRate={graphs[2].data[1].text[6]}
+                    date={graphs[2].data[0].x[6]}
+                  >
+                    <Plot data={graph.data} layout={graph.layout} />
+                  </ReportVaccineGraph>
+                ) : Number(idx) === 3 ? (
+                  <ReportTotalConfirmed
+                    key={idx}
+                    position={position}
+                    totalNum={graphs[3].data[0].text[6]}
+                    addNum={graphs[3].data[1].text[6]}
+                    date={graphs[3].data[0].x[6]}
+                  >
+                    <Plot data={graph.data} layout={graph.layout} />
+                  </ReportTotalConfirmed>
+                ) : (
+                  <ReportConfirmedByGu
+                    key={idx}
+                    position={position}
+                    rank={riskScoreDetail.rank}
+                    regionRate={riskScoreDetail.region_rate}
+                  >
+                    <Plot data={graph.data} layout={graph.layout} />
+                  </ReportConfirmedByGu>
+                )}
+                {/* 그래프 화면 출력이 끝나는 지점 입니다. */}
+              </GraphContainer>
+            </ReportSection>
+          ))}
           {/* 위험도 점수가 60점 이상이라면 내 지역 배달 음식 카테고리로, 
           그렇지 않다면 (외식점 카테고리 또는 배달음식점) 으로 이동을 제한. */}
           <ButtonWrapper>

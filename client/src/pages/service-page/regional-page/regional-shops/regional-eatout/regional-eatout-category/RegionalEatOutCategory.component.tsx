@@ -77,6 +77,7 @@ const RegionalDeliveryCategoryPage: React.FC = () => {
               <SelectedCategory
                 onClick={handleToggleCategory}
                 imgUrl={EATOUT_IMAGES[item]}
+                key={item.restaurant_id}
               >
                 <SelectedTitle>{item}</SelectedTitle>
               </SelectedCategory>
@@ -90,8 +91,9 @@ const RegionalDeliveryCategoryPage: React.FC = () => {
           </NextButton>
         </ButtonsContainer>
         <CategoryListContainer>
-          {eatoutCategories.map((cat) => (
+          {eatoutCategories.map((cat, idx) => (
             <CategoryContainer
+              key={idx}
               onClick={handleToggleCategory}
               imgUrl={EATOUT_IMAGES[cat]}
             >

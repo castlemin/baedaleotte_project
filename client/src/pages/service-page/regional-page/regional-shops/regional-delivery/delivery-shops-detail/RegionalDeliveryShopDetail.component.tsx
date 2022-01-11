@@ -57,7 +57,11 @@ const RegionalShopDetail: React.FC<Props> = ({
               <DetailCategoryList>
                 <DescName>카테고리</DescName>:{' '}
                 {item.categories.map((cat: any) => (
-                  <DetailCategoryItem>{cat}</DetailCategoryItem>
+                  <DetailCategoryItem
+                    key={`${item.restauran_id}${item.categories}`}
+                  >
+                    {cat}
+                  </DetailCategoryItem>
                 ))}
               </DetailCategoryList>
               <DetailDescContent>

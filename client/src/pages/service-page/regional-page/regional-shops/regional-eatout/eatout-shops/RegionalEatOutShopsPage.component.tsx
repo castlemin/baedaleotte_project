@@ -159,8 +159,10 @@ const RegionalEatOutShopsPage: React.FC = () => {
             <ToMainPageButton onClick={handleToMain}>메인으로</ToMainPageButton>
             <CategoryIndicator>
               선택하신{' '}
-              {chosenEatOutCategories.map((item) => (
-                <CategoryNameContainer>[{item}]</CategoryNameContainer>
+              {chosenEatOutCategories.map((item: any) => (
+                <CategoryNameContainer key={item.categories}>
+                  [{item}]
+                </CategoryNameContainer>
               ))}
               에 대한 추천 결과입니다.
             </CategoryIndicator>

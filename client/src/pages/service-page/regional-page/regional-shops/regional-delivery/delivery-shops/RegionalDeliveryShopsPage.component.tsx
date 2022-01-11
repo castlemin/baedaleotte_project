@@ -186,8 +186,10 @@ const RegionalDeliveryShopsPage = () => {
             <ToMainPageButton onClick={handleToMain}>메인으로</ToMainPageButton>
             <CategoryIndicator>
               선택하신{' '}
-              {chosenDeliveryCategories.map((item) => (
-                <CategoryNameContainer>[{item}]</CategoryNameContainer>
+              {chosenDeliveryCategories.map((item: any) => (
+                <CategoryNameContainer key={item.restaurant_id}>
+                  [{item}]
+                </CategoryNameContainer>
               ))}
               에 대한 추천 결과입니다.
             </CategoryIndicator>
@@ -227,8 +229,13 @@ const RegionalDeliveryShopsPage = () => {
                   </ShopTitleContainer>
                   <ShopDescContainer id={item.restaurant_id}>
                     <DescName>카테고리</DescName>:{' '}
-                    {item.categories.map((cat: string[]) => (
-                      <ListItem id={item.restaurant_id}>{cat}</ListItem>
+                    {item.categories.map((cat: any) => (
+                      <ListItem
+                        key={`${cat.restaurant_id}${cat.name}`}
+                        id={item.restaurant_id}
+                      >
+                        {cat}
+                      </ListItem>
                     ))}
                     <DescItem>
                       <DescName>영업시간</DescName>:{' '}

@@ -16,6 +16,8 @@ export const ConfirmMessage = styled.div`
   font-size: 18px;
 `;
 
+export const WarningMessage = styled.p``;
+
 export const ConfirmCard = styled.div`
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   border-radius: 6px;

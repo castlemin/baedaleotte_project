@@ -9,6 +9,7 @@ import {
   ConfirmCard,
   ConfirmMessage,
   ConfirmPageContainer,
+  WarningMessage,
 } from './ConfirmPage.styles';
 
 const ConfirmPage = () => {
@@ -59,7 +60,7 @@ const ConfirmPage = () => {
         <ConfirmMessage>
           서울시 시민 혹은 서울에 현재 재류하고 계십니까?
         </ConfirmMessage>
-        <p>{message}</p>
+        <WarningMessage>{message}</WarningMessage>
         {buttonOn && (
           <>
             <ConfirmButton onClick={handleToReport}>예</ConfirmButton>

@@ -49,7 +49,7 @@ const DeliveryShopDetailReview = ({ shopId }: Props) => {
       <Title>리뷰</Title>
       <CommentWrapper>
         {limitCurItems(review).map((item: any) => (
-          <Content>
+          <Content key={item.row_num}>
             <Comment>
               <CommentName>{item.row_num}.</CommentName> {item.comment}
             </Comment>
