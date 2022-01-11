@@ -52,7 +52,7 @@ const RegionalDeliveryCategoryPage: React.FC = () => {
     }
     if (categoryStored.includes(event.target.textContent)) {
       setCategoryStored((prev: any) =>
-        prev.filter((cat: any) => cat !== event.target.textContent)
+        prev.filter((cat: string) => cat !== event.target.textContent)
       );
     } else if (categoryStored.length < 2) {
       setCategoryStored((prev: any) => [...prev, event.target.textContent]);
@@ -91,7 +91,7 @@ const RegionalDeliveryCategoryPage: React.FC = () => {
           </NextButton>
         </ButtonsContainer>
         <CategoryListContainer>
-          {eatoutCategories.map((cat, idx) => (
+          {eatoutCategories.map((cat: string, idx: number) => (
             <CategoryContainer
               key={idx}
               onClick={handleToggleCategory}

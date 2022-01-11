@@ -35,7 +35,7 @@ const RegionalDeliveryCategoryPage = () => {
   const [topCategory, setTopCategory] = useState('');
 
   /* 선택한 카테고리를 담는 recoil 상태값 */
-  const [categoryStored, setCategoryStored] = useRecoilState(
+  const [categoryStored, setCategoryStored] = useRecoilState<any>(
     selectedDeliveryCategory
   );
 
@@ -67,7 +67,7 @@ const RegionalDeliveryCategoryPage = () => {
   };
 
   /* 카테고리 모달 경고창 여닫기 함수 */
-  const handleToggleCategory = (event) => {
+  const handleToggleCategory = (event: any) => {
     if (
       categoryStored.length >= 2 &&
       !categoryStored.includes(event.target.textContent)
@@ -76,11 +76,11 @@ const RegionalDeliveryCategoryPage = () => {
       setIsModalClosed((prev) => !prev);
     }
     if (categoryStored.includes(event.target.textContent)) {
-      setCategoryStored((prev) =>
-        prev.filter((cat) => cat !== event.target.textContent)
+      setCategoryStored((prev: any) =>
+        prev.filter((cat: any) => cat !== event.target.textContent)
       );
     } else if (categoryStored.length < 2) {
-      setCategoryStored((prev) => [...prev, event.target.textContent]);
+      setCategoryStored((prev: any) => [...prev, event.target.textContent]);
     }
   };
 
@@ -105,12 +105,13 @@ const RegionalDeliveryCategoryPage = () => {
             <PlaceHolder selected={categoryStored.length}>
               카테고리를 선택해주세요.
             </PlaceHolder>
-            {categoryStored.map((item) => (
+            {categoryStored.map((cat: string, idx: number) => (
               <SelectedCategory
+                key={idx}
                 onClick={handleToggleCategory}
-                imgUrl={DELIVERY_IMAGES[item]}
+                imgUrl={DELIVERY_IMAGES[cat]}
               >
-                <SelectedTitle>{item}</SelectedTitle>
+                <SelectedTitle>{cat}</SelectedTitle>
               </SelectedCategory>
             ))}
           </SelectedContainer>
@@ -122,10 +123,11 @@ const RegionalDeliveryCategoryPage = () => {
           </NextButton>
         </ButtonsContainer>
         <CategoryListContainer>
-          {deliveryCategories.map((cat) => (
+          {deliveryCategories.map((cat, idx) => (
             <CategoryContainer
               onClick={handleToggleCategory}
               imgUrl={DELIVERY_IMAGES[cat]}
+              key={idx}
             >
               <CategoryTitle>{cat}</CategoryTitle>
             </CategoryContainer>
