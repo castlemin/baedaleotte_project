@@ -20,7 +20,7 @@ interface Props {
 }
 
 const TeamHeader: React.FC<Props> = ({ viewHeight, onSetViewHeight }) => {
-  /* 스크롤 이벤트를 위한 뷰 포트에 따른 위치 지정 */
+  /* 스크롤 액션을 위한 뷰 포트에 따른 위치 지정, 화면 렌더링 이후 저장*/
   useEffect(() => {
     onSetViewHeight(() => viewHeight);
   }, []);
