@@ -21,7 +21,7 @@ import {
 } from './ReportThreatMap.styles';
 
 import { riskScoreParser } from '../../../../../../assets/data/riskScoreParser';
-import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
+import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
 import prophet from '../../../../../../assets/images/dataset/prophet.png';
 import prophet2 from '../../../../../../assets/images/dataset/prophet2.png';
 import {

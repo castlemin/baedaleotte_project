@@ -6,7 +6,7 @@ import {
   GraphContainer,
   ReportDesc,
 } from './ReportTotalConfirmed.styles';
-import { ConfirmedGraph } from '../../../../../../assets/data/Graphs/ConfirmedGraph';
+import { ConfirmedGraph } from '../../../../../../assets/data/graphs/ConfirmedGraph';
 
 interface IProps {
   position: number;

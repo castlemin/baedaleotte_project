@@ -19,10 +19,9 @@ import {
 } from './RegionalDeliveryCategory.styles';
 
 import { weekDay, hour } from '../../../../../../assets/data/weekDay';
-import Header from '../../../../../../components/UI/header/Header.component';
 import { deliveryCategories } from '../../../../../../assets/data/deliveryCategories';
 import Modal from '../../../../../../components/UI/modal/Modal.component';
-import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
+import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
 import { NextButton } from './RegionalDeliveryCategory.styles';
 import { DELIVERY_IMAGES } from '../../../../../../assets/data/imgMapper';
 import { selectedDeliveryCategory } from '../../../../../../store/store';

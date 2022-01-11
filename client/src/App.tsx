@@ -8,8 +8,8 @@ import RegionalEatOutShopsPage from './pages/service-page/regional-page/regional
 import RegionalReportPage from './pages/service-page/regional-page/regional-report/RegionalReportPage.components';
 import RegionalDeliveryCategoryPage from './pages/service-page/regional-page/regional-shops/regional-delivery/regional-delivery-category/RegionalDeliveryCategoryPage.component.jsx';
 import RegionalEatOutCategoryPage from './pages/service-page/regional-page/regional-shops/regional-eatout/regional-eatout-category/RegionalEatOutCategory.component';
-import Error404 from './components/UI/Error/404.error';
-import Error500 from './components/UI/Error/500.error';
+import Error404 from './components/UI/error/404.error';
+import Error500 from './components/UI/error/500.error';
 import ConfirmPage from './pages/service-page/start-page/ConfirmPage.component';
 
 const App: React.FC = () => {

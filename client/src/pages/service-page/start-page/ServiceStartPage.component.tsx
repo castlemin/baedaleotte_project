@@ -18,7 +18,7 @@ import { userLocation } from '../../../store/store';
 import Loading from '../../../components/UI/loading/Loading.component';
 
 const SeoulMap = React.lazy(() =>
-  import('../../../assets/data/Graphs/SeoulMap').then(({ SeoulMap }) => ({
+  import('../../../assets/data/graphs/SeoulMap').then(({ SeoulMap }) => ({
     default: SeoulMap,
   }))
 );

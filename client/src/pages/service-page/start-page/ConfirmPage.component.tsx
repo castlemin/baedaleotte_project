@@ -21,7 +21,7 @@ const ConfirmPage = () => {
       'Access-Control-Allow-Origin': '*',
     },
   });
-  const params = { lat: 37.5384, lng: 126.9654 };
+  const params = userDistrict;
 
   useEffect(() => {
     const sendUserLocation = async () => {

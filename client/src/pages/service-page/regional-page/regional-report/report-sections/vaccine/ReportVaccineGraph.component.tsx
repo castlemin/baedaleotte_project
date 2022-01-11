@@ -5,9 +5,6 @@ import {
   ReportSubtitle,
 } from './ReportVaccineGraph.styles';
 
-import { VaccineGraph } from '../../../../../../assets/data/Graphs/VaccineGraph';
-import { RiskScore } from '../../../../../../assets/data/RiskScore';
-import { workerData } from 'worker_threads';
 import { ReportDesc } from '../threat-rank/ReportThreatRank.styles';
 
 interface IProps {

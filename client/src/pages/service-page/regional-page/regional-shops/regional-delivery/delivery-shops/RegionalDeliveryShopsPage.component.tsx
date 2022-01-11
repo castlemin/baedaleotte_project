@@ -4,14 +4,11 @@ import { useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { Audio } from 'react-loader-spinner';
 
-import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
+import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
 import Loading from '../../../../../../components/UI/loading/Loading.component';
 import RegionalShopDetail from '../delivery-shops-detail/RegionalDeliveryShopDetail.component';
 
-import {
-  selectedDeliveryCategory,
-  userLocation,
-} from '../../../../../../store/store';
+import { selectedDeliveryCategory } from '../../../../../../store/store';
 
 import {
   HeadingContainer,
@@ -37,7 +34,6 @@ import { formatTime } from '../../../../../../functions/formatter';
 
 const RegionalDeliveryShopsPage = () => {
   const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
-  const userDistrict = useRecoilValue(userLocation);
   const params = { lat: 37.5384, lng: 126.9654 };
 
   const navigate = useNavigate();

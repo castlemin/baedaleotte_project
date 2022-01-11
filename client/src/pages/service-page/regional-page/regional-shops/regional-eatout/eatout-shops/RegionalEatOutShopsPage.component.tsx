@@ -1,15 +1,13 @@
 import axios from 'axios';
 import React, { Suspense, useEffect, useState, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
-import { Audio } from 'react-loader-spinner';
+import { TailSpin } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
+import { BaseProps } from 'react-loader-spinner/dist/type';
 
-import BackDrop from '../../../../../../components/UI/BackDrop/BackDrop.component';
+import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
 import Loading from '../../../../../../components/UI/loading/Loading.component';
-import {
-  selectedEatOutCategory,
-  userLocation,
-} from '../../../../../../store/store';
+import { selectedEatOutCategory } from '../../../../../../store/store';
 
 import {
   formatEatOutWeekdayHour,
@@ -37,6 +35,11 @@ import {
   ToMainPageButton,
 } from '../../regional-delivery/delivery-shops/RegionalDeliveryShopsPage.styles';
 
+interface TailSpinProps extends BaseProps {
+  radius?: string | number;
+  type: string;
+}
+
 const RegionalEatOutShopsPage: React.FC = () => {
   const [eatOutShopList, setEatOutShopList] = useState<any[]>([]);
 
@@ -45,8 +48,6 @@ const RegionalEatOutShopsPage: React.FC = () => {
   const chosenEatOutCategories = useRecoilValue(selectedEatOutCategory);
 
   const [detailViewHeight, setDetailViewHeight] = useState(0);
-
-  const userCoords = useRecoilValue(userLocation);
 
   const navigate = useNavigate();
 
@@ -226,12 +227,12 @@ const RegionalEatOutShopsPage: React.FC = () => {
             ))}
             <Threshold ref={setTarget}>
               {isLoaded && eatOutShopList.length >= lastIdx ? (
-                <Audio
-                  height='100'
-                  width='100'
-                  color='grey'
-                  arialLabel='loading...'
-                ></Audio>
+                <TailSpin
+                  color='#00BFFF'
+                  height={80}
+                  width={80}
+                  arialLabel='loading'
+                />
               ) : null}
             </Threshold>
           </ShopListContainer>
