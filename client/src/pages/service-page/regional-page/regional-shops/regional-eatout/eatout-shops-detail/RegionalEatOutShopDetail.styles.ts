@@ -22,6 +22,7 @@ export const DetailCardContainer = styled.div`
   width: 40rem;
   z-index: 10;
   position: absolute;
+  transition: ease-in 200ms;
   ${({ cardHeight }: Props) => css`
     top: ${cardHeight};
   `}
