@@ -27,8 +27,6 @@ const SeoulMap = React.lazy(() =>
 const ServiceStartPage = () => {
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false);
-
   /* 사용자의 좌표를 저장할 상태값 */
   const [userGPS, setUserGPS] = useRecoilState(userLocation);
 
