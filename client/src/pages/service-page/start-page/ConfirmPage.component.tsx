@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { USER_LOCATION_URL } from '../../../assets/data/requestUrls';
-import { useRecoilState } from 'recoil';
-import { userGu } from '../../../store/store';
+import { selector, useRecoilState, useRecoilValue } from 'recoil';
+import { userGu, userLocation } from '../../../store/store';
 import { useNavigate } from 'react-router-dom';
 import {
   ConfirmButton,
@@ -14,33 +14,29 @@ import {
 
 const ConfirmPage = () => {
   const [userDistrict, setUserDistrict] = useRecoilState(userGu);
+  const userGPS = useRecoilValue(userLocation);
   const [message, setMessage] = useState('');
   const [buttonOn, setButtonOn] = useState(true);
   const navigate = useNavigate();
 
-  const cors = axios.create({
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
-  });
-  const params = userDistrict;
+  // useEffect(() => {
+  //   const sendUserLocation = async () => {
+  //     const sendCoords = await cors.post(USER_LOCATION_URL, userGPS);
+  //     const targetDistrict = await sendCoords.data.region;
+  //     setUserDistrict(targetDistrict);
+  //   };
+  //   /* 함수 실행단 */
+  //   sendUserLocation();
+  // }, []);
 
-  useEffect(() => {
-    const sendUserLocation = async () => {
-      const sendCoords = await cors.post(USER_LOCATION_URL, params);
-      const targetDistrict = sendCoords.data.region;
-      setUserDistrict(targetDistrict);
-    };
-    /* 함수 실행단 */
-    sendUserLocation();
-  }, []);
-
-  const handleToReport = () => {
+  const handleToReport = async () => {
     navigate('/service/regional/report');
   };
+
   const handleToMain = () => {
     navigate('/');
   };
+
   const handleSetMessage = () => {
     setMessage(
       '죄송합니다. 현 서비스는 서울시 만을 범위로 사용가능하십니다. 5초 뒤 메인화면으로 이동합니다.'

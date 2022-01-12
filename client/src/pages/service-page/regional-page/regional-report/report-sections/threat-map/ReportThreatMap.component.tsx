@@ -30,7 +30,7 @@ import {
 } from '../../../regional-shops/regional-delivery/delivery-shops-detail/RegionalDeliveryShopDetail.styles';
 
 interface IProps {
-  location: string;
+  location: any;
   score: any;
   population: number;
   family: number;

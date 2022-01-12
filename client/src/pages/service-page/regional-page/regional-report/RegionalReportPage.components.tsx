@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useRecoilState } from 'recoil';
+import {
+  useRecoilState,
+  selector,
+  useRecoilValue,
+  useSetRecoilState,
+} from 'recoil';
 import {
   CONFIRMED_ALL_URL,
   CONFIRMED_BY_GU_URL,
@@ -10,12 +15,14 @@ import {
   RISK_SCORE_DETAIL_URL,
   RISK_SCORE_URL,
   SEOUL_RISK_MAP_URL,
+  USER_LOCATION_URL,
   VAC_GRAPH_URL,
 } from '../../../../assets/data/requestUrls';
 import {
   userGu,
   ThreatScore,
   ThreatScoreDetail,
+  userLocation,
 } from '../../../../store/store';
 import Loading from '../../../../components/UI/loading/Loading.component';
 
@@ -39,7 +46,7 @@ const RegionalReportPage: React.FC = () => {
   const navigate = useNavigate();
 
   /* userGu 상태 atom에 userDistrict이름으로 저장하기 위한 상태값 */
-  const userDistrict = useRecoilValue(userGu);
+  const setUserDistrict = useSetRecoilState(userGu);
 
   /* 모든 그래프 정보(JSON)를 담을 상태값 */
   const [graphs, setGraphs] = useState<any>([]);
@@ -73,7 +80,21 @@ const RegionalReportPage: React.FC = () => {
     },
   });
 
-  /* post 요청에 params로 넘겨줄 유저 좌표 */
+  const fetchUserDistrict = selector({
+    key: 'gu',
+    get: async ({ get }) => {
+      const userGPS = get(userLocation);
+      try {
+        const { data } = await cors.post(USER_LOCATION_URL, userGPS);
+        setUserDistrict(data);
+        if (data === 'undefined') navigate('/');
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+
+  const userDistrict = useRecoilValue(fetchUserDistrict);
 
   /* 리포트 페이지 내, 최초 화면 렌더링 이후 실행할 사이드 이펙트*/
   useEffect(() => {
@@ -141,8 +162,6 @@ const RegionalReportPage: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  console.log(graphs.length);
 
   return (
     <ReportContainer>

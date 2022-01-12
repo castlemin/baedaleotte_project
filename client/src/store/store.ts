@@ -1,4 +1,12 @@
 import { atom, selector } from 'recoil';
+import axios from 'axios';
+import { USER_LOCATION_URL } from '../assets/data/requestUrls';
+
+const cors = axios.create({
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
+});
 
 export const selectedDeliveryCategory = atom({
   key: 'selectedDeliveryCategory',
@@ -43,4 +51,17 @@ export const ThreatScore = atom({
 export const ThreatScoreDetail = atom({
   key: 'threatScoreDetail',
   default: [],
+});
+
+export const fetchUserDistrict = selector({
+  key: 'gu',
+  get: async ({ get }) => {
+    const userGPS = get(userLocation);
+    try {
+      const { data } = await cors.post(USER_LOCATION_URL, userGPS);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 });

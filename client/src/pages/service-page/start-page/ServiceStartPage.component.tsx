@@ -23,11 +23,11 @@ const SeoulMap = React.lazy(() =>
   }))
 );
 
-const ServiceStartPage: React.FC = () => {
+const ServiceStartPage = () => {
   const navigate = useNavigate();
 
   /* 사용자의 좌표를 저장할 상태값 */
-  const [userCoords, setUserCoords] = useRecoilState(userLocation);
+  const [userGPS, setUserGPS] = useRecoilState(userLocation);
 
   /* 사용자가 동의서에 체크 했는지 판단 */
   const [checked, setChecked] = useState(false);
@@ -40,7 +40,7 @@ const ServiceStartPage: React.FC = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setUserCoords({
+          setUserGPS({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           });
@@ -65,13 +65,18 @@ const ServiceStartPage: React.FC = () => {
 
   /* memory leak 방지 코드 */
   useEffect(() => {
+    getLocation();
     return () => setChecked(false);
   }, []);
 
   /* 좌표 가져오기 함수를 실행, 리포트 페이지로 이동 */
   const handleClick = (e: any) => {
-    getLocation();
-    navigate('/service/confirm');
+    if (!Object.entries(userGPS)) {
+      return <Loading />;
+    } else {
+      console.log(userGPS);
+      navigate('/service/confirm');
+    }
   };
 
   return (

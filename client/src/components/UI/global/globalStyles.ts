@@ -3,16 +3,13 @@ import { createGlobalStyle, css } from 'styled-components';
 const font = css`
   @import url(//font.elice.io/EliceDigitalBaeum.css);
 
-  * {
-    font-family: 'Elice Digital Baeum', sans-serif;
-  }
+  font-family: 'Elice Digital Baeum', sans-serif;
 `;
 const GlobalStyles = createGlobalStyle`
   * {
-    margin: 0;
-    padding: 0;
     outline:0;
     box-sizing:border-box;
+    ${font}
   }
   #root{
     margin:0 auto;

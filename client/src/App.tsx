@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/home-page/HomePage.component';
 import ServiceStartPage from './pages/service-page/start-page/ServiceStartPage.component';
@@ -12,39 +12,45 @@ import Error404 from './components/UI/error/404.error';
 import Error500 from './components/UI/error/500.error';
 import ConfirmPage from './pages/service-page/start-page/ConfirmPage.component';
 import GlobalStyles from './components/UI/global/globalStyles';
+import Loading from './components/UI/loading/Loading.component';
+import { RecoilRoot } from 'recoil';
 
 const App: React.FC = () => {
   return (
     <>
-      <GlobalStyles />
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/service' element={<ServiceStartPage />} />
-        <Route path='/service/confirm' element={<ConfirmPage />} />
-        <Route
-          path='/service/regional/report'
-          element={<RegionalReportPage />}
-        />
-        <Route
-          path='/service/regional/delivery-categories'
-          element={<RegionalDeliveryCategoryPage />}
-        />
-        <Route
-          path='/service/regional/delivery-shop-list'
-          element={<RegionalDeliveryShopsPage />}
-        />
-        <Route
-          path='/service/regional/eatout-categories'
-          element={<RegionalEatOutCategoryPage />}
-        />
-        <Route
-          path='/service/regional/eatout-shop-list'
-          element={<RegionalEatOutShopsPage />}
-        />
-        <Route path='/team' element={<TeamHome />} />
-        <Route path='/*' element={<Error404 />} />
-        <Route path='/500-error' element={<Error500 />} />
-      </Routes>
+      <RecoilRoot>
+        <Suspense fallback={<Loading />}>
+          <GlobalStyles />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/service' element={<ServiceStartPage />} />
+            <Route path='/service/confirm' element={<ConfirmPage />} />
+            <Route
+              path='/service/regional/report'
+              element={<RegionalReportPage />}
+            />
+            <Route
+              path='/service/regional/delivery-categories'
+              element={<RegionalDeliveryCategoryPage />}
+            />
+            <Route
+              path='/service/regional/delivery-shop-list'
+              element={<RegionalDeliveryShopsPage />}
+            />
+            <Route
+              path='/service/regional/eatout-categories'
+              element={<RegionalEatOutCategoryPage />}
+            />
+            <Route
+              path='/service/regional/eatout-shop-list'
+              element={<RegionalEatOutShopsPage />}
+            />
+            <Route path='/team' element={<TeamHome />} />
+            <Route path='/*' element={<Error404 />} />
+            <Route path='/500-error' element={<Error500 />} />
+          </Routes>
+        </Suspense>
+      </RecoilRoot>
     </>
   );
 };
