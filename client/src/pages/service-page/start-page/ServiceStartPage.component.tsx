@@ -14,6 +14,8 @@ import {
   ExampleTitle,
 } from "./ServiceStartPage.styles";
 import Loading from "../../../components/UI/loading/Loading.component";
+import { useSetRecoilState } from "recoil";
+import { userLocation } from "../../../store/store";
 
 const SeoulMap = React.lazy(() =>
   import("../../../assets/data/graphs/SeoulMap").then(({ SeoulMap }) => ({
@@ -26,9 +28,33 @@ const ServiceStartPage = () => {
 
   /* 사용자가 동의서에 체크 했는지 판단 */
   const [checked, setChecked] = useState(false);
+  const setUserGPS = useSetRecoilState(userLocation);
 
   /* 서울 전체 지도를 불러옴 */
   const seoulMapJson = useFetchGraph("seoul_risk_map_all");
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserGPS({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.log(error);
+        },
+        {
+          enableHighAccuracy: false,
+          maximumAge: 0,
+          timeout: Infinity,
+        }
+      );
+    } else {
+      console.log("GPS 접근이 거부되었습니다.");
+    }
+  };
 
   const handleCheck = () => {
     setChecked(false);
@@ -39,6 +65,7 @@ const ServiceStartPage = () => {
 
   /* memory leak 방지 코드 */
   useEffect(() => {
+    getLocation();
     return () => setChecked(false);
   }, []);
 
