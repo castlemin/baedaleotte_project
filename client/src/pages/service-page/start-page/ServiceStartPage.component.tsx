@@ -56,6 +56,8 @@ const ServiceStartPage = () => {
     }
   };
 
+  getLocation();
+
   const handleCheck = () => {
     setChecked(false);
     if (!checked) {
@@ -65,7 +67,6 @@ const ServiceStartPage = () => {
 
   /* memory leak 방지 코드 */
   useEffect(() => {
-    getLocation();
     return () => setChecked(false);
   }, []);
 

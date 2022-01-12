@@ -17,6 +17,30 @@ const ConfirmPage = () => {
   const navigate = useNavigate();
 
   /* 좌표 정보를 가져온다. */
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserGPS({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.log(error);
+        },
+        {
+          enableHighAccuracy: false,
+          maximumAge: 0,
+          timeout: Infinity,
+        }
+      );
+    } else {
+      console.log("GPS 접근이 거부되었습니다.");
+    }
+  };
+
+  getLocation();
 
   useEffect(() => {
     console.log("불러오기 완료");
