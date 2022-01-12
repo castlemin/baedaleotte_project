@@ -7,7 +7,10 @@ import { BaseProps } from 'react-loader-spinner/dist/type';
 
 import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
 import Loading from '../../../../../../components/UI/loading/Loading.component';
-import { selectedEatOutCategory } from '../../../../../../store/store';
+import {
+  selectedEatOutCategory,
+  userLocation,
+} from '../../../../../../store/store';
 
 import {
   formatEatOutWeekdayHour,
@@ -46,6 +49,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
   const [selectShop, setSelectShop] = useState('');
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const chosenEatOutCategories = useRecoilValue(selectedEatOutCategory);
+  const userDistrict = useRecoilValue(userLocation);
 
   const [detailViewHeight, setDetailViewHeight] = useState(0);
 
@@ -63,7 +67,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
   );
 
   /* 좌표를 딤아 넘겨 줄 params */
-  const params = { lat: 37.5384, lng: 126.9654 };
+  const params = userLocation;
 
   const cors = axios.create({
     headers: {

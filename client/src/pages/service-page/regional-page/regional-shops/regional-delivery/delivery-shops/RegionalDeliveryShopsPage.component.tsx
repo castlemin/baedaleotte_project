@@ -8,7 +8,10 @@ import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.componen
 import Loading from '../../../../../../components/UI/loading/Loading.component';
 import RegionalShopDetail from '../delivery-shops-detail/RegionalDeliveryShopDetail.component';
 
-import { selectedDeliveryCategory } from '../../../../../../store/store';
+import {
+  selectedDeliveryCategory,
+  userLocation,
+} from '../../../../../../store/store';
 
 import {
   HeadingContainer,
@@ -34,9 +37,10 @@ import { formatTime } from '../../../../../../functions/formatter';
 
 const RegionalDeliveryShopsPage = () => {
   const chosenDeliveryCategories = useRecoilValue(selectedDeliveryCategory);
-  const params = { lat: 37.5384, lng: 126.9654 };
-
+  const userDistrict = useRecoilValue(userLocation);
   const navigate = useNavigate();
+
+  const params = userDistrict;
 
   /* 디테일 페이지 모달을 띄우기 위해 선택한 상점의 ID 저장 */
   const [selectShop, setSelectDeliveryShop] = useState('');
