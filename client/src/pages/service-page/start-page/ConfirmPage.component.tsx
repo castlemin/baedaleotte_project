@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
 import { userLocation } from "../../../store/store";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,7 +8,6 @@ import {
   ConfirmPageContainer,
   WarningMessage,
 } from "./ConfirmPage.styles";
-import axios from "axios";
 
 const ConfirmPage = () => {
   const [message, setMessage] = useState("");
