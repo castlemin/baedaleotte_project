@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { useFetchGraph } from '../../../hooks/useFetchJson';
@@ -16,6 +16,7 @@ import {
 } from './ServiceStartPage.styles';
 import { userLocation } from '../../../store/store';
 import Loading from '../../../components/UI/loading/Loading.component';
+import { TailSpin } from 'react-loader-spinner';
 
 const SeoulMap = React.lazy(() =>
   import('../../../assets/data/graphs/SeoulMap').then(({ SeoulMap }) => ({
@@ -25,6 +26,8 @@ const SeoulMap = React.lazy(() =>
 
 const ServiceStartPage = () => {
   const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   /* 사용자의 좌표를 저장할 상태값 */
   const [userGPS, setUserGPS] = useRecoilState(userLocation);
@@ -70,14 +73,13 @@ const ServiceStartPage = () => {
   }, []);
 
   /* 좌표 가져오기 함수를 실행, 리포트 페이지로 이동 */
-  const handleClick = (e: any) => {
-    if (!Object.entries(userGPS)) {
-      return <Loading />;
+  const handleClick = useCallback(() => {
+    if (Object.entries(userGPS).length === 0) {
+      getLocation();
     } else {
-      console.log(userGPS);
       navigate('/service/confirm');
     }
-  };
+  }, [userGPS]);
 
   return (
     <BackgroundContainer>
