@@ -59,7 +59,7 @@ export const fetchUserDistrict = selector({
     const userGPS = get(userLocation);
     try {
       const { data } = await cors.post(USER_LOCATION_URL, userGPS);
-      return data;
+      return data.region;
     } catch (error) {
       console.log(error);
     }

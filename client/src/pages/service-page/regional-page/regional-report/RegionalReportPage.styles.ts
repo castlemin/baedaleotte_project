@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { customAnimation } from '../../../../components/UI/global/css.styles';
+import styled, { css } from "styled-components";
+import { customAnimation } from "../../../../components/UI/global/css.styles";
 
 interface IProps {
   id: string;

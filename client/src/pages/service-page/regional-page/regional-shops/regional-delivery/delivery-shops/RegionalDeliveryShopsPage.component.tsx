@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Suspense, useEffect, useState, useRef, MouseEvent } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
-import { Audio } from 'react-loader-spinner';
+import { Audio, TailSpin } from 'react-loader-spinner';
 
 import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
 import Loading from '../../../../../../components/UI/loading/Loading.component';
@@ -30,6 +30,7 @@ import {
   DescName,
   ListItem,
   Threshold,
+  LoaderContainer,
 } from './RegionalDeliveryShopsPage.styles';
 
 import { FOOD_DELIVERY_LIST_URL } from '../../../../../../assets/data/requestUrls';
@@ -216,58 +217,55 @@ const RegionalDeliveryShopsPage = () => {
                 viewHeight={detailViewHeight}
               />
             )}
-            <Suspense fallback={<Loading />}>
-              {limitNumOfItems(deliveryShopList).map((item, idx) => (
-                <ShopContainer
-                  key={idx}
-                  onClick={handleOpenDeliveryDetail}
-                  id={item.restaurant_id}
-                  ref={cardHeightRef}
-                >
-                  <ShopImgContainer
-                    id={item.restaurant_id}
-                    url={item.logo_url}
-                  />
-                  <ShopTitleContainer id={item.restaurant_id}>
-                    {item.name}
-                  </ShopTitleContainer>
-                  <ShopDescContainer id={item.restaurant_id}>
-                    <DescName>카테고리</DescName>:{' '}
-                    {item.categories.map((cat: any) => (
-                      <ListItem
-                        key={`${cat.restaurant_id}${cat.name}`}
-                        id={item.restaurant_id}
-                      >
-                        {cat}
-                      </ListItem>
-                    ))}
-                    <DescItem>
-                      <DescName>영업시간</DescName>:{' '}
-                      {formatTime(item.begin, item.end)}시
-                    </DescItem>
-                    <DescItem>
-                      <DescName>평균평점</DescName>:{' '}
-                      {item.review_avg === 0
-                        ? '평점 없음'
-                        : `${item.review_avg}점`}
-                    </DescItem>
-                    <DescItem>배달 소요시간</DescItem>:{' '}
-                    {item.estimated_delivery_time}
-                  </ShopDescContainer>
-                </ShopContainer>
-              ))}
-            </Suspense>
+            {limitNumOfItems(deliveryShopList).map((item, idx) => (
+              <ShopContainer
+                key={idx}
+                onClick={handleOpenDeliveryDetail}
+                id={item.restaurant_id}
+                ref={cardHeightRef}
+              >
+                <ShopImgContainer id={item.restaurant_id} url={item.logo_url} />
+                <ShopTitleContainer id={item.restaurant_id}>
+                  {item.name}
+                </ShopTitleContainer>
+                <ShopDescContainer id={item.restaurant_id}>
+                  <DescName>카테고리</DescName>:{' '}
+                  {item.categories.map((cat: any) => (
+                    <ListItem
+                      key={`${cat.restaurant_id}${cat.name}`}
+                      id={item.restaurant_id}
+                    >
+                      {cat}
+                    </ListItem>
+                  ))}
+                  <DescItem>
+                    <DescName>영업시간</DescName>:{' '}
+                    {formatTime(item.begin, item.end)}시
+                  </DescItem>
+                  <DescItem>
+                    <DescName>평균평점</DescName>:{' '}
+                    {item.review_avg === 0
+                      ? '평점 없음'
+                      : `${item.review_avg}점`}
+                  </DescItem>
+                  <DescItem>배달 소요시간</DescItem>:{' '}
+                  {item.estimated_delivery_time}
+                </ShopDescContainer>
+              </ShopContainer>
+            ))}
+          </ShopListContainer>
+          <LoaderContainer>
             <Threshold ref={setTarget}>
               {isLoaded && deliveryShopList.length >= lastIdx ? (
-                <Audio
-                  height='100'
-                  width='100'
+                <TailSpin
+                  height='80'
+                  width='80'
                   color='grey'
                   arialLabel='loading...'
-                ></Audio>
+                ></TailSpin>
               ) : null}
             </Threshold>
-          </ShopListContainer>
+          </LoaderContainer>
         </>
       )}
     </>

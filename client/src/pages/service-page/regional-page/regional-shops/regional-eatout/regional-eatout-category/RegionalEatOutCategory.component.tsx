@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import {
   CategoryTemplate,
   CategoryContainer,
@@ -13,14 +13,14 @@ import {
   PlaceHolder,
   NextButton,
   ToMainButton,
-} from './RegionalEatOutCategory.styles';
+} from "./RegionalEatOutCategory.styles";
 
-import { eatoutCategories } from '../../../../../../assets/data/eatoutCategories';
-import Modal from '../../../../../../components/UI/modal/Modal.component';
-import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
-import { EATOUT_IMAGES } from '../../../../../../assets/data/imgMapper';
-import { selectedEatOutCategory } from '../../../../../../store/store';
-import { ButtonsContainer } from './RegionalEatOutCategory.styles';
+import { eatoutCategories } from "../../../../../../assets/data/eatoutCategories";
+import Modal from "../../../../../../components/UI/modal/Modal.component";
+import BackDrop from "../../../../../../components/UI/backDrop/BackDrop.component";
+import { EATOUT_IMAGES } from "../../../../../../assets/data/imgMapper";
+import { selectedEatOutCategory } from "../../../../../../store/store";
+import { ButtonsContainer } from "./RegionalEatOutCategory.styles";
 
 const RegionalDeliveryCategoryPage: React.FC = () => {
   const navigate = useNavigate();
@@ -28,14 +28,14 @@ const RegionalDeliveryCategoryPage: React.FC = () => {
     selectedEatOutCategory
   );
   const [isModalClosed, setIsModalClosed] = useState(true);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const handleToShopList = () => {
-    navigate('/service/regional/eatout-shop-list');
+    navigate("/service/regional/eatout-shop-list");
   };
 
   const handleToMain = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const handleCloseModal = () => {
@@ -47,7 +47,7 @@ const RegionalDeliveryCategoryPage: React.FC = () => {
       categoryStored.length >= 2 &&
       !categoryStored.includes(event.target.textContent)
     ) {
-      setMessage('카테고리 선택은 2개까지만 가능합니다!');
+      setMessage("카테고리 선택은 2개까지만 가능합니다!");
       setIsModalClosed((prev) => !prev);
     }
     if (categoryStored.includes(event.target.textContent)) {

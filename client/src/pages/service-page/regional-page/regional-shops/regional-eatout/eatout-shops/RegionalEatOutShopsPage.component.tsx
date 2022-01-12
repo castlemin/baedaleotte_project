@@ -31,6 +31,7 @@ import {
   ShopContainer,
   EatoutShopListTitle,
   Threshold,
+  LoaderContainer,
 } from './RegionalEatOutShopsPage.styles';
 import { EAT_OUT_LIST_URL } from '../../../../../../assets/data/requestUrls';
 import {
@@ -231,17 +232,19 @@ const RegionalEatOutShopsPage: React.FC = () => {
                 </ShopDescContainer>
               </ShopContainer>
             ))}
+          </ShopListContainer>
+          <LoaderContainer>
             <Threshold ref={setTarget}>
               {isLoaded && eatOutShopList.length >= lastIdx ? (
                 <TailSpin
                   color='#00BFFF'
-                  height={80}
-                  width={80}
+                  height='80'
+                  width='80'
                   arialLabel='loading'
                 />
               ) : null}
             </Threshold>
-          </ShopListContainer>
+          </LoaderContainer>
         </>
       )}
     </>

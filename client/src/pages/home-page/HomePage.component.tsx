@@ -101,19 +101,25 @@ const HomePage: React.FC = () => {
               style={{ opacity: (position - 380) / 80 }}
               position={position}
             >
-              지역의 안전도를 확인하세요.
+              코로나 상황에 따른
+            </DescContainer>
+            <DescContainer
+              style={{ opacity: (position - 380) / 80 }}
+              position={position}
+            >
+              당신의 지역의 안전도를 확인하세요.
             </DescContainer>
             <DescContainer
               style={{ opacity: (position - 440) / 80 }}
               position={position}
             >
-              그리고, 오늘이 외식날인지
+              그리고, 오늘이 안전한 외식날인지
             </DescContainer>
             <DescContainer
               style={{ opacity: (position - 500) / 80 }}
               position={position}
             >
-              배달날인지 파악하세요.
+              위험해서 집콕할 배달날인지 파악하세요.
             </DescContainer>
           </TextWrapper>
         </ContentsContainer>

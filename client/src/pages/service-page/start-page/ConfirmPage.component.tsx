@@ -1,46 +1,62 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { USER_LOCATION_URL } from '../../../assets/data/requestUrls';
-import { selector, useRecoilState, useRecoilValue } from 'recoil';
-import { userGu, userLocation } from '../../../store/store';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { userLocation } from "../../../store/store";
+import { useNavigate } from "react-router-dom";
 import {
   ConfirmButton,
   ConfirmCard,
   ConfirmMessage,
   ConfirmPageContainer,
   WarningMessage,
-} from './ConfirmPage.styles';
+} from "./ConfirmPage.styles";
 
 const ConfirmPage = () => {
-  const [userDistrict, setUserDistrict] = useRecoilState(userGu);
-  const userGPS = useRecoilValue(userLocation);
-  const [message, setMessage] = useState('');
+  const setUserGPS = useSetRecoilState(userLocation);
+  const [message, setMessage] = useState("");
   const [buttonOn, setButtonOn] = useState(true);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const sendUserLocation = async () => {
-  //     const sendCoords = await cors.post(USER_LOCATION_URL, userGPS);
-  //     const targetDistrict = await sendCoords.data.region;
-  //     setUserDistrict(targetDistrict);
-  //   };
-  //   /* 함수 실행단 */
-  //   sendUserLocation();
-  // }, []);
+  /* 좌표 정보를 가져온다. */
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserGPS({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.log(error);
+        },
+        {
+          enableHighAccuracy: false,
+          maximumAge: 0,
+          timeout: Infinity,
+        }
+      );
+    } else {
+      console.log("GPS 접근이 거부되었습니다.");
+    }
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
 
   const handleToReport = async () => {
-    navigate('/service/regional/report');
+    navigate("/service/regional/report");
   };
 
   const handleToMain = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const handleSetMessage = () => {
     setMessage(
-      '죄송합니다. 현 서비스는 서울시 만을 범위로 사용가능하십니다. 5초 뒤 메인화면으로 이동합니다.'
+      `죄송합니다. 현 서비스는 서울시 만을 범위로 사용가능하십니다. 5초 뒤 메인화면으로 이동합니다.`
     );
+
     setButtonOn(false);
     setTimeout(() => {
       handleToMain();

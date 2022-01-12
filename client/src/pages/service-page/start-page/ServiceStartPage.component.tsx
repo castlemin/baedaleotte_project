@@ -1,7 +1,6 @@
-import React, { Suspense, useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { useFetchGraph } from '../../../hooks/useFetchJson';
+import React, { Suspense, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFetchGraph } from "../../../hooks/useFetchJson";
 import {
   ToServiceBtn,
   ToServiceBtnContainer,
@@ -13,13 +12,11 @@ import {
   RequestTitleContainer,
   RequestDescContainer,
   ExampleTitle,
-} from './ServiceStartPage.styles';
-import { userLocation } from '../../../store/store';
-import Loading from '../../../components/UI/loading/Loading.component';
-import { TailSpin } from 'react-loader-spinner';
+} from "./ServiceStartPage.styles";
+import Loading from "../../../components/UI/loading/Loading.component";
 
 const SeoulMap = React.lazy(() =>
-  import('../../../assets/data/graphs/SeoulMap').then(({ SeoulMap }) => ({
+  import("../../../assets/data/graphs/SeoulMap").then(({ SeoulMap }) => ({
     default: SeoulMap,
   }))
 );
@@ -27,57 +24,28 @@ const SeoulMap = React.lazy(() =>
 const ServiceStartPage = () => {
   const navigate = useNavigate();
 
-  /* 사용자의 좌표를 저장할 상태값 */
-  const [userGPS, setUserGPS] = useRecoilState(userLocation);
-
   /* 사용자가 동의서에 체크 했는지 판단 */
   const [checked, setChecked] = useState(false);
 
   /* 서울 전체 지도를 불러옴 */
-  const seoulMapJson = useFetchGraph('seoul_risk_map_all');
-
-  /* 좌표 정보를 가져온다. */
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserGPS({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.log(error);
-        },
-        {
-          enableHighAccuracy: false,
-          maximumAge: 0,
-          timeout: Infinity,
-        }
-      );
-    } else {
-      console.log('GPS 접근이 거부되었습니다.');
-    }
-  };
+  const seoulMapJson = useFetchGraph("seoul_risk_map_all");
 
   const handleCheck = () => {
-    setChecked((checked) => !checked);
+    setChecked(false);
+    if (!checked) {
+      setChecked(true);
+    }
   };
 
   /* memory leak 방지 코드 */
   useEffect(() => {
-    getLocation();
     return () => setChecked(false);
   }, []);
 
   /* 좌표 가져오기 함수를 실행, 리포트 페이지로 이동 */
-  const handleClick = useCallback(() => {
-    if (Object.entries(userGPS).length === 0) {
-      getLocation();
-    } else {
-      navigate('/service/confirm');
-    }
-  }, [userGPS]);
+  const handleClick = () => {
+    navigate("/service/confirm");
+  };
 
   return (
     <BackgroundContainer>
@@ -97,10 +65,10 @@ const ServiceStartPage = () => {
           회원님의 GPS 정보 사용에 동의하시겠습니까?
         </RequestDescContainer>
         <ApprovalContainer onChange={handleCheck}>
-          <ApproveLabel htmlFor='approval'>
+          <ApproveLabel htmlFor="approval">
             <ApprovalCheck
-              type='checkbox'
-              id='approval'
+              type="checkbox"
+              id="approval"
               defaultChecked={checked}
             />
             위치 정보 제공을 동의합니다.
@@ -108,7 +76,7 @@ const ServiceStartPage = () => {
         </ApprovalContainer>
         <ToServiceBtnContainer>
           <ToServiceBtn
-            id='toRegional'
+            id="toRegional"
             onClick={handleClick}
             disabled={checked === false}
           >

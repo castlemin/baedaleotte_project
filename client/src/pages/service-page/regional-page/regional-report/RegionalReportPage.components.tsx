@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Plot from 'react-plotly.js';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import {
-  useRecoilState,
-  selector,
-  useRecoilValue,
-  useSetRecoilState,
-} from 'recoil';
+import React, { useEffect, useState } from "react";
+import Plot from "react-plotly.js";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   CONFIRMED_ALL_URL,
   CONFIRMED_BY_GU_URL,
@@ -15,16 +10,14 @@ import {
   RISK_SCORE_DETAIL_URL,
   RISK_SCORE_URL,
   SEOUL_RISK_MAP_URL,
-  USER_LOCATION_URL,
   VAC_GRAPH_URL,
-} from '../../../../assets/data/requestUrls';
+} from "../../../../assets/data/requestUrls";
 import {
-  userGu,
   ThreatScore,
   ThreatScoreDetail,
-  userLocation,
-} from '../../../../store/store';
-import Loading from '../../../../components/UI/loading/Loading.component';
+  fetchUserDistrict,
+} from "../../../../store/store";
+import Loading from "../../../../components/UI/loading/Loading.component";
 
 import {
   NextButton,
@@ -33,20 +26,17 @@ import {
   ReportSection,
   ButtonWrapper,
   GraphContainer,
-} from './RegionalReportPage.styles';
-import { ReportThreatMap } from './report-sections/threat-map/ReportThreatMap.component';
-import { ReportThreatRank } from './report-sections/threat-rank/ReportThreatRank.component';
-import { ReportTotalConfirmed } from './report-sections/total-confirmed/ReportTotalConfirmed.component';
-import { ReportConfirmedByGu } from './report-sections/confirmed-by-gu/ReportConfirmedByGu.component';
-import { ReportVaccineGraph } from './report-sections/vaccine/ReportVaccineGraph.component';
+} from "./RegionalReportPage.styles";
+import { ReportThreatMap } from "./report-sections/threat-map/ReportThreatMap.component";
+import { ReportThreatRank } from "./report-sections/threat-rank/ReportThreatRank.component";
+import { ReportTotalConfirmed } from "./report-sections/total-confirmed/ReportTotalConfirmed.component";
+import { ReportConfirmedByGu } from "./report-sections/confirmed-by-gu/ReportConfirmedByGu.component";
+import { ReportVaccineGraph } from "./report-sections/vaccine/ReportVaccineGraph.component";
 
 const RegionalReportPage: React.FC = () => {
   const [position, setPosition] = useState(0);
 
   const navigate = useNavigate();
-
-  /* userGu 상태 atom에 userDistrict이름으로 저장하기 위한 상태값 */
-  const setUserDistrict = useSetRecoilState(userGu);
 
   /* 모든 그래프 정보(JSON)를 담을 상태값 */
   const [graphs, setGraphs] = useState<any>([]);
@@ -67,30 +57,16 @@ const RegionalReportPage: React.FC = () => {
 
   /* 카테고리 페이지 이동 : id 가 toDelivery이면 배달음식 카테고리 페이지으로, 다른 경우 외식 카테고리 페이지로 이동*/
   const handleToCategory = (event: any) => {
-    if (event.target.id === 'toDelivery') {
-      navigate('/service/regional/delivery-categories/');
+    if (event.target.id === "toDelivery") {
+      navigate("/service/regional/delivery-categories/");
     } else {
-      navigate('/service/regional/eatout-categories/');
+      navigate("/service/regional/eatout-categories/");
     }
   };
 
   const cors = axios.create({
     headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
-  });
-
-  const fetchUserDistrict = selector({
-    key: 'gu',
-    get: async ({ get }) => {
-      const userGPS = get(userLocation);
-      try {
-        const { data } = await cors.post(USER_LOCATION_URL, userGPS);
-        setUserDistrict(data);
-        if (data === 'undefined') navigate('/');
-      } catch (error) {
-        console.log(error);
-      }
+      "Access-Control-Allow-Origin": "*",
     },
   });
 
@@ -157,9 +133,9 @@ const RegionalReportPage: React.FC = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -170,7 +146,7 @@ const RegionalReportPage: React.FC = () => {
         <Loading />
       ) : (
         <>
-          <ReportTitle style={{ display: 'absolute' }}>
+          <ReportTitle style={{ display: "absolute" }}>
             내 지역 코로나 리포트
           </ReportTitle>
           {graphs.map((graph: any, idx: string) => (
@@ -236,15 +212,15 @@ const RegionalReportPage: React.FC = () => {
           그렇지 않다면 (외식점 카테고리 또는 배달음식점) 으로 이동을 제한. */}
           <ButtonWrapper>
             {Number(riskScore) >= 60 ? (
-              <NextButton id='toDelivery' onClick={handleToCategory}>
+              <NextButton id="toDelivery" onClick={handleToCategory}>
                 내 지역 배달 음식점 찾으러 가기
               </NextButton>
             ) : (
               <>
-                <NextButton id='toDelivery' onClick={handleToCategory}>
+                <NextButton id="toDelivery" onClick={handleToCategory}>
                   내 지역 배달 음식점 찾으러 가기
                 </NextButton>
-                <NextButton id='toEatOut' onClick={handleToCategory}>
+                <NextButton id="toEatOut" onClick={handleToCategory}>
                   내 근처 외식점 찾으러 가기
                 </NextButton>
               </>

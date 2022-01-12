@@ -47,6 +47,10 @@ export const CategoryIndicator = styled.h2``;
 
 export const CategoryNameContainer = styled.span``;
 
+export const LoaderContainer = styled.div`
+  margin: auto;
+`;
+
 export const ShopListContainer = styled.div<Props>`
   display: grid;
   margin: 30px 80px;

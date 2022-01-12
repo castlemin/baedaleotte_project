@@ -10,6 +10,10 @@ export const EatoutShopListTitle = styled.h1`
   margin: 10px 0 20px 0px;
 `;
 
+export const LoaderContainer = styled.div`
+  margin: auto;
+`;
+
 export const HeadingContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
