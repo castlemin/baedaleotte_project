@@ -1,3 +1,4 @@
+import e from 'express';
 import styled, { css } from 'styled-components';
 import {
   pageDefault,
@@ -67,6 +68,29 @@ export const DescContainer = styled.span<Props>`
   font-weight: unset;
   animation: ${({ aniLevitate }: Props) =>
     aniLevitate ? `pop-up 1s ease-in-out` : 'none'};
+`;
+
+export const ToIntroButton = styled.button`
+  background-color: white;
+  margin-top: 54px;
+  width: 248px;
+  height: 64px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 1px 2px 1px 1px darkgrey;
+  postition: absolute;
+  box-sizing: border-box;
+  padding: 0;
+  :hover {
+    background-color: #88aed0;
+    transition: ease-in 185ms;
+    box-shadow: 1px 2px 1px 1px grey;
+    border-color: wheat;
+    color: white;
+  }
 `;
 
 export const StartButton = styled.button`

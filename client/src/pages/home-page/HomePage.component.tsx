@@ -20,6 +20,7 @@ import {
   TeamImage,
   Notice,
   IntroductionTitle,
+  ToIntroButton,
 } from './HomePage.styles';
 
 const HomePage: React.FC = () => {

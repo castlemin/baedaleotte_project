@@ -15,10 +15,7 @@ interface Props {
   viewHeight?: any;
 }
 
-const Header: React.FC<Props> = ({ serviceStatic, viewHeight }) => {
-  // const handleScroll = (position: number) => {
-  //   window.scrollTo({ top: position, behavior: 'smooth' });
-  // };
+const Header: React.FC<Props> = ({ viewHeight }) => {
   return (
     <HeaderContainer>
       <div>

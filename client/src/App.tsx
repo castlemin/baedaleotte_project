@@ -11,10 +11,12 @@ import RegionalEatOutCategoryPage from './pages/service-page/regional-page/regio
 import Error404 from './components/UI/error/404.error';
 import Error500 from './components/UI/error/500.error';
 import ConfirmPage from './pages/service-page/start-page/ConfirmPage.component';
+import GlobalStyles from './components/UI/global/globalStyles';
 
 const App: React.FC = () => {
   return (
     <>
+      <GlobalStyles />
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/service' element={<ServiceStartPage />} />
