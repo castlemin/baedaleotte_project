@@ -14,8 +14,9 @@ import {
   ExampleTitle,
 } from "./ServiceStartPage.styles";
 import Loading from "../../../components/UI/loading/Loading.component";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userLocation } from "../../../store/store";
+import axios from "axios";
 
 const SeoulMap = React.lazy(() =>
   import("../../../assets/data/graphs/SeoulMap").then(({ SeoulMap }) => ({
@@ -26,37 +27,30 @@ const SeoulMap = React.lazy(() =>
 const ServiceStartPage = () => {
   const navigate = useNavigate();
 
+  const [userGPS, setUserGPS] = useRecoilState(userLocation);
+
   /* 사용자가 동의서에 체크 했는지 판단 */
   const [checked, setChecked] = useState(false);
-  const setUserGPS = useSetRecoilState(userLocation);
 
   /* 서울 전체 지도를 불러옴 */
   const seoulMapJson = useFetchGraph("seoul_risk_map_all");
 
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserGPS({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.log(error);
-        },
-        {
-          enableHighAccuracy: false,
-          maximumAge: 0,
-          timeout: Infinity,
-        }
-      );
-    } else {
-      console.log("GPS 접근이 거부되었습니다.");
-    }
-  };
+  const cors = axios.create({
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
 
-  getLocation();
+  useEffect(() => {
+    const fetchGeo = async () => {
+      const res = await cors.post(
+        "https://cors-anywhere.herokuapp.com/https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDmKk-Vine19NYMkRabXbYCrCVik36V-o4"
+      );
+      const data = await res.data;
+      setUserGPS(data.location);
+    };
+    fetchGeo();
+  }, []);
 
   const handleCheck = () => {
     setChecked(false);
