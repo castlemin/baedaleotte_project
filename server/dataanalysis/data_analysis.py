@@ -30,6 +30,11 @@ max_point = 40 # 신규 확진자의 최대 점수
 def change_max_to_100(data):
     return (data / max(data)) *100
 
+# 서울시 전체 확진자 중 자치구의 확진자 비율을 반환하는 함수
+def get_coronic_rate(data, region):
+    rate =  np.mean(data[f'{region} 전체'][:7]/data['서울 전체'][:7]) * 100
+    return rate
+
 # 생활인구지수 (유동, 10)
 def 생활인구지수(data):
     # 기준일 ID time 형식으로 변경

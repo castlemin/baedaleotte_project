@@ -36,6 +36,7 @@ def df_dic(df, region):
             'family' : df.loc[region]['평균가구'],
             'rate' : round((df.loc[region]['rate'] / 0.3), 1),
             'rank' : list(점수df['합계'].sort_values(ascending = False).index).index(region)+1,
+            'region_rate' : da.get_coronic_rate(da.coronic_seoul, region)
     }
     return dic
 
