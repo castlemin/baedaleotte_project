@@ -1,60 +1,60 @@
-import { atom, selector } from 'recoil';
-import axios from 'axios';
-import { USER_LOCATION_URL } from '../assets/data/requestUrls';
+import { atom, selector } from "recoil";
+import axios from "axios";
+import { USER_LOCATION_URL } from "../assets/data/requestUrls";
 
 const cors = axios.create({
   headers: {
-    'Access-Control-Allow-Origin': '*',
+    "Access-Control-Allow-Origin": "*",
   },
 });
 
 export const selectedDeliveryCategory = atom({
-  key: 'selectedDeliveryCategory',
+  key: "selectedDeliveryCategory",
   default: [],
 });
 
 export const selectedEatOutCategory = atom({
-  key: 'selectedEatOutCategory',
+  key: "selectedEatOutCategory",
   default: [],
 });
 
 export const itemsPerPage = atom({
-  key: 'itemsPerPage',
+  key: "itemsPerPage",
   default: 5,
 });
 
 export const userLocation = atom({
-  key: 'userLocation',
+  key: "userLocation",
   default: {},
 });
 
 export const userGu = atom({
-  key: 'userGu',
-  default: '',
+  key: "userGu",
+  default: "",
 });
 
 export const RegionName = atom({
-  key: 'regionName',
-  default: '',
+  key: "regionName",
+  default: "",
 });
 
 export const CoronicNumberByGu = atom({
-  key: 'coronicNum',
+  key: "coronicNum",
   default: [],
 });
 
 export const ThreatScore = atom({
-  key: 'threatScore',
-  default: '',
+  key: "threatScore",
+  default: "",
 });
 
 export const ThreatScoreDetail = atom({
-  key: 'threatScoreDetail',
+  key: "threatScoreDetail",
   default: [],
 });
 
 export const fetchUserDistrict = selector({
-  key: 'gu',
+  key: "gu",
   get: async ({ get }) => {
     const userGPS = get(userLocation);
     try {

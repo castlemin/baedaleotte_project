@@ -1,27 +1,45 @@
 import { useEffect, useState } from "react";
-import { userLocation } from "../../../store/store";
+import { userGu, userLocation } from "../../../store/store";
 import { useNavigate } from "react-router-dom";
+import seoul_gu_data from "../../../assets/data/seoul_regions.json";
+import { seoulGuData } from "../../../assets/data/seoulGuData";
 import {
   ConfirmButton,
   ConfirmCard,
   ConfirmMessage,
   ConfirmPageContainer,
+  GuLabel,
+  GuSelectionForm,
   WarningMessage,
 } from "./ConfirmPage.styles";
+import { useRecoilState } from "recoil";
+import Button from "../../../components/UI/button/Button.component";
 
 const ConfirmPage = () => {
   const [message, setMessage] = useState("");
+  const [check, setCheck] = useState([]);
+  const [guList, setGuList] = useState<any>([]);
   const [buttonOn, setButtonOn] = useState(true);
+  const [formOn, setFormOn] = useState(false);
   const navigate = useNavigate();
 
   /* 좌표 정보를 가져온다. */
 
   useEffect(() => {
-    console.log("불러오기 완료");
+    setGuList(seoulGuData);
   }, []);
 
   const handleToReport = async () => {
+    if (!check.length) {
+      alert("지역을 선택해주세요!");
+      return;
+    }
     navigate("/service/regional/report");
+  };
+
+  const handleOpenForm = () => {
+    setButtonOn(false);
+    setFormOn(true);
   };
 
   const handleToMain = () => {
@@ -48,12 +66,29 @@ const ConfirmPage = () => {
         <ConfirmMessage>
           서울시 시민 혹은 서울에 현재 재류하고 계십니까?
         </ConfirmMessage>
-        <WarningMessage>{message}</WarningMessage>
-        {buttonOn && (
+        {buttonOn ? (
           <>
-            <ConfirmButton onClick={handleToReport}>예</ConfirmButton>
+            <ConfirmButton onClick={handleOpenForm}>예</ConfirmButton>
             <ConfirmButton onClick={handleSetMessage}>아니오</ConfirmButton>
           </>
+        ) : !buttonOn && formOn ? (
+          <>
+            <GuLabel>선택 지역: {check}</GuLabel>
+            <GuSelectionForm>
+              {guList.map((gu: string, idx: string) => (
+                <Button
+                  key={idx}
+                  gu={gu}
+                  number={idx}
+                  onSetCheck={setCheck}
+                  checkedVal={check}
+                />
+              ))}
+            </GuSelectionForm>
+            <ConfirmButton onClick={handleToReport}>확인</ConfirmButton>
+          </>
+        ) : (
+          <WarningMessage>{message}</WarningMessage>
         )}
       </ConfirmCard>
     </ConfirmPageContainer>

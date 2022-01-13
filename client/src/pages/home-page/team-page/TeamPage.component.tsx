@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from "react";
 import {
   TeamPageContainer,
   MemberName,
@@ -8,20 +8,20 @@ import {
   ProfileImage,
   MemberDescription,
   Introduction,
-} from './TeamPage.styles';
+} from "./TeamPage.styles";
 
-import HWANIK_FACE_IMG from '../../../assets/images/team/hwanIk_face.png';
-import HWANIK_FULL_IMG from '../../../assets/images/team/hwanIk_full.png';
-import SANG_FACE_IMG from '../../../assets/images/team/Sang_face.png';
-import SANG_FULL_IMG from '../../../assets/images/team/Sang_full.png';
-import SUNGMIN_FACE_IMG from '../../../assets/images/team/sungMin_face.png';
-import SUNGMIN_FULL_IMG from '../../../assets/images/team/sungMin_full.png';
-import SUHYEN_FACE_IMG from '../../../assets/images/team/suHyen_face.png';
-import SUHYEN_FULL_IMG from '../../../assets/images/team/suHyen_full.png';
-import HYEONHEE_FACE_IMG from '../../../assets/images/team/hyeonHee_face.png';
-import HYEONHEE_FULL_IMG from '../../../assets/images/team/hyeonHee_full.png';
+import HWANIK_FACE_IMG from "../../../assets/images/team/hwanIk_face.png";
+import HWANIK_FULL_IMG from "../../../assets/images/team/hwanIk_full.png";
+import SANG_FACE_IMG from "../../../assets/images/team/Sang_face.png";
+import SANG_FULL_IMG from "../../../assets/images/team/Sang_full.png";
+import SUNGMIN_FACE_IMG from "../../../assets/images/team/sungMin_face.png";
+import SUNGMIN_FULL_IMG from "../../../assets/images/team/sungMin_full.png";
+import SUHYEN_FACE_IMG from "../../../assets/images/team/suHyen_face.png";
+import SUHYEN_FULL_IMG from "../../../assets/images/team/suHyen_full.png";
+import HYEONHEE_FACE_IMG from "../../../assets/images/team/hyeonHee_face.png";
+import HYEONHEE_FULL_IMG from "../../../assets/images/team/hyeonHee_full.png";
 
-import TeamHeader from './TeamHeader.component';
+import TeamHeader from "./TeamHeader.component";
 
 const TeamPage = () => {
   const [viewHeight, setViewHeight] = useState(0);
@@ -39,9 +39,9 @@ const TeamPage = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -53,7 +53,7 @@ const TeamPage = () => {
         <FirstParagraph>
           <ProfileImage
             src={SANG_FACE_IMG}
-            alt='Team Leader, backend developer'
+            alt="Team Leader, backend developer"
           />
           <MemberDescription>
             <Introduction>
@@ -66,7 +66,7 @@ const TeamPage = () => {
         <SecondParagraph>
           <ProfileImage
             src={SANG_FULL_IMG}
-            alt='Team Leader, backend developer'
+            alt="Team Leader, backend developer"
           />
           <MemberDescription>
             <Introduction>
@@ -89,7 +89,7 @@ const TeamPage = () => {
           <ProfileImage
             style={{ opacity: (position - 380) / 80 }}
             src={HWANIK_FACE_IMG}
-            alt='frontend developer'
+            alt="frontend developer"
           />
           <MemberDescription>
             <Introduction style={{ opacity: (position - 470) / 80 }}>
@@ -105,7 +105,7 @@ const TeamPage = () => {
           <ProfileImage
             style={{ opacity: (position - 600) / 100 }}
             src={HWANIK_FULL_IMG}
-            alt='frontend developer'
+            alt="frontend developer"
           />
           <MemberDescription>
             <Introduction style={{ opacity: (position - 700) / 100 }}>
@@ -129,7 +129,7 @@ const TeamPage = () => {
           <ProfileImage
             style={{ opacity: (position - 1200) / 100 }}
             src={SUNGMIN_FACE_IMG}
-            alt='backend developer'
+            alt="backend developer"
           />
           <MemberDescription>
             <Introduction style={{ opacity: (position - 1250) / 100 }}>
@@ -143,7 +143,7 @@ const TeamPage = () => {
           <ProfileImage
             style={{ opacity: (position - 1500) / 100 }}
             src={SUNGMIN_FULL_IMG}
-            alt='backend developer'
+            alt="backend developer"
           />
           <MemberDescription>
             <Introduction style={{ opacity: (position - 1520) / 100 }}>
@@ -166,7 +166,7 @@ const TeamPage = () => {
           <ProfileImage
             style={{ opacity: (position - 2100) / 100 }}
             src={SUHYEN_FACE_IMG}
-            alt='data analylist'
+            alt="data analylist"
           />
           <MemberDescription>
             <Introduction style={{ opacity: (position - 2100) / 100 }}>
@@ -179,7 +179,7 @@ const TeamPage = () => {
           <ProfileImage
             style={{ opacity: (position - 2300) / 100 }}
             src={SUHYEN_FULL_IMG}
-            alt='data analylist'
+            alt="data analylist"
           />
           <MemberDescription>
             <Introduction style={{ opacity: (position - 2350) / 100 }}>
@@ -201,10 +201,10 @@ const TeamPage = () => {
           <ProfileImage
             style={{ opacity: (position - 2850) / 100 }}
             src={HYEONHEE_FACE_IMG}
-            alt='data analylist'
+            alt="data analylist"
           />
           <MemberDescription>
-            <Introduction style={{ opacity: (position - 2920) / 100 }}>
+            <Introduction>
               안녕하세요 이번 프로젝트에서 데이터 분석을 맡은 강현희입니다. 서버
               엔지니어로 일했던 경력이 있으며, 원하는 기능 및 프로그램을 직접
               만들어 낼 수 있는 개발자들이 부러워 개발자를 목표로 하게
@@ -213,17 +213,13 @@ const TeamPage = () => {
           </MemberDescription>
         </FirstParagraph>
         <SecondParagraph>
-          <ProfileImage
-            style={{ opacity: (position - 3200) / 100 }}
-            src={HYEONHEE_FULL_IMG}
-            alt='data analylist'
-          />
+          <ProfileImage src={HYEONHEE_FULL_IMG} alt="data analylist" />
           <MemberDescription>
-            <Introduction style={{ opacity: (position - 3200) / 100 }}>
+            <Introduction>
               배달어때 서비스를 팀원들과 함께 만들어 가며 개발자의 노고와
               즐거움을 함께 느낄 수 있었습니다.
             </Introduction>
-            <Introduction style={{ opacity: (position - 3240) / 100 }}>
+            <Introduction>
               좋아하는건 의자에 누워 책 읽기, 에일 맥주 마시기 그리고 식물
               키우기 입니다.
             </Introduction>

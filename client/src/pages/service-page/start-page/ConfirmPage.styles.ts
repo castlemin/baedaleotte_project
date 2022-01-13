@@ -16,6 +16,18 @@ export const ConfirmMessage = styled.div`
   font-size: 18px;
 `;
 
+export const GuLabel = styled.p`
+  transition: 200ms ease-in;
+`;
+
+export const GuSelectionForm = styled.form`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  place-items: center;
+  border: 1px solid black;
+  border-radius: 4px;
+`;
+
 export const WarningMessage = styled.p``;
 
 export const ConfirmCard = styled.div`
@@ -27,7 +39,7 @@ export const ConfirmCard = styled.div`
   width: 30rem;
   z-index: 11;
   position: fixed;
-  top: 25vh;
+  top: 10vh;
   left: calc(50% - 15rem);
 `;
 

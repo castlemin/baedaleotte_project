@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { EAT_OUT_REVIEW_URL } from '../../../../../../assets/data/requestUrls';
-import { formatRating } from '../../../../../../functions/formatter';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { EAT_OUT_REVIEW_URL } from "../../../../../../assets/data/requestUrls";
+import { formatRating } from "../../../../../../functions/formatter";
 import {
   Title,
   Comment,
@@ -9,7 +9,7 @@ import {
   Content,
   CommentRating,
   CommentDate,
-} from './EatOutShopDetailReview.styles';
+} from "./EatOutShopDetailReview.styles";
 
 interface Props {
   shopId: string;
