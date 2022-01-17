@@ -6,7 +6,7 @@ import {
   GraphContainer,
   ReportDesc,
 } from './ReportTotalConfirmed.styles';
-import { ConfirmedGraph } from '../../../../../../assets/data/graphs/ConfirmedGraph';
+import { HighLight } from '../../../../../../components/UI/text/HighLight.styles';
 
 interface IProps {
   position: number;
@@ -20,23 +20,28 @@ export const ReportTotalConfirmed: React.FC<IProps> = ({
   addNum,
   date,
   position,
+  children,
 }) => {
   return (
     <DescriptionSection style={{ opacity: (position - 1900) / 80 }}>
       <ReportSubtitle>
         <ReportDesc style={{ opacity: (position - 2000) / 80 }}>
-          {date}일 기준으로,
+          <HighLight>"{date}일"</HighLight> 기준으로,
         </ReportDesc>
         <ReportDesc style={{ opacity: (position - 2050) / 80 }}>
-          서울시 전체 확진자 수는 {totalNum}명이며,
+          서울시 전체 확진자 수는{' '}
+          <HighLight>{totalNum.toLocaleString()}명</HighLight>
+          이며,
         </ReportDesc>
         <ReportDesc style={{ opacity: (position - 2100) / 80 }}>
-          서울시 추가 확진자 수는 {addNum}명입니다.{' '}
+          서울시 추가 확진자 수는{' '}
+          <HighLight>{addNum.toLocaleString()}명</HighLight>
+          입니다.{' '}
         </ReportDesc>
       </ReportSubtitle>
       <GraphContainer>
         <ReportSubtitle>서울시 전체 확진자 현황</ReportSubtitle>
-        <ConfirmedGraph />
+        {children}
       </GraphContainer>
     </DescriptionSection>
   );

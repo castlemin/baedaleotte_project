@@ -56,7 +56,6 @@ const ServiceStartPage = () => {
       console.log('GPS 접근이 거부되었습니다.');
     }
   };
-  getLocation();
 
   const handleCheck = () => {
     setChecked(false);
@@ -66,6 +65,7 @@ const ServiceStartPage = () => {
   };
   /* memory leak 방지 코드 */
   useEffect(() => {
+    getLocation();
     return () => setChecked(false);
   }, []);
 

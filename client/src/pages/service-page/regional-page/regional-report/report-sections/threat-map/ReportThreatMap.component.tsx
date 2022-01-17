@@ -19,6 +19,7 @@ import {
   ReportDesc,
   ReportSubtitle,
 } from './ReportThreatMap.styles';
+import { HighLight } from '../../../../../../components/UI/text/HighLight.styles';
 
 import { riskScoreParser } from '../../../../../../assets/data/riskScoreParser';
 import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
@@ -59,21 +60,29 @@ export const ReportThreatMap: React.FC<IProps> = ({
     <>
       <DescriptionSection>
         <GraphContainer>
-          <ReportSubtitle>내 행정구 위험도 지도</ReportSubtitle>
+          <ReportSubtitle>
+            내 행정구: <HighLight>"{location}"</HighLight> 위험도 지도
+          </ReportSubtitle>
           {children}
         </GraphContainer>
         <ReportSubtitle>
           <ReportDesc>
-            파란색 테두리로 표시된 당신의 행정구 현재 위험도는 {score}점,
+            파란색 테두리로 표시된 <HighLight>"{location}"</HighLight>의 현재
+            위험도는 {score}점,
           </ReportDesc>
-          <ReportDesc>{riskScoreParser(score)}등급은 입니다.</ReportDesc>
+          <ReportDesc>
+            <HighLight>{riskScoreParser(score)}</HighLight>
+            등급은 입니다.
+          </ReportDesc>
           {score >= 60 ? (
             <ReportDesc>
-              오늘은 배달날입니다. 얌전히 집콕하고 식사하시지요!
+              오늘은 <HighLight>"배달날"</HighLight>입니다. 얌전히 집콕하고
+              식사하시지요!
             </ReportDesc>
           ) : (
             <ReportDesc>
-              오늘은 외식 가능날입니다. 기분전환 겸 간만에 외식 한번 할까요?
+              오늘은 <HighLight>"외식 가능날"</HighLight>
+              입니다. 기분전환 겸 간만에 외식 한번 할까요?
             </ReportDesc>
           )}
           <AddOnButton onClick={handleOpen}>
@@ -94,39 +103,52 @@ export const ReportThreatMap: React.FC<IProps> = ({
             </AddOnDesc>
             <ContentDivider />
             <AddOnDesc>
-              <AddOnName>내 지역</AddOnName>: "{location}"
+              <AddOnName>내 지역</AddOnName>:{' '}
+              <HighLight>"{location}"</HighLight>
             </AddOnDesc>
             <AddOnDesc>
-              <AddOnName>종합 위험도 점수</AddOnName>: {score} 점
+              <AddOnName>종합 위험도 점수</AddOnName>:{' '}
+              <HighLight>{score} 점</HighLight>
             </AddOnDesc>
             <GradeSection>
               <AddOnDesc>
-                <AddOnName>등급표</AddOnName>: {riskScoreParser(score)}
+                <AddOnName>등급표</AddOnName>:{' '}
+                <HighLight>{riskScoreParser(score)}</HighLight>
               </AddOnDesc>
               <GradeList>
-                <GradeListItem>30점 미만 = {riskScoreParser(29)}</GradeListItem>
-                <GradeListItem>60점 미만 = {riskScoreParser(59)}</GradeListItem>
-                <GradeListItem>60점 이상 = {riskScoreParser(60)}</GradeListItem>
+                <GradeListItem>
+                  30점 미만 = <HighLight>{riskScoreParser(29)}</HighLight>
+                </GradeListItem>
+                <GradeListItem>
+                  60점 미만 = <HighLight>{riskScoreParser(59)}</HighLight>
+                </GradeListItem>
+                <GradeListItem>
+                  60점 이상 = <HighLight>{riskScoreParser(60)}</HighLight>
+                </GradeListItem>
               </GradeList>
             </GradeSection>
             <ContentDivider />
             <RateDesc>
               이후 3일 동안의 코로나 증감률 예측치는
-              <DescName> {rate}%</DescName> 입니다.
+              <HighLight> {rate}%</HighLight> 입니다.
             </RateDesc>
             <ElementDescSection>
               <RateSection>
                 <AddOnDesc>
-                  <DescName>코로나 누적지수</DescName>: {stack}
+                  <DescName>코로나 누적지수</DescName>:{' '}
+                  <HighLight>{stack}</HighLight>
                 </AddOnDesc>
                 <AddOnDesc>
-                  <DescName>생활인구 지수</DescName>: {population}
+                  <DescName>생활인구 지수</DescName>:{' '}
+                  <HighLight>{population}</HighLight>
                 </AddOnDesc>
                 <AddOnDesc>
-                  <DescName>평균 가구 수</DescName>: {family}
+                  <DescName>평균 가구 수</DescName>:{' '}
+                  <HighLight>{family}</HighLight>
                 </AddOnDesc>
                 <AddOnDesc>
-                  <DescName>대중이용시설 분포</DescName>: {facillity}
+                  <DescName>대중이용시설 분포</DescName>:{' '}
+                  <HighLight>{facillity}</HighLight>
                 </AddOnDesc>
               </RateSection>
               <AddOnGraphContainer imgUrl={prophet}></AddOnGraphContainer>

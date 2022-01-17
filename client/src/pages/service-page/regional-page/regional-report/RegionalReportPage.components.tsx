@@ -15,7 +15,7 @@ import {
 import {
   ThreatScore,
   ThreatScoreDetail,
-  fetchUserDistrict,
+  userGu,
 } from '../../../../store/store';
 import Loading from '../../../../components/UI/loading/Loading.component';
 
@@ -32,6 +32,7 @@ import { ReportThreatRank } from './report-sections/threat-rank/ReportThreatRank
 import { ReportTotalConfirmed } from './report-sections/total-confirmed/ReportTotalConfirmed.component';
 import { ReportConfirmedByGu } from './report-sections/confirmed-by-gu/ReportConfirmedByGu.component';
 import { ReportVaccineGraph } from './report-sections/vaccine/ReportVaccineGraph.component';
+import { CloseBtn } from '../regional-shops/regional-delivery/delivery-shops-detail/RegionalDeliveryShopDetail.styles';
 
 const RegionalReportPage: React.FC = () => {
   const [position, setPosition] = useState(0);
@@ -70,7 +71,8 @@ const RegionalReportPage: React.FC = () => {
     },
   });
 
-  const userDistrict = useRecoilValue(fetchUserDistrict);
+  const userDistrict = useRecoilValue(userGu);
+  console.log(userDistrict);
 
   /* 리포트 페이지 내, 최초 화면 렌더링 이후 실행할 사이드 이펙트*/
   useEffect(() => {
@@ -171,6 +173,7 @@ const RegionalReportPage: React.FC = () => {
                     key={idx}
                     position={position}
                     rank={riskScoreDetail.rank}
+                    location={userDistrict}
                   >
                     <Plot data={graph.data} layout={graph.layout} />
                   </ReportThreatRank>
@@ -198,8 +201,11 @@ const RegionalReportPage: React.FC = () => {
                   <ReportConfirmedByGu
                     key={idx}
                     position={position}
+                    totalNum={graphs[4].data[0].text[6]}
+                    addNum={graphs[4].data[1].text[6]}
                     rank={riskScoreDetail.rank}
                     regionRate={riskScoreDetail.region_rate}
+                    location={userDistrict}
                   >
                     <Plot data={graph.data} layout={graph.layout} />
                   </ReportConfirmedByGu>

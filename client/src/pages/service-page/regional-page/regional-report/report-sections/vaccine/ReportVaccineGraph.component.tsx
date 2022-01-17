@@ -4,6 +4,7 @@ import {
   GraphContainer,
   ReportSubtitle,
 } from './ReportVaccineGraph.styles';
+import { HighLight } from '../../../../../../components/UI/text/HighLight.styles';
 
 import { ReportDesc } from '../threat-rank/ReportThreatRank.styles';
 
@@ -28,15 +29,19 @@ export const ReportVaccineGraph: React.FC<IProps> = ({
         {children}
       </GraphContainer>
       <ReportSubtitle>
-        <ReportDesc>{date}일 기준으로,</ReportDesc>
+        <ReportDesc>
+          <HighLight>"{date}일"</HighLight> 기준으로,
+        </ReportDesc>
         <ReportDesc style={{ opacity: (position - 1300) / 80 }}>
-          현재 서울시의 2차 백신 접종률은 {secVacRate}%입니다.
+          현재 서울시의 2차 백신 접종률은 <HighLight>"{secVacRate}%"</HighLight>
+          입니다.
         </ReportDesc>
         <ReportDesc style={{ opacity: (position - 1350) / 80 }}>
-          현재 서울시의 3차 백신 접종률은 {thrVacRate}%입니다.
+          현재 서울시의 3차 백신 접종률은 <HighLight>"{thrVacRate}%"</HighLight>
+          입니다.
         </ReportDesc>
         <ReportDesc style={{ opacity: (position - 1400) / 80 }}>
-          {secVacRate}% 를 따라잡을 때까지 영차 영차!
+          <HighLight>"{secVacRate}%"</HighLight>를 따라잡을 때까지 영차 영차!
         </ReportDesc>
       </ReportSubtitle>
     </DescriptionSection>
