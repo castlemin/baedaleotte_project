@@ -33,11 +33,13 @@ export const ReportVaccineGraph: React.FC<IProps> = ({
           <HighLight>"{date}일"</HighLight> 기준으로,
         </ReportDesc>
         <ReportDesc style={{ opacity: (position - 1300) / 80 }}>
-          현재 서울시의 2차 백신 접종률은 <HighLight>"{secVacRate}%"</HighLight>
+          현재 서울시의 2차 백신 접종률은{' '}
+          <HighLight>"{secVacRate.toFixed(2)}%"</HighLight>
           입니다.
         </ReportDesc>
         <ReportDesc style={{ opacity: (position - 1350) / 80 }}>
-          현재 서울시의 3차 백신 접종률은 <HighLight>"{thrVacRate}%"</HighLight>
+          현재 서울시의 3차 백신 접종률은{' '}
+          <HighLight>"{thrVacRate.toFixed(2)}%"</HighLight>
           입니다.
         </ReportDesc>
         <ReportDesc style={{ opacity: (position - 1400) / 80 }}>
