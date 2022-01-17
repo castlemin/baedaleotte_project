@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { Suspense, useEffect, useState, useRef, MouseEvent } from 'react';
+import { useEffect, useState, useRef, MouseEvent } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
-import { Audio, TailSpin } from 'react-loader-spinner';
+import { TailSpin } from 'react-loader-spinner';
 
 import BackDrop from '../../../../../../components/UI/backDrop/BackDrop.component';
 import Loading from '../../../../../../components/UI/loading/Loading.component';

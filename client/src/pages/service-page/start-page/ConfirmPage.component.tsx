@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { userLocation } from '../../../store/store';
 import {
   ConfirmButton,
   ConfirmCard,
@@ -16,8 +14,6 @@ const ConfirmPage = () => {
   const navigate = useNavigate();
 
   /* 좌표 정보를 가져온다. */
-
-  useEffect(() => {}, []);
 
   const handleToReport = () => {
     navigate('/service/regional/report');

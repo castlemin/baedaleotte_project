@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface Props {
   selected?: number;
@@ -18,7 +18,7 @@ export const CategoryListContainer = styled.div`
   place-items: center;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
-  margin: 0 200px;
+  margin: 0 auto;
   background-color: white;
 `;
 
@@ -38,6 +38,7 @@ export const CategoryContainer = styled.div`
 
   &:hover {
     box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+    background-color: #88aed0;
     opacity: 1;
     transition: 200ms ease;
     transform: scale(1.03);
@@ -57,6 +58,12 @@ export const PageTitle = styled.h2`
   text-align: center;
 `;
 
+export const OptionsInstruction = styled.p`
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 10px auto;
+`;
+
 export const SelectedOptionsTitle = styled.h3`
   font-size: 1.5rem;
   margin-bottom: 0;
@@ -66,6 +73,7 @@ export const SelectedOptionsTitle = styled.h3`
 export const SelectedContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  background-color: white;
   align-items: center;
   height: 120px;
   width: 240px;
@@ -136,7 +144,7 @@ export const ToMainButton = styled.button`
   box-shadow: 1px 2px 1px 1px darkgrey;
   box-sizing: border-box;
   padding: 0;
-  :hover {
+  &:hover {
     background-color: #88aed0;
     transition: ease-in 185ms;
     box-shadow: 1px 2px 1px 1px grey;
@@ -157,7 +165,7 @@ export const NextButton = styled.button`
   box-shadow: 1px 2px 1px 1px darkgrey;
   box-sizing: border-box;
   padding: 0;
-  :hover {
+  &:hover {
     background-color: #88aed0;
     transition: ease-in 185ms;
     box-shadow: 1px 2px 1px 1px grey;

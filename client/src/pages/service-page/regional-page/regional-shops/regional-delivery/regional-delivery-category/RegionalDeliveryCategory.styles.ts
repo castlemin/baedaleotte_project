@@ -14,11 +14,12 @@ export const CategoryTemplate = styled.div`
 
 export const CategoryListContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   place-items: center;
   border-radius: 6px;
+  width: fit-content;
   box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
-  margin: 0 200px;
+  margin: 0 auto;
   background-color: white;
 `;
 
@@ -64,7 +65,7 @@ export const TopCategories = styled.span`
 export const HighLight = styled.span`
   color: darkred;
 `;
-export const SelectedOptionsTitle = styled.h3`
+export const SelectedOptionsTitle = styled.p`
   font-size: 1.5rem;
   margin-bottom: 10px;
 `;
@@ -77,6 +78,7 @@ export const OptionsInstruction = styled.p`
 export const SelectedContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  background-color: white;
   align-items: center;
   height: 120px;
   width: 240px;

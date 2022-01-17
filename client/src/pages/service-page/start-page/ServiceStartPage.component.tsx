@@ -64,7 +64,6 @@ const ServiceStartPage = () => {
       setChecked(true);
     }
   };
-
   /* memory leak 방지 코드 */
   useEffect(() => {
     return () => setChecked(false);
