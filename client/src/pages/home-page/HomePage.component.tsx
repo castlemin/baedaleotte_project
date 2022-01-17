@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import Header from "../../components/UI/header/Header.component";
-import { SeoulMap } from "../../assets/data/graphs/SeoulMap";
-import teamImg from "../../assets/images/team/team.png";
-import IntroLottie from "../../components/UI/introLottie/IntroLottie.component";
-import { HOME_IMG_CONFIG } from "../../assets/data/homeImgConfig";
-import { useFetchGraph } from "../../hooks/useFetchJson";
+import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Header from '../../components/UI/header/Header.component';
+import { SeoulMap } from '../../assets/data/graphs/SeoulMap';
+import teamImg from '../../assets/images/team/team.png';
+import IntroLottie from '../../components/UI/introLottie/IntroLottie.component';
+import { HOME_IMG_CONFIG } from '../../assets/data/homeImgConfig';
+import { useFetchGraph } from '../../hooks/useFetchJson';
 
 import {
   HomePageContainer,
@@ -20,8 +20,7 @@ import {
   TeamImage,
   Notice,
   IntroductionTitle,
-  ToIntroButton,
-} from "./HomePage.styles";
+} from './HomePage.styles';
 
 const HomePage: React.FC = () => {
   const [position, setPosition] = useState(0);
@@ -43,19 +42,19 @@ const HomePage: React.FC = () => {
 
   /* 서비스 소개 섹션으로 스크롤 */
   const handleToService = () => {
-    navigate("/service");
+    navigate('/service');
   };
 
   /* 팀 소개 섹션으로 스크롤 */
   const handleToTeamSection = () => {
-    navigate("/team");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate('/team');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -126,7 +125,7 @@ const HomePage: React.FC = () => {
       </RegIntroContainer>
       <TeamIntroContainer>
         <ContentsContainer>
-          <TeamImage src={teamImg} style={HOME_IMG_CONFIG} alt="team" />
+          <TeamImage src={teamImg} style={HOME_IMG_CONFIG} alt='team' />
           <TextWrapper>
             <TitleContainer
               style={{ opacity: (position - 1100) / 80 }}

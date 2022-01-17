@@ -68,7 +68,7 @@ const RegionalEatOutShopsPage: React.FC = () => {
   );
 
   /* 좌표를 딤아 넘겨 줄 params */
-  const params = userLocation;
+  const params = userDistrict;
 
   const cors = axios.create({
     headers: {

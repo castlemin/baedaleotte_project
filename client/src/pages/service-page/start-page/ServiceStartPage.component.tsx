@@ -1,6 +1,6 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useFetchGraph } from "../../../hooks/useFetchJson";
+import React, { Suspense, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useFetchGraph } from '../../../hooks/useFetchJson';
 import {
   ToServiceBtn,
   ToServiceBtnContainer,
@@ -12,13 +12,13 @@ import {
   RequestTitleContainer,
   RequestDescContainer,
   ExampleTitle,
-} from "./ServiceStartPage.styles";
-import Loading from "../../../components/UI/loading/Loading.component";
-import { useSetRecoilState } from "recoil";
-import { userLocation } from "../../../store/store";
+} from './ServiceStartPage.styles';
+import Loading from '../../../components/UI/loading/Loading.component';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userLocation } from '../../../store/store';
 
 const SeoulMap = React.lazy(() =>
-  import("../../../assets/data/graphs/SeoulMap").then(({ SeoulMap }) => ({
+  import('../../../assets/data/graphs/SeoulMap').then(({ SeoulMap }) => ({
     default: SeoulMap,
   }))
 );
@@ -29,9 +29,10 @@ const ServiceStartPage = () => {
   /* 사용자가 동의서에 체크 했는지 판단 */
   const [checked, setChecked] = useState(false);
   const setUserGPS = useSetRecoilState(userLocation);
+  const userGPS = useRecoilValue(userLocation);
 
   /* 서울 전체 지도를 불러옴 */
-  const seoulMapJson = useFetchGraph("seoul_risk_map_all");
+  const seoulMapJson = useFetchGraph('seoul_risk_map_all');
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -52,10 +53,9 @@ const ServiceStartPage = () => {
         }
       );
     } else {
-      console.log("GPS 접근이 거부되었습니다.");
+      console.log('GPS 접근이 거부되었습니다.');
     }
   };
-
   getLocation();
 
   const handleCheck = () => {
@@ -70,9 +70,9 @@ const ServiceStartPage = () => {
     return () => setChecked(false);
   }, []);
 
-  /* 좌표 가져오기 함수를 실행, 리포트 페이지로 이동 */
+  /* 좌표 가져오기 함수를 실행, 확인 페이지로 이동 */
   const handleClick = () => {
-    navigate("/service/confirm");
+    navigate('/service/confirm');
   };
 
   return (
@@ -93,10 +93,10 @@ const ServiceStartPage = () => {
           회원님의 GPS 정보 사용에 동의하시겠습니까?
         </RequestDescContainer>
         <ApprovalContainer onChange={handleCheck}>
-          <ApproveLabel htmlFor="approval">
+          <ApproveLabel htmlFor='approval'>
             <ApprovalCheck
-              type="checkbox"
-              id="approval"
+              type='checkbox'
+              id='approval'
               defaultChecked={checked}
             />
             위치 정보 제공을 동의합니다.
@@ -104,7 +104,7 @@ const ServiceStartPage = () => {
         </ApprovalContainer>
         <ToServiceBtnContainer>
           <ToServiceBtn
-            id="toRegional"
+            id='toRegional'
             onClick={handleClick}
             disabled={checked === false}
           >
