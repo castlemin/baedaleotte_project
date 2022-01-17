@@ -1,1 +1,4 @@
 data_processing/
+*.pyc
+*/__pycache__/*
+server/venv/
