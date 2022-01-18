@@ -128,7 +128,7 @@ const RegionalReportPage: React.FC = () => {
       setRiskScoreDetail(riskScoreDetailData);
     };
     getGraph();
-  }, []);
+  }, [userDistrict]);
 
   const handleScroll = () => {
     setPosition(window.scrollY);

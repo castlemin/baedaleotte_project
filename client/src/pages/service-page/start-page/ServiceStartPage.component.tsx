@@ -14,7 +14,7 @@ import {
   ExampleTitle,
 } from './ServiceStartPage.styles';
 import Loading from '../../../components/UI/loading/Loading.component';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userLocation } from '../../../store/store';
 
 const SeoulMap = React.lazy(() =>
@@ -28,8 +28,7 @@ const ServiceStartPage = () => {
 
   /* 사용자가 동의서에 체크 했는지 판단 */
   const [checked, setChecked] = useState(false);
-  const setUserGPS = useSetRecoilState(userLocation);
-  const userGPS = useRecoilValue(userLocation);
+  const [userGPS, setUserGPS] = useRecoilState(userLocation);
 
   /* 서울 전체 지도를 불러옴 */
   const seoulMapJson = useFetchGraph('seoul_risk_map_all');
@@ -56,6 +55,7 @@ const ServiceStartPage = () => {
       console.log('GPS 접근이 거부되었습니다.');
     }
   };
+  getLocation();
 
   const handleCheck = () => {
     setChecked(false);
@@ -63,9 +63,9 @@ const ServiceStartPage = () => {
       setChecked(true);
     }
   };
+
   /* memory leak 방지 코드 */
   useEffect(() => {
-    getLocation();
     return () => setChecked(false);
   }, []);
 

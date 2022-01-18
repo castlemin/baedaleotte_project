@@ -15,7 +15,7 @@ import {
 const ConfirmPage = () => {
   const [message, setMessage] = useState('');
   const [buttonOn, setButtonOn] = useState(true);
-  const userGPS = useRecoilValue(userLocation);
+  const [userGPS, setUserGPS] = useRecoilState(userLocation);
   const setUserDistrict = useSetRecoilState(userGu);
   const navigate = useNavigate();
 
@@ -27,38 +27,15 @@ const ConfirmPage = () => {
     },
   });
 
-  // const getLocation = () => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         setUserGPS({
-  //           lat: position.coords.latitude,
-  //           lng: position.coords.longitude,
-  //         });
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       },
-  //       {
-  //         enableHighAccuracy: false,
-  //         maximumAge: 0,
-  //         timeout: Infinity,
-  //       }
-  //     );
-  //   } else {
-  //     console.log('GPS 접근이 거부되었습니다.');
-  //   }
-  // };
-  // getLocation();
-
   useEffect(() => {
     const getDistrict = async () => {
       const res = await cors.post(USER_LOCATION_URL, userGPS);
       const region = await res.data.region;
       setUserDistrict(region);
     };
+    console.log(userGPS);
     getDistrict();
-  }, []);
+  }, [userGPS]);
 
   const handleToReport = () => {
     navigate('/service/regional/report');
