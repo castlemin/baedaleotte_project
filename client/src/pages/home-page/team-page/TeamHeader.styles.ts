@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-interface Props {
-  serviceStatic?: boolean;
-}
-
 const linkCSS = css`
   background-color: #fd7555;
   color: white;
