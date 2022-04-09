@@ -137,7 +137,7 @@ const HomePage: React.FC = () => {
               style={{ margin: 0, opacity: (position - 1160) / 80 }}
               position={position}
             >
-              멋진 사람들, "언더톢의 반란"을
+              멋진 사람들, "언더톡의 반란"을
             </IntroductionTitle>
             <IntroductionTitle
               style={{ margin: 0, opacity: (position - 1220) / 80 }}
