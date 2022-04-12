@@ -4,16 +4,16 @@ personal keys
 
 
 db_setting = {
-    "user": "team04",
-    "password": "1234",
-    "host": "localhost",
-    "port": 3306,
-    "database": "TEAM04",
+    "user": None,
+    "password": None,
+    "host": None,
+    "port": None,
+    "database": None,
 }
-SEOUL_OPEN_DATA_PERSONAL_KEY = "7847747475776f753435454f6b6179"
+SEOUL_OPEN_DATA_PERSONAL_KEY = None
 
-secretKey = "1234"
+secretKey = None
 
-geocodingKey = "AIzaSyDmKk-Vine19NYMkRabXbYCrCVik36V-o4"
+geocodingKey = None
 
-sentry_dsn = "https://ae48aa0a59f54fcc93acb1c8383b2585@o1106875.ingest.sentry.io/6133634"
+sentry_dsn = None
