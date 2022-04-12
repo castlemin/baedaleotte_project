@@ -2,3 +2,9 @@ data_processing/
 *.pyc
 */__pycache__/*
 server/venv/
+
+server/dataanalysis/data/*
+server/dataanalysis/img/*
+server/logs/*
+server/static/*
+!server/static/projectKeys
